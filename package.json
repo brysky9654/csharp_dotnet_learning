@@ -1,0 +1,34 @@
+{
+  "name": "com.appalachia.dotnet.mdabros.sharp-learning",
+  "displayName": "Dotnet Sharp Learning",
+  "version": "0.1.0",
+  "unity": "2020.3",
+  "description": "SharpLearning is an open-source machine learning library for C# .Net.",
+  "keywords": [
+    "Scripts",
+    "Tool"
+  ],
+  "category": "Tool",
+  "license": "MIT",
+  "author": {
+    "name": "Mdabros"
+  },
+  "dependencies": {
+  },
+  "repository": {
+    "url": "https://github.com/AppalachiaInteractive/com.appalachia.dotnet.mdabros.sharp-learning.git",
+    "type": "git"
+  },
+  "scripts": {
+    "preversion": "ai.sh package preversion",
+    "version": "ai.sh package version",
+    "postversion": "ai.sh package postversion",
+    "prepack": "ai.sh package prepack",
+    "postpack": "ai.sh package postpack",
+    "prepublishOnly": "ai.sh package prepublishOnly",
+    "publish": "ai.sh package publish",
+    "postpublish": "ai.sh package postpublish"
+  }
+}
+
+
