@@ -22,13 +22,15 @@
     "registry": "http://35.211.123.13:4873/"
   },
   "scripts": {
-    "preversion": "bash ~/com.appalachia/appa/appa.sh package preversion",
-    "version": "bash ~/com.appalachia/appa/appa.sh package version",
-    "postversion": "bash ~/com.appalachia/appa/appa.sh package postversion",
-    "prepack": "bash ~/com.appalachia/appa/appa.sh package prepack",
-    "postpack": "bash ~/com.appalachia/appa/appa.sh package postpack",
-    "prepublishOnly": "bash ~/com.appalachia/appa/appa.sh package prepublishOnly",
-    "publish": "bash ~/com.appalachia/appa/appa.sh package publish",
-    "postpublish": "bash ~/com.appalachia/appa/appa.sh package postpublish"
+    "preversion": "bash ~/com.appalachia/appa/appa package unity3d preversion",
+    "version": "bash ~/com.appalachia/appa/appa package unity3d version",
+    "postversion": "bash ~/com.appalachia/appa/appa package unity3d postversion",
+    "prepack": "bash ~/com.appalachia/appa/appa package unity3d prepack",
+    "package": "bash ~/com.appalachia/appa/appa package unity3d package",
+    "postpack": "bash ~/com.appalachia/appa/appa package unity3d postpack",
+    "vscode:prepublish": "bash ~/com.appalachia/appa/appa package unity3d vscode_prepublish",
+    "prepublishOnly": "bash ~/com.appalachia/appa/appa package unity3d prepublishOnly",
+    "publish": "bash ~/com.appalachia/appa/appa package unity3d publish",
+    "postpublish": "bash ~/com.appalachia/appa/appa package unity3d postpublish"
   }
 }
