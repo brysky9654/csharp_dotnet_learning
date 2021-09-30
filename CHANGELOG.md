@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| e590cc29daa55f335de64ea8d984a649821e299f | 2021-09-30 | Chris Schubert | Updates for packaging |
+
+
+ ## Tag: `v0.2.4`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | c03270f5d82586fee165eeec4646f02be132f2bc | 2021-09-29 | Chris Schubert | Adding unity assembly definitionj |
 
 

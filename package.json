@@ -1,7 +1,7 @@
 {
   "name": "com.appalachia.dotnet.mdabros.sharp-learning",
   "displayName": "Dotnet Sharp Learning",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "unity": "2020.3",
   "description": "SharpLearning is an open-source machine learning library for C# .Net.",
   "keywords": [
