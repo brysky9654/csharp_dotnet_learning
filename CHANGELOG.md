@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 615964569edd6181f9e6b254d823cb948f74d5f3 | 2021-09-30 | Chris Schubert | Adding .unitypackage files to LFS |
+
+
+ ## Tag: `v0.2.5`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | e590cc29daa55f335de64ea8d984a649821e299f | 2021-09-30 | Chris Schubert | Updates for packaging |
 
 
