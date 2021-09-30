@@ -10,8 +10,7 @@
 
 ## Released Changes
 
-`0.2.1`
+`0.2.2`
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
-| 1ef829cf478f9acc556732d891312f5d026ffebd | 2021-09-29 | Chris Schubert | Publishing to UPM |
-| dd79a9236ea61ae8c77f876ee69161e083eeb29e | 2021-09-29 | Chris Schubert | Updating package |
+
