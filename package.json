@@ -18,14 +18,17 @@
     "url": "https://github.com/AppalachiaInteractive/com.appalachia.dotnet.mdabros.sharp-learning.git",
     "type": "git"
   },
+  "publishConfig": {
+    "registry": "http://35.211.123.13:4873/"
+  },
   "scripts": {
-    "preversion": "ai.sh package preversion",
-    "version": "ai.sh package version",
-    "postversion": "ai.sh package postversion",
-    "prepack": "ai.sh package prepack",
-    "postpack": "ai.sh package postpack",
-    "prepublishOnly": "ai.sh package prepublishOnly",
-    "publish": "ai.sh package publish",
-    "postpublish": "ai.sh package postpublish"
+    "preversion": "bash ~/com.appalachia/appa/appa.sh package preversion",
+    "version": "bash ~/com.appalachia/appa/appa.sh package version",
+    "postversion": "bash ~/com.appalachia/appa/appa.sh package postversion",
+    "prepack": "bash ~/com.appalachia/appa/appa.sh package prepack",
+    "postpack": "bash ~/com.appalachia/appa/appa.sh package postpack",
+    "prepublishOnly": "bash ~/com.appalachia/appa/appa.sh package prepublishOnly",
+    "publish": "bash ~/com.appalachia/appa/appa.sh package publish",
+    "postpublish": "bash ~/com.appalachia/appa/appa.sh package postpublish"
   }
 }
