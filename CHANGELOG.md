@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| c03270f5d82586fee165eeec4646f02be132f2bc | 2021-09-29 | Chris Schubert | Adding unity assembly definitionj |
+
+
+ ## Tag: `v0.2.3`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 10b5b4e0742e5e76061cbe0dc748899a670a59a6 | 2021-09-29 | Chris Schubert | Adding unity assembly definitionj |
 
 
