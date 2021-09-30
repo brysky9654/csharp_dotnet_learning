@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 3b7c497d128dd0eea83f8cf2e69bac1be7af792d | 2021-09-30 | Chris Schubert | Removing extra unitypackages to decrease package size |
+
+
+ ## Tag: `v0.2.6`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 615964569edd6181f9e6b254d823cb948f74d5f3 | 2021-09-30 | Chris Schubert | Adding .unitypackage files to LFS |
 
 
