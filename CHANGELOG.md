@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 4da74f1b62d39409eaa2fd367a7f0fb601a6bbe9 | 2021-10-10 | Chris Schubert | Correcting gitignore to exclude .meta files for ignored directories |
+
+
+ ## Tag: `v0.2.8`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 83dcf5ce9d587961ef5a2c77a29bfc5360acd100 | 2021-10-10 | Chris Schubert | Appa project integration updates for packaging |
 
 
