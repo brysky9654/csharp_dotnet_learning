@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 83dcf5ce9d587961ef5a2c77a29bfc5360acd100 | 2021-10-10 | Chris Schubert | Appa project integration updates for packaging |
+
+
+ ## Tag: `v0.2.7`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 3b7c497d128dd0eea83f8cf2e69bac1be7af792d | 2021-09-30 | Chris Schubert | Removing extra unitypackages to decrease package size |
 
 
