@@ -122,7 +122,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                     e[j] = matrixCopy.At(l, j);
                 }
 
-                if (computeVectors && l < nct)
+                if (computeVectors && (l < nct))
                 {
                     // Place the transformation in u for subsequent back multiplication.
                     for (i = l; i < matrixCopy.RowCount; i++)
@@ -151,7 +151,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                 }
 
                 e[l] = -e[l];
-                if (lp1 < matrixCopy.RowCount && e[l] != 0.0)
+                if ((lp1 < matrixCopy.RowCount) && (e[l] != 0.0))
                 {
                     // Apply the transformation.
                     for (i = lp1; i < matrixCopy.RowCount; i++)
@@ -292,7 +292,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                     t = s[i];
                     r = s[i]/t;
                     s[i] = t;
-                    if (i < m - 1)
+                    if (i < (m - 1))
                     {
                         e[i] = e[i]/r;
                     }
@@ -304,7 +304,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                 }
 
                 // Exit
-                if (i == m - 1)
+                if (i == (m - 1))
                 {
                     break;
                 }
@@ -355,7 +355,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                 }
 
                 int kase;
-                if (l == m - 2)
+                if (l == (m - 2))
                 {
                     kase = 4;
                 }
@@ -365,12 +365,12 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                     for (ls = m - 1; ls > l; ls--)
                     {
                         test = 0.0f;
-                        if (ls != m - 1)
+                        if (ls != (m - 1))
                         {
                             test = test + Math.Abs(e[ls]);
                         }
 
-                        if (ls != l + 1)
+                        if (ls != (l + 1))
                         {
                             test = test + Math.Abs(e[ls - 1]);
                         }
@@ -387,7 +387,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                     {
                         kase = 3;
                     }
-                    else if (ls == m - 1)
+                    else if (ls == (m - 1))
                     {
                         kase = 1;
                     }
@@ -412,9 +412,9 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                         f = e[m - 2];
                         e[m - 2] = 0.0f;
                         float t1;
-                        for (var kk = l; kk < m - 1; kk++)
+                        for (var kk = l; kk < (m - 1); kk++)
                         {
-                            k = m - 2 - kk + l;
+                            k = (m - 2 - kk) + l;
                             t1 = s[k];
                             Drotg(ref t1, ref f, out cs, out sn);
                             s[k] = t1;
@@ -468,7 +468,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                         var b = (((smm1 + sm)*(smm1 - sm)) + (emm1*emm1))/2.0f;
                         var c = (sm*emm1)*(sm*emm1);
                         var shift = 0.0f;
-                        if (b != 0.0 || c != 0.0)
+                        if ((b != 0.0) || (c != 0.0))
                         {
                             shift = (float) Math.Sqrt((b*b) + c);
                             if (b < 0.0)
@@ -483,7 +483,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                         var g = sl*el;
 
                         // Chase zeros.
-                        for (k = l; k < m - 1; k++)
+                        for (k = l; k < (m - 1); k++)
                         {
                             Drotg(ref f, ref g, out cs, out sn);
                             if (k != l)
@@ -506,7 +506,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                             s[k + 1] = (-sn*e[k]) + (cs*s[k + 1]);
                             g = sn*e[k + 1];
                             e[k + 1] = cs*e[k + 1];
-                            if (computeVectors && k < matrixCopy.RowCount)
+                            if (computeVectors && (k < matrixCopy.RowCount))
                             {
                                 Drot(u, matrixCopy.RowCount, k, k + 1, cs, sn);
                             }
@@ -529,7 +529,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                         }
 
                         // Order the singular value.
-                        while (l != mn - 1)
+                        while (l != (mn - 1))
                         {
                             if (s[l] >= s[l + 1])
                             {
@@ -539,12 +539,12 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                             t = s[l];
                             s[l] = s[l + 1];
                             s[l + 1] = t;
-                            if (computeVectors && l < matrixCopy.ColumnCount)
+                            if (computeVectors && (l < matrixCopy.ColumnCount))
                             {
                                 Dswap(vt, matrixCopy.ColumnCount, l, l + 1);
                             }
 
-                            if (computeVectors && l < matrixCopy.RowCount)
+                            if (computeVectors && (l < matrixCopy.RowCount))
                             {
                                 Dswap(u, matrixCopy.RowCount, l, l + 1);
                             }
@@ -691,7 +691,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
                     z = s;
                 }
 
-                if (absdb >= absda && c != 0.0)
+                if ((absdb >= absda) && (c != 0.0))
                 {
                     z = 1.0f/c;
                 }

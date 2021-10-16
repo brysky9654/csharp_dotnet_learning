@@ -171,7 +171,7 @@ namespace MathNet.Numerics
         {
             // NOTE: the special case for negative real numbers fixes negative-zero value behavior. Do not remove.
             [TargetedPatchingOptOut("Performance critical to inline this type of method across NGen image boundaries")]
-            get { return _imag == 0f && _real < 0f ? (float)Constants.Pi : (float)Math.Atan2(_imag, _real); }
+            get { return (_imag == 0f) && (_real < 0f) ? (float)Constants.Pi : (float)Math.Atan2(_imag, _real); }
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace MathNet.Numerics
                 if (a > b)
                 {
                     double tmp = b / a;
-                    return a * (float)Math.Sqrt(1.0f + tmp * tmp);
+                    return a * (float)Math.Sqrt(1.0f + (tmp * tmp));
 
                 }
                 if (a == 0.0f) // one can write a >= float.Epsilon here
@@ -203,7 +203,7 @@ namespace MathNet.Numerics
                 else
                 {
                     double tmp = a / b;
-                    return b * (float)Math.Sqrt(1.0f + tmp * tmp);
+                    return b * (float)Math.Sqrt(1.0f + (tmp * tmp));
                 }
             }
         }
@@ -262,7 +262,7 @@ namespace MathNet.Numerics
         /// <returns><c>true</c> if this instance is zero; otherwise, <c>false</c>.</returns>
         public bool IsZero()
         {
-            return _real == 0.0f && _imag == 0.0f;
+            return (_real == 0.0f) && (_imag == 0.0f);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace MathNet.Numerics
         /// <returns><c>true</c> if this instance is one; otherwise, <c>false</c>.</returns>
         public bool IsOne()
         {
-            return _real == 1.0f && _imag == 0.0f;
+            return (_real == 1.0f) && (_imag == 0.0f);
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace MathNet.Numerics
         /// <returns><c>true</c> if this instance is ImaginaryOne; otherwise, <c>false</c>.</returns>
         public bool IsImaginaryOne()
         {
-            return _real == 0.0f && _imag == 1.0f;
+            return (_real == 0.0f) && (_imag == 1.0f);
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace MathNet.Numerics
         /// </returns>
         public bool IsRealNonNegative()
         {
-            return _imag == 0.0f && _real >= 0;
+            return (_imag == 0.0f) && (_real >= 0);
         }
 
         /// <summary>
@@ -677,17 +677,17 @@ namespace MathNet.Numerics
         private static Complex32 InternalDiv(float a, float b, float c, float d, bool swapped)
         {
             float r = d / c;
-            float t = 1 / (c + d * r);
+            float t = 1 / (c + (d * r));
             float e, f;
             if (r != 0.0f) // one can use r >= float.Epsilon || r <= float.Epsilon instead
             {
-                e = (a + b * r) * t;
-                f = (b - a * r) * t;
+                e = (a + (b * r)) * t;
+                f = (b - (a * r)) * t;
             }
             else
             {
-                e = (a + d * (b / c)) * t;
-                f = (b - d * (a / c)) * t;
+                e = (a + (d * (b / c))) * t;
+                f = (b - (d * (a / c))) * t;
             }
             if (swapped)
                 f = -f;
@@ -702,7 +702,7 @@ namespace MathNet.Numerics
         /// <param name="divisor">The divisor.</param>
         public static Complex32 operator /(float dividend, Complex32 divisor)
         {
-            if (dividend == 0.0f && divisor.IsZero())
+            if ((dividend == 0.0f) && divisor.IsZero())
             {
                 return NaN;
             }
@@ -724,7 +724,7 @@ namespace MathNet.Numerics
         /// <param name="divisor">The divisor.</param>
         public static Complex32 operator /(Complex32 dividend, float divisor)
         {
-            if (dividend.IsZero() && divisor == 0.0f)
+            if (dividend.IsZero() && (divisor == 0.0f))
             {
                 return NaN;
             }
@@ -1016,8 +1016,8 @@ namespace MathNet.Numerics
             }
 
             // handle prefix imaginary symbol
-            if (String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0
-                || String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0)
+            if ((String.Compare(token.Value,    "i", StringComparison.OrdinalIgnoreCase) == 0)
+                || (String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0))
             {
                 imaginary = true;
                 token = token.Next;
@@ -1035,8 +1035,8 @@ namespace MathNet.Numerics
 #endif
 
             // handle suffix imaginary symbol
-            if (token != null && (String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0
-                                  || String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0))
+            if ((token != null) && ((String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0)
+                                 || (String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0)))
             {
                 if (imaginary)
                 {

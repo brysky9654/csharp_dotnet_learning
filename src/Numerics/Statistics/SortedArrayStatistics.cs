@@ -74,7 +74,7 @@ namespace MathNet.Numerics.Statistics
         /// <param name="order">One-based order of the statistic, must be between 1 and N (inclusive).</param>
         public static double OrderStatistic(double[] data, int order)
         {
-            if (order < 1 || order > data.Length)
+            if ((order < 1) || (order > data.Length))
             {
                 return double.NaN;
             }
@@ -172,12 +172,12 @@ namespace MathNet.Numerics.Statistics
         /// </remarks>
         public static double Quantile(double[] data, double tau)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            if (tau == 0d || data.Length == 1)
+            if ((tau == 0d) || (data.Length == 1))
             {
                 return data[0];
             }
@@ -187,11 +187,11 @@ namespace MathNet.Numerics.Statistics
                 return data[data.Length - 1];
             }
 
-            double h = (data.Length + 1/3d)*tau + 1/3d;
+            double h = ((data.Length + (1/3d))*tau) + (1/3d);
             var hf = (int)h;
             return hf < 1 ? data[0]
                 : hf >= data.Length ? data[data.Length - 1]
-                    : data[hf - 1] + (h - hf)*(data[hf] - data[hf - 1]);
+                    : data[hf - 1] + ((h - hf)*(data[hf] - data[hf - 1]));
         }
 
         /// <summary>
@@ -208,12 +208,12 @@ namespace MathNet.Numerics.Statistics
         /// <param name="d">d-parameter</param>
         public static double QuantileCustom(double[] data, double tau, double a, double b, double c, double d)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            var x = a + (data.Length + b)*tau - 1;
+            var x = (a + ((data.Length + b)*tau)) - 1;
             var ip = Math.Truncate(x);
             var fp = x - ip;
 
@@ -224,7 +224,7 @@ namespace MathNet.Numerics.Statistics
 
             var lower = data[Math.Max((int)Math.Floor(x), 0)];
             var upper = data[Math.Min((int)Math.Ceiling(x), data.Length - 1)];
-            return lower + (upper - lower)*(c + d*fp);
+            return lower + ((upper - lower)*(c + (d*fp)));
         }
 
         /// <summary>
@@ -238,12 +238,12 @@ namespace MathNet.Numerics.Statistics
         /// <param name="definition">Quantile definition, to choose what product/definition it should be consistent with</param>
         public static double QuantileCustom(double[] data, double tau, QuantileDefinition definition)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            if (tau == 0d || data.Length == 1)
+            if ((tau == 0d) || (data.Length == 1))
             {
                 return data[0];
             }
@@ -257,13 +257,13 @@ namespace MathNet.Numerics.Statistics
             {
                 case QuantileDefinition.R1:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     return data[(int)Math.Ceiling(h - 0.5d) - 1];
                 }
 
                 case QuantileDefinition.R2:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     return (data[(int)Math.Ceiling(h - 0.5d) - 1] + data[(int)(h + 0.5d) - 1])*0.5d;
                 }
 
@@ -279,16 +279,16 @@ namespace MathNet.Numerics.Statistics
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R5:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R6:
@@ -297,34 +297,34 @@ namespace MathNet.Numerics.Statistics
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R7:
                 {
-                    double h = (data.Length - 1)*tau + 1d;
+                    double h = ((data.Length - 1)*tau) + 1d;
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R8:
                 {
-                    double h = (data.Length + 1/3d)*tau + 1/3d;
+                    double h = ((data.Length + (1/3d))*tau) + (1/3d);
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R9:
                 {
-                    double h = (data.Length + 0.25d)*tau + 0.375d;
+                    double h = ((data.Length + 0.25d)*tau) + 0.375d;
                     var hf = (int)h;
                     var lower = data[Math.Max(hf - 1, 0)];
                     var upper = data[Math.Min(hf, data.Length - 1)];
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 default:
@@ -352,7 +352,7 @@ namespace MathNet.Numerics.Statistics
             int right = Array.BinarySearch(data, x);
             if (right >= 0)
             {
-                while (right < data.Length - 1 && data[right + 1] == data[right])
+                while ((right < (data.Length - 1)) && (data[right + 1] == data[right]))
                 {
                     right++;
                 }
@@ -389,12 +389,12 @@ namespace MathNet.Numerics.Statistics
             {
                 int left = right;
 
-                while (left > 0 && data[left - 1] == data[left])
+                while ((left > 0) && (data[left - 1] == data[left]))
                 {
                     left--;
                 }
 
-                while (right < data.Length - 1 && data[right + 1] == data[right])
+                while ((right < (data.Length - 1)) && (data[right + 1] == data[right]))
                 {
                     right++;
                 }
@@ -411,7 +411,7 @@ namespace MathNet.Numerics.Statistics
                         return left/(double)(data.Length - 1);
 
                     case RankDefinition.Average:
-                        return (left/(double)(data.Length - 1) + right/(double)(data.Length - 1))/2;
+                        return ((left/(double)(data.Length - 1)) + (right/(double)(data.Length - 1)))/2;
 
                     default:
                         throw new NotSupportedException();
@@ -431,7 +431,7 @@ namespace MathNet.Numerics.Statistics
                     {
                         var a = left/(double)(data.Length - 1);
                         var b = right/(double)(data.Length - 1);
-                        return ((data[right] - x)*a + (x - data[left])*b)/(data[right] - data[left]);
+                        return (((data[right] - x)*a) + ((x - data[left])*b))/(data[right] - data[left]);
                     }
                 }
             }
@@ -464,7 +464,7 @@ namespace MathNet.Numerics.Statistics
                     continue;
                 }
 
-                if (i == previousIndex + 1)
+                if (i == (previousIndex + 1))
                 {
                     ranks[previousIndex] = i;
                 }
@@ -489,7 +489,7 @@ namespace MathNet.Numerics.Statistics
             {
                 case RankDefinition.Average:
                 {
-                    rank = (b + a - 1)/2d + 1;
+                    rank = (((b + a) - 1)/2d) + 1;
                     break;
                 }
 

@@ -236,7 +236,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             var otherDense = other as DenseVector;
             var resultDense = result as DenseVector;
 
-            if (otherDense == null || resultDense == null)
+            if ((otherDense == null) || (resultDense == null))
             {
                 base.DoAdd(other, result);
             }
@@ -298,7 +298,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             var otherDense = other as DenseVector;
             var resultDense = result as DenseVector;
 
-            if (otherDense == null || resultDense == null)
+            if ((otherDense == null) || (resultDense == null))
             {
                 base.DoSubtract(other, result);
             }
@@ -686,7 +686,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             var denseOther = other as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseOther == null || denseResult == null)
+            if ((denseOther == null) || (denseResult == null))
             {
                 base.DoPointwiseMultiply(other, result);
             }
@@ -707,7 +707,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             var denseOther = divisor as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseOther == null || denseResult == null)
+            if ((denseOther == null) || (denseResult == null))
             {
                 base.DoPointwiseDivide(divisor, result);
             }
@@ -727,7 +727,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             var denseExponent = exponent as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseExponent == null || denseResult == null)
+            if ((denseExponent == null) || (denseResult == null))
             {
                 base.DoPointwisePower(exponent, result);
             }

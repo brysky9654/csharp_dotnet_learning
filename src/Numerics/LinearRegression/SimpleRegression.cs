@@ -77,7 +77,7 @@ namespace MathNet.Numerics.LinearRegression
             }
 
             var b = covariance/variance;
-            return new Tuple<double, double>(my - b*mx, b);
+            return new Tuple<double, double>(my - (b*mx), b);
         }
 
         /// <summary>

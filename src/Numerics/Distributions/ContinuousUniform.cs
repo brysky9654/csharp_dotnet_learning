@@ -137,7 +137,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the variance of the distribution.
         /// </summary>
-        public double Variance => (_upper - _lower)*(_upper - _lower)/12.0;
+        public double Variance => ((_upper - _lower)*(_upper - _lower))/12.0;
 
         /// <summary>
         /// Gets the standard deviation of the distribution.
@@ -185,7 +185,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDF"/>
         public double Density(double x)
         {
-            return x < _lower || x > _upper ? 0.0 : 1.0/(_upper - _lower);
+            return (x < _lower) || (x > _upper) ? 0.0 : 1.0/(_upper - _lower);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDFLn"/>
         public double DensityLn(double x)
         {
-            return x < _lower || x > _upper ? double.NegativeInfinity : -Math.Log(_upper - _lower);
+            return (x < _lower) || (x > _upper) ? double.NegativeInfinity : -Math.Log(_upper - _lower);
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="InvCDF"/>
         public double InverseCumulativeDistribution(double p)
         {
-            return p <= 0.0 ? _lower : p >= 1.0 ? _upper : _lower*(1.0 - p) + _upper*p;
+            return p <= 0.0 ? _lower : p >= 1.0 ? _upper : (_lower*(1.0 - p)) + (_upper*p);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MathNet.Numerics.Distributions
 
         static double SampleUnchecked(System.Random rnd, double lower, double upper)
         {
-            return lower + rnd.NextDouble()*(upper - lower);
+            return lower + (rnd.NextDouble()*(upper - lower));
         }
 
         static IEnumerable<double> SamplesUnchecked(System.Random rnd, double lower, double upper)
@@ -258,7 +258,7 @@ namespace MathNet.Numerics.Distributions
             double difference = upper - lower;
             while (true)
             {
-                yield return lower + rnd.NextDouble()*difference;
+                yield return lower + (rnd.NextDouble()*difference);
             }
         }
 
@@ -270,7 +270,7 @@ namespace MathNet.Numerics.Distributions
             {
                 for (int i = a; i < b; i++)
                 {
-                    values[i] = lower + values[i]*difference;
+                    values[i] = lower + (values[i]*difference);
                 }
             });
         }
@@ -290,7 +290,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return x < lower || x > upper ? 0.0 : 1.0/(upper - lower);
+            return (x < lower) || (x > upper) ? 0.0 : 1.0/(upper - lower);
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return x < lower || x > upper ? double.NegativeInfinity : -Math.Log(upper - lower);
+            return (x < lower) || (x > upper) ? double.NegativeInfinity : -Math.Log(upper - lower);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return p <= 0.0 ? lower : p >= 1.0 ? upper : lower*(1.0 - p) + upper*p;
+            return p <= 0.0 ? lower : p >= 1.0 ? upper : (lower*(1.0 - p)) + (upper*p);
         }
 
         /// <summary>

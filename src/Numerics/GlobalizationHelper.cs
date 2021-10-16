@@ -211,7 +211,7 @@ namespace MathNet.Numerics
             // in case the + and - in scientific notation are separated, join them back together.
             if (token.Value.EndsWith("e", true, culture))
             {
-                if (token.Next == null || token.Next.Next == null)
+                if ((token.Next == null) || (token.Next.Next == null))
                 {
                     throw new FormatException();
                 }
@@ -245,7 +245,7 @@ namespace MathNet.Numerics
             // in case the + and - in scientific notation are separated, join them back together.
             if (token.Value.EndsWith("e", true, culture))
             {
-                if (token.Next == null || token.Next.Next == null)
+                if ((token.Next == null) || (token.Next.Next == null))
                 {
                     throw new FormatException();
                 }

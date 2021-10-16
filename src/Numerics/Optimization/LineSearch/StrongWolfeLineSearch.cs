@@ -46,7 +46,7 @@ namespace MathNet.Numerics.Optimization.LineSearch
 
         protected override bool WolfeCondition(double stepDd, double initialDd)
         {
-            return Math.Abs(stepDd) > C2 * Math.Abs(initialDd);
+            return Math.Abs(stepDd) > (C2 * Math.Abs(initialDd));
         }
     }
 }

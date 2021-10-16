@@ -234,7 +234,7 @@ namespace MathNet.Numerics.Distributions
         static double SampleUnchecked(System.Random rnd, double freedom)
         {
             // Use the simple method if the degrees of freedom is an integer anyway
-            if (Math.Floor(freedom) == freedom && freedom < int.MaxValue)
+            if ((Math.Floor(freedom) == freedom) && (freedom < int.MaxValue))
             {
                 double sum = 0;
                 var n = (int)freedom;
@@ -254,7 +254,7 @@ namespace MathNet.Numerics.Distributions
         internal static void SamplesUnchecked(System.Random rnd, double[] values, double freedom)
         {
             // Use the simple method if the degrees of freedom is an integer anyway
-            if (Math.Floor(freedom) == freedom && freedom < int.MaxValue)
+            if ((Math.Floor(freedom) == freedom) && (freedom < int.MaxValue))
             {
                 var n = (int)freedom;
                 var standard = new double[values.Length*n];
@@ -303,7 +303,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || x == 0.0)
+            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || (x == 0.0))
             {
                 return 0.0;
             }
@@ -330,12 +330,12 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || x == 0.0)
+            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || (x == 0.0))
             {
                 return double.NegativeInfinity;
             }
 
-            return (-x/2.0) + (((freedom/2.0) - 1.0)*Math.Log(x)) - ((freedom/2.0)*Math.Log(2)) - SpecialFunctions.GammaLn(freedom/2.0);
+            return ((-x/2.0) + (((freedom/2.0) - 1.0)*Math.Log(x))) - ((freedom/2.0)*Math.Log(2)) - SpecialFunctions.GammaLn(freedom/2.0);
         }
 
         /// <summary>

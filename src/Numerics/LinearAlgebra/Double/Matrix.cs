@@ -637,7 +637,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             var ret = new double[RowCount];
             if (norm == 2.0)
             {
-                Storage.FoldByRowUnchecked(ret, (s, x) => s + x*x, (x, c) => Math.Sqrt(x), ret, Zeros.AllowSkip);
+                Storage.FoldByRowUnchecked(ret, (s, x) => s + (x*x), (x, c) => Math.Sqrt(x), ret, Zeros.AllowSkip);
             }
             else if (norm == 1.0)
             {
@@ -669,7 +669,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             var ret = new double[ColumnCount];
             if (norm == 2.0)
             {
-                Storage.FoldByColumnUnchecked(ret, (s, x) => s + x*x, (x, c) => Math.Sqrt(x), ret, Zeros.AllowSkip);
+                Storage.FoldByColumnUnchecked(ret, (s, x) => s + (x*x), (x, c) => Math.Sqrt(x), ret, Zeros.AllowSkip);
             }
             else if (norm == 1.0)
             {

@@ -168,7 +168,7 @@ namespace MathNet.Numerics.Distributions
             for (int i = 0; i < p.Length; i++)
             {
                 double t = p[i];
-                if (t < 0.0 || double.IsNaN(t))
+                if ((t < 0.0) || double.IsNaN(t))
                 {
                     return false;
                 }
@@ -190,7 +190,7 @@ namespace MathNet.Numerics.Distributions
             for (int i = 0; i < cdf.Length; i++)
             {
                 double t = cdf[i];
-                if (t < 0.0 || double.IsNaN(t) || t < last)
+                if ((t < 0.0) || double.IsNaN(t) || (t < last))
                 {
                     return false;
                 }
@@ -363,7 +363,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>An integer between 0 and the size of the categorical (exclusive), that corresponds to the inverse CDF for the given probability.</returns>
         public int InverseCumulativeDistribution(double probability)
         {
-            if (probability < 0.0 || probability > 1.0 || double.IsNaN(probability))
+            if ((probability < 0.0) || (probability > 1.0) || double.IsNaN(probability))
             {
                 throw new ArgumentOutOfRangeException(nameof(probability));
             }
@@ -461,7 +461,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (probability < 0.0 || probability > 1.0 || double.IsNaN(probability))
+            if ((probability < 0.0) || (probability > 1.0) || double.IsNaN(probability))
             {
                 throw new ArgumentOutOfRangeException(nameof(probability));
             }
@@ -491,7 +491,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (probability < 0.0 || probability > 1.0 || double.IsNaN(probability))
+            if ((probability < 0.0) || (probability > 1.0) || double.IsNaN(probability))
             {
                 throw new ArgumentOutOfRangeException(nameof(probability));
             }

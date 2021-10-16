@@ -120,7 +120,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Factorization
                 }
 
                 // Compute multipliers.
-                if (j < order & factors.At(j, j) != 0.0f)
+                if ((j < order) & (factors.At(j, j) != 0.0f))
                 {
                     for (var i = j + 1; i < order; i++)
                     {

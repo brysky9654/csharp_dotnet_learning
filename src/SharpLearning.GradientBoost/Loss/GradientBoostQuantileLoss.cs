@@ -22,7 +22,7 @@ namespace SharpLearning.GradientBoost.Loss
         /// <param name="alpha"></param>
         public GradientBoostQuantileLoss(double alpha)
         {
-            if (alpha <= 0.0 || alpha > 1.0) { throw new ArgumentException("Alpha must larger than 0.0 and at most 1.0"); }
+            if ((alpha <= 0.0) || (alpha > 1.0)) { throw new ArgumentException("Alpha must larger than 0.0 and at most 1.0"); }
             m_alpha = alpha;
         }
 
@@ -70,7 +70,7 @@ namespace SharpLearning.GradientBoost.Loss
                 }
             }
 
-            splitInfo.Cost = splitInfo.SumOfSquares - (splitInfo.Sum * splitInfo.Sum / splitInfo.Samples);
+            splitInfo.Cost = splitInfo.SumOfSquares - ((splitInfo.Sum * splitInfo.Sum) / splitInfo.Samples);
 
             return splitInfo;
         }
@@ -128,12 +128,12 @@ namespace SharpLearning.GradientBoost.Loss
             left.Samples++;
             left.Sum += residual;
             left.SumOfSquares += residual2;
-            left.Cost = left.SumOfSquares - (left.Sum * left.Sum / left.Samples);
+            left.Cost = left.SumOfSquares - ((left.Sum * left.Sum) / left.Samples);
 
             right.Samples--;
             right.Sum -= residual;
             right.SumOfSquares -= residual2;
-            right.Cost = right.SumOfSquares - (right.Sum * right.Sum / right.Samples);
+            right.Cost = right.SumOfSquares - ((right.Sum * right.Sum) / right.Samples);
         }
 
         /// <summary>

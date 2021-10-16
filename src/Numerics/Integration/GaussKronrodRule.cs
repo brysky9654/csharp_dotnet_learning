@@ -132,7 +132,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, double> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return recursive_adaptive_integrate(u, -1, 1, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -146,7 +146,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, double> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return recursive_adaptive_integrate(u, 0, 1, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -160,7 +160,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, double> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return recursive_adaptive_integrate(u, -1, 0, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -173,7 +173,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, double> u = (t) =>
                 {
-                    return f((intervalEnd - intervalBegin) / 4 * t * (3 - t * t) + (intervalEnd + intervalBegin) / 2) * 3 * (intervalEnd - intervalBegin) / 4 * (1 - t * t);
+                    return ((f((((intervalEnd - intervalBegin) / 4) * t * (3 - (t * t))) + ((intervalEnd + intervalBegin) / 2)) * 3 * (intervalEnd - intervalBegin)) / 4) * (1 - (t * t));
                 };
                 return recursive_adaptive_integrate(u, -1, 1, maximumDepth, targetRelativeError, 0d, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -218,7 +218,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, Complex> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return contour_recursive_adaptive_integrate(u, -1, 1, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -232,7 +232,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return contour_recursive_adaptive_integrate(u, 0, 1, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -246,7 +246,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return contour_recursive_adaptive_integrate(u, -1, 0, maximumDepth, targetRelativeError, 0, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -259,7 +259,7 @@ namespace MathNet.Numerics.Integration
             {
                 Func<double, Complex> u = (t) =>
                 {
-                    return f((intervalEnd - intervalBegin) / 4 * t * (3 - t * t) + (intervalEnd + intervalBegin) / 2) * 3 * (intervalEnd - intervalBegin) / 4 * (1 - t * t);
+                    return ((f((((intervalEnd - intervalBegin) / 4) * t * (3 - (t * t))) + ((intervalEnd + intervalBegin) / 2)) * 3 * (intervalEnd - intervalBegin)) / 4) * (1 - (t * t));
                 };
                 return contour_recursive_adaptive_integrate(u, -1, 1, maximumDepth, targetRelativeError, 0d, out error, out L1Norm, gaussKronrodPoint);
             }
@@ -369,7 +369,7 @@ namespace MathNet.Numerics.Integration
             double mean = (b + a) / 2;
             double scale = (b - a) / 2;
 
-            var r1 = integrate_non_adaptive_m1_1((x) => f(scale * x + mean), out error_local, out L1, gaussKronrodPoint);
+            var r1 = integrate_non_adaptive_m1_1((x) => f((scale * x) + mean), out error_local, out L1, gaussKronrodPoint);
             var estimate = scale * r1;
 
             var tmp = estimate * rel_tol;
@@ -379,7 +379,7 @@ namespace MathNet.Numerics.Integration
                 abs_tol = abs_tol1;
             }
 
-            if (max_levels > 0 && (abs_tol1 < error_local) && (abs_tol < error_local))
+            if ((max_levels > 0) && (abs_tol1 < error_local) && (abs_tol < error_local))
             {
                 double mid = (a + b) / 2d;
                 double L1_local;
@@ -400,7 +400,7 @@ namespace MathNet.Numerics.Integration
             double mean = (b + a) / 2;
             double scale = (b - a) / 2;
 
-            var r1 = contour_integrate_non_adaptive_m1_1((x) => f(scale * x + mean), out error_local, out L1, gaussKronrodPoint);
+            var r1 = contour_integrate_non_adaptive_m1_1((x) => f((scale * x) + mean), out error_local, out L1, gaussKronrodPoint);
             var estimate = scale * r1;
 
             var tmp = estimate * rel_tol;
@@ -410,7 +410,7 @@ namespace MathNet.Numerics.Integration
                 abs_tol = abs_tol1;
             }
 
-            if (max_levels > 0 && (abs_tol1 < error_local) && (abs_tol < error_local))
+            if ((max_levels > 0) && (abs_tol1 < error_local) && (abs_tol < error_local))
             {
                 double mid = (a + b) / 2d;
                 double L1_local;

@@ -59,7 +59,7 @@ namespace MathNet.Numerics.Statistics
             double min = double.PositiveInfinity;
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i] < min || double.IsNaN(data[i]))
+                if ((data[i] < min) || double.IsNaN(data[i]))
                 {
                     min = data[i];
                 }
@@ -83,7 +83,7 @@ namespace MathNet.Numerics.Statistics
             double max = double.NegativeInfinity;
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i] > max || double.IsNaN(data[i]))
+                if ((data[i] > max) || double.IsNaN(data[i]))
                 {
                     max = data[i];
                 }
@@ -107,7 +107,7 @@ namespace MathNet.Numerics.Statistics
             double min = double.PositiveInfinity;
             for (int i = 0; i < data.Length; i++)
             {
-                if (Math.Abs(data[i]) < min || double.IsNaN(data[i]))
+                if ((Math.Abs(data[i]) < min) || double.IsNaN(data[i]))
                 {
                     min = Math.Abs(data[i]);
                 }
@@ -131,7 +131,7 @@ namespace MathNet.Numerics.Statistics
             double max = 0.0d;
             for (int i = 0; i < data.Length; i++)
             {
-                if (Math.Abs(data[i]) > max || double.IsNaN(data[i]))
+                if ((Math.Abs(data[i]) > max) || double.IsNaN(data[i]))
                 {
                     max = Math.Abs(data[i]);
                 }
@@ -374,7 +374,7 @@ namespace MathNet.Numerics.Statistics
             ulong m = 0;
             for (int i = 0; i < data.Length; i++)
             {
-                mean += (data[i]*data[i] - mean)/++m;
+                mean += ((data[i]*data[i]) - mean)/++m;
             }
 
             return Math.Sqrt(mean);
@@ -388,7 +388,7 @@ namespace MathNet.Numerics.Statistics
         /// <param name="order">One-based order of the statistic, must be between 1 and N (inclusive).</param>
         public static double OrderStatisticInplace(double[] data, int order)
         {
-            if (order < 1 || order > data.Length)
+            if ((order < 1) || (order > data.Length))
             {
                 return double.NaN;
             }
@@ -498,27 +498,27 @@ namespace MathNet.Numerics.Statistics
         /// </remarks>
         public static double QuantileInplace(double[] data, double tau)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            double h = (data.Length + 1d/3d)*tau + 1d/3d;
+            double h = ((data.Length + (1d/3d))*tau) + (1d/3d);
             var hf = (int)h;
 
-            if (hf <= 0 || tau == 0d)
+            if ((hf <= 0) || (tau == 0d))
             {
                 return Minimum(data);
             }
 
-            if (hf >= data.Length || tau == 1d)
+            if ((hf >= data.Length) || (tau == 1d))
             {
                 return Maximum(data);
             }
 
             var a = SelectInplace(data, hf - 1);
             var b = SelectInplace(data, hf);
-            return a + (h - hf)*(b - a);
+            return a + ((h - hf)*(b - a));
         }
 
         /// <summary>
@@ -536,12 +536,12 @@ namespace MathNet.Numerics.Statistics
         /// <param name="d">d-parameter</param>
         public static double QuantileCustomInplace(double[] data, double tau, double a, double b, double c, double d)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            var x = a + (data.Length + b)*tau - 1;
+            var x = (a + ((data.Length + b)*tau)) - 1;
             var ip = Math.Truncate(x);
             var fp = x - ip;
 
@@ -552,7 +552,7 @@ namespace MathNet.Numerics.Statistics
 
             var lower = SelectInplace(data, (int)Math.Floor(x));
             var upper = SelectInplace(data, (int)Math.Ceiling(x));
-            return lower + (upper - lower)*(c + d*fp);
+            return lower + ((upper - lower)*(c + (d*fp)));
         }
 
         /// <summary>
@@ -567,12 +567,12 @@ namespace MathNet.Numerics.Statistics
         /// <param name="definition">Quantile definition, to choose what product/definition it should be consistent with</param>
         public static double QuantileCustomInplace(double[] data, double tau, QuantileDefinition definition)
         {
-            if (tau < 0d || tau > 1d || data.Length == 0)
+            if ((tau < 0d) || (tau > 1d) || (data.Length == 0))
             {
                 return double.NaN;
             }
 
-            if (tau == 0d || data.Length == 1)
+            if ((tau == 0d) || (data.Length == 1))
             {
                 return Minimum(data);
             }
@@ -586,13 +586,13 @@ namespace MathNet.Numerics.Statistics
             {
                 case QuantileDefinition.R1:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     return SelectInplace(data, (int)Math.Ceiling(h - 0.5d) - 1);
                 }
 
                 case QuantileDefinition.R2:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     return (SelectInplace(data, (int)Math.Ceiling(h - 0.5d) - 1) + SelectInplace(data, (int)(h + 0.5d) - 1))*0.5d;
                 }
 
@@ -608,16 +608,16 @@ namespace MathNet.Numerics.Statistics
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R5:
                 {
-                    double h = data.Length*tau + 0.5d;
+                    double h = (data.Length*tau) + 0.5d;
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R6:
@@ -626,34 +626,34 @@ namespace MathNet.Numerics.Statistics
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R7:
                 {
-                    double h = (data.Length - 1)*tau + 1d;
+                    double h = ((data.Length - 1)*tau) + 1d;
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R8:
                 {
-                    double h = (data.Length + 1/3d)*tau + 1/3d;
+                    double h = ((data.Length + (1/3d))*tau) + (1/3d);
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 case QuantileDefinition.R9:
                 {
-                    double h = (data.Length + 0.25d)*tau + 0.375d;
+                    double h = ((data.Length + 0.25d)*tau) + 0.375d;
                     var hf = (int)h;
                     var lower = SelectInplace(data, hf - 1);
                     var upper = SelectInplace(data, hf);
-                    return lower + (h - hf)*(upper - lower);
+                    return lower + ((h - hf)*(upper - lower));
                 }
 
                 default:
@@ -670,7 +670,7 @@ namespace MathNet.Numerics.Statistics
                 return Minimum(workingData);
             }
 
-            if (rank >= workingData.Length - 1)
+            if (rank >= (workingData.Length - 1))
             {
                 return Maximum(workingData);
             }
@@ -681,9 +681,9 @@ namespace MathNet.Numerics.Statistics
 
             while (true)
             {
-                if (high <= low + 1)
+                if (high <= (low + 1))
                 {
-                    if (high == low + 1 && a[high] < a[low])
+                    if ((high == (low + 1)) && (a[high] < a[low]))
                     {
                         var tmp = a[low];
                         a[low] = a[high];
@@ -798,7 +798,7 @@ namespace MathNet.Numerics.Statistics
                     continue;
                 }
 
-                if (i == previousIndex + 1)
+                if (i == (previousIndex + 1))
                 {
                     ranks[index[previousIndex]] = i;
                 }
@@ -822,7 +822,7 @@ namespace MathNet.Numerics.Statistics
             {
                 case RankDefinition.Average:
                 {
-                    rank = (b + a - 1)/2d + 1;
+                    rank = (((b + a) - 1)/2d) + 1;
                     break;
                 }
 

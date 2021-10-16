@@ -172,7 +172,7 @@ namespace SharpLearning.Ensemble.Learners
                     var probabilities = modelPredictions[j].Probabilities.Values.ToArray();
                     for (int k = 0; k < probabilities.Length; k++)
                     {
-                        cvPredictions[j, i * numberOfClasses + k] = probabilities[k];
+                        cvPredictions[j, (i * numberOfClasses) + k] = probabilities[k];
                     }
                 }
             }

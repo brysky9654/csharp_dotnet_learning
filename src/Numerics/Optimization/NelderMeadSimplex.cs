@@ -216,7 +216,7 @@ namespace MathNet.Numerics.Optimization
         /// <returns></returns>
         static bool HasConverged(double convergenceTolerance, ErrorProfile errorProfile, double[] errorValues)
         {
-            double range = 2 * Math.Abs(errorValues[errorProfile.HighestIndex] - errorValues[errorProfile.LowestIndex]) /
+            double range = (2 * Math.Abs(errorValues[errorProfile.HighestIndex] - errorValues[errorProfile.LowestIndex])) /
                 (Math.Abs(errorValues[errorProfile.HighestIndex]) + Math.Abs(errorValues[errorProfile.LowestIndex]) + JITTER);
 
             if (range < convergenceTolerance)
@@ -260,7 +260,7 @@ namespace MathNet.Numerics.Optimization
                     errorProfile.NextHighestIndex = errorProfile.HighestIndex; // downgrade the current highest to next highest
                     errorProfile.HighestIndex = index;
                 }
-                else if (errorValue > errorValues[errorProfile.NextHighestIndex] && index != errorProfile.HighestIndex)
+                else if ((errorValue > errorValues[errorProfile.NextHighestIndex]) && (index != errorProfile.HighestIndex))
                 {
                     errorProfile.NextHighestIndex = index;
                 }

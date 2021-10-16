@@ -168,7 +168,7 @@ namespace MathNet.Numerics
                     throw new ArgumentOutOfRangeException(nameof(observedValues), Resources.ArgumentArraysSameLength);
                 }
             }
-            return 1 - ssRes/ssTot;
+            return 1 - (ssRes/ssTot);
         }
     }
 }

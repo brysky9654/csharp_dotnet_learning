@@ -154,8 +154,8 @@ namespace MathNet.Numerics
                 return Math.Exp(x) * Evaluate.ChebyshevA(BesselI0A, y);
             }
 
-            double x1 = 32.0 / x - 2.0;
-            return Math.Exp(x) * Evaluate.ChebyshevA(BesselI0B, x1) / Math.Sqrt(x);
+            double x1 = (32.0 / x) - 2.0;
+            return (Math.Exp(x) * Evaluate.ChebyshevA(BesselI0B, x1)) / Math.Sqrt(x);
         }
 
         /// <summary>Returns the modified Bessel function of first kind,
@@ -179,8 +179,8 @@ namespace MathNet.Numerics
             }
             else
             {
-                double x1 = 32.0 / z - 2.0;
-                z = Math.Exp(z) * Evaluate.ChebyshevA(BesselI1B, x1) / Math.Sqrt(z);
+                double x1 = (32.0 / z) - 2.0;
+                z = (Math.Exp(z) * Evaluate.ChebyshevA(BesselI1B, x1)) / Math.Sqrt(z);
             }
 
             if (x < 0.0)
@@ -209,12 +209,12 @@ namespace MathNet.Numerics
 
             if (x <= 2.0)
             {
-                double y = x * x - 2.0;
-                return Evaluate.ChebyshevA(BesselK0A, y) - Math.Log(0.5 * x) * BesselI0(x);
+                double y = (x * x) - 2.0;
+                return Evaluate.ChebyshevA(BesselK0A, y) - (Math.Log(0.5 * x) * BesselI0(x));
             }
 
-            double z = 8.0 / x - 2.0;
-            return Math.Exp(-x) * Evaluate.ChebyshevA(BesselK0B, z) / Math.Sqrt(x);
+            double z = (8.0 / x) - 2.0;
+            return (Math.Exp(-x) * Evaluate.ChebyshevA(BesselK0B, z)) / Math.Sqrt(x);
         }
 
         /// <summary>Returns the exponentially scaled modified Bessel function
@@ -231,11 +231,11 @@ namespace MathNet.Numerics
 
             if (x <= 2.0)
             {
-                double y = x * x - 2.0;
-                return Evaluate.ChebyshevA(BesselK0A, y) - Math.Log(0.5 * x) * BesselI0(x) * Math.Exp(x);
+                double y = (x * x) - 2.0;
+                return Evaluate.ChebyshevA(BesselK0A, y) - (Math.Log(0.5 * x) * BesselI0(x) * Math.Exp(x));
             }
 
-            double x1 = 8.0 / x - 2.0;
+            double x1 = (8.0 / x) - 2.0;
             return Evaluate.ChebyshevA(BesselK0B, x1) / Math.Sqrt(x);
         }
 
@@ -258,12 +258,12 @@ namespace MathNet.Numerics
 
             if (x <= 2.0)
             {
-                double y = x * x - 2.0;
-                return Math.Log(z) * BesselI1(x) + Evaluate.ChebyshevA(BesselK1A, y) / x;
+                double y = (x * x) - 2.0;
+                return (Math.Log(z) * BesselI1(x)) + (Evaluate.ChebyshevA(BesselK1A, y) / x);
             }
 
-            double x1 = 8.0 / x - 2.0;
-            return Math.Exp(-x) * Evaluate.ChebyshevA(BesselK1B, x1) / Math.Sqrt(x);
+            double x1 = (8.0 / x) - 2.0;
+            return (Math.Exp(-x) * Evaluate.ChebyshevA(BesselK1B, x1)) / Math.Sqrt(x);
         }
 
         /// <summary> Returns the exponentially scaled modified Bessel function
@@ -282,11 +282,11 @@ namespace MathNet.Numerics
 
             if (x <= 2.0)
             {
-                double y = x * x - 2.0;
-                return Math.Log(0.5 * x) * BesselI1(x) + Evaluate.ChebyshevA(BesselK1A, y) / x * Math.Exp(x);
+                double y = (x * x) - 2.0;
+                return (Math.Log(0.5 * x) * BesselI1(x)) + ((Evaluate.ChebyshevA(BesselK1A, y) / x) * Math.Exp(x));
             }
 
-            double x1 = 8.0 / x - 2.0;
+            double x1 = (8.0 / x) - 2.0;
             return Evaluate.ChebyshevA(BesselK1B, x1) / Math.Sqrt(x);
         }
     }

@@ -100,7 +100,7 @@ namespace MathNet.Numerics.Threading
             }
 
             // Special case: not worth to parallelize, inline
-            if (Control.MaxDegreeOfParallelism < 2 || (rangeSize*2) > length)
+            if ((Control.MaxDegreeOfParallelism < 2) || ((rangeSize*2) > length))
             {
                 body(fromInclusive, toExclusive);
                 return;
@@ -243,7 +243,7 @@ namespace MathNet.Numerics.Threading
             }
 
             // Special case: no action
-            if (array == null || array.Length == 0)
+            if ((array == null) || (array.Length == 0))
             {
                 return reduce(new TOut[0]);
             }
@@ -308,7 +308,7 @@ namespace MathNet.Numerics.Threading
         {
             return Aggregate(fromInclusive, toExclusive, select, results =>
             {
-                if (results == null || results.Length == 0)
+                if ((results == null) || (results.Length == 0))
                 {
                     return reduceDefault;
                 }
@@ -340,7 +340,7 @@ namespace MathNet.Numerics.Threading
         {
             return Aggregate(array, select, results =>
             {
-                if (results == null || results.Length == 0)
+                if ((results == null) || (results.Length == 0))
                 {
                     return reduceDefault;
                 }

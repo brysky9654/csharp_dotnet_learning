@@ -94,7 +94,7 @@ namespace MathNet.Numerics.RootFinding
                     if (gnew > g)
                     {
                         double g2 = g*g;
-                        double scale = g2/(g2 + gnew*gnew);
+                        double scale = g2/(g2 + (gnew*gnew));
                         if (scale == 0.0)
                         {
                             scale = 1.0e-4;

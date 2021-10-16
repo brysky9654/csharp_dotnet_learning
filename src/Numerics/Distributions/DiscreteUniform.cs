@@ -130,17 +130,17 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the standard deviation of the distribution.
         /// </summary>
-        public double StdDev => Math.Sqrt((((_upper - _lower + 1.0)*(_upper - _lower + 1.0)) - 1.0)/12.0);
+        public double StdDev => Math.Sqrt(((((_upper - _lower) + 1.0)*((_upper - _lower) + 1.0)) - 1.0)/12.0);
 
         /// <summary>
         /// Gets the variance of the distribution.
         /// </summary>
-        public double Variance => (((_upper - _lower + 1.0)*(_upper - _lower + 1.0)) - 1.0)/12.0;
+        public double Variance => ((((_upper - _lower) + 1.0)*((_upper - _lower) + 1.0)) - 1.0)/12.0;
 
         /// <summary>
         /// Gets the entropy of the distribution.
         /// </summary>
-        public double Entropy => Math.Log(_upper - _lower + 1.0);
+        public double Entropy => Math.Log((_upper - _lower) + 1.0);
 
         /// <summary>
         /// Gets the skewness of the distribution.
@@ -211,7 +211,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return k >= lower && k <= upper ? 1.0/(upper - lower + 1) : 0.0;
+            return (k >= lower) && (k <= upper) ? 1.0/((upper - lower) + 1) : 0.0;
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return k >= lower && k <= upper ? -Math.Log(upper - lower + 1) : double.NegativeInfinity;
+            return (k >= lower) && (k <= upper) ? -Math.Log((upper - lower) + 1) : double.NegativeInfinity;
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace MathNet.Numerics.Distributions
                 return 1.0;
             }
 
-            return Math.Min(1.0, (Math.Floor(x) - lower + 1)/(upper - lower + 1));
+            return Math.Min(1.0, ((Math.Floor(x) - lower) + 1)/((upper - lower) + 1));
         }
 
         /// <summary>

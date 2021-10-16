@@ -253,7 +253,7 @@ namespace SharpLearning.InputOutput.Csv
                 current++;
             }
 
-            if (last != csvText.Length - 1)
+            if (last != (csvText.Length - 1))
             {
                 tokens.Add(csvText.Substring(last + 1).Trim());
             }

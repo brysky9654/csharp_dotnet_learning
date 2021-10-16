@@ -109,7 +109,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public static double EpanechnikovKernel(double x)
         {
-            return Math.Abs(x) <= 1.0 ? 0.75 * (1 - x * x) : 0.0;
+            return Math.Abs(x) <= 1.0 ? 0.75 * (1 - (x * x)) : 0.0;
         }
 
         /// <summary>

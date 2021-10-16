@@ -76,7 +76,7 @@ namespace MathNet.Numerics.Distributions
         public static bool IsValidParameterSet(double scale, double shape, double truncation)
         {
             var allFinite = scale.IsFinite() && shape.IsFinite() && truncation.IsFinite();
-            return allFinite && scale > 0.0 && shape > 0.0 && truncation > scale;
+            return allFinite && (scale > 0.0) && (shape > 0.0) && (truncation > scale);
         }
 
         /// <summary>
@@ -168,14 +168,14 @@ namespace MathNet.Numerics.Distributions
                 var mean = Mean;
                 var variance = Variance;
                 var std = StdDev;
-                return (GetMoment(3) - 3.0 * mean * variance - mean * mean * mean) / (std * std * std);
+                return (GetMoment(3) - (3.0 * mean * variance) - (mean * mean * mean)) / (std * std * std);
             }
         }
 
         /// <summary>
         /// Gets the median of the truncated Pareto distribution.
         /// </summary>
-        public double Median => Scale * Math.Pow(1.0 - (1.0 / 2.0) * (1.0 - Math.Pow(Scale / Truncation, Shape)), -(1.0 / Shape));
+        public double Median => Scale * Math.Pow(1.0 - ((1.0 / 2.0) * (1.0 - Math.Pow(Scale / Truncation, Shape))), -(1.0 / Shape));
 
         /// <summary>
         /// Generates a sample from the truncated Pareto distribution.
@@ -399,7 +399,7 @@ namespace MathNet.Numerics.Distributions
 
         internal static double DensityImpl(double scale, double shape, double truncation, double x)
         {
-            if (x < scale || x > truncation)
+            if ((x < scale) || (x > truncation))
                 return 0;
             else
                 return (shape * Math.Pow(scale, shape) * Math.Pow(x, -shape - 1)) / (1 - Math.Pow(scale / truncation, shape));
@@ -417,12 +417,12 @@ namespace MathNet.Numerics.Distributions
             else if (x >= truncation)
                 return 1;
             else
-                return (1 - Math.Pow(scale, shape) * Math.Pow(x, -shape)) / (1 - Math.Pow(scale / truncation, shape));
+                return (1 - (Math.Pow(scale, shape) * Math.Pow(x, -shape))) / (1 - Math.Pow(scale / truncation, shape));
         }
 
         internal static double InvCDFUncheckedImpl(double scale, double shape, double truncation, double p)
         {
-            var numerator = p * Math.Pow(truncation, shape) - p * Math.Pow(scale, shape) - Math.Pow(truncation, shape);
+            var numerator = (p * Math.Pow(truncation, shape)) - (p * Math.Pow(scale, shape)) - Math.Pow(truncation, shape);
             var denominator = Math.Pow(truncation, shape) * Math.Pow(scale, shape);
             return Math.Pow(-numerator / denominator, -(1 / shape));
         }

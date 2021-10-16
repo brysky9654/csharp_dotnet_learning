@@ -188,10 +188,10 @@ namespace MathNet.Numerics.Statistics
 
                 mean += scaleDelta;
 
-                kurtosis += tmpDelta*scaleDelta*scaleDeltaSqr*(n*n - 3*n + 3)
-                            + 6*scaleDeltaSqr*variance - 4*scaleDelta*skewness;
+                kurtosis += ((tmpDelta*scaleDelta*scaleDeltaSqr*(((n*n) - (3*n)) + 3))
+                           + (6*scaleDeltaSqr*variance)) - (4*scaleDelta*skewness);
 
-                skewness += tmpDelta*scaleDeltaSqr*(n - 2) - 3*scaleDelta*variance;
+                skewness += (tmpDelta*scaleDeltaSqr*(n - 2)) - (3*scaleDelta*variance);
                 variance += tmpDelta*scaleDelta;
 
                 if (minimum > xi)
@@ -233,10 +233,10 @@ namespace MathNet.Numerics.Statistics
 
                     mean += scaleDelta;
 
-                    kurtosis += tmpDelta*scaleDelta*scaleDeltaSqr*(n*n - 3*n + 3)
-                                + 6*scaleDeltaSqr*variance - 4*scaleDelta*skewness;
+                    kurtosis += ((tmpDelta*scaleDelta*scaleDeltaSqr*(((n*n) - (3*n)) + 3))
+                               + (6*scaleDeltaSqr*variance)) - (4*scaleDelta*skewness);
 
-                    skewness += tmpDelta*scaleDeltaSqr*(n - 2) - 3*scaleDelta*variance;
+                    skewness += (tmpDelta*scaleDeltaSqr*(n - 2)) - (3*scaleDelta*variance);
                     variance += tmpDelta*scaleDelta;
 
                     if (minimum > xi)
@@ -278,10 +278,10 @@ namespace MathNet.Numerics.Statistics
 
                 mean += scaleDelta;
 
-                kurtosis += tmpDelta*scaleDelta*scaleDelta2*(n*n - 3*n + 3)
-                            + 6*scaleDelta2*variance - 4*scaleDelta*skewness;
+                kurtosis += ((tmpDelta*scaleDelta*scaleDelta2*(((n*n) - (3*n)) + 3))
+                           + (6*scaleDelta2*variance)) - (4*scaleDelta*skewness);
 
-                skewness += tmpDelta*scaleDelta2*(n - 2) - 3*scaleDelta*variance;
+                skewness += (tmpDelta*scaleDelta2*(n - 2)) - (3*scaleDelta*variance);
                 variance += tmpDelta*scaleDelta;
 
                 if (minimum > xi)
@@ -324,10 +324,10 @@ namespace MathNet.Numerics.Statistics
 
                     mean += scaleDelta;
 
-                    kurtosis += tmpDelta*scaleDelta*scaleDeltaSQR*(n*n - 3*n + 3)
-                                + 6*scaleDeltaSQR*variance - 4*scaleDelta*skewness;
+                    kurtosis += ((tmpDelta*scaleDelta*scaleDeltaSQR*(((n*n) - (3*n)) + 3))
+                               + (6*scaleDeltaSQR*variance)) - (4*scaleDelta*skewness);
 
-                    skewness += tmpDelta*scaleDeltaSQR*(n - 2) - 3*scaleDelta*variance;
+                    skewness += (tmpDelta*scaleDeltaSQR*(n - 2)) - (3*scaleDelta*variance);
                     variance += tmpDelta*scaleDelta;
 
                     if (minimum > xi)
@@ -382,13 +382,13 @@ namespace MathNet.Numerics.Statistics
                 {
                     if (n > 2)
                     {
-                        Skewness = (double)n/((n - 1)*(n - 2))*(skewness/(Variance*StandardDeviation));
+                        Skewness = ((double)n/((n - 1)*(n - 2)))*(skewness/(Variance*StandardDeviation));
                     }
 
                     if (n > 3)
                     {
-                        Kurtosis = ((double)n*n - 1)/((n - 2)*(n - 3))
-                                   *(n*kurtosis/(variance*variance) - 3 + 6.0/(n + 1));
+                        Kurtosis = ((((double)n*n) - 1)/((n - 2)*(n - 3)))
+                                   *((((n*kurtosis)/(variance*variance)) - 3) + (6.0/(n + 1)));
                     }
                 }
             }

@@ -50,7 +50,7 @@ namespace MathNet.Numerics.Interpolation
         /// <param name="c2">second order spline coefficients (N)</param>
         public QuadraticSpline(double[] x, double[] c0, double[] c1, double[] c2)
         {
-            if (x.Length != c0.Length + 1 || x.Length != c1.Length + 1 || x.Length != c2.Length + 1)
+            if ((x.Length != (c0.Length + 1)) || (x.Length != (c1.Length + 1)) || (x.Length != (c2.Length + 1)))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -92,7 +92,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _c0[k] + x*(_c1[k] + x*_c2[k]);
+            return _c0[k] + (x*(_c1[k] + (x*_c2[k])));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace MathNet.Numerics.Interpolation
         public double Differentiate(double t)
         {
             int k = LeftSegmentIndex(t);
-            return _c1[k] + (t - _x[k])*2*_c2[k];
+            return _c1[k] + ((t - _x[k])*2*_c2[k]);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _indefiniteIntegral.Value[k] + x*(_c0[k] + x*(_c1[k]/2 + x*_c2[k]/3));
+            return _indefiniteIntegral.Value[k] + (x*(_c0[k] + (x*((_c1[k]/2) + ((x*_c2[k])/3)))));
         }
 
         /// <summary>
@@ -141,10 +141,10 @@ namespace MathNet.Numerics.Interpolation
         double[] ComputeIndefiniteIntegral()
         {
             var integral = new double[_c1.Length];
-            for (int i = 0; i < integral.Length - 1; i++)
+            for (int i = 0; i < (integral.Length - 1); i++)
             {
                 double w = _x[i + 1] - _x[i];
-                integral[i + 1] = integral[i] + w*(_c0[i] + w*(_c1[i]/2 + w*_c2[i]/3));
+                integral[i + 1] = integral[i] + (w*(_c0[i] + (w*((_c1[i]/2) + ((w*_c2[i])/3)))));
             }
 
             return integral;

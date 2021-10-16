@@ -60,7 +60,7 @@ namespace SharpLearning.GradientBoost.Loss
                     var target = targets[i];
                     var residual = residuals[i];
                     var residual2 = residual * residual;
-                    var binomial = (target - residual) * (1.0 - target + residual);
+                    var binomial = (target - residual) * ((1.0 - target) + residual);
 
                     splitInfo.Samples++;
                     splitInfo.Sum += residual;
@@ -69,7 +69,7 @@ namespace SharpLearning.GradientBoost.Loss
                 }
             }
 
-            splitInfo.Cost = splitInfo.SumOfSquares - (splitInfo.Sum * splitInfo.Sum / splitInfo.Samples);
+            splitInfo.Cost = splitInfo.SumOfSquares - ((splitInfo.Sum * splitInfo.Sum) / splitInfo.Samples);
             splitInfo.BestConstant = BinomialBestConstant(splitInfo.Sum, splitInfo.BinomialSum);
 
             return splitInfo;
@@ -83,7 +83,7 @@ namespace SharpLearning.GradientBoost.Loss
         /// <returns></returns>
         public double NegativeGradient(double target, double prediction)
         {
-            return (target - 1.0 / (1.0 + Math.Exp(-prediction))).NanToNum();
+            return (target - (1.0 / (1.0 + Math.Exp(-prediction)))).NanToNum();
         }
 
         /// <summary>
@@ -116,20 +116,20 @@ namespace SharpLearning.GradientBoost.Loss
             double target, double residual)
         {
             var residual2 = residual * residual;
-            var binomial = (target - residual) * (1.0 - target + residual);
+            var binomial = (target - residual) * ((1.0 - target) + residual);
 
             left.Samples++;
             left.Sum += residual;
             left.SumOfSquares += residual2;
             left.BinomialSum += binomial;
-            left.Cost = left.SumOfSquares - (left.Sum * left.Sum / left.Samples);
+            left.Cost = left.SumOfSquares - ((left.Sum * left.Sum) / left.Samples);
             left.BestConstant = BinomialBestConstant(left.Sum, left.BinomialSum);
 
             right.Samples--;
             right.Sum -= residual;
             right.SumOfSquares -= residual2;
             right.BinomialSum -= binomial;
-            right.Cost = right.SumOfSquares - (right.Sum * right.Sum / right.Samples);
+            right.Cost = right.SumOfSquares - ((right.Sum * right.Sum) / right.Samples);
             right.BestConstant = BinomialBestConstant(right.Sum, right.BinomialSum);
         }
 

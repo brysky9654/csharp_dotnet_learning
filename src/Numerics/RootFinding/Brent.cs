@@ -123,11 +123,11 @@ namespace MathNet.Numerics.RootFinding
                 }
 
                 // convergence check
-                double xAcc1 = Precision.PositiveDoublePrecision*Math.Abs(root) + 0.5*accuracy;
+                double xAcc1 = (Precision.PositiveDoublePrecision*Math.Abs(root)) + (0.5*accuracy);
                 double xMidOld = xMid;
                 xMid = (upperBound - root)/2.0;
 
-                if (Math.Abs(xMid) <= xAcc1 || froot.AlmostEqualNormRelative(0, froot, accuracy))
+                if ((Math.Abs(xMid) <= xAcc1) || froot.AlmostEqualNormRelative(0, froot, accuracy))
                 {
                     return true;
                 }
@@ -138,7 +138,7 @@ namespace MathNet.Numerics.RootFinding
                     return false;
                 }
 
-                if (Math.Abs(e) >= xAcc1 && Math.Abs(fmin) > Math.Abs(froot))
+                if ((Math.Abs(e) >= xAcc1) && (Math.Abs(fmin) > Math.Abs(froot)))
                 {
                     // Attempt inverse quadratic interpolation
                     double s = froot/fmin;
@@ -153,7 +153,7 @@ namespace MathNet.Numerics.RootFinding
                     {
                         q = fmin/fmax;
                         double r = froot/fmax;
-                        p = s*(2.0*xMid*q*(q - r) - (root - lowerBound)*(r - 1.0));
+                        p = s*((2.0*xMid*q*(q - r)) - ((root - lowerBound)*(r - 1.0)));
                         q = (q - 1.0)*(r - 1.0)*(s - 1.0);
                     }
 
@@ -164,7 +164,7 @@ namespace MathNet.Numerics.RootFinding
                     }
 
                     p = Math.Abs(p);
-                    if (2.0*p < Math.Min(3.0*xMid*q - Math.Abs(xAcc1*q), Math.Abs(e*q)))
+                    if ((2.0*p) < Math.Min((3.0*xMid*q) - Math.Abs(xAcc1*q), Math.Abs(e*q)))
                     {
                         // Accept interpolation
                         e = d;

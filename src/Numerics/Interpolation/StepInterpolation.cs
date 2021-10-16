@@ -162,7 +162,7 @@ namespace MathNet.Numerics.Interpolation
 
             int k = LeftBracketIndex(t);
             var x = t - _x[k];
-            return _indefiniteIntegral.Value[k] + x*_y[k];
+            return _indefiniteIntegral.Value[k] + (x*_y[k]);
         }
 
         /// <summary>
@@ -178,9 +178,9 @@ namespace MathNet.Numerics.Interpolation
         double[] ComputeIndefiniteIntegral()
         {
             var integral = new double[_x.Length];
-            for (int i = 0; i < integral.Length - 1; i++)
+            for (int i = 0; i < (integral.Length - 1); i++)
             {
-                integral[i + 1] = integral[i] + (_x[i + 1] - _x[i])*_y[i];
+                integral[i + 1] = integral[i] + ((_x[i + 1] - _x[i])*_y[i]);
             }
 
             return integral;

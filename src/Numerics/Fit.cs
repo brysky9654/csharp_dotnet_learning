@@ -58,7 +58,7 @@ namespace MathNet.Numerics
         {
             var parameters = SimpleRegression.Fit(x, y);
             double intercept = parameters.Item1, slope = parameters.Item2;
-            return z => intercept + slope*z;
+            return z => intercept + (slope*z);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace MathNet.Numerics
             var parameters = Logarithm(x, y, method);
             var a = parameters.Item1;
             var b = parameters.Item2;
-            return z => a + b * Math.Log(z);
+            return z => a + (b * Math.Log(z));
         }
 
         /// <summary>

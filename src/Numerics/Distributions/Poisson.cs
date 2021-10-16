@@ -160,7 +160,7 @@ namespace MathNet.Numerics.Distributions
         /// Gets the median of the distribution.
         /// </summary>
         /// <remarks>Approximation, see Wikipedia <a href="http://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a></remarks>
-        public double Median => Math.Floor(_lambda + (1.0/3.0) - (0.02/_lambda));
+        public double Median => Math.Floor((_lambda + (1.0/3.0)) - (0.02/_lambda));
 
         /// <summary>
         /// Computes the probability mass (PMF) at k, i.e. P(X = k).
@@ -169,7 +169,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public double Probability(int k)
         {
-            return Math.Exp(-_lambda + (k*Math.Log(_lambda)) - SpecialFunctions.FactorialLn(k));
+            return Math.Exp((-_lambda + (k*Math.Log(_lambda))) - SpecialFunctions.FactorialLn(k));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public double ProbabilityLn(int k)
         {
-            return -_lambda + (k*Math.Log(_lambda)) - SpecialFunctions.FactorialLn(k);
+            return (-_lambda + (k*Math.Log(_lambda))) - SpecialFunctions.FactorialLn(k);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Math.Exp(-lambda + (k*Math.Log(lambda)) - SpecialFunctions.FactorialLn(k));
+            return Math.Exp((-lambda + (k*Math.Log(lambda))) - SpecialFunctions.FactorialLn(k));
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return -lambda + (k*Math.Log(lambda)) - SpecialFunctions.FactorialLn(k);
+            return (-lambda + (k*Math.Log(lambda))) - SpecialFunctions.FactorialLn(k);
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace MathNet.Numerics.Distributions
                         var y = alpha - (beta*x);
                         var temp = 1.0 + Math.Exp(y);
                         var lhs = y + Math.Log(v/(temp*temp));
-                        var rhs = k + (n*Math.Log(lambda)) - SpecialFunctions.FactorialLn(n);
+                        var rhs = (k + (n*Math.Log(lambda))) - SpecialFunctions.FactorialLn(n);
                         if (lhs <= rhs)
                         {
                             values[i] = n;
@@ -367,7 +367,7 @@ namespace MathNet.Numerics.Distributions
                 var y = alpha - (beta*x);
                 var temp = 1.0 + Math.Exp(y);
                 var lhs = y + Math.Log(v/(temp*temp));
-                var rhs = k + (n*Math.Log(lambda)) - SpecialFunctions.FactorialLn(n);
+                var rhs = (k + (n*Math.Log(lambda))) - SpecialFunctions.FactorialLn(n);
                 if (lhs <= rhs)
                 {
                     return n;

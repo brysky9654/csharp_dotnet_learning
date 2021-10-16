@@ -46,12 +46,12 @@ namespace SharpLearning.Neural
         {
             // BorderMode.Same pads with half the filter size on both sides (one less on
             // the second side for an even filter size)
-            if (borderMode == BorderMode.Same && filterSize % 2 == 0) 
+            if ((borderMode == BorderMode.Same) && ((filterSize % 2) == 0)) 
             {
-                return (int)Math.Floor((inputLength + (padding + padding - 1) - filterSize) / (double)stride + 1);
+                return (int)Math.Floor((((inputLength + ((padding + padding) - 1)) - filterSize) / (double)stride) + 1);
             }
 
-            return (int)Math.Floor((inputLength + padding * 2 - filterSize) / (double)stride + 1);
+            return (int)Math.Floor((((inputLength + (padding * 2)) - filterSize) / (double)stride) + 1);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace SharpLearning.Neural
         public static float GetValueFromIndex(this Matrix<float> m, int n, int c, int h, int w, 
             int depth, int width, int height)
         {
-            var indexInBatchItem = c * width * height + h * width + w;
-            var mIndex = indexInBatchItem * m.RowCount + n;
+            var indexInBatchItem = (c * width * height) + (h * width) + w;
+            var mIndex = (indexInBatchItem * m.RowCount) + n;
             return m.Data()[mIndex];
         }
 
@@ -89,8 +89,8 @@ namespace SharpLearning.Neural
         public static int GetDataIndex(this Matrix<float> m, int n, int c, int h, int w, 
             int depth, int width, int height)
         {
-            var indexInBatchItem = c * width * height + h * width + w;
-            var mIndex = indexInBatchItem * m.RowCount + n;
+            var indexInBatchItem = (c * width * height) + (h * width) + w;
+            var mIndex = (indexInBatchItem * m.RowCount) + n;
             return mIndex;
         }
 
@@ -138,16 +138,16 @@ namespace SharpLearning.Neural
                         var rowOffSet = h * width_col;
                         for (int w = 0; w < width_col; ++w)
                         {
-                            int h_pad = h * stride_h - pad_h + h_offset;
-                            int w_pad = w * stride_w - pad_w + w_offset;
+                            int h_pad = ((h * stride_h) - pad_h) + h_offset;
+                            int w_pad = ((w * stride_w) - pad_w) + w_offset;
 
                             var outColIndex = batchRowOffSet + rowOffSet + w;
-                            var outputIndex = outColIndex * data_col.RowCount + c;                                                   
+                            var outputIndex = (outColIndex * data_col.RowCount) + c;                                                   
 
-                            var inputColIndex = (cImRowOffSet + h_pad) * width + w_pad;
-                            var inputIndex = inputColIndex * batchSize + batchItem;
+                            var inputColIndex = ((cImRowOffSet + h_pad) * width) + w_pad;
+                            var inputIndex = (inputColIndex * batchSize) + batchItem;
 
-                            if (h_pad >= 0 && h_pad < height && w_pad >= 0 && w_pad < width)
+                            if ((h_pad >= 0) && (h_pad < height) && (w_pad >= 0) && (w_pad < width))
                             {
                                 data_colData[outputIndex] = data_imData[inputIndex];
                             }
@@ -201,12 +201,12 @@ namespace SharpLearning.Neural
                     for (int column = 0; column < columnWidth; column++)
                     {
                         // get value from conv data
-                        var convIndex = (batchOffSet + column) * filterCount + filter;
+                        var convIndex = ((batchOffSet + column) * filterCount) + filter;
                         var convValue = convolutedData[convIndex];
 
                         // set value in row major data
                         var rowMajorIndex = rowOffSet + column;
-                        var index = rowMajorIndex * batchSize + batchItem;
+                        var index = (rowMajorIndex * batchSize) + batchItem;
                         data_convolutedRowMajorData[index] = convValue;
                     }
                 }
@@ -254,11 +254,11 @@ namespace SharpLearning.Neural
                     {
                         // get value from row major data
                         var rowMajorIndex = rowOffSet + column;
-                        var index = rowMajorIndex * batchSize + batchItem;
+                        var index = (rowMajorIndex * batchSize) + batchItem;
                         var rowValue = data_convolutedRowMajorData[index];
 
                         // set value in conv data
-                        var convIndex = (batchOffSet + column) * filterCount + filter;
+                        var convIndex = ((batchOffSet + column) * filterCount) + filter;
                         convolutedData[convIndex] = rowValue;
                     }
                 }
@@ -306,19 +306,19 @@ namespace SharpLearning.Neural
                     for (int h = 0; h < height_col; ++h)
                     {
                         var rowOffSet = h * width_col;
-                        int h_pad = h * stride_h - pad_h + h_offset;
+                        int h_pad = ((h * stride_h) - pad_h) + h_offset;
 
                         for (int w = 0; w < width_col; ++w)
                         {
                             
-                            int w_pad = w * stride_w - pad_w + w_offset;
-                            if (h_pad >= 0 && h_pad < height && w_pad >= 0 && w_pad < width)
+                            int w_pad = ((w * stride_w) - pad_w) + w_offset;
+                            if ((h_pad >= 0) && (h_pad < height) && (w_pad >= 0) && (w_pad < width))
                             {
                                 var colColIndex = batchRowOffSet + rowOffSet + w;
-                                var outIndex = (c_ImRowOffSet + h_pad) * width + w_pad;
+                                var outIndex = ((c_ImRowOffSet + h_pad) * width) + w_pad;
 
-                                var imIndex = outIndex * batchSize + batchItem;
-                                var colIndex = colColIndex * data_col.RowCount + c;
+                                var imIndex = (outIndex * batchSize) + batchItem;
+                                var colIndex = (colColIndex * data_col.RowCount) + c;
 
                                 var newValue = data_imData[imIndex] + data_colData[colIndex];
                                 data_imData[imIndex] = newValue;

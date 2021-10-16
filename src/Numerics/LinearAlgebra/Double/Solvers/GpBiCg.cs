@@ -358,7 +358,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double.Solvers
 
                 // beta_k = alpha_k / sigma_k * (r*_0 * r_(k+1)) / (r*_0 * r_k)
                 // But first we check if there is a possible NaN. If so just reset beta to zero.
-                beta = (!sigma.AlmostEqualNumbersBetween(0, 1)) ? alpha/sigma*rdash.DotProduct(residuals)/rdash.DotProduct(t0) : 0;
+                beta = (!sigma.AlmostEqualNumbersBetween(0, 1)) ? ((alpha/sigma)*rdash.DotProduct(residuals))/rdash.DotProduct(t0) : 0;
 
                 // w_k = c_k + beta_k s_k
                 s.Multiply(beta, temp2);

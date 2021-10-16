@@ -146,7 +146,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="precInvScale">The inverse scale of the precision.</param>
         public static bool IsValidParameterSet(double meanLocation, double meanScale, double precShape, double precInvScale)
         {
-            return meanScale > 0.0 && precShape > 0.0 && precInvScale > 0.0 && !double.IsNaN(meanLocation);
+            return (meanScale > 0.0) && (precShape > 0.0) && (precInvScale > 0.0) && !double.IsNaN(meanLocation);
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>Density value</returns>
         public double Density(double mean, double prec)
         {
-            if (double.IsPositiveInfinity(_precisionInvScale) && _meanScale == 0.0)
+            if (double.IsPositiveInfinity(_precisionInvScale) && (_meanScale == 0.0))
             {
                 throw new NotSupportedException();
             }
@@ -254,7 +254,7 @@ namespace MathNet.Numerics.Distributions
             // double e = -0.5 * prec * (mean - _meanLocation) * (mean - _meanLocation) - prec * _precisionInvScale;
             // return Math.Pow(prec * _precisionInvScale, _precisionShape) * Math.Exp(e) / (Constants.Sqrt2Pi * Math.Sqrt(prec) * SpecialFunctions.Gamma(_precisionShape));
             double e = -(0.5*prec*_meanScale*(mean - _meanLocation)*(mean - _meanLocation)) - (prec*_precisionInvScale);
-            return Math.Pow(prec*_precisionInvScale, _precisionShape)*Math.Exp(e)*Math.Sqrt(_meanScale)
+            return (Math.Pow(prec*_precisionInvScale, _precisionShape)*Math.Exp(e)*Math.Sqrt(_meanScale))
                    /(Constants.Sqrt2Pi*Math.Sqrt(prec)*SpecialFunctions.Gamma(_precisionShape));
         }
 
@@ -276,7 +276,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>The log of the density value</returns>
         public double DensityLn(double mean, double prec)
         {
-            if (double.IsPositiveInfinity(_precisionInvScale) && _meanScale == 0.0)
+            if (double.IsPositiveInfinity(_precisionInvScale) && (_meanScale == 0.0))
             {
                 throw new NotSupportedException();
             }
@@ -294,7 +294,7 @@ namespace MathNet.Numerics.Distributions
             // double e = -0.5 * prec * (mean - _meanLocation) * (mean - _meanLocation) - prec * _precisionInvScale;
             // return (_precisionShape - 0.5) * Math.Log(prec) + _precisionShape * Math.Log(_precisionInvScale) + e - Constants.LogSqrt2Pi - SpecialFunctions.GammaLn(_precisionShape);
             double e = -(0.5*prec*_meanScale*(mean - _meanLocation)*(mean - _meanLocation)) - (prec*_precisionInvScale);
-            return ((_precisionShape - 0.5)*Math.Log(prec)) + (_precisionShape*Math.Log(_precisionInvScale)) - (0.5*Math.Log(_meanScale)) + e - Constants.LogSqrt2Pi - SpecialFunctions.GammaLn(_precisionShape);
+            return (((((_precisionShape - 0.5)*Math.Log(prec)) + (_precisionShape*Math.Log(_precisionInvScale))) - (0.5*Math.Log(_meanScale))) + e) - Constants.LogSqrt2Pi - SpecialFunctions.GammaLn(_precisionShape);
         }
 
         /// <summary>

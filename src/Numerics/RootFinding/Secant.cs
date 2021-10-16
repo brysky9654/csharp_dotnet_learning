@@ -80,7 +80,7 @@ namespace MathNet.Numerics.RootFinding
             root = secondGuess;
 
             // Either guess is outside of bounds
-            if (guess <= lowerBound || guess >= upperBound || secondGuess <= lowerBound || secondGuess >= upperBound)
+            if ((guess <= lowerBound) || (guess >= upperBound) || (secondGuess <= lowerBound) || (secondGuess >= upperBound))
             {
                 return false;
             }
@@ -89,10 +89,10 @@ namespace MathNet.Numerics.RootFinding
             double fguess = f(guess);
             double froot = f(root);
 
-            for (int i = 0; i <= maxIterations && root >= lowerBound && root <= upperBound; i++)
+            for (int i = 0; (i <= maxIterations) && (root >= lowerBound) && (root <= upperBound); i++)
             {
                 // Secant step
-                double step = froot * (root - guess) / (froot - fguess);
+                double step = (froot * (root - guess)) / (froot - fguess);
 
                 guess = root;
                 fguess = froot;
@@ -100,7 +100,7 @@ namespace MathNet.Numerics.RootFinding
                 root -= step;
                 froot = f(root);
 
-                if (Math.Abs(step) < accuracy && Math.Abs(froot) < accuracy)
+                if ((Math.Abs(step) < accuracy) && (Math.Abs(froot) < accuracy))
                 {
                     return true;
                 }

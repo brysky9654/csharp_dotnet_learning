@@ -56,7 +56,7 @@ namespace MathNet.Numerics.Integration
                 throw new ArgumentNullException(nameof(f));
             }
 
-            return (intervalEnd - intervalBegin)/2*(f(intervalBegin) + f(intervalEnd));
+            return ((intervalEnd - intervalBegin)/2)*(f(intervalBegin) + f(intervalEnd));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MathNet.Numerics.Integration
                 throw new ArgumentNullException(nameof(f));
             }
 
-            return (intervalEnd - intervalBegin) / 2 * (f(intervalBegin) + f(intervalEnd));
+            return ((intervalEnd - intervalBegin) / 2) * (f(intervalBegin) + f(intervalEnd));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace MathNet.Numerics.Integration
 
             double offset = step;
             double sum = 0.5*(f(intervalBegin) + f(intervalEnd));
-            for (int i = 0; i < numberOfPartitions - 1; i++)
+            for (int i = 0; i < (numberOfPartitions - 1); i++)
             {
                 // NOTE (ruegg, 2009-01-07): Do not combine intervalBegin and offset (numerical stability!)
                 sum += f(intervalBegin + offset);
@@ -134,7 +134,7 @@ namespace MathNet.Numerics.Integration
 
             double offset = step;
             Complex sum = 0.5 * (f(intervalBegin) + f(intervalEnd));
-            for (int i = 0; i < numberOfPartitions - 1; i++)
+            for (int i = 0; i < (numberOfPartitions - 1); i++)
             {
                 // NOTE (ruegg, 2009-01-07): Do not combine intervalBegin and offset (numerical stability!)
                 sum += f(intervalBegin + offset);
@@ -308,7 +308,7 @@ namespace MathNet.Numerics.Integration
                     double r = Math.Log(delta)/Math.Log(previousDelta);
                     previousDelta = delta;
 
-                    if (r > 1.9 && r < 2.1)
+                    if ((r > 1.9) && (r < 2.1))
                     {
                         // convergence region
                         delta = Math.Sqrt(delta);
@@ -407,7 +407,7 @@ namespace MathNet.Numerics.Integration
                     double r = Math.Log(delta) / Math.Log(previousDelta);
                     previousDelta = delta;
 
-                    if (r > 1.9 && r < 2.1)
+                    if ((r > 1.9) && (r < 2.1))
                     {
                         // convergence region
                         delta = Math.Sqrt(delta);

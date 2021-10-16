@@ -148,7 +148,7 @@ namespace SharpLearning.Optimization
 
             var initializationResults = RunParameterSets(functionToMinimize, threshold, initialParameterSets, out best);
 
-            if (best != null && best.Error < threshold) return results;
+            if ((best != null) && (best.Error < threshold)) return results;
 
             results.AddRange(initializationResults);
 
@@ -158,7 +158,7 @@ namespace SharpLearning.Optimization
                 var iterationResults = RunParameterSets(functionToMinimize, threshold, parameterSets, out best);
                 results.AddRange(iterationResults);
 
-                if (best != null && best.Error < threshold) return results;
+                if ((best != null) && (best.Error < threshold)) return results;
             }
 
             return results;
@@ -326,7 +326,7 @@ namespace SharpLearning.Optimization
                 {
                     var neighbor = neighborhood[i];
                     var ei = ComputeExpectedImprovement(bestScore, neighbor, model);
-                    if (ei - bestExpectedImprovement > epsilon)
+                    if ((ei - bestExpectedImprovement) > epsilon)
                     {
                         bestParameterSet = neighbor;
                         bestExpectedImprovement = ei;

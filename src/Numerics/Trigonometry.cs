@@ -249,7 +249,7 @@ namespace MathNet.Numerics
             var sinhi = Sinh(value.Imaginary);
             var denom = (cosr * cosr) + (sinhi * sinhi);
 
-            return new Complex(cosr * Cosh(value.Imaginary) / denom, Sin(value.Real) * sinhi / denom);
+            return new Complex((cosr * Cosh(value.Imaginary)) / denom, (Sin(value.Real) * sinhi) / denom);
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace MathNet.Numerics
             var sinhi = Sinh(value.Imaginary);
             var denom = (sinr * sinr) + (sinhi * sinhi);
 
-            return new Complex(sinr * Cosh(value.Imaginary) / denom, -Cos(value.Real) * sinhi / denom);
+            return new Complex((sinr * Cosh(value.Imaginary)) / denom, (-Cos(value.Real) * sinhi) / denom);
         }
 
 
@@ -299,7 +299,7 @@ namespace MathNet.Numerics
         /// <returns>The arc sine of a complex number.</returns>
         public static Complex Asin(this Complex value)
         {
-            if (value.Imaginary > 0 || value.Imaginary == 0d && value.Real < 0)
+            if ((value.Imaginary > 0) || ((value.Imaginary == 0d) && (value.Real < 0)))
             {
                 return -Asin(-value);
             }
@@ -324,7 +324,7 @@ namespace MathNet.Numerics
         /// <returns>The arc cosine of a complex number.</returns>
         public static Complex Acos(this Complex value)
         {
-            if (value.Imaginary < 0 || value.Imaginary == 0d && value.Real > 0)
+            if ((value.Imaginary < 0) || ((value.Imaginary == 0d) && (value.Real > 0)))
             {
                 return Constants.Pi - Acos(-value);
             }
@@ -548,15 +548,15 @@ namespace MathNet.Numerics
             }
 
             double tani = Tan(value.Imaginary);
-            double beta = 1 + tani * tani; // beta = 1/cos^2(y) = 1 + t^2
+            double beta = 1 + (tani * tani); // beta = 1/cos^2(y) = 1 + t^2
             double sinhr = Sinh(value.Real);
             double coshr = Cosh(value.Real);
 
             if (double.IsInfinity(tani))
                 return new Complex(coshr / sinhr, 0.0);
 
-            double denom = 1.0 + beta * sinhr * sinhr;
-            return new Complex(beta * coshr * sinhr / denom, tani / denom);
+            double denom = 1.0 + (beta * sinhr * sinhr);
+            return new Complex((beta * coshr * sinhr) / denom, tani / denom);
         }
 
         /// <summary>
@@ -629,7 +629,7 @@ namespace MathNet.Numerics
 
             double tani = Tan(value.Imaginary);
             double cosi = Cos(value.Imaginary);
-            double beta = 1.0 + tani * tani;
+            double beta = 1.0 + (tani * tani);
             double sinhr = Math.Sinh(value.Real);
             double coshr = Math.Cosh(value.Real);
 
@@ -646,8 +646,8 @@ namespace MathNet.Numerics
                 return new Complex(0.0, -Math.Sign(tani) / sinhr);
             }
 
-            double denom = 1.0 + beta * sinhr * sinhr;
-            return new Complex(coshr / cosi / denom, -sinhr * tani / cosi / denom);
+            double denom = 1.0 + (beta * sinhr * sinhr);
+            return new Complex(coshr / cosi / denom, (-sinhr * tani) / cosi / denom);
         }
 
         /// <summary>
@@ -681,7 +681,7 @@ namespace MathNet.Numerics
 
             double coti = Cot(value.Imaginary);
             double sini = Sin(value.Imaginary);
-            double beta = 1 + coti * coti;
+            double beta = 1 + (coti * coti);
             double sinhr = Sinh(value.Real);
             double coshr = Cosh(value.Real);
 
@@ -698,8 +698,8 @@ namespace MathNet.Numerics
                 return new Complex(Math.Sign(coti) / sinhr, 0.0);
             }
 
-            double denom = 1.0 + beta * sinhr * sinhr;
-            return new Complex(sinhr * coti / sini / denom, -coshr / sini / denom);
+            double denom = 1.0 + (beta * sinhr * sinhr);
+            return new Complex((sinhr * coti) / sini / denom, -coshr / sini / denom);
         }
 
 

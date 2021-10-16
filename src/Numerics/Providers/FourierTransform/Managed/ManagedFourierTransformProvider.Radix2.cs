@@ -43,7 +43,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
         private static void Radix2Reorder<T>(T[] samples)
         {
             var j = 0;
-            for (var i = 0; i < samples.Length - 1; i++)
+            for (var i = 0; i < (samples.Length - 1); i++)
             {
                 if (i < j)
                 {
@@ -76,7 +76,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
         private static void Radix2Step(Complex32[] samples, int exponentSign, int levelSize, int k)
         {
             // Twiddle Factor
-            var exponent = (exponentSign * k) * Constants.Pi / levelSize;
+            var exponent = ((exponentSign * k) * Constants.Pi) / levelSize;
             var w = new Complex32((float)Math.Cos(exponent), (float)Math.Sin(exponent));
 
             var step = levelSize << 1;
@@ -102,7 +102,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
         private static void Radix2Step(Complex[] samples, int exponentSign, int levelSize, int k)
         {
             // Twiddle Factor
-            var exponent = (exponentSign * k) * Constants.Pi / levelSize;
+            var exponent = ((exponentSign * k) * Constants.Pi) / levelSize;
             var w = new Complex(Math.Cos(exponent), Math.Sin(exponent));
 
             var step = levelSize << 1;

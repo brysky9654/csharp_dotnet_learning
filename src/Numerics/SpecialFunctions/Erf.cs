@@ -418,7 +418,7 @@ namespace MathNet.Numerics
                 else
                 {
                     // Worst case absolute error found: 6.688618532e-21
-                    result = (z*1.125) + (z*Polynomial.Evaluate(z, ErfImpAn)/Polynomial.Evaluate(z, ErfImpAd));
+                    result = (z*1.125) + ((z*Polynomial.Evaluate(z, ErfImpAn))/Polynomial.Evaluate(z, ErfImpAd));
                 }
             }
             else if (z < 110)

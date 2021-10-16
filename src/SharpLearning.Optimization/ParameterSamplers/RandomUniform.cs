@@ -45,7 +45,7 @@ namespace SharpLearning.Optimization.ParameterSamplers
 
         double SampleContinous(double min, double max)
         {
-            return m_random.NextDouble() * (max - min) + min;
+            return (m_random.NextDouble() * (max - min)) + min;
         }
 
         int SampleInteger(int min, int max)

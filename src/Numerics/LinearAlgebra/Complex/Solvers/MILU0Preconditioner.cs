@@ -139,7 +139,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                 result[i] = input[i];
                 for (int k = _jlu[i]; k < _diag[i]; k++)
                 {
-                    result[i] = result[i] - _alu[k] * result[_jlu[k]];
+                    result[i] = result[i] - (_alu[k] * result[_jlu[k]]);
                 }
             }
 
@@ -148,7 +148,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
             {
                 for (int k = _diag[i]; k < _jlu[i + 1]; k++)
                 {
-                    result[i] = result[i] - _alu[k] * result[_jlu[k]];
+                    result[i] = result[i] - (_alu[k] * result[_jlu[k]]);
                 }
                 result[i] = _alu[i] * result[i];
             }
@@ -225,12 +225,12 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                         int jw = iw[jlu[k]];
                         if (jw != -1)
                         {
-                            alu[jw] = alu[jw] - tl * alu[k];
+                            alu[jw] = alu[jw] - (tl * alu[k]);
                         }
                         else
                         {
                             // Accumulate fill-in values.
-                            s = s + tl * alu[k];
+                            s = s + (tl * alu[k]);
                         }
                     }
                 }

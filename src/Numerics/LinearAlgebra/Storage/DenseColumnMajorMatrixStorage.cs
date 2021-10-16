@@ -60,7 +60,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (data.Length != rows*columns)
+            if (data.Length != (rows*columns))
             {
                 throw new ArgumentOutOfRangeException(nameof(data), string.Format(Resources.ArgumentArrayWrongLength, rows*columns));
             }
@@ -132,15 +132,15 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         internal override void ClearUnchecked(int rowIndex, int rowCount, int columnIndex, int columnCount)
         {
-            if (rowIndex == 0 && columnIndex == 0 && rowCount == RowCount && columnCount == ColumnCount)
+            if ((rowIndex == 0) && (columnIndex == 0) && (rowCount == RowCount) && (columnCount == ColumnCount))
             {
                 Array.Clear(Data, 0, Data.Length);
                 return;
             }
 
-            for (int j = columnIndex; j < columnIndex + columnCount; j++)
+            for (int j = columnIndex; j < (columnIndex + columnCount); j++)
             {
-                Array.Clear(Data, j*RowCount + rowIndex, rowCount);
+                Array.Clear(Data, (j*RowCount) + rowIndex, rowCount);
             }
         }
 
@@ -464,10 +464,10 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             // FALL BACK
 
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
-                int index = sourceRowIndex + j*RowCount;
-                for (int ii = targetRowIndex; ii < targetRowIndex + rowCount; ii++)
+                int index = sourceRowIndex + (j*RowCount);
+                for (int ii = targetRowIndex; ii < (targetRowIndex + rowCount); ii++)
                 {
                     target.At(ii, jj, Data[index++]);
                 }
@@ -478,10 +478,10 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             int sourceRowIndex, int targetRowIndex, int rowCount,
             int sourceColumnIndex, int targetColumnIndex, int columnCount)
         {
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
                 //Buffer.BlockCopy(Data, j*RowCount + sourceRowIndex, target.Data, jj*target.RowCount + targetRowIndex, rowCount * System.Runtime.InteropServices.Marshal.SizeOf(typeof(T)));
-                Array.Copy(Data, j*RowCount + sourceRowIndex, target.Data, jj*target.RowCount + targetRowIndex, rowCount);
+                Array.Copy(Data, (j*RowCount) + sourceRowIndex, target.Data, (jj*target.RowCount) + targetRowIndex, rowCount);
             }
         }
 
@@ -495,14 +495,14 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 for (int j = 0; j < columnCount; j++)
                 {
-                    targetDense.Data[j + targetColumnIndex] = Data[(j + sourceColumnIndex)*RowCount + rowIndex];
+                    targetDense.Data[j + targetColumnIndex] = Data[((j + sourceColumnIndex)*RowCount) + rowIndex];
                 }
                 return;
             }
 
             // FALL BACK
 
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
                 target.At(jj, Data[(j*RowCount) + rowIndex]);
             }
@@ -516,14 +516,14 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             var targetDense = target as DenseVectorStorage<T>;
             if (targetDense != null)
             {
-                Array.Copy(Data, columnIndex*RowCount + sourceRowIndex, targetDense.Data, targetRowIndex, rowCount);
+                Array.Copy(Data, (columnIndex*RowCount) + sourceRowIndex, targetDense.Data, targetRowIndex, rowCount);
                 return;
             }
 
             // FALL BACK
 
             var offset = columnIndex*RowCount;
-            for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+            for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
             {
                 target.At(ii, Data[offset + i]);
             }
@@ -603,8 +603,8 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 for (var i = 0; i < j; i++)
                 {
                     T swap = Data[index + i];
-                    Data[index + i] = Data[i*ColumnCount + j];
-                    Data[i*ColumnCount + j] = swap;
+                    Data[index + i] = Data[(i*ColumnCount) + j];
+                    Data[(i*ColumnCount) + j] = swap;
                 }
             }
         }
@@ -642,7 +642,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     var row = new T[ColumnCount];
                     for (int j = 0; j < ColumnCount; j++)
                     {
-                        row[j] = Data[j*RowCount + i];
+                        row[j] = Data[(j*RowCount) + i];
                     }
                     ret[i] = row;
                 }
@@ -792,19 +792,19 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 {
                     for (int col = 0; col < ColumnCount; col++)
                     {
-                        if (k < otherRowPointers[row + 1] && otherColumnIndices[k] == col)
+                        if ((k < otherRowPointers[row + 1]) && (otherColumnIndices[k] == col))
                         {
-                            if (predicate(Data[col*RowCount + row], otherValues[k]))
+                            if (predicate(Data[(col*RowCount) + row], otherValues[k]))
                             {
-                                return new Tuple<int, int, T, TOther>(row, col, Data[col*RowCount + row], otherValues[k]);
+                                return new Tuple<int, int, T, TOther>(row, col, Data[(col*RowCount) + row], otherValues[k]);
                             }
                             k++;
                         }
                         else
                         {
-                            if (predicate(Data[col*RowCount + row], otherZero))
+                            if (predicate(Data[(col*RowCount) + row], otherZero))
                             {
-                                return new Tuple<int, int, T, TOther>(row, col, Data[col*RowCount + row], otherValues[k]);
+                                return new Tuple<int, int, T, TOther>(row, col, Data[(col*RowCount) + row], otherValues[k]);
                             }
                         }
                     }
@@ -919,8 +919,8 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 {
                     for (int j = a; j < b; j++)
                     {
-                        int sourceIndex = sourceRowIndex + (j + sourceColumnIndex)*RowCount;
-                        int targetIndex = targetRowIndex + (j + targetColumnIndex)*target.RowCount;
+                        int sourceIndex = sourceRowIndex + ((j + sourceColumnIndex)*RowCount);
+                        int targetIndex = targetRowIndex + ((j + targetColumnIndex)*target.RowCount);
                         for (int i = 0; i < rowCount; i++)
                         {
                             denseTarget.Data[targetIndex++] = f(targetRowIndex + i, targetColumnIndex + j, Data[sourceIndex++]);
@@ -934,10 +934,10 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             // FALL BACK
 
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
-                int index = sourceRowIndex + j*RowCount;
-                for (int ii = targetRowIndex; ii < targetRowIndex + rowCount; ii++)
+                int index = sourceRowIndex + (j*RowCount);
+                for (int ii = targetRowIndex; ii < (targetRowIndex + rowCount); ii++)
                 {
                     target.At(ii, jj, f(ii, jj, Data[index++]));
                 }
@@ -953,7 +953,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 TU s = state[i];
                 for (int j = 0; j < ColumnCount; j++)
                 {
-                    s = f(s, Data[j*RowCount + i]);
+                    s = f(s, Data[(j*RowCount) + i]);
                 }
                 target[i] = finalize(s, ColumnCount);
             }
@@ -1015,13 +1015,13 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 {
                     for (int col = 0; col < ColumnCount; col++)
                     {
-                        if (k < otherRowPointers[row + 1] && otherColumnIndices[k] == col)
+                        if ((k < otherRowPointers[row + 1]) && (otherColumnIndices[k] == col))
                         {
-                            state = f(state, Data[col*RowCount + row], otherValues[k++]);
+                            state = f(state, Data[(col*RowCount) + row], otherValues[k++]);
                         }
                         else
                         {
-                            state = f(state, Data[col*RowCount + row], otherZero);
+                            state = f(state, Data[(col*RowCount) + row], otherZero);
                         }
                     }
                 }

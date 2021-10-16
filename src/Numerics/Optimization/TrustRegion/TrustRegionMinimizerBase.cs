@@ -161,7 +161,7 @@ namespace MathNet.Numerics.Optimization.TrustRegion
 
             int iterations = 0;
             bool hitBoundary = false;
-            while (iterations < maximumIterations && exitCondition == ExitCondition.None)
+            while ((iterations < maximumIterations) && (exitCondition == ExitCondition.None))
             {
                 iterations++;
 
@@ -171,9 +171,9 @@ namespace MathNet.Numerics.Optimization.TrustRegion
                 hitBoundary = subproblem.HitBoundary;
 
                 // predicted reduction = L(0) - L(Δp) = -Δp'g - 1/2 * Δp'HΔp
-                var predictedReduction = -Gradient.DotProduct(Pstep) - 0.5 * Pstep.DotProduct(Hessian * Pstep);
+                var predictedReduction = -Gradient.DotProduct(Pstep) - (0.5 * Pstep.DotProduct(Hessian * Pstep));
 
-                if (Pstep.L2Norm() <= stepTolerance * (stepTolerance + P.L2Norm()))
+                if (Pstep.L2Norm() <= (stepTolerance * (stepTolerance + P.L2Norm())))
                 {
                     exitCondition = ExitCondition.RelativePoints; // SmallRelativeParameters
                     break;
@@ -195,14 +195,14 @@ namespace MathNet.Numerics.Optimization.TrustRegion
                         ? (RSS - RSSnew) / predictedReduction
                         : 0.0;
 
-                if (rho > 0.75 && hitBoundary)
+                if ((rho > 0.75) && hitBoundary)
                 {
                     delta = Math.Min(2.0 * delta, maxDelta);
                 }
                 else if (rho < 0.25)
                 {
                     delta = delta * 0.25;
-                    if (delta <= radiusTolerance * (radiusTolerance + P.DotProduct(P)))
+                    if (delta <= (radiusTolerance * (radiusTolerance + P.DotProduct(P))))
                     {
                         exitCondition = ExitCondition.LackOfProgress;
                         break;

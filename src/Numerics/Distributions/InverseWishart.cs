@@ -165,7 +165,7 @@ namespace MathNet.Numerics.Distributions
             {
                 return Matrix<double>.Build.Dense(_scale.RowCount, _scale.ColumnCount, (i, j) =>
                 {
-                    var num1 = ((_freedom - _scale.RowCount + 1)*_scale.At(i, j)*_scale.At(i, j)) + ((_freedom - _scale.RowCount - 1)*_scale.At(i, i)*_scale.At(j, j));
+                    var num1 = (((_freedom - _scale.RowCount) + 1)*_scale.At(i, j)*_scale.At(i, j)) + ((_freedom - _scale.RowCount - 1)*_scale.At(i, i)*_scale.At(j, j));
                     var num2 = (_freedom - _scale.RowCount)*(_freedom - _scale.RowCount - 1)*(_freedom - _scale.RowCount - 1)*(_freedom - _scale.RowCount - 3);
                     return num1/num2;
                 });
@@ -182,7 +182,7 @@ namespace MathNet.Numerics.Distributions
         {
             var p = _scale.RowCount;
 
-            if (x.RowCount != p || x.ColumnCount != p)
+            if ((x.RowCount != p) || (x.ColumnCount != p))
             {
                 throw new ArgumentOutOfRangeException(nameof(x), Resources.ArgumentMatrixDimensions);
             }
@@ -192,16 +192,16 @@ namespace MathNet.Numerics.Distributions
             var sXi = chol.Solve(Scale);
 
             // Compute the multivariate Gamma function.
-            var gp = Math.Pow(Constants.Pi, p*(p - 1.0)/4.0);
+            var gp = Math.Pow(Constants.Pi, (p*(p - 1.0))/4.0);
             for (var j = 1; j <= p; j++)
             {
-                gp *= SpecialFunctions.Gamma((_freedom + 1.0 - j)/2.0);
+                gp *= SpecialFunctions.Gamma(((_freedom + 1.0) - j)/2.0);
             }
 
-            return Math.Pow(dX, -(_freedom + p + 1.0)/2.0)
+            return (Math.Pow(dX, -(_freedom + p + 1.0)/2.0)
                    *Math.Exp(-0.5*sXi.Trace())
-                   *Math.Pow(_chol.Determinant, _freedom/2.0)
-                   /Math.Pow(2.0, _freedom*p/2.0)
+                   *Math.Pow(_chol.Determinant, _freedom/2.0))
+                   /Math.Pow(2.0, (_freedom*p)/2.0)
                    /gp;
         }
 

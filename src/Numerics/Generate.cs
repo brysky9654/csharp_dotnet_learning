@@ -107,7 +107,7 @@ namespace MathNet.Numerics
             var data = new double[length];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = start + i*step;
+                data[i] = start + (i*step);
             }
             data[data.Length - 1] = stop;
             return data;
@@ -131,7 +131,7 @@ namespace MathNet.Numerics
             var data = new T[length];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = map(start + i*step);
+                data[i] = map(start + (i*step));
             }
             data[data.Length - 1] = map(stop);
             return data;
@@ -156,7 +156,7 @@ namespace MathNet.Numerics
             var data = new double[length];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = Math.Pow(10, startExponent + i*step);
+                data[i] = Math.Pow(10, startExponent + (i*step));
             }
             data[data.Length - 1] = Math.Pow(10, stopExponent);
             return data;
@@ -180,7 +180,7 @@ namespace MathNet.Numerics
             var data = new T[length];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = map(Math.Pow(10, startExponent + i*step));
+                data[i] = map(Math.Pow(10, startExponent + (i*step)));
             }
             data[data.Length - 1] = map(Math.Pow(10, stopExponent));
             return data;
@@ -195,7 +195,7 @@ namespace MathNet.Numerics
             if (start == stop) return new double[] { start };
             if (start < stop)
             {
-                var data = new double[stop - start + 1];
+                var data = new double[(stop - start) + 1];
                 for (int i = 0; i < data.Length; i++)
                 {
                     data[i] = start + i;
@@ -204,7 +204,7 @@ namespace MathNet.Numerics
             }
             else
             {
-                var data = new double[start - stop + 1];
+                var data = new double[(start - stop) + 1];
                 for (int i = 0; i < data.Length; i++)
                 {
                     data[i] = start - i;
@@ -222,7 +222,7 @@ namespace MathNet.Numerics
             if (start == stop) return new int[] { start };
             if (start < stop)
             {
-                var data = new int[stop - start + 1];
+                var data = new int[(stop - start) + 1];
                 for (int i = 0; i < data.Length; i++)
                 {
                     data[i] = start + i;
@@ -231,7 +231,7 @@ namespace MathNet.Numerics
             }
             else
             {
-                var data = new int[start - stop + 1];
+                var data = new int[(start - stop) + 1];
                 for (int i = 0; i < data.Length; i++)
                 {
                     data[i] = start - i;
@@ -248,15 +248,15 @@ namespace MathNet.Numerics
         public static double[] LinearRange(int start, int step, int stop)
         {
             if (start == stop) return new double[] { start };
-            if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
+            if (((start < stop) && (step < 0)) || ((start > stop) && (step > 0)) || (step == 0d))
             {
                 return new double[0];
             }
 
-            var data = new double[(stop - start)/step + 1];
+            var data = new double[((stop - start)/step) + 1];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = start + i*step;
+                data[i] = start + (i*step);
             }
             return data;
         }
@@ -269,15 +269,15 @@ namespace MathNet.Numerics
         public static int[] LinearRangeInt32(int start, int step, int stop)
         {
             if (start == stop) return new int[] { start };
-            if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
+            if (((start < stop) && (step < 0)) || ((start > stop) && (step > 0)) || (step == 0d))
             {
                 return new int[0];
             }
 
-            var data = new int[(stop - start) / step + 1];
+            var data = new int[((stop - start) / step) + 1];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = start + i * step;
+                data[i] = start + (i * step);
             }
             return data;
         }
@@ -290,15 +290,15 @@ namespace MathNet.Numerics
         public static double[] LinearRange(double start, double step, double stop)
         {
             if (start == stop) return new[] { start };
-            if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
+            if (((start < stop) && (step < 0)) || ((start > stop) && (step > 0)) || (step == 0d))
             {
                 return new double[0];
             }
 
-            var data = new double[(int)Math.Floor((stop - start)/step + 1d)];
+            var data = new double[(int)Math.Floor(((stop - start)/step) + 1d)];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = start + i*step;
+                data[i] = start + (i*step);
             }
             return data;
         }
@@ -310,15 +310,15 @@ namespace MathNet.Numerics
         public static T[] LinearRangeMap<T>(double start, double step, double stop, Func<double, T> map)
         {
             if (start == stop) return new[] { map(start) };
-            if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
+            if (((start < stop) && (step < 0)) || ((start > stop) && (step > 0)) || (step == 0d))
             {
                 return new T[0];
             }
 
-            var data = new T[(int)Math.Floor((stop - start)/step + 1d)];
+            var data = new T[(int)Math.Floor(((stop - start)/step) + 1d)];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = map(start + i*step);
+                data[i] = map(start + (i*step));
             }
             return data;
         }
@@ -339,13 +339,13 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException(nameof(length));
             }
 
-            double step = frequency/samplingRate*amplitude;
-            phase = Euclid.Modulus(phase - delay*step, amplitude);
+            double step = (frequency/samplingRate)*amplitude;
+            phase = Euclid.Modulus(phase - (delay*step), amplitude);
 
             var data = new double[length];
             for (int i = 0, k = 0; i < data.Length; i++, k++)
             {
-                var x = phase + k*step;
+                var x = phase + (k*step);
                 if (x >= amplitude)
                 {
                     x %= amplitude;
@@ -375,13 +375,13 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException(nameof(length));
             }
 
-            double step = frequency/samplingRate*amplitude;
-            phase = Euclid.Modulus(phase - delay*step, amplitude);
+            double step = (frequency/samplingRate)*amplitude;
+            phase = Euclid.Modulus(phase - (delay*step), amplitude);
 
             var data = new T[length];
             for (int i = 0, k = 0; i < data.Length; i++, k++)
             {
-                var x = phase + k*step;
+                var x = phase + (k*step);
                 if (x >= amplitude)
                 {
                     x %= amplitude;
@@ -404,13 +404,13 @@ namespace MathNet.Numerics
         /// <param name="delay">Optional delay, relative to the phase.</param>
         public static IEnumerable<double> PeriodicSequence(double samplingRate, double frequency, double amplitude = 1.0, double phase = 0.0, int delay = 0)
         {
-            double step = frequency/samplingRate*amplitude;
-            phase = Euclid.Modulus(phase - delay*step, amplitude);
+            double step = (frequency/samplingRate)*amplitude;
+            phase = Euclid.Modulus(phase - (delay*step), amplitude);
 
             int k = 0;
             while (true)
             {
-                var x = phase + (k++)*step;
+                var x = phase + ((k++)*step);
                 if (x >= amplitude)
                 {
                     x %= amplitude;
@@ -433,13 +433,13 @@ namespace MathNet.Numerics
         /// <param name="delay">Optional delay, relative to the phase.</param>
         public static IEnumerable<T> PeriodicMapSequence<T>(Func<double, T> map, double samplingRate, double frequency, double amplitude = 1.0, double phase = 0.0, int delay = 0)
         {
-            double step = frequency/samplingRate*amplitude;
-            phase = Euclid.Modulus(phase - delay*step, amplitude);
+            double step = (frequency/samplingRate)*amplitude;
+            phase = Euclid.Modulus(phase - (delay*step), amplitude);
 
             int k = 0;
             while (true)
             {
-                var x = phase + (k++)*step;
+                var x = phase + ((k++)*step);
                 if (x >= amplitude)
                 {
                     x %= amplitude;
@@ -468,13 +468,13 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException(nameof(length));
             }
 
-            double step = frequency/samplingRate*Constants.Pi2;
-            phase = (phase - delay*step)%Constants.Pi2;
+            double step = (frequency/samplingRate)*Constants.Pi2;
+            phase = (phase - (delay*step))%Constants.Pi2;
 
             var data = new double[length];
             for (int i = 0; i < data.Length; i++)
             {
-                data[i] = mean + amplitude*Math.Sin(phase + i*step);
+                data[i] = mean + (amplitude*Math.Sin(phase + (i*step)));
             }
             return data;
         }
@@ -490,16 +490,16 @@ namespace MathNet.Numerics
         /// <param name="delay">Optional delay, relative to the phase.</param>
         public static IEnumerable<double> SinusoidalSequence(double samplingRate, double frequency, double amplitude, double mean = 0.0, double phase = 0.0, int delay = 0)
         {
-            double step = frequency/samplingRate*Constants.Pi2;
-            phase = (phase - delay*step)%Constants.Pi2;
+            double step = (frequency/samplingRate)*Constants.Pi2;
+            phase = (phase - (delay*step))%Constants.Pi2;
 
             while (true)
             {
                 for (int i = 0; i < 1000; i++)
                 {
-                    yield return mean + amplitude*Math.Sin(phase + i*step);
+                    yield return mean + (amplitude*Math.Sin(phase + (i*step)));
                 }
-                phase = (phase + 1000*step)%Constants.Pi2;
+                phase = (phase + (1000*step))%Constants.Pi2;
             }
         }
 
@@ -547,7 +547,7 @@ namespace MathNet.Numerics
             var height = highValue - lowValue;
             var raise = height / raiseDuration;
             var fall = height / fallDuration;
-            return PeriodicMap(length, x => x < raiseDuration ? lowValue + x*raise : highValue - (x-raiseDuration)*fall, 1.0, 1.0/duration, duration, 0.0, delay);
+            return PeriodicMap(length, x => x < raiseDuration ? lowValue + (x*raise) : highValue - ((x-raiseDuration)*fall), 1.0, 1.0/duration, duration, 0.0, delay);
         }
 
         /// <summary>
@@ -564,7 +564,7 @@ namespace MathNet.Numerics
             var height = highValue - lowValue;
             var raise = height / raiseDuration;
             var fall = height / fallDuration;
-            return PeriodicMapSequence(x => x < raiseDuration ? lowValue + x*raise : highValue - (x-raiseDuration)*fall, 1.0, 1.0/duration, duration, 0.0, delay);
+            return PeriodicMapSequence(x => x < raiseDuration ? lowValue + (x*raise) : highValue - ((x-raiseDuration)*fall), 1.0, 1.0/duration, duration, 0.0, delay);
         }
 
         /// <summary>
@@ -578,7 +578,7 @@ namespace MathNet.Numerics
         public static double[] Sawtooth(int length, int period, double lowValue, double highValue, int delay = 0)
         {
             var height = highValue - lowValue;
-            return PeriodicMap(length, x => x + lowValue, 1.0, 1.0/period, height*period/(period-1), 0.0, delay);
+            return PeriodicMap(length, x => x + lowValue, 1.0, 1.0/period, (height*period)/(period-1), 0.0, delay);
         }
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace MathNet.Numerics
         public static IEnumerable<double> SawtoothSequence(int period, double lowValue, double highValue, int delay = 0)
         {
             var height = highValue - lowValue;
-            return PeriodicMapSequence(x => x + lowValue, 1.0, 1.0/period, height*period/(period-1), 0.0, delay);
+            return PeriodicMapSequence(x => x + lowValue, 1.0, 1.0/period, (height*period)/(period-1), 0.0, delay);
         }
 
         /// <summary>
@@ -682,7 +682,7 @@ namespace MathNet.Numerics
             }
 
             var data = new double[length];
-            if (delay >= 0 && delay < length)
+            if ((delay >= 0) && (delay < length))
             {
                 data[delay] = amplitude;
             }

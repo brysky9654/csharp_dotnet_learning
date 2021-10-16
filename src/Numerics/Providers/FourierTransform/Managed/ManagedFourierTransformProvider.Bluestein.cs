@@ -127,7 +127,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
                         b[i] = sequence[i];
                     }
 
-                    for (int i = m - n + 1; i < b.Length; i++)
+                    for (int i = (m - n) + 1; i < b.Length; i++)
                     {
                         b[i] = sequence[m - i];
                     }
@@ -182,7 +182,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
                         b[i] = sequence[i];
                     }
 
-                    for (int i = m - n + 1; i < b.Length; i++)
+                    for (int i = (m - n) + 1; i < b.Length; i++)
                     {
                         b[i] = sequence[m - i];
                     }

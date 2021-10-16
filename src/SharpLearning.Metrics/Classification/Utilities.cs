@@ -5,7 +5,7 @@ namespace SharpLearning.Metrics.Classification
 {
     internal static class Utilities
     {
-        static internal List<T> UniqueTargetValues<T>(T[] targets, T[] predictions)
+        internal static List<T> UniqueTargetValues<T>(T[] targets, T[] predictions)
         {
             var uniquePredictions = predictions.Distinct();
             var uniqueTargets = targets.Distinct();

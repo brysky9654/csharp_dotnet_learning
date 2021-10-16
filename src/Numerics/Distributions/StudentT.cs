@@ -134,7 +134,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="freedom">The degrees of freedom (ν) for the distribution. Range: ν > 0.</param>
         public static bool IsValidParameterSet(double location, double scale, double freedom)
         {
-            return scale > 0.0 && freedom > 0.0 && !double.IsNaN(location);
+            return (scale > 0.0) && (freedom > 0.0) && !double.IsNaN(location);
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace MathNet.Numerics.Distributions
 
                 if (_freedom > 2.0)
                 {
-                    return _freedom*_scale*_scale/(_freedom - 2.0);
+                    return (_freedom*_scale*_scale)/(_freedom - 2.0);
                 }
 
                 return _freedom > 1.0 ? double.PositiveInfinity : double.NaN;
@@ -201,7 +201,7 @@ namespace MathNet.Numerics.Distributions
 
                 if (_freedom > 2.0)
                 {
-                    return Math.Sqrt(_freedom*_scale*_scale/(_freedom - 2.0));
+                    return Math.Sqrt((_freedom*_scale*_scale)/(_freedom - 2.0));
                 }
 
                 return _freedom > 1.0 ? double.PositiveInfinity : double.NaN;
@@ -215,7 +215,7 @@ namespace MathNet.Numerics.Distributions
         {
             get
             {
-                if (_location != 0 || _scale != 1.0)
+                if ((_location != 0) || (_scale != 1.0))
                 {
                     throw new NotSupportedException();
                 }
@@ -374,7 +374,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double location, double scale, double freedom, double x)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -386,8 +386,8 @@ namespace MathNet.Numerics.Distributions
             }
 
             var d = (x - location)/scale;
-            return Math.Exp(SpecialFunctions.GammaLn((freedom + 1.0)/2.0) - SpecialFunctions.GammaLn(freedom/2.0))
-                   *Math.Pow(1.0 + (d*d/freedom), -0.5*(freedom + 1.0))
+            return (Math.Exp(SpecialFunctions.GammaLn((freedom + 1.0)/2.0) - SpecialFunctions.GammaLn(freedom/2.0))
+                   *Math.Pow(1.0 + ((d*d)/freedom), -0.5*(freedom + 1.0)))
                    /Math.Sqrt(freedom*Math.PI)
                    /scale;
         }
@@ -403,7 +403,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="DensityLn"/>
         public static double PDFLn(double location, double scale, double freedom, double x)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -416,7 +416,7 @@ namespace MathNet.Numerics.Distributions
 
             var d = (x - location)/scale;
             return SpecialFunctions.GammaLn((freedom + 1.0)/2.0)
-                   - (0.5*((freedom + 1.0)*Math.Log(1.0 + (d*d/freedom))))
+                   - (0.5*((freedom + 1.0)*Math.Log(1.0 + ((d*d)/freedom))))
                    - SpecialFunctions.GammaLn(freedom/2.0)
                    - (0.5*Math.Log(freedom*Math.PI)) - Math.Log(scale);
         }
@@ -432,7 +432,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double location, double scale, double freedom, double x)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -462,7 +462,7 @@ namespace MathNet.Numerics.Distributions
         /// <remarks>WARNING: currently not an explicit implementation, hence slow and unreliable.</remarks>
         public static double InvCDF(double location, double scale, double freedom, double p)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -498,7 +498,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -516,7 +516,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -535,7 +535,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -552,7 +552,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -569,7 +569,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -587,7 +587,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double location, double scale, double freedom)
         {
-            if (scale <= 0.0 || freedom <= 0.0)
+            if ((scale <= 0.0) || (freedom <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

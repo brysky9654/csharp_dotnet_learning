@@ -168,7 +168,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDF"/>
         public double Density(double x)
         {
-            return (x/(_scale*_scale))*Math.Exp(-x*x/(2.0*_scale*_scale));
+            return (x/(_scale*_scale))*Math.Exp((-x*x)/(2.0*_scale*_scale));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDFLn"/>
         public double DensityLn(double x)
         {
-            return Math.Log(x/(_scale*_scale)) - (x*x/(2.0*_scale*_scale));
+            return Math.Log(x/(_scale*_scale)) - ((x*x)/(2.0*_scale*_scale));
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CDF"/>
         public double CumulativeDistribution(double x)
         {
-            return 1.0 - Math.Exp(-x*x/(2.0*_scale*_scale));
+            return 1.0 - Math.Exp((-x*x)/(2.0*_scale*_scale));
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return (x/(scale*scale))*Math.Exp(-x*x/(2.0*scale*scale));
+            return (x/(scale*scale))*Math.Exp((-x*x)/(2.0*scale*scale));
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Math.Log(x/(scale*scale)) - (x*x/(2.0*scale*scale));
+            return Math.Log(x/(scale*scale)) - ((x*x)/(2.0*scale*scale));
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return 1.0 - Math.Exp(-x*x/(2.0*scale*scale));
+            return 1.0 - Math.Exp((-x*x)/(2.0*scale*scale));
         }
 
         /// <summary>

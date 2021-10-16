@@ -93,7 +93,7 @@ namespace SharpLearning.CrossValidation.LearningCurves
 
             foreach (var samplePercentage in m_samplePercentages)
             {
-                if (samplePercentage <= 0.0 || samplePercentage > 1.0)
+                if ((samplePercentage <= 0.0) || (samplePercentage > 1.0))
                 { 
                     throw new ArgumentException("Sample percentage must be larger than 0.0 and smaller than or equal to 1.0"); 
                 }

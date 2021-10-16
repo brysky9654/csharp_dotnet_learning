@@ -60,7 +60,7 @@ namespace SharpLearning.GradientBoost.Learners
             if (minimumSplitSize <= 0) { throw new ArgumentException("minimum split size must be larger than 0"); }
             if (maximumTreeDepth < 0) { throw new ArgumentException("maximum tree depth must be larger than 0"); }
             if (minimumInformationGain <= 0) { throw new ArgumentException("minimum information gain must be larger than 0"); }
-            if (subSampleRatio <= 0.0 || subSampleRatio > 1.0) { throw new ArgumentException("subSampleRatio must be larger than 0.0 and at max 1.0"); }
+            if ((subSampleRatio <= 0.0) || (subSampleRatio > 1.0)) { throw new ArgumentException("subSampleRatio must be larger than 0.0 and at max 1.0"); }
             if (featuresPrSplit < 0) { throw new ArgumentException("featuresPrSplit must be at least 0"); }
             m_loss = loss ?? throw new ArgumentNullException(nameof(loss));
 
@@ -246,7 +246,7 @@ namespace SharpLearning.GradientBoost.Learners
 
                 // When using early stopping, Check that the validation error is not increasing between earlyStoppingRounds
                 // If the validation error has increased, stop the learning and return the model with the best number of iterations (trees).
-                if (iteration % earlyStoppingRounds == 0)
+                if ((iteration % earlyStoppingRounds) == 0)
                 {
                     var model = new RegressionGradientBoostModel(trees.Take(iteration).ToArray(), 
                         m_learningRate, initialLoss, trainingObservations.ColumnCount);

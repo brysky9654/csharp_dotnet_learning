@@ -105,7 +105,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="scale">The scale (γ) of the distribution. Range: γ > 0.</param>
         public static bool IsValidParameterSet(double location, double scale)
         {
-            return scale > 0.0 && !double.IsNaN(location);
+            return (scale > 0.0) && !double.IsNaN(location);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace MathNet.Numerics.Distributions
         public double InverseCumulativeDistribution(double p)
         {
             return p <= 0.0 ? double.NegativeInfinity : p >= 1.0 ? double.PositiveInfinity
-                : _location + _scale*Math.Tan((p - 0.5)*Constants.Pi);
+                : _location + (_scale*Math.Tan((p - 0.5)*Constants.Pi));
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace MathNet.Numerics.Distributions
 
         static double SampleUnchecked(System.Random rnd, double location, double scale)
         {
-            return location + scale*Math.Tan(Constants.Pi*(rnd.NextDouble() - 0.5));
+            return location + (scale*Math.Tan(Constants.Pi*(rnd.NextDouble() - 0.5)));
         }
 
         static void SamplesUnchecked(System.Random rnd, double[] values, double location, double scale)
@@ -256,7 +256,7 @@ namespace MathNet.Numerics.Distributions
             {
                 for (int i = a; i < b; i++)
                 {
-                    values[i] = location + scale*Math.Tan(Constants.Pi*(values[i] - 0.5));
+                    values[i] = location + (scale*Math.Tan(Constants.Pi*(values[i] - 0.5)));
                 }
             });
         }
@@ -265,7 +265,7 @@ namespace MathNet.Numerics.Distributions
         {
             while (true)
             {
-                yield return location + scale*Math.Tan(Constants.Pi*(rnd.NextDouble() - 0.5));
+                yield return location + (scale*Math.Tan(Constants.Pi*(rnd.NextDouble() - 0.5)));
             }
         }
 
@@ -320,7 +320,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Math.Atan((x - location)/scale)/Constants.Pi + 0.5;
+            return (Math.Atan((x - location)/scale)/Constants.Pi) + 0.5;
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace MathNet.Numerics.Distributions
             }
 
             return p <= 0.0 ? double.NegativeInfinity : p >= 1.0 ? double.PositiveInfinity
-                : location + scale*Math.Tan((p - 0.5)*Constants.Pi);
+                : location + (scale*Math.Tan((p - 0.5)*Constants.Pi));
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SharpLearning.Metrics.Classification
 {
@@ -40,12 +39,12 @@ namespace SharpLearning.Metrics.Classification
             var precision = Precision(targets, predictions);
             var recall = Recall(targets, predictions);
 
-            if (precision + recall == 0.0)
+            if ((precision + recall) == 0.0)
             {
                 return 1.0 - 0.0;
             }
 
-            var f1Score = 2 * precision * recall / (precision + recall);
+            var f1Score = (2 * precision * recall) / (precision + recall);
 
             return 1.0 - f1Score;
         }
@@ -70,7 +69,7 @@ namespace SharpLearning.Metrics.Classification
                 }
             }
 
-            if (truePositives + falsePositves == 0)
+            if ((truePositives + falsePositves) == 0)
             {
                 return 0.0;
             }
@@ -98,7 +97,7 @@ namespace SharpLearning.Metrics.Classification
                 }
             }
 
-            if (truePositives + falseNegatives == 0)
+            if ((truePositives + falseNegatives) == 0)
             {
                 return 0.0;
             }

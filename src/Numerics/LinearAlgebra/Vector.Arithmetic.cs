@@ -1432,7 +1432,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">The matrix to store the result of the product.</param>
         public void OuterProduct(Vector<T> other, Matrix<T> result)
         {
-            if (Count != result.RowCount || other.Count != result.ColumnCount)
+            if ((Count != result.RowCount) || (other.Count != result.ColumnCount))
             {
                 throw new ArgumentException(Resources.ArgumentMatrixDimensions, nameof(result));
             }

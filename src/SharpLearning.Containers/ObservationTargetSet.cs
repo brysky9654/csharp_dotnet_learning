@@ -67,8 +67,8 @@ namespace SharpLearning.Containers
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + Observations.GetHashCode();
-                hash = hash * 23 + Targets.GetHashCode();
+                hash = (hash * 23) + Observations.GetHashCode();
+                hash = (hash * 23) + Targets.GetHashCode();
 
                 return hash;
             }

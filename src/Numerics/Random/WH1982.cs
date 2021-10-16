@@ -121,7 +121,7 @@ namespace MathNet.Numerics.Random
             _yn = (172*_yn)%Mody;
             _zn = (170*_zn)%Modz;
 
-            double w = _xn*ModxRecip + _yn*ModyRecip + _zn*ModzRecip;
+            double w = (_xn*ModxRecip) + (_yn*ModyRecip) + (_zn*ModzRecip);
             w -= (int)w;
             return w;
         }
@@ -147,7 +147,7 @@ namespace MathNet.Numerics.Random
                 yn = (172*yn)%Mody;
                 zn = (170*zn)%Modz;
 
-                double w = xn*ModxRecip + yn*ModyRecip + zn*ModzRecip;
+                double w = (xn*ModxRecip) + (yn*ModyRecip) + (zn*ModzRecip);
                 values[i] = w - (int)w;
             }
         }
@@ -185,7 +185,7 @@ namespace MathNet.Numerics.Random
                 yn = (172*yn)%Mody;
                 zn = (170*zn)%Modz;
 
-                double w = xn*ModxRecip + yn*ModyRecip + zn*ModzRecip;
+                double w = (xn*ModxRecip) + (yn*ModyRecip) + (zn*ModzRecip);
                 yield return w - (int)w;
             }
         }

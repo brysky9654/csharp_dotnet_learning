@@ -61,7 +61,7 @@ namespace SharpLearning.Ensemble.EnsembleSelectors
             {
                 var error = SelectNextModelToRemove(crossValidatedModelPredictions, targets, currentError);
 
-                if (error < currentError && m_remainingModelIndices.Count <= m_numberOfModelsToSelect)
+                if ((error < currentError) && (m_remainingModelIndices.Count <= m_numberOfModelsToSelect))
                 {
                     currentError = error;
                     m_bestModelIndices = m_remainingModelIndices.ToList();

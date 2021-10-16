@@ -94,7 +94,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static bool IsValidParameterSet(double p)
         {
-            return p >= 0.0 && p <= 1.0;
+            return (p >= 0.0) && (p <= 1.0);
         }
 
         /// <summary>
@@ -145,7 +145,12 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the median of the distribution.
         /// </summary>
-        public double Median => _p == 0.0 ? double.PositiveInfinity : _p == 1.0 ? 1.0 : Math.Ceiling(-Constants.Ln2/Math.Log(1 - _p));
+        public double Median => _p switch
+        {
+            0.0 => double.PositiveInfinity,
+            1.0 => 1.0,
+            _   => Math.Ceiling(-Constants.Ln2/Math.Log(1 - _p))
+        };
 
         /// <summary>
         /// Gets the smallest element in the domain of the distributions which can be represented by an integer.
@@ -205,7 +210,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public static double PMF(double p, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -226,7 +231,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public static double PMFLn(double p, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -248,7 +253,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double p, double x)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -336,7 +341,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static int Sample(System.Random rnd, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -351,7 +356,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static IEnumerable<int> Samples(System.Random rnd, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -367,7 +372,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static void Samples(System.Random rnd, int[] values, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -381,7 +386,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static int Sample(double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -395,7 +400,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static IEnumerable<int> Samples(double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -410,7 +415,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static void Samples(int[] values, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

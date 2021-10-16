@@ -74,8 +74,8 @@ namespace SharpLearning.InputOutput.Csv
             {
                 int hash = 17;
                 // Suitable nullity checks etc, of course :)
-                hash = hash * 23 + Values.GetHashCode();
-                hash = hash * 23 + ColumnNameToIndex.GetHashCode();
+                hash = (hash * 23) + Values.GetHashCode();
+                hash = (hash * 23) + ColumnNameToIndex.GetHashCode();
 
                 return hash;
             }

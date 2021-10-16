@@ -98,7 +98,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>The Beta distribution derived from the PERT parameters.</returns>
         public static BetaScaled PERT(double min, double max, double likely, System.Random randomSource = null)
         {
-            if (min > max || likely > max || likely < min)
+            if ((min > max) || (likely > max) || (likely < min))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -110,7 +110,7 @@ namespace MathNet.Numerics.Distributions
             const double lambda = 4;
 
             // calculate the mean
-            double mean = (min + max + lambda * likely) / (lambda + 2);
+            double mean = (min + max + (lambda * likely)) / (lambda + 2);
 
             // derive the shape parameters a and b
             double a;
@@ -122,7 +122,7 @@ namespace MathNet.Numerics.Distributions
             }
             else
             {
-                a = ((mean - min) * (2 * likely - min - max)) / ((likely - mean) * (max - min));
+                a = ((mean - min) * ((2 * likely) - min - max)) / ((likely - mean) * (max - min));
             }
 
             double b = (a * (max - mean)) / (mean - min);
@@ -148,7 +148,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="scale">The scale (σ) of the distribution. Range: σ > 0.</param>
         public static bool IsValidParameterSet(double a, double b, double location, double scale)
         {
-            return a > 0.0 && b > 0.0 && scale > 0.0 && !double.IsNaN(location);
+            return (a > 0.0) && (b > 0.0) && (scale > 0.0) && !double.IsNaN(location);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace MathNet.Numerics.Distributions
             {
                 if (double.IsPositiveInfinity(_shapeA) && double.IsPositiveInfinity(_shapeB))
                 {
-                    return _location + 0.5 * _scale;
+                    return _location + (0.5 * _scale);
                 }
 
                 if (double.IsPositiveInfinity(_shapeA))
@@ -202,7 +202,7 @@ namespace MathNet.Numerics.Distributions
                     return _location;
                 }
 
-                return (_shapeB*_location + _shapeA*(_location + _scale))/(_shapeA + _shapeB);
+                return ((_shapeB*_location) + (_shapeA*(_location + _scale)))/(_shapeA + _shapeB);
             }
         }
 
@@ -242,17 +242,17 @@ namespace MathNet.Numerics.Distributions
 
                 if (double.IsPositiveInfinity(_shapeA))
                 {
-                    return -2.0*_scale/Math.Sqrt(_shapeB*_scale*_scale);
+                    return (-2.0*_scale)/Math.Sqrt(_shapeB*_scale*_scale);
                 }
 
                 if (double.IsPositiveInfinity(_shapeB))
                 {
-                    return 2.0*_scale/Math.Sqrt(_shapeA*_scale*_scale);
+                    return (2.0*_scale)/Math.Sqrt(_shapeA*_scale*_scale);
                 }
 
                 double sum = _shapeA + _shapeB;
                 double variance = (_shapeA * _shapeB * _scale * _scale) / (sum * sum * (1.0 + sum));
-                return 2.0*(_shapeB - _shapeA)*_scale/(sum*(2.0 + sum)*Math.Sqrt(variance));
+                return (2.0*(_shapeB - _shapeA)*_scale)/(sum*(2.0 + sum)*Math.Sqrt(variance));
             }
         }
 
@@ -265,7 +265,7 @@ namespace MathNet.Numerics.Distributions
             {
                 if (double.IsPositiveInfinity(_shapeA) && double.IsPositiveInfinity(_shapeB))
                 {
-                    return _location + 0.5 * _scale;
+                    return _location + (0.5 * _scale);
                 }
 
                 if (double.IsPositiveInfinity(_shapeA))
@@ -278,12 +278,12 @@ namespace MathNet.Numerics.Distributions
                     return _location;
                 }
 
-                if (_shapeA == 1.0 && _shapeB == 1.0)
+                if ((_shapeA == 1.0) && (_shapeB == 1.0))
                 {
-                    return _location + 0.5 * _scale;
+                    return _location + (0.5 * _scale);
                 }
 
-                return ((_shapeA - 1)/(_shapeA + _shapeB - 2))*_scale + _location;
+                return (((_shapeA - 1)/((_shapeA + _shapeB) - 2))*_scale) + _location;
             }
         }
 
@@ -376,7 +376,7 @@ namespace MathNet.Numerics.Distributions
 
         static double SampleUnchecked(System.Random rnd, double a, double b, double location, double scale)
         {
-            return Beta.SampleUnchecked(rnd, a, b)*scale + location;
+            return (Beta.SampleUnchecked(rnd, a, b)*scale) + location;
         }
 
         static void SamplesUnchecked(System.Random rnd, double[] values, double a, double b, double location, double scale)
@@ -386,7 +386,7 @@ namespace MathNet.Numerics.Distributions
             {
                 for (int i = aa; i < bb; i++)
                 {
-                    values[i] = values[i]*scale + location;
+                    values[i] = (values[i]*scale) + location;
                 }
             });
         }
@@ -411,7 +411,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double a, double b, double location, double scale, double x)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -431,7 +431,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="DensityLn"/>
         public static double PDFLn(double a, double b, double location, double scale, double x)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -451,7 +451,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double a, double b, double location, double scale, double x)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -473,12 +473,12 @@ namespace MathNet.Numerics.Distributions
         /// <remarks>WARNING: currently not an explicit implementation, hence slow and unreliable.</remarks>
         public static double InvCDF(double a, double b, double location, double scale, double p)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Beta.InvCDF(a, b, p)*scale + location;
+            return (Beta.InvCDF(a, b, p)*scale) + location;
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -511,7 +511,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -531,7 +531,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -549,7 +549,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -567,7 +567,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -586,7 +586,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double a, double b, double location, double scale)
         {
-            if (!(a > 0.0 && b > 0.0 && scale > 0.0) || double.IsNaN(location))
+            if (!((a > 0.0) && (b > 0.0) && (scale > 0.0)) || double.IsNaN(location))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

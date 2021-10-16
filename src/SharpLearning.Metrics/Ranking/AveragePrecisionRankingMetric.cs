@@ -56,7 +56,7 @@ namespace SharpLearning.Metrics.Ranking
 
             double minLength = Math.Min(targets.Length, m_k);
 
-            return 1.0 - score / minLength;
+            return 1.0 - (score / minLength);
         }
 
         bool Contains(T[] predictions, int i, T prediction)

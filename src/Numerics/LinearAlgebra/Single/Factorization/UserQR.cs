@@ -140,7 +140,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
             var norm = u.Sum(t => t*t);
             norm = (float) Math.Sqrt(norm);
 
-            if (row == a.RowCount - 1 || norm == 0)
+            if ((row == (a.RowCount - 1)) || (norm == 0))
             {
                 a.At(row, column, -u[0]);
                 u[0] = (float) Constants.Sqrt2;
@@ -183,7 +183,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Factorization
         /// <param name="availableCores">Number of available CPUs</param>
         static void ComputeQR(float[] u, Matrix<float> a, int rowStart, int rowDim, int columnStart, int columnDim, int availableCores)
         {
-            if (rowDim < rowStart || columnDim < columnStart)
+            if ((rowDim < rowStart) || (columnDim < columnStart))
             {
                 return;
             }

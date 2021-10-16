@@ -29,7 +29,7 @@ namespace SharpLearning.Containers.Matrices
         public StringMatrix(string[] values, int rows, int cols)
         {
             if (values == null) { throw new ArgumentNullException("values"); }
-            if (values.Length != rows * cols) { throw new ArgumentException("feature array length does not match row * cols"); }
+            if (values.Length != (rows * cols)) { throw new ArgumentException("feature array length does not match row * cols"); }
             if (rows < 1) { throw new ArgumentException("matrix must have at least 1 row"); }
             if (cols < 1) { throw new ArgumentException("matrix must have at least 1 col"); }
 
@@ -72,8 +72,8 @@ namespace SharpLearning.Containers.Matrices
         /// <returns></returns>
         public string this[int row, int col]
         {
-            get { return m_featureArray[row * ColumnCount + col]; }
-            set { m_featureArray[row * ColumnCount + col] = value; }
+            get { return m_featureArray[(row * ColumnCount) + col]; }
+            set { m_featureArray[(row * ColumnCount) + col] = value; }
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace SharpLearning.Containers.Matrices
 
             for (int i = 0; i < RowCount; i++)
             {
-                col[i] = m_featureArray[ColumnCount * i + index];
+                col[i] = m_featureArray[(ColumnCount * i) + index];
             }
 
             return col;
@@ -137,7 +137,7 @@ namespace SharpLearning.Containers.Matrices
         {
             for (int i = 0; i < RowCount; i++)
             {
-                col[i] = m_featureArray[ColumnCount * i + index];
+                col[i] = m_featureArray[(ColumnCount * i) + index];
             }
         }
 
@@ -290,9 +290,9 @@ namespace SharpLearning.Containers.Matrices
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + m_featureArray.GetHashCode();
-                hash = hash * 23 + ColumnCount.GetHashCode();
-                hash = hash * 23 + RowCount.GetHashCode();
+                hash = (hash * 23) + m_featureArray.GetHashCode();
+                hash = (hash * 23) + ColumnCount.GetHashCode();
+                hash = (hash * 23) + RowCount.GetHashCode();
 
                 return hash;
             }

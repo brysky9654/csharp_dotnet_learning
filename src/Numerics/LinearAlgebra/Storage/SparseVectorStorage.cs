@@ -153,7 +153,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             // Check whether we need to shrink the arrays. This is reasonable to do if
             // there are a lot of non-zero elements and storage is two times bigger
-            if ((ValueCount > 1024) && (ValueCount < Indices.Length / 2))
+            if ((ValueCount > 1024) && (ValueCount < (Indices.Length / 2)))
             {
                 Array.Resize(ref Values, ValueCount);
                 Array.Resize(ref Indices, ValueCount);
@@ -190,7 +190,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         public override bool Equals(VectorStorage<T> other)
         {
             // Reject equality when the argument is null or has a different shape.
-            if (other == null || Length != other.Length)
+            if ((other == null) || (Length != other.Length))
             {
                 return false;
             }
@@ -208,9 +208,9 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
 
             int i = 0, j = 0;
-            while (i < ValueCount || j < otherSparse.ValueCount)
+            while ((i < ValueCount) || (j < otherSparse.ValueCount))
             {
-                if (j >= otherSparse.ValueCount || i < ValueCount && Indices[i] < otherSparse.Indices[j])
+                if ((j >= otherSparse.ValueCount) || ((i < ValueCount) && (Indices[i] < otherSparse.Indices[j])))
                 {
                     if (!Zero.Equals(Values[i++]))
                     {
@@ -219,7 +219,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     continue;
                 }
 
-                if (i >= ValueCount || j < otherSparse.ValueCount && otherSparse.Indices[j] < Indices[i])
+                if ((i >= ValueCount) || ((j < otherSparse.ValueCount) && (otherSparse.Indices[j] < Indices[i])))
                 {
                     if (!Zero.Equals(otherSparse.Values[j++]))
                     {
@@ -255,7 +255,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 for (var i = 0; i < hashNum; i++)
                 {
-                    hash = hash * 31 + values[i].GetHashCode();
+                    hash = (hash * 31) + values[i].GetHashCode();
                 }
             }
             return hash;
@@ -270,17 +270,17 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         public override void Clear(int index, int count)
         {
-            if (index == 0 && count == Length)
+            if ((index == 0) && (count == Length))
             {
                 Clear();
                 return;
             }
 
             var first = Array.BinarySearch(Indices, 0, ValueCount, index);
-            var last = Array.BinarySearch(Indices, 0, ValueCount, index + count - 1);
+            var last = Array.BinarySearch(Indices, 0, ValueCount, (index + count) - 1);
             if (first < 0) first = ~first;
             if (last < 0) last = ~last - 1;
-            int itemCount = last - first + 1;
+            int itemCount = (last - first) + 1;
 
             if (itemCount > 0)
             {
@@ -292,7 +292,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             // Check whether we need to shrink the arrays. This is reasonable to do if
             // there are a lot of non-zero elements and storage is two times bigger
-            if ((ValueCount > 1024) && (ValueCount < Indices.Length / 2))
+            if ((ValueCount > 1024) && (ValueCount < (Indices.Length / 2)))
             {
                 Array.Resize(ref Values, ValueCount);
                 Array.Resize(ref Indices, ValueCount);
@@ -529,7 +529,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             var offset = targetIndex - sourceIndex;
 
             var sourceFirst = Array.BinarySearch(Indices, 0, ValueCount, sourceIndex);
-            var sourceLast = Array.BinarySearch(Indices, 0, ValueCount, sourceIndex + count - 1);
+            var sourceLast = Array.BinarySearch(Indices, 0, ValueCount, (sourceIndex + count) - 1);
             if (sourceFirst < 0) sourceFirst = ~sourceFirst;
             if (sourceLast < 0) sourceLast = ~sourceLast - 1;
 
@@ -551,10 +551,10 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             var offset = targetIndex - sourceIndex;
 
             var sourceFirst = Array.BinarySearch(Indices, 0, ValueCount, sourceIndex);
-            var sourceLast = Array.BinarySearch(Indices, 0, ValueCount, sourceIndex + count - 1);
+            var sourceLast = Array.BinarySearch(Indices, 0, ValueCount, (sourceIndex + count) - 1);
             if (sourceFirst < 0) sourceFirst = ~sourceFirst;
             if (sourceLast < 0) sourceLast = ~sourceLast - 1;
-            int sourceCount = sourceLast - sourceFirst + 1;
+            int sourceCount = (sourceLast - sourceFirst) + 1;
 
             // special case when copying to itself
             if (ReferenceEquals(this, target))
@@ -630,7 +630,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             int k = 0;
             for (int i = 0; i < Length; i++)
             {
-                yield return k < ValueCount && Indices[k] == i
+                yield return (k < ValueCount) && (Indices[k] == i)
                     ? Values[k++]
                     : Zero;
             }
@@ -641,7 +641,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             int k = 0;
             for (int i = 0; i < Length; i++)
             {
-                yield return k < ValueCount && Indices[k] == i
+                yield return (k < ValueCount) && (Indices[k] == i)
                     ? new Tuple<int, T>(i, Values[k++])
                     : new Tuple<int, T>(i, Zero);
             }
@@ -674,11 +674,11 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     return new Tuple<int, T>(Indices[i], Values[i]);
                 }
             }
-            if (zeros == Zeros.Include && ValueCount < Length && predicate(Zero))
+            if ((zeros == Zeros.Include) && (ValueCount < Length) && predicate(Zero))
             {
                 for (int i = 0; i < Length; i++)
                 {
-                    if (i >= ValueCount || Indices[i] != i)
+                    if ((i >= ValueCount) || (Indices[i] != i))
                     {
                         return new Tuple<int, T>(i, Zero);
                     }
@@ -696,7 +696,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < otherData.Length; i++)
                 {
-                    if (k < ValueCount && Indices[k] == i)
+                    if ((k < ValueCount) && (Indices[k] == i))
                     {
                         if (predicate(Values[k], otherData[i]))
                         {
@@ -725,12 +725,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
                 // Full Scan
                 int k = 0, otherk = 0;
-                if (zeros == Zeros.Include && ValueCount < Length && sparseOther.ValueCount < Length && predicate(Zero, otherZero))
+                if ((zeros == Zeros.Include) && (ValueCount < Length) && (sparseOther.ValueCount < Length) && predicate(Zero, otherZero))
                 {
                     for (int i = 0; i < Length; i++)
                     {
-                        var left = k < ValueCount && Indices[k] == i ? Values[k++] : Zero;
-                        var right = otherk < otherValueCount && otherIndices[otherk] == i ? otherValues[otherk++] : otherZero;
+                        var left = (k < ValueCount) && (Indices[k] == i) ? Values[k++] : Zero;
+                        var right = (otherk < otherValueCount) && (otherIndices[otherk] == i) ? otherValues[otherk++] : otherZero;
                         if (predicate(left, right))
                         {
                             return new Tuple<int, T, TOther>(i, left, right);
@@ -742,16 +742,16 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 // Sparse Scan
                 k = 0;
                 otherk = 0;
-                while (k < ValueCount || otherk < otherValueCount)
+                while ((k < ValueCount) || (otherk < otherValueCount))
                 {
-                    if (k == ValueCount || otherk < otherValueCount && Indices[k] > otherIndices[otherk])
+                    if ((k == ValueCount) || ((otherk < otherValueCount) && (Indices[k] > otherIndices[otherk])))
                     {
                         if (predicate(Zero, otherValues[otherk++]))
                         {
                             return new Tuple<int, T, TOther>(otherIndices[otherk - 1], Zero, otherValues[otherk - 1]);
                         }
                     }
-                    else if (otherk == otherValueCount || Indices[k] < otherIndices[otherk])
+                    else if ((otherk == otherValueCount) || (Indices[k] < otherIndices[otherk]))
                     {
                         if (predicate(Values[k++], otherZero))
                         {
@@ -780,12 +780,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         {
             var indices = new List<int>();
             var values = new List<T>(ValueCount);
-            if (zeros == Zeros.Include || !Zero.Equals(f(Zero)))
+            if ((zeros == Zeros.Include) || !Zero.Equals(f(Zero)))
             {
                 int k = 0;
                 for (int i = 0; i < Length; i++)
                 {
-                    var item = k < ValueCount && (Indices[k]) == i ? f(Values[k++]) : f(Zero);
+                    var item = (k < ValueCount) && ((Indices[k]) == i) ? f(Values[k++]) : f(Zero);
                     if (!Zero.Equals(item))
                     {
                         values.Add(item);
@@ -819,7 +819,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < Length; i++)
                 {
-                    var item = k < ValueCount && (Indices[k]) == i ? f(i, Values[k++]) : f(i, Zero);
+                    var item = (k < ValueCount) && ((Indices[k]) == i) ? f(i, Values[k++]) : f(i, Zero);
                     if (!Zero.Equals(item))
                     {
                         values.Add(item);
@@ -851,12 +851,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 var indices = new List<int>();
                 var values = new List<TU>();
-                if (zeros == Zeros.Include || !Zero.Equals(f(Zero)))
+                if ((zeros == Zeros.Include) || !Zero.Equals(f(Zero)))
                 {
                     int k = 0;
                     for (int i = 0; i < Length; i++)
                     {
-                        var item = k < ValueCount && (Indices[k]) == i ? f(Values[k++]) : f(Zero);
+                        var item = (k < ValueCount) && ((Indices[k]) == i) ? f(Values[k++]) : f(Zero);
                         if (!Zero.Equals(item))
                         {
                             values.Add(item);
@@ -890,12 +890,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     denseTarget.Clear();
                 }
 
-                if (zeros == Zeros.Include || !Zero.Equals(f(Zero)))
+                if ((zeros == Zeros.Include) || !Zero.Equals(f(Zero)))
                 {
                     int k = 0;
                     for (int i = 0; i < Length; i++)
                     {
-                        denseTarget.Data[i] = k < ValueCount && (Indices[k]) == i
+                        denseTarget.Data[i] = (k < ValueCount) && ((Indices[k]) == i)
                             ? f(Values[k++])
                             : f(Zero);
                     }
@@ -925,12 +925,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 var indices = new List<int>();
                 var values = new List<TU>();
-                if (zeros == Zeros.Include || !Zero.Equals(f(0, Zero)))
+                if ((zeros == Zeros.Include) || !Zero.Equals(f(0, Zero)))
                 {
                     int k = 0;
                     for (int i = 0; i < Length; i++)
                     {
-                        var item = k < ValueCount && (Indices[k]) == i ? f(i, Values[k++]) : f(i, Zero);
+                        var item = (k < ValueCount) && ((Indices[k]) == i) ? f(i, Values[k++]) : f(i, Zero);
                         if (!Zero.Equals(item))
                         {
                             values.Add(item);
@@ -964,12 +964,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     denseTarget.Clear();
                 }
 
-                if (zeros == Zeros.Include || !Zero.Equals(f(0, Zero)))
+                if ((zeros == Zeros.Include) || !Zero.Equals(f(0, Zero)))
                 {
                     int k = 0;
                     for (int i = 0; i < Length; i++)
                     {
-                        denseTarget.Data[i] = k < ValueCount && (Indices[k]) == i
+                        denseTarget.Data[i] = (k < ValueCount) && ((Indices[k]) == i)
                             ? f(i, Values[k++])
                             : f(i, Zero);
                     }
@@ -994,12 +994,12 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         internal override void Map2ToUnchecked(VectorStorage<T> target, VectorStorage<T> other, Func<T, T, T> f, Zeros zeros, ExistingData existingData)
         {
-            var processZeros = zeros == Zeros.Include || !Zero.Equals(f(Zero, Zero));
+            var processZeros = (zeros == Zeros.Include) || !Zero.Equals(f(Zero, Zero));
 
             var denseTarget = target as DenseVectorStorage<T>;
             var denseOther = other as DenseVectorStorage<T>;
 
-            if (denseTarget == null && (denseOther != null || processZeros))
+            if ((denseTarget == null) && ((denseOther != null) || processZeros))
             {
                 // The handling is effectively dense but we're supposed to push
                 // to a sparse target. Let's use a dense target instead,
@@ -1018,7 +1018,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < otherData.Length; i++)
                 {
-                    if (k < ValueCount && Indices[k] == i)
+                    if ((k < ValueCount) && (Indices[k] == i))
                     {
                         targetData[i] = f(Values[k], otherData[i]);
                         k++;
@@ -1033,7 +1033,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
 
             var sparseOther = other as SparseVectorStorage<T>;
-            if (sparseOther != null && denseTarget != null)
+            if ((sparseOther != null) && (denseTarget != null))
             {
                 T[] targetData = denseTarget.Data;
                 int[] otherIndices = sparseOther.Indices;
@@ -1045,8 +1045,8 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     int p = 0, q = 0;
                     for (int i = 0; i < targetData.Length; i++)
                     {
-                        var left = p < ValueCount && Indices[p] == i ? Values[p++] : Zero;
-                        var right = q < otherValueCount && otherIndices[q] == i ? otherValues[q++] : Zero;
+                        var left = (p < ValueCount) && (Indices[p] == i) ? Values[p++] : Zero;
+                        var right = (q < otherValueCount) && (otherIndices[q] == i) ? otherValues[q++] : Zero;
                         targetData[i] = f(left, right);
                     }
                 }
@@ -1058,14 +1058,14 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     }
 
                     int p = 0, q = 0;
-                    while (p < ValueCount || q < otherValueCount)
+                    while ((p < ValueCount) || (q < otherValueCount))
                     {
-                        if (q >= otherValueCount || p < ValueCount && Indices[p] < otherIndices[q])
+                        if ((q >= otherValueCount) || ((p < ValueCount) && (Indices[p] < otherIndices[q])))
                         {
                             targetData[Indices[p]] = f(Values[p], Zero);
                             p++;
                         }
-                        else if (p >= ValueCount || q < otherValueCount && Indices[p] > otherIndices[q])
+                        else if ((p >= ValueCount) || ((q < otherValueCount) && (Indices[p] > otherIndices[q])))
                         {
                             targetData[otherIndices[q]] = f(Zero, otherValues[q]);
                             q++;
@@ -1084,7 +1084,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
 
             var sparseTarget = target as SparseVectorStorage<T>;
-            if (sparseOther != null && sparseTarget != null)
+            if ((sparseOther != null) && (sparseTarget != null))
             {
                 var indices = new List<int>();
                 var values = new List<T>();
@@ -1093,9 +1093,9 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int otherValueCount = sparseOther.ValueCount;
 
                 int p = 0, q = 0;
-                while (p < ValueCount || q < otherValueCount)
+                while ((p < ValueCount) || (q < otherValueCount))
                 {
-                    if (q >= otherValueCount || p < ValueCount && Indices[p] < otherIndices[q])
+                    if ((q >= otherValueCount) || ((p < ValueCount) && (Indices[p] < otherIndices[q])))
                     {
                         var value = f(Values[p], Zero);
                         if (!Zero.Equals(value))
@@ -1106,7 +1106,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
                         p++;
                     }
-                    else if (p >= ValueCount || q < otherValueCount && Indices[p] > otherIndices[q])
+                    else if ((p >= ValueCount) || ((q < otherValueCount) && (Indices[p] > otherIndices[q])))
                     {
                         var value = f(Zero, otherValues[q]);
                         if (!Zero.Equals(value))
@@ -1159,22 +1159,22 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     int p = 0, q = 0;
                     for (int i = 0; i < Length; i++)
                     {
-                        var left = p < ValueCount && Indices[p] == i ? Values[p++] : Zero;
-                        var right = q < otherValueCount && otherIndices[q] == i ? otherValues[q++] : otherZero;
+                        var left = (p < ValueCount) && (Indices[p] == i) ? Values[p++] : Zero;
+                        var right = (q < otherValueCount) && (otherIndices[q] == i) ? otherValues[q++] : otherZero;
                         state = f(state, left, right);
                     }
                 }
                 else
                 {
                     int p = 0, q = 0;
-                    while (p < ValueCount || q < otherValueCount)
+                    while ((p < ValueCount) || (q < otherValueCount))
                     {
-                        if (q >= otherValueCount || p < ValueCount && Indices[p] < otherIndices[q])
+                        if ((q >= otherValueCount) || ((p < ValueCount) && (Indices[p] < otherIndices[q])))
                         {
                             state = f(state, Values[p], otherZero);
                             p++;
                         }
-                        else if (p >= ValueCount || q < otherValueCount && Indices[p] > otherIndices[q])
+                        else if ((p >= ValueCount) || ((q < otherValueCount) && (Indices[p] > otherIndices[q])))
                         {
                             state = f(state, Zero, otherValues[q]);
                             q++;
@@ -1200,7 +1200,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < otherData.Length; i++)
                 {
-                    if (k < ValueCount && Indices[k] == i)
+                    if ((k < ValueCount) && (Indices[k] == i))
                     {
                         state = f(state, Values[k], otherData[i]);
                         k++;

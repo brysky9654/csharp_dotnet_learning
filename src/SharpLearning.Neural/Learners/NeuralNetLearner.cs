@@ -153,7 +153,7 @@ namespace SharpLearning.Neural
             Checks.VerifyIndices(indices, observations, targets);
 
             // Only check validation data if in use.
-            if (validationObservations != null && validationTargets != null)
+            if ((validationObservations != null) && (validationTargets != null))
             {
                 Checks.VerifyObservationsAndTargets(validationObservations, validationTargets);
             }
@@ -186,7 +186,7 @@ namespace SharpLearning.Neural
             m_optimizer.Reset();
 
             // Setup early stopping if validation data is provided.
-            var earlyStopping = validationObservations != null && validationTargets != null;
+            var earlyStopping = (validationObservations != null) && (validationTargets != null);
 
             NeuralNet bestNeuralNet = null;
             Matrix<float> floatValidationObservations = null;

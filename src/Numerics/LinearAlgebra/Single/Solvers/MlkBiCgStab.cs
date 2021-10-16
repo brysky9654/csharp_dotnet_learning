@@ -421,7 +421,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Solvers
                     float beta;
                     if (iterationNumber >= 1)
                     {
-                        for (var s = i; s < k - 1; s++)
+                        for (var s = i; s < (k - 1); s++)
                         {
                             // beta^(jk+i)_((j-1)k+s) = -q^t_(s+1) z_d / c_((j-1)k+s)
                             beta = -_startingVectors[s + 1].DotProduct(zd)/c[s];
@@ -469,7 +469,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Solvers
                     residuals.Add(zw, zd);
 
                     // FOR (s = 1, ... i - 1)
-                    for (var s = 0; s < i - 1; s++)
+                    for (var s = 0; s < (i - 1); s++)
                     {
                         // beta^(jk+i)_(jk+s) = -q^T_s+1 z_d / c_(jk+s)
                         beta = -_startingVectors[s + 1].DotProduct(zd)/c[s];
@@ -492,7 +492,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Solvers
                     zg.Add(zw, g[i]);
 
                     // IF (i < k - 1)
-                    if (i < k - 1)
+                    if (i < (k - 1))
                     {
                         // c_(jk+1) = q^T_i+1 d_(jk+i)
                         c[i] = _startingVectors[i + 1].DotProduct(d[i]);

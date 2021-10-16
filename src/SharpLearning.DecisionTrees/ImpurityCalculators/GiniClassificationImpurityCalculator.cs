@@ -39,8 +39,8 @@
                 giniRight += rightCount * rightCount;
             }
 
-            giniLeft = 1.0 - giniLeft / (m_weightedLeft * m_weightedLeft);
-            giniRight = 1.0 - giniRight / (m_weightedRight * m_weightedRight);
+            giniLeft = 1.0 - (giniLeft / (m_weightedLeft * m_weightedLeft));
+            giniRight = 1.0 - (giniRight / (m_weightedRight * m_weightedRight));
 
             return new ChildImpurities(giniLeft, giniRight);
         }
@@ -59,7 +59,7 @@
                 gini += value * value;
             }
 
-            gini = 1.0 - gini / (m_weightedTotal * m_weightedTotal);
+            gini = 1.0 - (gini / (m_weightedTotal * m_weightedTotal));
 
             return gini;
         }

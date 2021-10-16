@@ -31,23 +31,23 @@ namespace MathNet.Numerics.Optimization.TrustRegion.Subproblems
                 if (dBd <= 0)
                 {
                     var t = Util.FindBeta(1, z, d, delta);
-                    Pstep = z + t.Item1 * d;
+                    Pstep = z + (t.Item1 * d);
                     HitBoundary = true;
                     return;
                 }
 
                 var r_sq = r.DotProduct(r);
                 var alpha = r_sq / dBd;
-                var znext = z + alpha * d;
+                var znext = z + (alpha * d);
                 if(znext.L2Norm() >= delta)
                 {
                     var t = Util.FindBeta(1, z, d, delta);
-                    Pstep = z + t.Item2 * d;
+                    Pstep = z + (t.Item2 * d);
                     HitBoundary = true;
                     return;
                 }
 
-                var rnext = r + alpha * Bd;
+                var rnext = r + (alpha * Bd);
                 var rnext_sq = rnext.DotProduct(rnext);
                 if (Math.Sqrt(rnext_sq) < tolerance)
                 {
@@ -58,7 +58,7 @@ namespace MathNet.Numerics.Optimization.TrustRegion.Subproblems
 
                 z = znext;
                 r = rnext;
-                d = -rnext + rnext_sq / r_sq * d;
+                d = -rnext + ((rnext_sq / r_sq) * d);
             }
         }
     }

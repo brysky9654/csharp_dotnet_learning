@@ -235,11 +235,11 @@ namespace SharpLearning.InputOutput.Serialization
 
                 foreach (Type type in allTypes)
                 {
-                    if (type.IsEnum == false &&
-                       type.IsInterface == false &&
-                       type.IsGenericTypeDefinition == false)
+                    if ((type.IsEnum == false) &&
+                       (type.IsInterface == false) &&
+                       (type.IsGenericTypeDefinition == false))
                     {
-                        if (publicOnly == true && type.IsPublic == false)
+                        if ((publicOnly == true) && (type.IsPublic == false))
                         {
                             if (type.IsNested == false)
                             {

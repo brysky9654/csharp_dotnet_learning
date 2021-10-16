@@ -50,7 +50,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </returns>
         public bool Equals(Matrix<T> other)
         {
-            return other != null && Storage.Equals(other.Storage);
+            return (other != null) && Storage.Equals(other.Storage);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace MathNet.Numerics.LinearAlgebra
         public override bool Equals(object obj)
         {
             var other = obj as Matrix<T>;
-            return other != null && Storage.Equals(other.Storage);
+            return (other != null) && Storage.Equals(other.Storage);
         }
 
         /// <summary>
@@ -112,13 +112,13 @@ namespace MathNet.Numerics.LinearAlgebra
             rightColumns = Math.Max(rightColumns, 0);
 
             int upper = RowCount <= upperRows ? RowCount : upperRows;
-            int lower = RowCount <= upperRows ? 0 : RowCount <= upperRows + lowerRows ? RowCount - upperRows : lowerRows;
-            bool rowEllipsis = RowCount > upper + lower;
+            int lower = RowCount <= upperRows ? 0 : RowCount <= (upperRows + lowerRows) ? RowCount - upperRows : lowerRows;
+            bool rowEllipsis = RowCount > (upper + lower);
             int rows = rowEllipsis ? upper + lower + 1 : upper + lower;
 
             int left = ColumnCount <= leftColumns ? ColumnCount : leftColumns;
-            int right = ColumnCount <= leftColumns ? 0 : ColumnCount <= leftColumns + rightColumns ? ColumnCount - leftColumns : rightColumns;
-            bool colEllipsis = ColumnCount > left + right;
+            int right = ColumnCount <= leftColumns ? 0 : ColumnCount <= (leftColumns + rightColumns) ? ColumnCount - leftColumns : rightColumns;
+            bool colEllipsis = ColumnCount > (left + right);
             int cols = colEllipsis ? left + right + 1 : left + right;
 
             var array = new string[rows, cols];
@@ -136,7 +136,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 }
                 for (int j = 0; j < right; j++)
                 {
-                    array[i, colOffset + j] = formatValue(At(i, ColumnCount - right + j));
+                    array[i, colOffset + j] = formatValue(At(i, (ColumnCount - right) + j));
                 }
             }
             int rowOffset = upper;
@@ -162,7 +162,7 @@ namespace MathNet.Numerics.LinearAlgebra
             {
                 for (int j = 0; j < left; j++)
                 {
-                    array[rowOffset + i, j] = formatValue(At(RowCount - lower + i, j));
+                    array[rowOffset + i, j] = formatValue(At((RowCount - lower) + i, j));
                 }
                 int colOffset = left;
                 if (colEllipsis)
@@ -172,7 +172,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 }
                 for (int j = 0; j < right; j++)
                 {
-                    array[rowOffset + i, colOffset + j] = formatValue(At(RowCount - lower + i, ColumnCount - right + j));
+                    array[rowOffset + i, colOffset + j] = formatValue(At((RowCount - lower) + i, (ColumnCount - right) + j));
                 }
             }
             return array;
@@ -190,12 +190,12 @@ namespace MathNet.Numerics.LinearAlgebra
             maxWidth = Math.Max(maxWidth, 12);
 
             int upper = RowCount <= upperRows ? RowCount : upperRows;
-            int lower = RowCount <= upperRows ? 0 : RowCount <= upperRows + lowerRows ? RowCount - upperRows : lowerRows;
-            bool rowEllipsis = RowCount > upper + lower;
+            int lower = RowCount <= upperRows ? 0 : RowCount <= (upperRows + lowerRows) ? RowCount - upperRows : lowerRows;
+            bool rowEllipsis = RowCount > (upper + lower);
             int rows = rowEllipsis ? upper + lower + 1 : upper + lower;
 
             int left = ColumnCount <= minLeftColumns ? ColumnCount : minLeftColumns;
-            int right = ColumnCount <= minLeftColumns ? 0 : ColumnCount <= minLeftColumns + rightColumns ? ColumnCount - minLeftColumns : rightColumns;
+            int right = ColumnCount <= minLeftColumns ? 0 : ColumnCount <= (minLeftColumns + rightColumns) ? ColumnCount - minLeftColumns : rightColumns;
 
             var columnsLeft = new List<Tuple<int, string[]>>();
             for (int j = 0; j < left; j++)
@@ -206,11 +206,11 @@ namespace MathNet.Numerics.LinearAlgebra
             var columnsRight = new List<Tuple<int, string[]>>();
             for (int j = 0; j < right; j++)
             {
-                columnsRight.Add(FormatColumn(ColumnCount - right + j, rows, upper, lower, rowEllipsis, verticalEllipsis, formatValue));
+                columnsRight.Add(FormatColumn((ColumnCount - right) + j, rows, upper, lower, rowEllipsis, verticalEllipsis, formatValue));
             }
 
             int chars = columnsLeft.Sum(t => t.Item1 + padding) + columnsRight.Sum(t => t.Item1 + padding);
-            for (int j = left; j < ColumnCount - right; j++)
+            for (int j = left; j < (ColumnCount - right); j++)
             {
                 var candidate = FormatColumn(j, rows, upper, lower, rowEllipsis, verticalEllipsis, formatValue);
                 chars += candidate.Item1 + padding;

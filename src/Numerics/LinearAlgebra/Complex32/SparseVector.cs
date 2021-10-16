@@ -216,7 +216,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
                 int i = 0, j = 0;
                 while (j < otherStorage.ValueCount)
                 {
-                    if (i >= _storage.ValueCount || _storage.Indices[i] > otherStorage.Indices[j])
+                    if ((i >= _storage.ValueCount) || (_storage.Indices[i] > otherStorage.Indices[j]))
                     {
                         var otherValue = otherStorage.Values[j];
                         if (!Complex32.Zero.Equals(otherValue))
@@ -240,9 +240,9 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             {
                 result.Clear();
                 int i = 0, j = 0, last = -1;
-                while (i < _storage.ValueCount || j < otherStorage.ValueCount)
+                while ((i < _storage.ValueCount) || (j < otherStorage.ValueCount))
                 {
-                    if (j >= otherStorage.ValueCount || i < _storage.ValueCount && _storage.Indices[i] <= otherStorage.Indices[j])
+                    if ((j >= otherStorage.ValueCount) || ((i < _storage.ValueCount) && (_storage.Indices[i] <= otherStorage.Indices[j])))
                     {
                         var next = _storage.Indices[i];
                         if (next != last)
@@ -319,7 +319,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
                 int i = 0, j = 0;
                 while (j < otherStorage.ValueCount)
                 {
-                    if (i >= _storage.ValueCount || _storage.Indices[i] > otherStorage.Indices[j])
+                    if ((i >= _storage.ValueCount) || (_storage.Indices[i] > otherStorage.Indices[j]))
                     {
                         var otherValue = otherStorage.Values[j];
                         if (!Complex32.Zero.Equals(otherValue))
@@ -343,9 +343,9 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             {
                 result.Clear();
                 int i = 0, j = 0, last = -1;
-                while (i < _storage.ValueCount || j < otherStorage.ValueCount)
+                while ((i < _storage.ValueCount) || (j < otherStorage.ValueCount))
                 {
-                    if (j >= otherStorage.ValueCount || i < _storage.ValueCount && _storage.Indices[i] <= otherStorage.Indices[j])
+                    if ((j >= otherStorage.ValueCount) || ((i < _storage.ValueCount) && (_storage.Indices[i] <= otherStorage.Indices[j])))
                     {
                         var next = _storage.Indices[i];
                         if (next != last)
@@ -846,11 +846,11 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
                 for (int i = 0; i < weakTokens.Length; i++)
                 {
                     current += weakTokens[i];
-                    if (current.EndsWith("+") || current.EndsWith("-") || current.StartsWith("(") && !current.EndsWith(")"))
+                    if (current.EndsWith("+") || current.EndsWith("-") || (current.StartsWith("(") && !current.EndsWith(")")))
                     {
                         continue;
                     }
-                    var ahead = i < weakTokens.Length - 1 ? weakTokens[i + 1] : string.Empty;
+                    var ahead = i < (weakTokens.Length - 1) ? weakTokens[i + 1] : string.Empty;
                     if (ahead.StartsWith("+") || ahead.StartsWith("-"))
                     {
                         continue;

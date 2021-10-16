@@ -18,7 +18,7 @@ namespace MathNet.Numerics.Integration.GaussRule
         public static GaussPointPair GetGaussPoint(int order)
         {
             // Try to get the GaussKronrodPoint from the cached static field.
-            bool gaussKronrodPointIsCached = gaussKronrodPoint != null && gaussKronrodPoint.Order == order;
+            bool gaussKronrodPointIsCached = (gaussKronrodPoint != null) && (gaussKronrodPoint.Order == order);
             if (!gaussKronrodPointIsCached)
             {
                 // Try to find the GaussKronrodPoint in the precomputed dictionary. 

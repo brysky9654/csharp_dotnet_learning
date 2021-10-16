@@ -27,12 +27,12 @@ namespace MathNet.Numerics
                 return (z.Imaginary == 0) ? Complex.Zero : new Complex(double.PositiveInfinity, double.PositiveInfinity);
             }
 
-            if (z.Real == 0 && z.Imaginary == 0)
+            if ((z.Real == 0) && (z.Imaginary == 0))
             {
                 return (n == 0) ? 1 : 0;
             }
 
-            return Constants.SqrtPiOver2 * BesselJ(n + 0.5, z) / Complex.Sqrt(z);
+            return (Constants.SqrtPiOver2 * BesselJ(n + 0.5, z)) / Complex.Sqrt(z);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace MathNet.Numerics
                 return (n == 0) ? 1 : 0;
             }
 
-            return Constants.SqrtPiOver2 * BesselJ(n + 0.5, z) / Math.Sqrt(z);
+            return (Constants.SqrtPiOver2 * BesselJ(n + 0.5, z)) / Math.Sqrt(z);
         }
 
         /// <summary>
@@ -86,12 +86,12 @@ namespace MathNet.Numerics
                 return (z.Imaginary == 0) ? Complex.Zero : new Complex(double.PositiveInfinity, double.PositiveInfinity);
             }
 
-            if (z.Real == 0 && z.Imaginary == 0)
+            if ((z.Real == 0) && (z.Imaginary == 0))
             {
                 return new Complex(double.NaN, double.NaN);
             }
 
-            return Constants.SqrtPiOver2 * BesselY(n + 0.5, z) / Complex.Sqrt(z);
+            return (Constants.SqrtPiOver2 * BesselY(n + 0.5, z)) / Complex.Sqrt(z);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace MathNet.Numerics
                 return double.NegativeInfinity;
             }
 
-            return Constants.SqrtPiOver2 * BesselY(n + 0.5, z) / Math.Sqrt(z);
+            return (Constants.SqrtPiOver2 * BesselY(n + 0.5, z)) / Math.Sqrt(z);
         }
     }
 }

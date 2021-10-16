@@ -22,7 +22,7 @@ namespace SharpLearning.CrossValidation.TrainingTestSplitters
         public TrainingTestIndexSplitter(IIndexSampler<T> shuffler, double trainingPercentage)
         {
             m_indexSampler = shuffler ?? throw new ArgumentNullException(nameof(shuffler));
-            if (trainingPercentage <= 0.0 || trainingPercentage >= 1.0)
+            if ((trainingPercentage <= 0.0) || (trainingPercentage >= 1.0))
             { throw new ArgumentException("Training percentage must be larger than 0.0 and smaller than 1.0"); }
             m_trainingPercentage = trainingPercentage; 
         }

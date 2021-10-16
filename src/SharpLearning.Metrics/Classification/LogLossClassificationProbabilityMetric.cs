@@ -55,7 +55,7 @@ namespace SharpLearning.Metrics.Classification
                 }
             }
 
-            return -1.0 / (double)rows * sum;
+            return (-1.0 / (double)rows) * sum;
         }
 
         /// <summary>

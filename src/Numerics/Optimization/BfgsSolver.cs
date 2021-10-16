@@ -74,7 +74,7 @@ namespace MathNet.Numerics.Optimization
                 Vector<double> p = -1 * H * grad;
                 var lineSearchResult = wolfeLineSearch.FindConformingStep(objectiveFunction, p, 1.0);
                 double rate = lineSearchResult.FinalStep;
-                x = x + rate * p;
+                x = x + (rate * p);
                 Vector<double> grad_old = grad;
 
                 // update the gradient
@@ -88,16 +88,16 @@ namespace MathNet.Numerics.Optimization
                 if (iter == 0)
                 {
                     // set up an initial hessian
-                    H = (y * s) / (y * y) * DenseMatrix.CreateIdentity(dim);
+                    H = ((y * s) / (y * y)) * DenseMatrix.CreateIdentity(dim);
                 }
 
                 var sM = s.ToColumnMatrix();
                 var yM = y.ToColumnMatrix();
 
                 // Update the estimate of the hessian
-                H = H
-                    - rho * (sM * (yM.TransposeThisAndMultiply(H)) + (H * yM).TransposeAndMultiply(sM))
-                    + rho * rho * (y.DotProduct(H * y) + 1.0 / rho) * (sM.TransposeAndMultiply(sM));
+                H = (H
+                   - (rho * ((sM * (yM.TransposeThisAndMultiply(H))) + (H * yM).TransposeAndMultiply(sM))))
+                    + (rho * rho * (y.DotProduct(H * y) + (1.0 / rho)) * (sM.TransposeAndMultiply(sM)));
                 x_old = x;
                 iter++;
             }

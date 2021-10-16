@@ -30,7 +30,7 @@ namespace SharpLearning.CrossValidation.Augmentators
         /// <param name="seed">Seed for random augmentation</param>
         public ContinuousMungeAugmentator(double probabilityParameter=0.2, double localVariance=1.0, int seed = 432)
         {
-            if (probabilityParameter > 1.0 || probabilityParameter < 0.0)
+            if ((probabilityParameter > 1.0) || (probabilityParameter < 0.0))
             { throw new ArgumentException("probabilityParameter must be between 0.0 and 1.0. Was: " + probabilityParameter); }
 
             m_probabilityParameter = probabilityParameter;
@@ -90,7 +90,7 @@ namespace SharpLearning.CrossValidation.Augmentators
                         var sampleValue = sample[h];
                         var candiateValue = candidate[h];
 
-                        if (m_random.NextDouble() <= m_probabilityParameter && m_probabilityParameter != 0.0)
+                        if ((m_random.NextDouble() <= m_probabilityParameter) && (m_probabilityParameter != 0.0))
                         {
                             var std = (sampleValue - candiateValue) / m_localVariance;
 
@@ -115,7 +115,7 @@ namespace SharpLearning.CrossValidation.Augmentators
             double u2 = m_random.NextDouble();
 
             double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); // random normal(0,1)
-            double randNormal = mean + std * randStdNormal; //random normal(mean,stdDev^2)
+            double randNormal = mean + (std * randStdNormal); //random normal(mean,stdDev^2)
 
             return randNormal;
         }

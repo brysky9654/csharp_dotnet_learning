@@ -108,17 +108,17 @@ namespace MathNet.Numerics
             }
 
             // If one is almost zero, fall back to absolute equality
-            if (Math.Abs(a) < DoublePrecision || Math.Abs(b) < DoublePrecision)
+            if ((Math.Abs(a) < DoublePrecision) || (Math.Abs(b) < DoublePrecision))
             {
                 return Math.Abs(diff) < maximumError;
             }
 
-            if ((a == 0 && Math.Abs(b) < maximumError) || (b == 0 && Math.Abs(a) < maximumError))
+            if (((a == 0) && (Math.Abs(b) < maximumError)) || ((b == 0) && (Math.Abs(a) < maximumError)))
             {
                 return true;
             }
 
-            return Math.Abs(diff) < maximumError * Math.Max(Math.Abs(a), Math.Abs(b));
+            return Math.Abs(diff) < (maximumError * Math.Max(Math.Abs(a), Math.Abs(b)));
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace MathNet.Numerics
             // 10^(-numberOfDecimalPlaces). We divide by two so that we have half the range
             // on each side of the numbers, e.g. if decimalPlaces == 2,
             // then 0.01 will equal between 0.005 and 0.015, but not 0.02 and not 0.00
-            return Math.Abs(diff) < Math.Pow(10, -decimalPlaces) / 2d;
+            return Math.Abs(diff) < (Math.Pow(10, -decimalPlaces) / 2d);
         }
 
         /// <summary>
@@ -425,13 +425,13 @@ namespace MathNet.Numerics
             }
 
             // If one is almost zero, fall back to absolute equality
-            if (Math.Abs(a) < DoublePrecision || Math.Abs(b) < DoublePrecision)
+            if ((Math.Abs(a) < DoublePrecision) || (Math.Abs(b) < DoublePrecision))
             {
                 // The values are equal if the difference between the two numbers is smaller than
                 // 10^(-numberOfDecimalPlaces). We divide by two so that we have half the range
                 // on each side of the numbers, e.g. if decimalPlaces == 2,
                 // then 0.01 will equal between 0.005 and 0.015, but not 0.02 and not 0.00
-                return Math.Abs(diff) < Math.Pow(10, -decimalPlaces) / 2d;
+                return Math.Abs(diff) < (Math.Pow(10, -decimalPlaces) / 2d);
             }
 
             // If the magnitudes of the two numbers are equal to within one magnitude the numbers could potentially be equal
@@ -447,7 +447,7 @@ namespace MathNet.Numerics
             // 10^(-numberOfDecimalPlaces). We divide by two so that we have half the range
             // on each side of the numbers, e.g. if decimalPlaces == 2,
             // then 0.01 will equal between 0.00995 and 0.01005, but not 0.0015 and not 0.0095
-            return Math.Abs(diff) < Math.Pow(10, magnitudeOfMax - decimalPlaces) / 2d;
+            return Math.Abs(diff) < (Math.Pow(10, magnitudeOfMax - decimalPlaces) / 2d);
         }
 
         /// <summary>
@@ -619,7 +619,7 @@ namespace MathNet.Numerics
             // Now compare the values.
             // Note that this comparison can overflow so we'll approach this differently
             // Do note that we could overflow this way too. We should probably check that we don't.
-            return (a > b) ? (secondUlong + maxNumbersBetween >= firstUlong) : (firstUlong + maxNumbersBetween >= secondUlong);
+            return (a > b) ? ((secondUlong + maxNumbersBetween) >= firstUlong) : ((firstUlong + maxNumbersBetween) >= secondUlong);
         }
 
         /// <summary>
@@ -662,7 +662,7 @@ namespace MathNet.Numerics
             // Now compare the values.
             // Note that this comparison can overflow so we'll approach this differently
             // Do note that we could overflow this way too. We should probably check that we don't.
-            return (a > b) ? (secondUlong + maxNumbersBetween >= firstUlong) : (firstUlong + maxNumbersBetween >= secondUlong);
+            return (a > b) ? ((secondUlong + maxNumbersBetween) >= firstUlong) : ((firstUlong + maxNumbersBetween) >= secondUlong);
         }
 
         /// <summary>
@@ -867,12 +867,12 @@ namespace MathNet.Numerics
         public static bool ListAlmostEqualNorm<T>(this IList<T> a, IList<T> b, double maximumAbsoluteError)
             where T : IPrecisionSupport<T>
         {
-            if (a == null && b == null)
+            if ((a == null) && (b == null))
             {
                 return true;
             }
 
-            if (a == null || b == null || a.Count != b.Count)
+            if ((a == null) || (b == null) || (a.Count != b.Count))
             {
                 return false;
             }
@@ -898,12 +898,12 @@ namespace MathNet.Numerics
         public static bool ListAlmostEqualNormRelative<T>(this IList<T> a, IList<T> b, double maximumError)
             where T : IPrecisionSupport<T>
         {
-            if (a == null && b == null)
+            if ((a == null) && (b == null))
             {
                 return true;
             }
 
-            if (a == null || b == null || a.Count != b.Count)
+            if ((a == null) || (b == null) || (a.Count != b.Count))
             {
                 return false;
             }
@@ -921,12 +921,12 @@ namespace MathNet.Numerics
 
         private static bool ListForAll<T,TP>(IList<T> a, IList<T> b, Func<T, T, TP, bool> predicate, TP parameter)
         {
-            if (a == null && b == null)
+            if ((a == null) && (b == null))
             {
                 return true;
             }
 
-            if (a == null || b == null || a.Count != b.Count)
+            if ((a == null) || (b == null) || (a.Count != b.Count))
             {
                 return false;
             }

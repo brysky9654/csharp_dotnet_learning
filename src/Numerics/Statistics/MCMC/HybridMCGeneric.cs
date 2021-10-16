@@ -269,7 +269,7 @@ namespace MathNet.Numerics.Statistics.Mcmc
         /// <returns>Hamiltonian=E+p.p/2</returns>
         protected double Hamiltonian(T momentum, double e)
         {
-            return e + DoProduct(momentum, momentum) / 2;
+            return e + (DoProduct(momentum, momentum) / 2);
         }
 
         /// <summary>

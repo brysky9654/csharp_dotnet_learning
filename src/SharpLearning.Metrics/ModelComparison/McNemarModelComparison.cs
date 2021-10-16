@@ -27,8 +27,8 @@ namespace SharpLearning.Metrics
         /// <returns></returns>
         public int[][] Compare(double[] model1Predictions, double[] model2Predictions, double[] targets)
         {
-            if (model1Predictions.Length != model2Predictions.Length || 
-                model1Predictions.Length != targets.Length)
+            if ((model1Predictions.Length != model2Predictions.Length) || 
+                (model1Predictions.Length != targets.Length))
             {
                 throw new ArgumentException("Model prediction lengths differ from target length. " +
                     $"Model1: {model1Predictions.Length}, " + 
@@ -45,19 +45,19 @@ namespace SharpLearning.Metrics
                 var model2Prediction = model2Predictions[i];
                 var target = targets[i];
 
-                if (model1Prediction == target && model2Prediction == target)
+                if ((model1Prediction == target) && (model2Prediction == target))
                 {
                     mcNemarmatrix[1][1]++;
                 }
-                else if (model1Prediction != target && model2Prediction != target)
+                else if ((model1Prediction != target) && (model2Prediction != target))
                 {
                     mcNemarmatrix[0][0]++;
                 }
-                else if (model1Prediction != target && model2Prediction == target)
+                else if ((model1Prediction != target) && (model2Prediction == target))
                 {
                     mcNemarmatrix[1][0]++;
                 }
-                else if (model1Prediction == target && model2Prediction != target)
+                else if ((model1Prediction == target) && (model2Prediction != target))
                 {
                     mcNemarmatrix[0][1]++;
                 }

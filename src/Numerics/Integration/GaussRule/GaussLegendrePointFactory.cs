@@ -47,7 +47,7 @@ namespace MathNet.Numerics.Integration.GaussRule
         public static GaussPoint GetGaussPoint(int order)
         {
             // Try to get the GaussPoint from the cached static field.
-            bool gaussLegendrePointIsCached = _gaussLegendrePoint != null && _gaussLegendrePoint.Order == order;
+            bool gaussLegendrePointIsCached = (_gaussLegendrePoint != null) && (_gaussLegendrePoint.Order == order);
             if (!gaussLegendrePointIsCached)
             {
                 // Try to find the GaussPoint in the precomputed dictionary.
@@ -95,8 +95,8 @@ namespace MathNet.Numerics.Integration.GaussRule
                 int index2 = i - 1;
                 int index3 = m - i;
 
-                abscissas[index1] = gaussPoint.Abscissas[index3] * a + b;
-                abscissas[index2] = -gaussPoint.Abscissas[index3] * a + b;
+                abscissas[index1] = (gaussPoint.Abscissas[index3] * a) + b;
+                abscissas[index2] = (-gaussPoint.Abscissas[index3] * a) + b;
 
                 weights[index1] = gaussPoint.Weights[index3] * a;
                 weights[index2] = gaussPoint.Weights[index3] * a;

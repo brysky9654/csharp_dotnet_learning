@@ -87,7 +87,7 @@ namespace SharpLearning.DecisionTrees.SplitSearchers
 
                 currentFeature = feature[i];
 
-                if (currentFeature > threshold && Math.Min(leftSize, rightSize) >= m_minimumSplitSize)
+                if ((currentFeature > threshold) && (Math.Min(leftSize, rightSize) >= m_minimumSplitSize))
                 {
                     splitIndex = i;
                     
@@ -115,7 +115,7 @@ namespace SharpLearning.DecisionTrees.SplitSearchers
         /// <returns></returns>
         public double RandomThreshold(double min, double max)
         {
-            return m_random.NextDouble() * (max - min) + min;
+            return (m_random.NextDouble() * (max - min)) + min;
         }
     }
 }

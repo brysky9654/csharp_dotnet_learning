@@ -206,7 +206,7 @@ namespace MathNet.Numerics.Random
             _mt[0] = s & 0xffffffff;
             for (_mti = 1; _mti < N; _mti++)
             {
-                _mt[_mti] = 1812433253*(_mt[_mti - 1] ^ (_mt[_mti - 1] >> 30)) + (uint)_mti;
+                _mt[_mti] = (1812433253*(_mt[_mti - 1] ^ (_mt[_mti - 1] >> 30))) + (uint)_mti;
                 /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
                 /* In the previous versions, MSBs of the seed affect   */
                 /* only MSBs of the array _mt[].                        */
@@ -268,18 +268,18 @@ namespace MathNet.Numerics.Random
                 /* generate _n words at one time */
                 int kk;
 
-                if (_mti == N + 1) /* if init_genrand() has not been called, */
+                if (_mti == (N + 1)) /* if init_genrand() has not been called, */
                 {
                     init_genrand(5489); /* a default initial seed is used */
                 }
 
-                for (kk = 0; kk < N - M; kk++)
+                for (kk = 0; kk < (N - M); kk++)
                 {
                     y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
                     _mt[kk] = _mt[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
                 }
 
-                for (; kk < N - 1; kk++)
+                for (; kk < (N - 1); kk++)
                 {
                     y = (_mt[kk] & UpperMask) | (_mt[kk + 1] & LowerMask);
                     _mt[kk] = _mt[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];
@@ -359,7 +359,7 @@ namespace MathNet.Numerics.Random
             t[0] = s & 0xffffffff;
             for (k = 1; k < N; k++)
             {
-                t[k] = 1812433253*(t[k - 1] ^ (t[k - 1] >> 30)) + (uint)k;
+                t[k] = (1812433253*(t[k - 1] ^ (t[k - 1] >> 30))) + (uint)k;
                 t[k] &= 0xffffffff;
             }
 
@@ -370,13 +370,13 @@ namespace MathNet.Numerics.Random
                 if (k >= N)
                 {
                     int kk;
-                    for (kk = 0; kk < N - M; kk++)
+                    for (kk = 0; kk < (N - M); kk++)
                     {
                         y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
                         t[kk] = t[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
                     }
 
-                    for (; kk < N - 1; kk++)
+                    for (; kk < (N - 1); kk++)
                     {
                         y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
                         t[kk] = t[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];
@@ -425,7 +425,7 @@ namespace MathNet.Numerics.Random
             t[0] = s & 0xffffffff;
             for (k = 1; k < N; k++)
             {
-                t[k] = 1812433253*(t[k - 1] ^ (t[k - 1] >> 30)) + (uint)k;
+                t[k] = (1812433253*(t[k - 1] ^ (t[k - 1] >> 30))) + (uint)k;
                 t[k] &= 0xffffffff;
             }
 
@@ -436,13 +436,13 @@ namespace MathNet.Numerics.Random
                 if (k >= N)
                 {
                     int kk;
-                    for (kk = 0; kk < N - M; kk++)
+                    for (kk = 0; kk < (N - M); kk++)
                     {
                         y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
                         t[kk] = t[kk + M] ^ (y >> 1) ^ Mag01[y & 0x1];
                     }
 
-                    for (; kk < N - 1; kk++)
+                    for (; kk < (N - 1); kk++)
                     {
                         y = (t[kk] & UpperMask) | (t[kk + 1] & LowerMask);
                         t[kk] = t[kk + (M - N)] ^ (y >> 1) ^ Mag01[y & 0x1];

@@ -142,7 +142,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
             var norm = u.Aggregate(Complex.Zero, (current, t) => current + (t.Magnitude*t.Magnitude));
             norm = norm.SquareRoot();
 
-            if (row == a.RowCount - 1 || norm.Magnitude == 0)
+            if ((row == (a.RowCount - 1)) || (norm.Magnitude == 0))
             {
                 a.At(row, column, -u[0]);
                 u[0] = Constants.Sqrt2;
@@ -184,7 +184,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
         /// <param name="availableCores">Number of available CPUs</param>
         static void ComputeQR(Complex[] u, Matrix<Complex> a, int rowStart, int rowDim, int columnStart, int columnDim, int availableCores)
         {
-            if (rowDim < rowStart || columnDim < columnStart)
+            if ((rowDim < rowStart) || (columnDim < columnStart))
             {
                 return;
             }

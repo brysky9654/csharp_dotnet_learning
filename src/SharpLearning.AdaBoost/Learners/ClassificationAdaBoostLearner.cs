@@ -63,7 +63,7 @@ namespace SharpLearning.AdaBoost.Learners
             double minimumInformationGain = 0.000001)
         {
             if (iterations < 1) { throw new ArgumentException("Iterations must be at least 1"); }
-            if (learningRate > 1.0 || learningRate <= 0) { throw new ArgumentException("learningRate must be larger than zero and smaller than 1.0"); }
+            if ((learningRate > 1.0) || (learningRate <= 0)) { throw new ArgumentException("learningRate must be larger than zero and smaller than 1.0"); }
             if (minimumSplitSize <= 0) { throw new ArgumentException("minimum split size must be larger than 0"); }
             if (maximumTreeDepth < 0) { throw new ArgumentException("maximum tree depth must be larger than 0"); }
             if (minimumInformationGain <= 0) { throw new ArgumentException("minimum information gain must be larger than 0"); }
@@ -158,7 +158,7 @@ namespace SharpLearning.AdaBoost.Learners
                 if (weightSum <= 0.0)
                     break;
 
-                if (i == m_iterations - 1)
+                if (i == (m_iterations - 1))
                 {
                     // Normalize weights
                     for (int j = 0; j < indices.Length; j++)
@@ -256,13 +256,13 @@ namespace SharpLearning.AdaBoost.Learners
                 Math.Log(m_uniqueTargetValues - 1.0));
 
             // Only boost if not last iteration
-            if (iteration != m_iterations - 1)
+            if (iteration != (m_iterations - 1))
             {
                 for (int i = 0; i < indices.Length; i++)
                 {
                     var index = indices[i];
                     var sampleWeight = m_sampleWeights[index];
-                    if(sampleWeight > 0.0 || modelWeight < 0.0)
+                    if((sampleWeight > 0.0) || (modelWeight < 0.0))
                     {
                         m_sampleWeights[index] = sampleWeight * Math.Exp(modelWeight * m_workErrors[index]);
                     }

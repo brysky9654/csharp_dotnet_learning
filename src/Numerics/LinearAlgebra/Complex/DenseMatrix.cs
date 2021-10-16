@@ -489,7 +489,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             // dense + dense = dense
             var denseOther = other.Storage as DenseColumnMajorMatrixStorage<Complex>;
             var denseResult = result.Storage as DenseColumnMajorMatrixStorage<Complex>;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.AddArrays(_values, denseOther.Data, denseResult.Data);
                 return;
@@ -545,7 +545,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             // dense + dense = dense
             var denseOther = other.Storage as DenseColumnMajorMatrixStorage<Complex>;
             var denseResult = result.Storage as DenseColumnMajorMatrixStorage<Complex>;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.SubtractArrays(_values, denseOther.Data, denseResult.Data);
                 return;
@@ -595,7 +595,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var denseRight = rightSide as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseRight == null || denseResult == null)
+            if ((denseRight == null) || (denseResult == null))
             {
                 base.DoMultiply(rightSide, result);
             }
@@ -621,7 +621,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiply(
                     _values,
@@ -667,7 +667,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.DontTranspose,
@@ -717,7 +717,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.DontTranspose,
@@ -773,7 +773,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseRight = rightSide as DenseVector;
             var denseResult = result as DenseVector;
-            if (denseRight != null && denseResult != null)
+            if ((denseRight != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.Transpose,
@@ -802,7 +802,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseRight = rightSide as DenseVector;
             var denseResult = result as DenseVector;
-            if (denseRight != null && denseResult != null)
+            if ((denseRight != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.ConjugateTranspose,
@@ -831,7 +831,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.Transpose,
@@ -882,7 +882,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
-            if (denseOther != null && denseResult != null)
+            if ((denseOther != null) && (denseResult != null))
             {
                 LinearAlgebraControl.Provider.MatrixMultiplyWithUpdate(
                     Providers.LinearAlgebra.Transpose.ConjugateTranspose,
@@ -952,7 +952,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var denseOther = other as DenseMatrix;
             var denseResult = result as DenseMatrix;
 
-            if (denseOther == null || denseResult == null)
+            if ((denseOther == null) || (denseResult == null))
             {
                 base.DoPointwiseMultiply(other, result);
             }
@@ -972,7 +972,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var denseDivisor = divisor as DenseMatrix;
             var denseResult = result as DenseMatrix;
 
-            if (denseDivisor == null || denseResult == null)
+            if ((denseDivisor == null) || (denseResult == null))
             {
                 base.DoPointwiseDivide(divisor, result);
             }
@@ -992,7 +992,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var denseExponent = exponent as DenseMatrix;
             var denseResult = result as DenseMatrix;
 
-            if (denseExponent == null || denseResult == null)
+            if ((denseExponent == null) || (denseResult == null))
             {
                 base.DoPointwisePower(exponent, result);
             }
@@ -1046,7 +1046,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(leftSide));
             }
 
-            if (leftSide._rowCount != rightSide._rowCount || leftSide._columnCount != rightSide._columnCount)
+            if ((leftSide._rowCount != rightSide._rowCount) || (leftSide._columnCount != rightSide._columnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }
@@ -1093,7 +1093,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(leftSide));
             }
 
-            if (leftSide._rowCount != rightSide._rowCount || leftSide._columnCount != rightSide._columnCount)
+            if ((leftSide._rowCount != rightSide._rowCount) || (leftSide._columnCount != rightSide._columnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }

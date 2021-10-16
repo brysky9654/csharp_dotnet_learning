@@ -245,7 +245,7 @@ namespace MathNet.Numerics
             // Return J(v, z)
             public static double Cbesj(double v, double z)
             {
-                if (z < 0 && v != (int)v)
+                if ((z < 0) && (v != (int)v))
                 {
                     return double.NaN;
                 }
@@ -312,7 +312,7 @@ namespace MathNet.Numerics
             // Return Exp(-Abs(y)) * J(v, z) where y = z.Imaginary
             public static double ScaledCbesj(double v, double z)
             {
-                if (z < 0 && v != (int)v)
+                if ((z < 0) && (v != (int)v))
                 {
                     return double.NaN;
                 }
@@ -345,7 +345,7 @@ namespace MathNet.Numerics
                 int ierr = 0;
                 Complex cyy;
 
-                if (z.Real == 0 && z.Imaginary == 0)
+                if ((z.Real == 0) && (z.Imaginary == 0))
                 {
                     //overflow
                     cyy = new Complex(double.NegativeInfinity, 0);
@@ -369,7 +369,7 @@ namespace MathNet.Numerics
 
                     if (ierr == 2)
                     {
-                        if (z.Real >= 0 && z.Imaginary == 0)
+                        if ((z.Real >= 0) && (z.Imaginary == 0))
                         {
                             //overflow
                             cyy = new Complex(double.NegativeInfinity, 0);
@@ -447,7 +447,7 @@ namespace MathNet.Numerics
 
                 if (ierr == 2)
                 {
-                    if (z.Real >= 0 && z.Imaginary == 0)
+                    if ((z.Real >= 0) && (z.Imaginary == 0))
                     {
                         //overflow
                         cyy = new Complex(double.PositiveInfinity, 0);
@@ -523,9 +523,9 @@ namespace MathNet.Numerics
                 if (ierr == 2)
                 {
                     //overflow
-                    if (z.Imaginary == 0 && (z.Real >= 0 || v == Math.Floor(v)))
+                    if ((z.Imaginary == 0) && ((z.Real >= 0) || (v == Math.Floor(v))))
                     {
-                        if (z.Real < 0 && v / 2 != Math.Floor(v / 2))
+                        if ((z.Real < 0) && ((v / 2) != Math.Floor(v / 2)))
                             cyi = new Complex(double.NegativeInfinity, 0);
                         else
                             cyi = new Complex(double.PositiveInfinity, 0);
@@ -610,7 +610,7 @@ namespace MathNet.Numerics
             // Return Exp(-Abs(x)) * I(v, z) where x = z.Real
             public static double ScaledCbesi(double v, double x)
             {
-                if (v != Math.Floor(v) && x < 0)
+                if ((v != Math.Floor(v)) && (x < 0))
                 {
                     return double.NaN;
                 }
@@ -653,14 +653,14 @@ namespace MathNet.Numerics
 
                 if (ierr == 1)
                 {
-                    if (z.Real == 0.0 && z.Imaginary == 0.0)
+                    if ((z.Real == 0.0) && (z.Imaginary == 0.0))
                     {
                         cyk = new Complex(double.PositiveInfinity, 0);
                     }
                 }
                 else if (ierr == 2)
                 {
-                    if (z.Real >= 0 && z.Imaginary == 0)
+                    if ((z.Real >= 0) && (z.Imaginary == 0))
                     {
                         //overflow
                         cyk = new Complex(double.PositiveInfinity, 0);
@@ -681,7 +681,7 @@ namespace MathNet.Numerics
                 {
                     return double.PositiveInfinity;
                 }
-                else if (z > 710 * (1 + Math.Abs(v)))
+                else if (z > (710 * (1 + Math.Abs(v))))
                 {
                     // Underflow. See uniform expansion https://dlmf.nist.gov/10.41
                     // This condition is not a strict bound (it can underflow earlier),
@@ -728,7 +728,7 @@ namespace MathNet.Numerics
 
                 if (ierr == 2)
                 {
-                    if (z.Real >= 0 && z.Imaginary == 0)
+                    if ((z.Real >= 0) && (z.Imaginary == 0))
                     {
                         //overflow
                         cyk = new Complex(double.PositiveInfinity, 0);
@@ -852,7 +852,7 @@ namespace MathNet.Numerics
                     return new Complex(double.NaN, double.NaN);
                 }
 
-                if (v == 0 && z.Real == 0 && z.Imaginary == 0)
+                if ((v == 0) && (z.Real == 0) && (z.Imaginary == 0))
                 {
                     return new Complex(double.NaN, double.NaN); // ComplexInfinity
                 }
@@ -896,7 +896,7 @@ namespace MathNet.Numerics
                     return new Complex(double.NaN, double.NaN);
                 }
 
-                if (v == 0 && z.Real == 0 && z.Imaginary == 0)
+                if ((v == 0) && (z.Real == 0) && (z.Imaginary == 0))
                 {
                     return new Complex(double.NaN, double.NaN); // ComplexInfinity
                 }
@@ -938,7 +938,7 @@ namespace MathNet.Numerics
 
             private static double SinPi(double x)
             {
-                if (Math.Floor(x) == x && Math.Abs(x) < 1.0e14)
+                if ((Math.Floor(x) == x) && (Math.Abs(x) < 1.0e14))
                 {
                     //Return 0 when at exact zero, as long as the floating point number is
                     //small enough to distinguish integer points from other points.
@@ -950,7 +950,7 @@ namespace MathNet.Numerics
 
             private static double CosPi(double x)
             {
-                if (Math.Floor(x + 0.5) == x + 0.5 && Math.Abs(x) < 1.0E14)
+                if ((Math.Floor(x + 0.5) == (x + 0.5)) && (Math.Abs(x) < 1.0E14))
                 {
                     //Return 0 when at exact zero, as long as the floating point number is
                     //small enough to distinguish integer points from other points.
@@ -964,14 +964,14 @@ namespace MathNet.Numerics
             {
                 double c = CosPi(v);
                 double s = SinPi(v);
-                return new Complex(z.Real * c - z.Imaginary * s, z.Real * s + z.Imaginary * c);
+                return new Complex((z.Real * c) - (z.Imaginary * s), (z.Real * s) + (z.Imaginary * c));
             }
 
             private static Complex RotateJY(Complex j, Complex y, double v)
             {
                 double c = CosPi(v);
                 double s = SinPi(v);
-                return new Complex(j.Real * c - y.Real * s, j.Imaginary * c - y.Imaginary * s);
+                return new Complex((j.Real * c) - (y.Real * s), (j.Imaginary * c) - (y.Imaginary * s));
             }
 
             private static bool ReflectJY(ref Complex jy, double v)
@@ -984,8 +984,8 @@ namespace MathNet.Numerics
                     return false;
                 }
 
-                int i = (int)(v - 16384.0 * Math.Floor(v / 16384.0));
-                if (i % 2 == 1)
+                int i = (int)(v - (16384.0 * Math.Floor(v / 16384.0)));
+                if ((i % 2) == 1)
                 {
                     jy = new Complex(-jy.Real, -jy.Imaginary);
                 }
@@ -1006,7 +1006,7 @@ namespace MathNet.Numerics
             private static Complex RotateI(Complex i, Complex k, double v)
             {
                 double s = Math.Sin(v * Math.PI) * (2.0 / Math.PI);
-                return new Complex(i.Real + s * k.Real, i.Imaginary + s * k.Imaginary);
+                return new Complex(i.Real + (s * k.Real), i.Imaginary + (s * k.Imaginary));
             }
 
             #endregion

@@ -66,8 +66,8 @@ namespace SharpLearning.CrossValidation.TrainingTestSplitters
             unchecked // Overflow is fine, just wrap
             {
                 int hash = 17;
-                hash = hash * 23 + TrainingIndices.GetHashCode();
-                hash = hash * 23 + TestIndices.GetHashCode();
+                hash = (hash * 23) + TrainingIndices.GetHashCode();
+                hash = (hash * 23) + TestIndices.GetHashCode();
 
                 return hash;
             }

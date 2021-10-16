@@ -61,7 +61,7 @@ namespace MathNet.Numerics
         public static double ExponentialIntegral(double x, int n)
         {
             //parameter validation
-            if (n < 0 || x < 0.0)
+            if ((n < 0) || (x < 0.0))
             {
                 throw new ArgumentOutOfRangeException(string.Format("x and n must be positive: x={0}, n={1}", x, n));
             }
@@ -98,8 +98,8 @@ namespace MathNet.Numerics
                 {
                     a = -1.0d*((double)i)*((ndbl - 1.0d) + (double)i);
                     b += 2.0d;
-                    d = 1.0d/(a*d + b);
-                    c = b + a/c;
+                    d = 1.0d/((a*d) + b);
+                    c = b + (a/c);
                     del = c*d;
                     h = h*del;
                     if (Math.Abs(del - 1.0d) < epsilon)
@@ -112,10 +112,10 @@ namespace MathNet.Numerics
             //series computation for small x
             else
             {
-                result = ((ndbl - 1.0d) != 0 ? 1.0/(ndbl - 1.0d) : (-1.0d*Math.Log(x) - Constants.EulerMascheroni)); //Set first term.
+                result = ((ndbl - 1.0d) != 0 ? 1.0/(ndbl - 1.0d) : ((-1.0d*Math.Log(x)) - Constants.EulerMascheroni)); //Set first term.
                 for (i = 1; i <= maxIterations; i++)
                 {
-                    factorial *= (-1.0d*x/((double)i));
+                    factorial *= ((-1.0d*x)/((double)i));
                     if (i != (ndbl - 1.0d))
                     {
                         del = -factorial/(i - (ndbl - 1.0d));
@@ -127,10 +127,10 @@ namespace MathNet.Numerics
                         {
                             psi += (1.0d/((double)ii));
                         }
-                        del = factorial*(-1.0d*Math.Log(x) + psi);
+                        del = factorial*((-1.0d*Math.Log(x)) + psi);
                     }
                     result += del;
-                    if (Math.Abs(del) < Math.Abs(result)*epsilon)
+                    if (Math.Abs(del) < (Math.Abs(result)*epsilon))
                     {
                         return result;
                     }

@@ -298,7 +298,7 @@ namespace SharpLearning.Containers.Extensions
             int k = 0;
             double sum = total - weights[0]; // sum is the total weight of all `x[i] > x[k]`
 
-            while (sum > total / 2)
+            while (sum > (total / 2))
             {
                 ++k;
                 sum -= weights[k];
@@ -318,7 +318,7 @@ namespace SharpLearning.Containers.Extensions
             Array.Copy(values, array, values.Length);
             Array.Sort(array);
 
-            if (array.Length % 2 == 0)
+            if ((array.Length % 2) == 0)
             {
                 var index1 = (int)((array.Length / 2.0) - 0.5);
                 var v1 = array[index1];
@@ -364,7 +364,7 @@ namespace SharpLearning.Containers.Extensions
                 var v2 = array[j];
                 var w2 = index - i;
 
-                return (v1 * w1 + v2 * w2) / (w1 + w2);
+                return ((v1 * w1) + (v2 * w2)) / (w1 + w2);
             }
 
             return array[i];
@@ -471,7 +471,7 @@ namespace SharpLearning.Containers.Extensions
             }
 
             var requiredSamples = data.GroupBy(d => d)
-                .ToDictionary(d => d.Key, d => (int)Math.Round((double)d.Count() / data.Length * sampleSize));
+                .ToDictionary(d => d.Key, d => (int)Math.Round(((double)d.Count() / data.Length) * sampleSize));
 
             foreach (var kvp in requiredSamples)
             {
@@ -554,7 +554,7 @@ namespace SharpLearning.Containers.Extensions
             }
 
             var requiredSamples = data.GroupBy(d => d)
-                .ToDictionary(d => d.Key, d => (int)Math.Round((double)d.Count() / data.Length * sampleSize));
+                .ToDictionary(d => d.Key, d => (int)Math.Round(((double)d.Count() / data.Length) * sampleSize));
 
             foreach (var kvp in requiredSamples)
             {

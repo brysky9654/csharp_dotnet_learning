@@ -78,7 +78,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
         /// <returns><c>true</c> if <paramref name="number"/> even, otherwise <c>false</c></returns>
         static bool IsEven(int number)
         {
-            return number % 2 == 0;
+            return (number % 2) == 0;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                 throw new ArgumentException(Resources.ArgumentMatrixSquare, nameof(matrix));
             }
 
-            if (input.Count != matrix.RowCount || result.Count != input.Count)
+            if ((input.Count != matrix.RowCount) || (result.Count != input.Count))
             {
                 throw Matrix.DimensionsDontMatch<ArgumentException>(matrix, input, result);
             }
@@ -193,7 +193,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                 temp2.CopyTo(pseudoResiduals);
 
                 // d = yOdd + theta * theta * eta / alpha * d
-                d.Multiply(theta*theta*eta/alpha, temp);
+                d.Multiply((theta*theta*eta)/alpha, temp);
                 yinternal.Add(temp, d);
 
                 // theta = ||pseudoResiduals||_2 / tau

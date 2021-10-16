@@ -11,7 +11,7 @@ using MathNet.Numerics.LinearRegression;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
 #if !NETSTANDARD1_3
-using System.Runtime;
+
 #endif
 
 namespace MathNet.Numerics
@@ -1030,7 +1030,7 @@ namespace MathNet.Numerics
             {
                 for (var i = 0; i < hashNum; i++)
                 {
-                    hash = hash * 31 + Coefficients[i].GetHashCode();
+                    hash = (hash * 31) + Coefficients[i].GetHashCode();
                 }
             }
 

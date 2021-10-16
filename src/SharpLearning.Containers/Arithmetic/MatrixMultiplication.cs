@@ -33,7 +33,7 @@ namespace SharpLearning.Containers.Arithmetic
             {
                 for (int j = 0; j < cols; ++j)
                 {
-                    output[i] += v[j] * data[i * cols + j];
+                    output[i] += v[j] * data[(i * cols) + j];
                 }
             }
             return output;
@@ -62,7 +62,7 @@ namespace SharpLearning.Containers.Arithmetic
                 var sum = 0.0;
                 for (int j = 0; j < cols; ++j)
                 {
-                    sum += v[j] * data[i * cols + j];
+                    sum += v[j] * data[(i * cols) + j];
                 }
                 output[i] = sum;
             }
@@ -137,7 +137,7 @@ namespace SharpLearning.Containers.Arithmetic
                 {
                     for (int j = 0; j < cCols; j++)
                     {
-                        cData[i * cCols + j] += aData[i * aCols + k] * bData[k * bCols + j];
+                        cData[(i * cCols) + j] += aData[(i * aCols) + k] * bData[(k * bCols) + j];
                     }
                 }
             });
@@ -184,7 +184,7 @@ namespace SharpLearning.Containers.Arithmetic
                 {
                     for (int j = 0; j < bCols; j++)
                     {
-                        outputArray[i * bCols + j] += aData[i * aCols + k] * bData[k * bCols + j];
+                        outputArray[(i * bCols) + j] += aData[(i * aCols) + k] * bData[(k * bCols) + j];
                     }
                 }
             });

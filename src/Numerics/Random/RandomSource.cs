@@ -200,7 +200,7 @@ namespace MathNet.Numerics.Random
             }
 
             // Fast case: Only minInclusive is allowed to be returned. No sampling is needed.
-            if (maxExclusive == minInclusive + 1)
+            if (maxExclusive == (minInclusive + 1))
             {
                 return minInclusive;
             }
@@ -341,7 +341,7 @@ namespace MathNet.Numerics.Random
             }
 
             // Fast case: Only minInclusive is allowed to be returned. No sampling is needed.
-            if (maxExclusive == minInclusive + 1)
+            if (maxExclusive == (minInclusive + 1))
             {
                 for (var i = 0; i < values.Length; i++)
                 {

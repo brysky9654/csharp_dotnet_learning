@@ -103,7 +103,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="shape">The shape (α) of the distribution. Range: α > 0.</param>
         public static bool IsValidParameterSet(double scale, double shape)
         {
-            return scale > 0.0 && shape > 0.0;
+            return (scale > 0.0) && (shape > 0.0);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace MathNet.Numerics.Distributions
                     throw new NotSupportedException();
                 }
 
-                return _shape*_scale/(_shape - 1.0);
+                return (_shape*_scale)/(_shape - 1.0);
             }
         }
 
@@ -153,7 +153,7 @@ namespace MathNet.Numerics.Distributions
                     return double.PositiveInfinity;
                 }
 
-                return _scale*_scale*_shape/((_shape - 1.0)*(_shape - 1.0)*(_shape - 2.0));
+                return (_scale*_scale*_shape)/((_shape - 1.0)*(_shape - 1.0)*(_shape - 2.0));
             }
         }
 
@@ -170,7 +170,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the skewness of the distribution.
         /// </summary>
-        public double Skewness => (2.0*(_shape + 1.0)/(_shape - 3.0))*Math.Sqrt((_shape - 2.0)/_shape);
+        public double Skewness => ((2.0*(_shape + 1.0))/(_shape - 3.0))*Math.Sqrt((_shape - 2.0)/_shape);
 
         /// <summary>
         /// Gets the mode of the distribution.
@@ -200,7 +200,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDF"/>
         public double Density(double x)
         {
-            return _shape*Math.Pow(_scale, _shape)/Math.Pow(x, _shape + 1.0);
+            return (_shape*Math.Pow(_scale, _shape))/Math.Pow(x, _shape + 1.0);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDFLn"/>
         public double DensityLn(double x)
         {
-            return Math.Log(_shape) + _shape*Math.Log(_scale) - (_shape + 1.0)*Math.Log(x);
+            return (Math.Log(_shape) + (_shape*Math.Log(_scale))) - ((_shape + 1.0)*Math.Log(x));
         }
 
         /// <summary>
@@ -297,12 +297,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double scale, double shape, double x)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return shape*Math.Pow(scale, shape)/Math.Pow(x, shape + 1.0);
+            return (shape*Math.Pow(scale, shape))/Math.Pow(x, shape + 1.0);
         }
 
         /// <summary>
@@ -315,12 +315,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="DensityLn"/>
         public static double PDFLn(double scale, double shape, double x)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Math.Log(shape) + shape*Math.Log(scale) - (shape + 1.0)*Math.Log(x);
+            return (Math.Log(shape) + (shape*Math.Log(scale))) - ((shape + 1.0)*Math.Log(x));
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double scale, double shape, double x)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -352,7 +352,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="InverseCumulativeDistribution"/>
         public static double InvCDF(double scale, double shape, double p)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -369,7 +369,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -386,7 +386,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -404,7 +404,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -420,7 +420,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -436,7 +436,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -453,7 +453,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double scale, double shape)
         {
-            if (scale <= 0.0 || shape <= 0.0)
+            if ((scale <= 0.0) || (shape <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

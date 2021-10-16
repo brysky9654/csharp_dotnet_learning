@@ -120,12 +120,12 @@ namespace MathNet.Numerics.Random
         /// </summary>
         protected sealed override double DoSample()
         {
-            _xn = 11600*_xn%Modx;
-            _yn = 47003*_yn%Mody;
-            _zn = 23000*_zn%Modz;
-            _wn = 33000*_wn%Modw;
+            _xn = (11600*_xn)%Modx;
+            _yn = (47003*_yn)%Mody;
+            _zn = (23000*_zn)%Modz;
+            _wn = (33000*_wn)%Modw;
 
-            double u = _xn*ModxRecip + _yn*ModyRecip + _zn*ModzRecip + _wn*ModwRecip;
+            double u = (_xn*ModxRecip) + (_yn*ModyRecip) + (_zn*ModzRecip) + (_wn*ModwRecip);
             u -= (int)u;
             return u;
         }
@@ -148,12 +148,12 @@ namespace MathNet.Numerics.Random
 
             for (int i = 0; i < values.Length; i++)
             {
-                xn = 11600*xn%Modx;
-                yn = 47003*yn%Mody;
-                zn = 23000*zn%Modz;
-                wn = 33000*wn%Modw;
+                xn = (11600*xn)%Modx;
+                yn = (47003*yn)%Mody;
+                zn = (23000*zn)%Modz;
+                wn = (33000*wn)%Modw;
 
-                double u = xn*ModxRecip + yn*ModyRecip + zn*ModzRecip + wn*ModwRecip;
+                double u = (xn*ModxRecip) + (yn*ModyRecip) + (zn*ModzRecip) + (wn*ModwRecip);
                 values[i] = u - (int)u;
             }
         }
@@ -188,12 +188,12 @@ namespace MathNet.Numerics.Random
 
             while (true)
             {
-                xn = 11600*xn%Modx;
-                yn = 47003*yn%Mody;
-                zn = 23000*zn%Modz;
-                wn = 33000*wn%Modw;
+                xn = (11600*xn)%Modx;
+                yn = (47003*yn)%Mody;
+                zn = (23000*zn)%Modz;
+                wn = (33000*wn)%Modw;
 
-                double u = xn*ModxRecip + yn*ModyRecip + zn*ModzRecip + wn*ModwRecip;
+                double u = (xn*ModxRecip) + (yn*ModyRecip) + (zn*ModzRecip) + (wn*ModwRecip);
                 yield return u - (int)u;
             }
         }

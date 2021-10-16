@@ -429,14 +429,14 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
                     // {
                     //     w(j) = 0
                     // }
-                    if (workVector[j].Magnitude <= _dropTolerance*vectorNorm)
+                    if (workVector[j].Magnitude <= (_dropTolerance*vectorNorm))
                     {
                         workVector[j] = 0.0f;
                     }
                 }
 
                 // spaceRow = spaceLeft / (n - i + 1) // Determine the space for this row
-                var spaceRow = spaceLeft/(sparseMatrix.RowCount - i + 1);
+                var spaceRow = spaceLeft/((sparseMatrix.RowCount - i) + 1);
 
                 // lfil = spaceRow / 2  // space for this row of L
                 var fillLevel = spaceRow/2;
@@ -465,9 +465,9 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
                 // u(i,j) = w(j) for j = i + 1, .. , n // only the largest lfil - 1 elements
                 var upperNonZeroCount = 0;
                 count = 0;
-                for (var j = 0; j < sparseMatrix.RowCount - i; j++)
+                for (var j = 0; j < (sparseMatrix.RowCount - i); j++)
                 {
-                    if ((count > fillLevel - 1) || (indexSorting[j] == -1))
+                    if ((count > (fillLevel - 1)) || (indexSorting[j] == -1))
                     {
                         break;
                     }
@@ -493,7 +493,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
                 // -1 values.
                 if ((i + 1) < (sparseMatrix.RowCount - 1))
                 {
-                    if (workVector[i].Magnitude < _pivotTolerance*workVector[indexSorting[0]].Magnitude)
+                    if (workVector[i].Magnitude < (_pivotTolerance*workVector[indexSorting[0]].Magnitude))
                     {
                         // swap columns of u (which holds the values of A in the
                         // sections that haven't been partitioned yet.
@@ -592,12 +592,12 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
         static void FindLargestItems(int lowerBound, int upperBound, int[] sortedIndices, Vector<Complex32> values)
         {
             // Copy the indices for the values into the array
-            for (var i = 0; i < upperBound + 1 - lowerBound; i++)
+            for (var i = 0; i < ((upperBound + 1) - lowerBound); i++)
             {
                 sortedIndices[i] = lowerBound + i;
             }
 
-            for (var i = upperBound + 1 - lowerBound; i < sortedIndices.Length; i++)
+            for (var i = (upperBound + 1) - lowerBound; i < sortedIndices.Length; i++)
             {
                 sortedIndices[i] = -1;
             }
@@ -654,7 +654,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
                     sum += rowValues[j]*lhs[j];
                 }
 
-                lhs[i] = 1/rowValues[i]*(lhs[i] - sum);
+                lhs[i] = (1/rowValues[i])*(lhs[i] - sum);
             }
 
             // We have a column pivot so we only need to pivot the
@@ -701,7 +701,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
             // array. Ignore the rest of the indices.
             if (lowerBound > 0)
             {
-                for (var i = 0; i < (upperBound - lowerBound + 1); i++)
+                for (var i = 0; i < ((upperBound - lowerBound) + 1); i++)
                 {
                     Exchange(sortedIndices, i, i + lowerBound);
                 }
@@ -723,10 +723,10 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
         /// <param name="values">The <see cref="Vector"/> that contains the values that need to be sorted.</param>
         private static void HeapSortDoublesIndices(int lowerBound, int upperBound, int[] sortedIndices, Vector<Complex32> values)
         {
-            var start = ((upperBound - lowerBound + 1) / 2) - 1 + lowerBound;
-            var end = (upperBound - lowerBound + 1) - 1 + lowerBound;
+            var start = ((((upperBound - lowerBound) + 1) / 2) - 1) + lowerBound;
+            var end = (((upperBound - lowerBound) + 1) - 1) + lowerBound;
 
-            BuildDoubleIndexHeap(start, upperBound - lowerBound + 1, sortedIndices, values);
+            BuildDoubleIndexHeap(start, (upperBound - lowerBound) + 1, sortedIndices, values);
 
             while (end >= lowerBound)
             {
@@ -763,10 +763,10 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
         {
             var root = begin;
 
-            while (root * 2 < count)
+            while ((root * 2) < count)
             {
                 var child = root * 2;
-                if ((child < count - 1) && (values[sortedIndices[child]].Magnitude > values[sortedIndices[child + 1]].Magnitude))
+                if ((child < (count - 1)) && (values[sortedIndices[child]].Magnitude > values[sortedIndices[child + 1]].Magnitude))
                 {
                     child += 1;
                 }
@@ -835,10 +835,10 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Solvers
         {
             var root = start;
 
-            while (root * 2 < count)
+            while ((root * 2) < count)
             {
                 var child = root * 2;
-                if ((child < count - 1) && (values[child] > values[child + 1]))
+                if ((child < (count - 1)) && (values[child] > values[child + 1]))
                 {
                     child += 1;
                 }

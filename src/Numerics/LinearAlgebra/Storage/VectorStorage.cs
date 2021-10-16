@@ -166,7 +166,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 for (var i = 0; i < hashNum; i++)
                 {
-                    hash = hash*31 + At(i).GetHashCode();
+                    hash = (hash*31) + At(i).GetHashCode();
                 }
             }
             return hash;
@@ -184,7 +184,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         public virtual void Clear(int index, int count)
         {
-            for (var i = index; i < index + count; i++)
+            for (var i = index; i < (index + count); i++)
             {
                 At(i, Zero);
             }
@@ -310,7 +310,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 return;
             }
 
-            for (int i = sourceIndex, ii = targetIndex; i < sourceIndex + count; i++, ii++)
+            for (int i = sourceIndex, ii = targetIndex; i < (sourceIndex + count); i++, ii++)
             {
                 target.At(ii, At(i));
             }
@@ -339,7 +339,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         internal virtual void CopyToSubRowUnchecked(MatrixStorage<T> target, int rowIndex,
             int sourceColumnIndex, int targetColumnIndex, int columnCount, ExistingData existingData)
         {
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
                 target.At(rowIndex, jj, At(j));
             }
@@ -368,7 +368,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         internal virtual void CopyToSubColumnUnchecked(MatrixStorage<T> target, int columnIndex,
             int sourceRowIndex, int targetRowIndex, int rowCount, ExistingData existingData)
         {
-            for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+            for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
             {
                 target.At(ii, columnIndex, At(i));
             }

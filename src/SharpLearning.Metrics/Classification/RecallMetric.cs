@@ -61,7 +61,7 @@ namespace SharpLearning.Metrics.Classification
                 }
             }
 
-            if (truePositives + falseNegatives == 0)
+            if ((truePositives + falseNegatives) == 0)
             {
                 return 0.0;
             }

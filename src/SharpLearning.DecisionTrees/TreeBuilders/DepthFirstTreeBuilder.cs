@@ -153,7 +153,7 @@ namespace SharpLearning.DecisionTrees.TreeBuilders
                 var parentNodePositionType = parentItem.NodeType;
                 var parentImpurity = parentItem.Impurity;
 
-                if (first && parentNode.FeatureIndex != -1)
+                if (first && (parentNode.FeatureIndex != -1))
                 {
                     nodes[0] = new Node(parentNode.FeatureIndex,
                         parentNode.Value, -1, -1, parentNode.NodeIndex, parentNode.LeafProbabilityIndex);
@@ -217,7 +217,7 @@ namespace SharpLearning.DecisionTrees.TreeBuilders
                 }
                 else
                 {
-                    m_variableImportance[bestFeatureIndex] += bestSplitResult.ImpurityImprovement * parentInterval.Length / allInterval.Length;
+                    m_variableImportance[bestFeatureIndex] += (bestSplitResult.ImpurityImprovement * parentInterval.Length) / allInterval.Length;
 
                     var split = new Node(bestFeatureIndex, bestSplitResult.Threshold, -1, -1,
                         currentNodeIndex++, -1);

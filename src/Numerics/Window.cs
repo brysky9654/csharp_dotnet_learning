@@ -47,7 +47,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = a + b*Math.Cos(i*phaseStep);
+                w[i] = a + (b*Math.Cos(i*phaseStep));
             }
             return w;
         }
@@ -66,7 +66,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = a + b*Math.Cos(i*phaseStep);
+                w[i] = a + (b*Math.Cos(i*phaseStep));
             }
             return w;
         }
@@ -82,7 +82,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = 0.5 - 0.5*Math.Cos(i*phaseStep);
+                w[i] = 0.5 - (0.5*Math.Cos(i*phaseStep));
             }
             return w;
         }
@@ -98,7 +98,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = 0.5 - 0.5*Math.Cos(i*phaseStep);
+                w[i] = 0.5 - (0.5*Math.Cos(i*phaseStep));
             }
             return w;
         }
@@ -146,7 +146,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = Trig.Sinc(i*phaseStep - 1.0);
+                w[i] = Trig.Sinc((i*phaseStep) - 1.0);
             }
             return w;
         }
@@ -162,7 +162,7 @@ namespace MathNet.Numerics
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = Trig.Sinc(i*phaseStep - 1.0);
+                w[i] = Trig.Sinc((i*phaseStep) - 1.0);
             }
             return w;
         }
@@ -189,19 +189,19 @@ namespace MathNet.Numerics
         public static double[] Blackman(int width)
         {
             const double alpha = 0.16;
-            const double a = 0.5 - 0.5*alpha;
+            const double a = 0.5 - (0.5*alpha);
             const double b = 0.5*alpha;
 
             int last = width - 1;
-            double c = 2.0*Math.PI/last;
+            double c = (2.0*Math.PI)/last;
             double d = 2.0*c;
 
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
-                w[i] = a
-                       - 0.5*Math.Cos(i*c)
-                       + b*Math.Cos(i*d);
+                w[i] = (a
+                      - (0.5*Math.Cos(i*c)))
+                       + (b*Math.Cos(i*d));
             }
             return w;
         }
@@ -217,7 +217,7 @@ namespace MathNet.Numerics
             const double d = -0.01168;
 
             int last = width - 1;
-            double e = 2.0*Math.PI/last;
+            double e = (2.0*Math.PI)/last;
             double f = 2.0*e;
             double g = 3.0*e;
 
@@ -225,9 +225,9 @@ namespace MathNet.Numerics
             for (int i = 0; i < w.Length; i++)
             {
                 w[i] = a
-                       + b*Math.Cos(e*i)
-                       + c*Math.Cos(f*i)
-                       + d*Math.Cos(g*i);
+                       + (b*Math.Cos(e*i))
+                       + (c*Math.Cos(f*i))
+                       + (d*Math.Cos(g*i));
             }
             return w;
         }
@@ -243,7 +243,7 @@ namespace MathNet.Numerics
             const double d = -0.0106411;
 
             int last = width - 1;
-            double e = 2.0*Math.PI/last;
+            double e = (2.0*Math.PI)/last;
             double f = 2.0*e;
             double g = 3.0*e;
 
@@ -251,9 +251,9 @@ namespace MathNet.Numerics
             for (int i = 0; i < w.Length; i++)
             {
                 w[i] = a
-                       + b*Math.Cos(e*i)
-                       + c*Math.Cos(f*i)
-                       + d*Math.Cos(g*i);
+                       + (b*Math.Cos(e*i))
+                       + (c*Math.Cos(f*i))
+                       + (d*Math.Cos(g*i));
             }
             return w;
         }
@@ -286,14 +286,14 @@ namespace MathNet.Numerics
 
             int last = width - 1;
             double d = 1.0/last;
-            double e = 2.0*Math.PI/last;
+            double e = (2.0*Math.PI)/last;
 
             var w = new double[width];
             for (int i = 0; i < w.Length; i++)
             {
                 w[i] = a
-                       + b*Math.Abs(i*d - 0.5)
-                       + c*Math.Cos(i*e);
+                       + (b*Math.Abs((i*d) - 0.5))
+                       + (c*Math.Cos(i*e));
             }
             return w;
         }
@@ -309,7 +309,7 @@ namespace MathNet.Numerics
             const double d = -0.012604;
 
             int last = width - 1;
-            double e = 2.0*Math.PI/last;
+            double e = (2.0*Math.PI)/last;
             double f = 2.0*e;
             double g = 3.0*e;
 
@@ -317,9 +317,9 @@ namespace MathNet.Numerics
             for (int i = 0; i < w.Length; i++)
             {
                 w[i] = a
-                       + b*Math.Cos(e*i)
-                       + c*Math.Cos(f*i)
-                       + d*Math.Cos(g*i);
+                       + (b*Math.Cos(e*i))
+                       + (c*Math.Cos(f*i))
+                       + (d*Math.Cos(g*i));
             }
             return w;
         }
@@ -336,7 +336,7 @@ namespace MathNet.Numerics
             const double e = 0.032;
 
             int last = width - 1;
-            double f = 2.0*Math.PI/last;
+            double f = (2.0*Math.PI)/last;
             double g = 2.0*f;
             double h = 3.0*f;
             double k = 4.0*f;
@@ -345,10 +345,10 @@ namespace MathNet.Numerics
             for (int i = 0; i < w.Length; i++)
             {
                 w[i] = a
-                       + b*Math.Cos(f*i)
-                       + c*Math.Cos(g*i)
-                       + d*Math.Cos(h*i)
-                       + e*Math.Cos(k*i);
+                       + (b*Math.Cos(f*i))
+                       + (c*Math.Cos(g*i))
+                       + (d*Math.Cos(h*i))
+                       + (e*Math.Cos(k*i));
             }
             return w;
         }
@@ -403,8 +403,8 @@ namespace MathNet.Numerics
 
             var w = new double[width];
             var period = (width - 1) * r;
-            var step =  2* Math.PI / period;
-            var b1 = (int)Math.Floor((width - 1) * r * 0.5 + 1);
+            var step =  (2* Math.PI) / period;
+            var b1 = (int)Math.Floor(((width - 1) * r * 0.5) + 1);
             var b2 = width - b1;
             for (var i = 0; i < b1; i++)
             {

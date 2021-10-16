@@ -48,7 +48,7 @@ namespace SharpLearning.Containers.Views
 
         double* RowPtr(int row)
         {
-            return (double*)((byte*)m_dataPtr + (long)row * m_strideInBytes);
+            return (double*)((byte*)m_dataPtr + ((long)row * m_strideInBytes));
         }
     }
 }

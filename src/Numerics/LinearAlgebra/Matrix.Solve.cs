@@ -183,7 +183,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="preconditioner">The preconditioner to use for approximations.</param>
         public IterationStatus TrySolveIterative(Matrix<T> input, Matrix<T> result, IIterativeSolver<T> solver, Iterator<T> iterator = null, IPreconditioner<T> preconditioner = null)
         {
-            if (RowCount != input.RowCount || input.RowCount != result.RowCount || input.ColumnCount != result.ColumnCount)
+            if ((RowCount != input.RowCount) || (input.RowCount != result.RowCount) || (input.ColumnCount != result.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, input, result);
             }

@@ -116,9 +116,9 @@ namespace MathNet.Numerics.Statistics
 
             int N = x.Length;    // Sample size
 
-            if (kLow < 0 || kLow >= N)
+            if ((kLow < 0) || (kLow >= N))
                 throw new ArgumentOutOfRangeException(nameof(kLow), "kMin must be zero or positive and smaller than x.Length");
-            if (kHigh < 0 || kHigh >= N)
+            if ((kHigh < 0) || (kHigh >= N))
                 throw new ArgumentOutOfRangeException(nameof(kHigh), "kMax must be positive and smaller than x.Length");
             if (N < 1)
                 return new double[0];
@@ -148,10 +148,10 @@ namespace MathNet.Numerics.Statistics
 
             double dc = xFFT2[0].Real;
 
-            double[] result = new double[kHigh - kLow + 1];
+            double[] result = new double[(kHigh - kLow) + 1];
 
             // normalize such that acf[0] would be 1.0
-            for (int i = 0; i < (kHigh - kLow + 1); i++)
+            for (int i = 0; i < ((kHigh - kLow) + 1); i++)
             {
                 result[i] = xFFT2[kLow + i].Real / dc;
             }
@@ -256,12 +256,12 @@ namespace MathNet.Numerics.Statistics
                     double temp = sumWeight + wi;
 
                     double deltaX = xi - meanA;
-                    double rX = deltaX*wi/temp;
+                    double rX = (deltaX*wi)/temp;
                     meanA += rX;
                     varA += sumWeight*deltaX*rX;
 
                     double deltaY = yi - meanB;
-                    double rY = deltaY*wi/temp;
+                    double rY = (deltaY*wi)/temp;
                     meanB += rY;
                     varB += sumWeight*deltaY*rY;
 

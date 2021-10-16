@@ -50,7 +50,7 @@ namespace MathNet.Numerics.Interpolation
         /// <param name="c1">Slopes (N) at the sample points (first order coefficients): N</param>
         public LinearSpline(double[] x, double[] c0, double[] c1)
         {
-            if ((x.Length != c0.Length + 1 && x.Length != c0.Length) || x.Length != c1.Length + 1)
+            if (((x.Length != (c0.Length + 1)) && (x.Length != c0.Length)) || (x.Length != (c1.Length + 1)))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -138,7 +138,7 @@ namespace MathNet.Numerics.Interpolation
         public double Interpolate(double t)
         {
             int k = LeftSegmentIndex(t);
-            return _c0[k] + (t - _x[k])*_c1[k];
+            return _c0[k] + ((t - _x[k])*_c1[k]);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _indefiniteIntegral.Value[k] + x*(_c0[k] + x*_c1[k]/2);
+            return _indefiniteIntegral.Value[k] + (x*(_c0[k] + ((x*_c1[k])/2)));
         }
 
         /// <summary>
@@ -186,10 +186,10 @@ namespace MathNet.Numerics.Interpolation
         double[] ComputeIndefiniteIntegral()
         {
             var integral = new double[_c1.Length];
-            for (int i = 0; i < integral.Length - 1; i++)
+            for (int i = 0; i < (integral.Length - 1); i++)
             {
                 double w = _x[i + 1] - _x[i];
-                integral[i + 1] = integral[i] + w*(_c0[i] + w*_c1[i]/2);
+                integral[i + 1] = integral[i] + (w*(_c0[i] + ((w*_c1[i])/2)));
             }
 
             return integral;

@@ -191,7 +191,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                 matrix.Multiply(vecPdash, nu);
 
                 // alpha_i = rho_(i-1)/ (r~^T nu_i) = rho / dotproduct(r~ and nu_i)
-                alpha = currentRho*1/tempResiduals.ConjugateDotProduct(nu);
+                alpha = (currentRho*1)/tempResiduals.ConjugateDotProduct(nu);
 
                 // s = r_(i-1) - alpha_i nu_i
                 nu.Multiply(-alpha, temp);

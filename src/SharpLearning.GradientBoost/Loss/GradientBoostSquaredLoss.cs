@@ -65,7 +65,7 @@ namespace SharpLearning.GradientBoost.Loss
                 }
             }
 
-            splitInfo.Cost = splitInfo.SumOfSquares - (splitInfo.Sum * splitInfo.Sum / splitInfo.Samples);
+            splitInfo.Cost = splitInfo.SumOfSquares - ((splitInfo.Sum * splitInfo.Sum) / splitInfo.Samples);
             splitInfo.BestConstant = splitInfo.Sum / splitInfo.Samples;
 
             return splitInfo;
@@ -116,7 +116,7 @@ namespace SharpLearning.GradientBoost.Loss
             left.Samples++;
             left.Sum += residual;
             left.SumOfSquares += residual2;
-            left.Cost = left.SumOfSquares - (left.Sum * left.Sum / left.Samples);
+            left.Cost = left.SumOfSquares - ((left.Sum * left.Sum) / left.Samples);
             left.BestConstant = left.Sum / left.Samples;
             
             // Alternative update but gives slightly different results
@@ -131,7 +131,7 @@ namespace SharpLearning.GradientBoost.Loss
             right.Samples--;
             right.Sum -= residual;
             right.SumOfSquares -= residual2;
-            right.Cost = right.SumOfSquares - (right.Sum * right.Sum / right.Samples);
+            right.Cost = right.SumOfSquares - ((right.Sum * right.Sum) / right.Samples);
             right.BestConstant = right.Sum / right.Samples;
 
             // Alternative update but gives slightly different results

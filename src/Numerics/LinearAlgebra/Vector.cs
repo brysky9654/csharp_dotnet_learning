@@ -132,7 +132,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentOutOfRangeException(nameof(count), Resources.ArgumentMustBePositive);
             }
 
-            if (index + count > Count || index < 0)
+            if (((index + count) > Count) || (index < 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }

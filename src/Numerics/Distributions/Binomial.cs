@@ -105,7 +105,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="n">The number of trials (n). Range: n ≥ 0.</param>
         public static bool IsValidParameterSet(double p, int n)
         {
-            return p >= 0.0 && p <= 1.0 && n >= 0;
+            return (p >= 0.0) && (p <= 1.0) && (n >= 0);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace MathNet.Numerics.Distributions
         {
             get
             {
-                if (_p == 0.0 || _p == 1.0)
+                if ((_p == 0.0) || (_p == 1.0))
                 {
                     return 0.0;
                 }
@@ -268,12 +268,12 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public static double PMF(double p, int n, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (k < 0 || k > n)
+            if ((k < 0) || (k > n))
             {
                 return 0.0;
             }
@@ -300,12 +300,12 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public static double PMFLn(double p, int n, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (k < 0 || k > n)
+            if ((k < 0) || (k > n))
             {
                 return double.NegativeInfinity;
             }
@@ -333,7 +333,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double p, int n, double x)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -432,7 +432,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>The number of successes in <paramref name="n"/> trials.</returns>
         public static int Sample(System.Random rnd, double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -449,7 +449,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of successes in <paramref name="n"/> trials.</returns>
         public static IEnumerable<int> Samples(System.Random rnd, double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -467,7 +467,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of successes in <paramref name="n"/> trials.</returns>
         public static void Samples(System.Random rnd, int[] values, double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -483,7 +483,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>The number of successes in <paramref name="n"/> trials.</returns>
         public static int Sample(double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -499,7 +499,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of successes in <paramref name="n"/> trials.</returns>
         public static IEnumerable<int> Samples(double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -516,7 +516,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of successes in <paramref name="n"/> trials.</returns>
         public static void Samples(int[] values, double p, int n)
         {
-            if (!(p >= 0.0 && p <= 1.0 && n >= 0))
+            if (!((p >= 0.0) && (p <= 1.0) && (n >= 0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

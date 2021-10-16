@@ -161,7 +161,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double Skewness
         {
-            get { return _n < 3 ? double.NaN : (_n*_m3*Math.Sqrt(_m2/(_n - 1))/(_m2*_m2*(_n - 2)))*(_n - 1); }
+            get { return _n < 3 ? double.NaN : ((_n*_m3*Math.Sqrt(_m2/(_n - 1)))/(_m2*_m2*(_n - 2)))*(_n - 1); }
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double PopulationSkewness
         {
-            get { return _n < 2 ? double.NaN : Math.Sqrt(_n)*_m3/Math.Pow(_m2, 1.5); }
+            get { return _n < 2 ? double.NaN : (Math.Sqrt(_n)*_m3)/Math.Pow(_m2, 1.5); }
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double Kurtosis
         {
-            get { return _n < 4 ? double.NaN : ((double)_n*_n - 1)/((_n - 2)*(_n - 3))*(_n*_m4/(_m2*_m2) - 3 + 6.0/(_n + 1)); }
+            get { return _n < 4 ? double.NaN : ((((double)_n*_n) - 1)/((_n - 2)*(_n - 3)))*((((_n*_m4)/(_m2*_m2)) - 3) + (6.0/(_n + 1))); }
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double PopulationKurtosis
         {
-            get { return _n < 3 ? double.NaN : _n*_m4/(_m2*_m2) - 3.0; }
+            get { return _n < 3 ? double.NaN : ((_n*_m4)/(_m2*_m2)) - 3.0; }
         }
 
         /// <summary>
@@ -206,16 +206,16 @@ namespace MathNet.Numerics.Statistics
             double t = d*s*(_n - 1);
 
             _m1 += s;
-            _m4 += t*s2*(_n*_n - 3*_n + 3) + 6*s2*_m2 - 4*s*_m3;
-            _m3 += t*s*(_n - 2) - 3*s*_m2;
+            _m4 += ((t*s2*(((_n*_n) - (3*_n)) + 3)) + (6*s2*_m2)) - (4*s*_m3);
+            _m3 += (t*s*(_n - 2)) - (3*s*_m2);
             _m2 += t;
 
-            if (value < _min || double.IsNaN(value))
+            if ((value < _min) || double.IsNaN(value))
             {
                 _min = value;
             }
 
-            if (value > _max || double.IsNaN(value))
+            if ((value > _max) || double.IsNaN(value))
             {
                 _max = value;
             }
@@ -252,12 +252,12 @@ namespace MathNet.Numerics.Statistics
             double d3 = d2*d;
             double d4 = d2*d2;
 
-            double m1 = (a._n*a._m1 + b._n*b._m1)/n;
-            double m2 = a._m2 + b._m2 + d2*a._n*b._n/n;
-            double m3 = a._m3 + b._m3 + d3*a._n*b._n*(a._n - b._n)/(n*n)
-                        + 3*d*(a._n*b._m2 - b._n*a._m2)/n;
-            double m4 = a._m4 + b._m4 + d4*a._n*b._n*(a._n*a._n - a._n*b._n + b._n*b._n)/(n*n*n)
-                        + 6*d2*(a._n*a._n*b._m2 + b._n*b._n*a._m2)/(n*n) + 4*d*(a._n*b._m3 - b._n*a._m3)/n;
+            double m1 = ((a._n*a._m1) + (b._n*b._m1))/n;
+            double m2 = a._m2 + b._m2 + ((d2*a._n*b._n)/n);
+            double m3 = a._m3 + b._m3 + ((d3*a._n*b._n*(a._n - b._n))/(n*n))
+                        + ((3*d*((a._n*b._m2) - (b._n*a._m2)))/n);
+            double m4 = a._m4 + b._m4 + ((d4*a._n*b._n*(((a._n*a._n) - (a._n*b._n)) + (b._n*b._n)))/(n*n*n))
+                        + ((6*d2*((a._n*a._n*b._m2) + (b._n*b._n*a._m2)))/(n*n)) + ((4*d*((a._n*b._m3) - (b._n*a._m3)))/n);
 
             double min = Math.Min(a._min, b._min);
             double max = Math.Max(a._max, b._max);

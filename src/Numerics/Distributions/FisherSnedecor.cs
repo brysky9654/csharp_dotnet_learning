@@ -99,7 +99,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="d2">The second degree of freedom (d2) of the distribution. Range: d2 > 0.</param>
         public static bool IsValidParameterSet(double d1, double d2)
         {
-            return d1 > 0.0 && d2 > 0.0;
+            return (d1 > 0.0) && (d2 > 0.0);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace MathNet.Numerics.Distributions
                     throw new NotSupportedException();
                 }
 
-                return (2.0*_freedom2*_freedom2*(_freedom1 + _freedom2 - 2.0))/(_freedom1*(_freedom2 - 2.0)*(_freedom2 - 2.0)*(_freedom2 - 4.0));
+                return (2.0*_freedom2*_freedom2*((_freedom1 + _freedom2) - 2.0))/(_freedom1*(_freedom2 - 2.0)*(_freedom2 - 2.0)*(_freedom2 - 4.0));
             }
         }
 
@@ -175,7 +175,7 @@ namespace MathNet.Numerics.Distributions
                     throw new NotSupportedException();
                 }
 
-                return (((2.0*_freedom1) + _freedom2 - 2.0)*Math.Sqrt(8.0*(_freedom2 - 4.0)))/((_freedom2 - 6.0)*Math.Sqrt(_freedom1*(_freedom1 + _freedom2 - 2.0)));
+                return ((((2.0*_freedom1) + _freedom2) - 2.0)*Math.Sqrt(8.0*(_freedom2 - 4.0)))/((_freedom2 - 6.0)*Math.Sqrt(_freedom1*((_freedom1 + _freedom2) - 2.0)));
             }
         }
 
@@ -218,7 +218,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDF"/>
         public double Density(double x)
         {
-            return Math.Sqrt(Math.Pow(_freedom1*x, _freedom1)*Math.Pow(_freedom2, _freedom2)/Math.Pow((_freedom1*x) + _freedom2, _freedom1 + _freedom2))/(x*SpecialFunctions.Beta(_freedom1/2.0, _freedom2/2.0));
+            return Math.Sqrt((Math.Pow(_freedom1*x, _freedom1)*Math.Pow(_freedom2, _freedom2))/Math.Pow((_freedom1*x) + _freedom2, _freedom1 + _freedom2))/(x*SpecialFunctions.Beta(_freedom1/2.0, _freedom2/2.0));
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CDF"/>
         public double CumulativeDistribution(double x)
         {
-            return SpecialFunctions.BetaRegularized(_freedom1/2.0, _freedom2/2.0, _freedom1*x/((_freedom1*x) + _freedom2));
+            return SpecialFunctions.BetaRegularized(_freedom1/2.0, _freedom2/2.0, (_freedom1*x)/((_freedom1*x) + _freedom2));
         }
 
         /// <summary>
@@ -326,12 +326,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double d1, double d2, double x)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return Math.Sqrt(Math.Pow(d1*x, d1)*Math.Pow(d2, d2)/Math.Pow((d1*x) + d2, d1 + d2))/(x*SpecialFunctions.Beta(d1/2.0, d2/2.0));
+            return Math.Sqrt((Math.Pow(d1*x, d1)*Math.Pow(d2, d2))/Math.Pow((d1*x) + d2, d1 + d2))/(x*SpecialFunctions.Beta(d1/2.0, d2/2.0));
         }
 
         /// <summary>
@@ -357,12 +357,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double d1, double d2, double x)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return SpecialFunctions.BetaRegularized(d1/2.0, d2/2.0, d1*x/(d1*x + d2));
+            return SpecialFunctions.BetaRegularized(d1/2.0, d2/2.0, (d1*x)/((d1*x) + d2));
         }
 
         /// <summary>
@@ -377,13 +377,13 @@ namespace MathNet.Numerics.Distributions
         /// <remarks>WARNING: currently not an explicit implementation, hence slow and unreliable.</remarks>
         public static double InvCDF(double d1, double d2, double p)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
             return Brent.FindRoot(
-                x => SpecialFunctions.BetaRegularized(d1/2.0, d2/2.0, d1*x/(d1*x + d2)) - p,
+                x => SpecialFunctions.BetaRegularized(d1/2.0, d2/2.0, (d1*x)/((d1*x) + d2)) - p,
                 0, 1000, accuracy: 1e-12);
         }
 
@@ -396,7 +396,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -413,7 +413,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -431,7 +431,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -447,7 +447,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -463,7 +463,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -480,7 +480,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double d1, double d2)
         {
-            if (d1 <= 0.0 || d2 <= 0.0)
+            if ((d1 <= 0.0) || (d2 <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

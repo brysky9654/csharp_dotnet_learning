@@ -123,7 +123,7 @@ namespace SharpLearning.Neural.Layers
 
                 for (int col = 0; col < x.ColumnCount; ++col)
                 {
-                    var index = col * rows + row;
+                    var index = (col * rows) + row;
                     var value = xData[index];
                     if (value > max)
                     {
@@ -133,7 +133,7 @@ namespace SharpLearning.Neural.Layers
 
                 for (int col = 0; col < x.ColumnCount; ++col)
                 {
-                    var index = col * rows + row;
+                    var index = (col * rows) + row;
 
                     var value = (float)Math.Exp(xData[index] - max);
                     rowSum += value;
@@ -142,7 +142,7 @@ namespace SharpLearning.Neural.Layers
 
                 for (int col = 0; col < x.ColumnCount; ++col)
                 {
-                    var index = col * rows + row;
+                    var index = (col * rows) + row;
                     xData[index] = xData[index] / rowSum;
                 }
             }

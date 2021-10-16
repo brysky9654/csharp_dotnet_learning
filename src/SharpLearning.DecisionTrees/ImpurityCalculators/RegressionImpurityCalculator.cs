@@ -120,8 +120,8 @@ namespace SharpLearning.DecisionTrees.ImpurityCalculators
             m_sumRight = m_sqSumTotal;
             m_sqSumLeft = 0.0;
 
-            m_varRight = (m_sqSumRight / m_weightedTotal -
-                m_meanRight * m_meanRight);
+            m_varRight = ((m_sqSumRight / m_weightedTotal) -
+                (m_meanRight * m_meanRight));
             m_varLeft = 0.0;
 
             m_sumRight = m_sumTotal;
@@ -178,11 +178,11 @@ namespace SharpLearning.DecisionTrees.ImpurityCalculators
             m_meanLeft = m_sumLeft / m_weightedLeft;
             m_meanRight = m_sumRight / m_weightedRight;
 
-            m_varLeft = (m_sqSumLeft / m_weightedLeft -
-                m_meanLeft * m_meanLeft);
+            m_varLeft = ((m_sqSumLeft / m_weightedLeft) -
+                (m_meanLeft * m_meanLeft));
 
-            m_varRight = (m_sqSumRight / m_weightedRight -
-                m_meanRight * m_meanRight);
+            m_varRight = ((m_sqSumRight / m_weightedRight) -
+                (m_meanRight * m_meanRight));
 
             m_currentPosition = newPosition;
         }
@@ -193,8 +193,8 @@ namespace SharpLearning.DecisionTrees.ImpurityCalculators
         /// <returns></returns>
         public double NodeImpurity()
         {
-            var impurity = (m_sqSumTotal / m_weightedTotal -
-                m_meanTotal * m_meanTotal);
+            var impurity = ((m_sqSumTotal / m_weightedTotal) -
+                (m_meanTotal * m_meanTotal));
 
             return impurity;
         }
@@ -218,7 +218,7 @@ namespace SharpLearning.DecisionTrees.ImpurityCalculators
             var diff = ((m_sumLeft / m_weightedLeft) -
                 (m_sumRight / m_weightedRight));
 
-            var improvement = (m_weightedLeft * m_weightedRight * diff * diff /
+            var improvement = ((m_weightedLeft * m_weightedRight * diff * diff) /
                 (m_weightedLeft + m_weightedRight));
 
             return improvement;

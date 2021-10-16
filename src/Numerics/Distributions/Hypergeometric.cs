@@ -107,7 +107,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static bool IsValidParameterSet(int population, int success, int draws)
         {
-            return population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population;
+            return (population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population);
         }
 
         /// <summary>
@@ -137,12 +137,12 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the mean of the distribution.
         /// </summary>
-        public double Mean => (double)_success*_draws/_population;
+        public double Mean => ((double)_success*_draws)/_population;
 
         /// <summary>
         /// Gets the variance of the distribution.
         /// </summary>
-        public double Variance => _draws*_success*(_population - _draws)*(_population - _success)/(_population*_population*(_population - 1.0));
+        public double Variance => (_draws*_success*(_population - _draws)*(_population - _success))/(_population*_population*(_population - 1.0));
 
         /// <summary>
         /// Gets the standard deviation of the distribution.
@@ -162,7 +162,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the mode of the distribution.
         /// </summary>
-        public int Mode => (_draws + 1)*(_success + 1)/(_population + 2);
+        public int Mode => ((_draws + 1)*(_success + 1))/(_population + 2);
 
         /// <summary>
         /// Gets the median of the distribution.
@@ -172,7 +172,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the minimum of the distribution.
         /// </summary>
-        public int Minimum => Math.Max(0, _draws + _success - _population);
+        public int Minimum => Math.Max(0, (_draws + _success) - _population);
 
         /// <summary>
         /// Gets the maximum of the distribution.
@@ -186,7 +186,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public double Probability(int k)
         {
-            return SpecialFunctions.Binomial(_success, k)*SpecialFunctions.Binomial(_population - _success, _draws - k)/SpecialFunctions.Binomial(_population, _draws);
+            return (SpecialFunctions.Binomial(_success, k)*SpecialFunctions.Binomial(_population - _success, _draws - k))/SpecialFunctions.Binomial(_population, _draws);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public double ProbabilityLn(int k)
         {
-            return SpecialFunctions.BinomialLn(_success, k) + SpecialFunctions.BinomialLn(_population - _success, _draws - k) - SpecialFunctions.BinomialLn(_population, _draws);
+            return (SpecialFunctions.BinomialLn(_success, k) + SpecialFunctions.BinomialLn(_population - _success, _draws - k)) - SpecialFunctions.BinomialLn(_population, _draws);
         }
 
         /// <summary>
@@ -219,12 +219,12 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public static double PMF(int population, int success, int draws, int k)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return SpecialFunctions.Binomial(success, k)*SpecialFunctions.Binomial(population - success, draws - k)/SpecialFunctions.Binomial(population, draws);
+            return (SpecialFunctions.Binomial(success, k)*SpecialFunctions.Binomial(population - success, draws - k))/SpecialFunctions.Binomial(population, draws);
         }
 
         /// <summary>
@@ -237,12 +237,12 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public static double PMFLn(int population, int success, int draws, int k)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return SpecialFunctions.BinomialLn(success, k) + SpecialFunctions.BinomialLn(population - success, draws - k) - SpecialFunctions.BinomialLn(population, draws);
+            return (SpecialFunctions.BinomialLn(success, k) + SpecialFunctions.BinomialLn(population - success, draws - k)) - SpecialFunctions.BinomialLn(population, draws);
         }
 
         /// <summary>
@@ -256,12 +256,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(int population, int success, int draws, double x)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (x < Math.Max(0, draws + success - population))
+            if (x < Math.Max(0, (draws + success) - population))
             {
                 return 0.0;
             }
@@ -276,7 +276,7 @@ namespace MathNet.Numerics.Distributions
             var sum = 0.0;
             for (var i = 0; i <= k; i++)
             {
-                sum += Math.Exp(SpecialFunctions.BinomialLn(success, i) + SpecialFunctions.BinomialLn(population - success, draws - i) - denominatorLn);
+                sum += Math.Exp((SpecialFunctions.BinomialLn(success, i) + SpecialFunctions.BinomialLn(population - success, draws - i)) - denominatorLn);
             }
 
             return Math.Min(sum, 1.0);
@@ -363,7 +363,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static int Sample(System.Random rnd, int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -380,7 +380,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static IEnumerable<int> Samples(System.Random rnd, int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -398,7 +398,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static void Samples(System.Random rnd, int[] values, int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -414,7 +414,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static int Sample(int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -430,7 +430,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static IEnumerable<int> Samples(int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -447,7 +447,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="draws">The number of draws without replacement (n).</param>
         public static void Samples(int[] values, int population, int success, int draws)
         {
-            if (!(population >= 0 && success >= 0 && draws >= 0 && success <= population && draws <= population))
+            if (!((population >= 0) && (success >= 0) && (draws >= 0) && (success <= population) && (draws <= population)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

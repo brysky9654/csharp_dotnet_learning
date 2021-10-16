@@ -237,7 +237,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             // diagonal + diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.AddArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -261,7 +261,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             // diagonal - diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.SubtractArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -321,7 +321,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex32>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex32>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -343,7 +343,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex32[diagonalResult._data.Length];
                 var otherDataCopy = new Complex32[diagonalResult._data.Length];
@@ -396,7 +396,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex32[diagonalResult._data.Length];
                 var otherDataCopy = new Complex32[diagonalResult._data.Length];
@@ -440,7 +440,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex32[diagonalResult._data.Length];
                 var otherDataCopy = new Complex32[diagonalResult._data.Length];
@@ -486,7 +486,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex32[diagonalResult._data.Length];
                 var otherDataCopy = new Complex32[diagonalResult._data.Length];
@@ -539,7 +539,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex32[diagonalResult._data.Length];
                 var otherDataCopy = new Complex32[diagonalResult._data.Length];
@@ -599,7 +599,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex32>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex32>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -629,7 +629,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex32>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex32>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     // TODO: merge/MulByConj
                     LinearAlgebraControl.Provider.ConjugateArray(_data, denseResult.Data);
@@ -855,7 +855,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void LowerTriangle(Matrix<Complex32> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -889,7 +889,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyLowerTriangle(Matrix<Complex32> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -913,7 +913,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void UpperTriangle(Matrix<Complex32> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -942,7 +942,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyUpperTriangle(Matrix<Complex32> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }

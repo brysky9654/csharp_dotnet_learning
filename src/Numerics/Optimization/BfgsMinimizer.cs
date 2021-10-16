@@ -75,7 +75,7 @@ namespace MathNet.Numerics.Optimization
             // First step
             var inversePseudoHessian = CreateMatrix.DenseIdentity<double>(initialGuess.Count);
             var lineSearchDirection = -objective.Gradient;
-            var stepSize = 100 * GradientTolerance / (lineSearchDirection * lineSearchDirection);
+            var stepSize = (100 * GradientTolerance) / (lineSearchDirection * lineSearchDirection);
 
             var previousPoint = objective;
 
@@ -106,7 +106,7 @@ namespace MathNet.Numerics.Optimization
             int iterationsWithNontrivialLineSearch = lineSearchResult.Iterations > 0 ? 0 : 1;
             iterations = DoBfgsUpdate(ref currentExitCondition, lineSearcher, ref inversePseudoHessian, ref lineSearchDirection, ref previousPoint, ref lineSearchResult, ref candidate, ref step, ref totalLineSearchSteps, ref iterationsWithNontrivialLineSearch);
 
-            if (iterations == MaximumIterations && currentExitCondition == ExitCondition.None)
+            if ((iterations == MaximumIterations) && (currentExitCondition == ExitCondition.None))
                 throw new MaximumIterationsException(String.Format("Maximum iterations ({0}) reached.", MaximumIterations));
 
             return new MinimizationWithLineSearchResult(candidate, iterations, ExitCondition.AbsoluteGradient, totalLineSearchSteps, iterationsWithNontrivialLineSearch);
@@ -126,10 +126,10 @@ namespace MathNet.Numerics.Optimization
             var y = candidate.Gradient - previousPoint.Gradient;
 
             double sy = step * y;
-            inversePseudoHessian = inversePseudoHessian + ((sy + y * inversePseudoHessian * y) / Math.Pow(sy, 2.0)) * step.OuterProduct(step) - ((inversePseudoHessian * y.ToColumnMatrix()) * step.ToRowMatrix() + step.ToColumnMatrix() * (y.ToRowMatrix() * inversePseudoHessian)) * (1.0 / sy);
+            inversePseudoHessian = (inversePseudoHessian + (((sy + (y * inversePseudoHessian * y)) / Math.Pow(sy, 2.0)) * step.OuterProduct(step))) - ((((inversePseudoHessian * y.ToColumnMatrix()) * step.ToRowMatrix()) + (step.ToColumnMatrix() * (y.ToRowMatrix() * inversePseudoHessian))) * (1.0 / sy));
             lineSearchDirection = -inversePseudoHessian * candidate.Gradient;
 
-            if (lineSearchDirection * candidate.Gradient >= 0.0)
+            if ((lineSearchDirection * candidate.Gradient) >= 0.0)
             {
                 lineSearchDirection = -candidate.Gradient;
                 inversePseudoHessian = CreateMatrix.DenseIdentity<double>(candidate.Point.Count);

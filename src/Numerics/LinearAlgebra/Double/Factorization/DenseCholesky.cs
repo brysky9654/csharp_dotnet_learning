@@ -164,7 +164,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double.Factorization
                 throw new ArgumentException(Resources.ArgumentMatrixSquare);
             }
 
-            if (matrix.RowCount != Factor.RowCount || matrix.ColumnCount != Factor.ColumnCount)
+            if ((matrix.RowCount != Factor.RowCount) || (matrix.ColumnCount != Factor.ColumnCount))
             {
                 throw Matrix.DimensionsDontMatch<ArgumentException>(matrix, Factor);
             }

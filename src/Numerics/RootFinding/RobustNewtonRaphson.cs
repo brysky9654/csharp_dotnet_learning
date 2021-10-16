@@ -102,18 +102,18 @@ namespace MathNet.Numerics.RootFinding
                 double step = fx/dfx;
                 root -= step;
 
-                if (Math.Abs(step) < accuracy && Math.Abs(fx) < accuracy)
+                if ((Math.Abs(step) < accuracy) && (Math.Abs(fx) < accuracy))
                 {
                     return true;
                 }
 
                 bool overshoot = root > upperBound, undershoot = root < lowerBound;
-                if (overshoot || undershoot || Math.Abs(2*fx) > Math.Abs(lastStep*dfx))
+                if (overshoot || undershoot || (Math.Abs(2*fx) > Math.Abs(lastStep*dfx)))
                 {
                     // Newton-Raphson step failed
 
                     // If same signs, try subdivision to scan for zero crossing intervals
-                    if (Math.Sign(fmin) == Math.Sign(fmax) && TryScanForCrossingsWithRoots(f, df, lowerBound, upperBound, accuracy, maxIterations - i - 1, subdivision, out root))
+                    if ((Math.Sign(fmin) == Math.Sign(fmax)) && TryScanForCrossingsWithRoots(f, df, lowerBound, upperBound, accuracy, maxIterations - i - 1, subdivision, out root))
                     {
                         return true;
                     }
@@ -161,7 +161,7 @@ namespace MathNet.Numerics.RootFinding
                     lowerBound = root;
                     fmin = fx;
                 }
-                else if (Math.Sign(fmin) != Math.Sign(fmax) && Math.Abs(fx) < accuracy)
+                else if ((Math.Sign(fmin) != Math.Sign(fmax)) && (Math.Abs(fx) < accuracy))
                 {
                     return true;
                 }

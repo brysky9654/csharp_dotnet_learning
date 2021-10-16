@@ -157,7 +157,7 @@ namespace MathNet.Numerics.Differentiation
             get { return _center; }
             set
             {
-                if (value >= _points || value < 0)
+                if ((value >= _points) || (value < 0))
                     throw new ArgumentOutOfRangeException(nameof(value), "Center must lie between 0 and points -1");
                 _center = value;
             }
@@ -191,7 +191,7 @@ namespace MathNet.Numerics.Differentiation
             if (points == null)
                 throw new ArgumentNullException(nameof(points));
 
-            if (order >= _points || order < 0)
+            if ((order >= _points) || (order < 0))
                 throw new ArgumentOutOfRangeException(nameof(order), "Order must be between zero and points-1.");
 
             var c = _coefficients.GetCoefficients(Center, order);
@@ -220,11 +220,11 @@ namespace MathNet.Numerics.Differentiation
             var points = new double[_points];
             for (int i = 0; i < _points; i++)
             {
-                if (i == Center && currentValue.HasValue)
+                if ((i == Center) && currentValue.HasValue)
                     points[i] = currentValue.Value;
                 else if(c[i] != 0) // Only evaluate function if it will actually be used.
                 {
-                    points[i] = f(x + (i - Center) * h);
+                    points[i] = f(x + ((i - Center) * h));
                     Evaluations++;
                 }
             }
@@ -261,11 +261,11 @@ namespace MathNet.Numerics.Differentiation
             var points = new double[_points];
             for (int i = 0; i < _points; i++)
             {
-                if (i == Center && currentValue.HasValue)
+                if ((i == Center) && currentValue.HasValue)
                     points[i] = currentValue.Value;
                 else if(c[i] != 0) // Only evaluate function if it will actually be used.
                 {
-                    x[parameterIndex] = xi + (i - Center) * h;
+                    x[parameterIndex] = xi + ((i - Center) * h);
                     points[i] = f(x);
                     Evaluations++;
                 }
@@ -293,7 +293,7 @@ namespace MathNet.Numerics.Differentiation
             var df = new double[f.Length];
             for (int i = 0; i < f.Length; i++)
             {
-                if(currentValue != null && currentValue[i].HasValue)
+                if((currentValue != null) && currentValue[i].HasValue)
                     df[i] = EvaluatePartialDerivative(f[i], x, parameterIndex, order, currentValue[i].Value);
                 else
                     df[i] = EvaluatePartialDerivative(f[i], x, parameterIndex, order);
@@ -364,7 +364,7 @@ namespace MathNet.Numerics.Differentiation
             var xi = x[currentParameterIndex];
             for (int i = 0; i < _points; i++)
             {
-                x[currentParameterIndex] = xi + (i - Center)*h;
+                x[currentParameterIndex] = xi + ((i - Center)*h);
                 points[i] = EvaluateMixedPartialDerivative(f, x, reducedParameterIndex, reducedOrder);
             }
 
@@ -395,7 +395,7 @@ namespace MathNet.Numerics.Differentiation
             var df = new double[f.Length];
             for (int i = 0; i < f.Length; i++)
             {
-                if(currentValue != null && currentValue[i].HasValue)
+                if((currentValue != null) && currentValue[i].HasValue)
                     df[i] = EvaluateMixedPartialDerivative(f[i], x, parameterIndex, order, currentValue[i].Value);
                 else
                     df[i] = EvaluateMixedPartialDerivative(f[i], x, parameterIndex, order);

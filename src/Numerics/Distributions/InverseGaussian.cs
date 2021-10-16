@@ -84,7 +84,7 @@ namespace MathNet.Numerics.Distributions
         public static bool IsValidParameterSet(double mu, double lambda)
         {
             var allFinite = mu.IsFinite() && lambda.IsFinite();
-            return allFinite && mu > 0.0 && lambda > 0.0;
+            return allFinite && (mu > 0.0) && (lambda > 0.0);
         }
 
         /// <summary>
@@ -135,12 +135,12 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the kurtosis of the Inverse Gaussian distribution.
         /// </summary>
-        public double Kurtosis => 15 * Mu / Lambda;
+        public double Kurtosis => (15 * Mu) / Lambda;
 
         /// <summary>
         /// Gets the mode of the Inverse Gaussian distribution.
         /// </summary>
-        public double Mode => Mu * (Math.Sqrt(1 + (9 * Mu * Mu) / (4 * Lambda * Lambda)) - (3 * Mu) / (2 * Lambda));
+        public double Mode => Mu * (Math.Sqrt(1 + ((9 * Mu * Mu) / (4 * Lambda * Lambda))) - ((3 * Mu) / (2 * Lambda)));
 
         /// <summary>
         /// Gets the entropy of the Inverse Gaussian distribution (currently not supported).
@@ -255,11 +255,11 @@ namespace MathNet.Numerics.Distributions
         internal static double InverseGaussianSampleImpl(double mu, double lambda, double normalSample, double uniformSample)
         {
             double y = normalSample * normalSample;
-            double x = mu + (mu * mu * y) / (2 * lambda) - (mu / (2 * lambda)) * Math.Sqrt(4 * mu * lambda * y + mu * mu * y * y);
-            if (uniformSample <= mu / (mu + x))
+            double x = (mu + ((mu * mu * y) / (2 * lambda))) - ((mu / (2 * lambda)) * Math.Sqrt((4 * mu * lambda * y) + (mu * mu * y * y)));
+            if (uniformSample <= (mu / (mu + x)))
                 return x;
             else
-                return mu * mu / x;
+                return (mu * mu) / x;
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace MathNet.Numerics.Distributions
         {
             var sampleVec = samples.ToArray();
             var muHat = sampleVec.Mean();
-            var lambdahat = 1 / (1 / samples.HarmonicMean() - 1 / muHat);
+            var lambdahat = 1 / ((1 / samples.HarmonicMean()) - (1 / muHat));
             return new InverseGaussian(muHat, lambdahat, randomSource);
         }
 
@@ -404,7 +404,7 @@ namespace MathNet.Numerics.Distributions
 
         internal static double CumulativeDistributionImpl(double mu, double lambda, double x)
         {
-            return Normal.CDF(0, 1, Math.Sqrt(lambda / x) * (x / mu - 1)) + Math.Exp(2 * lambda / mu) * Normal.CDF(0, 1, -Math.Sqrt(lambda / x) * (x / mu + 1));
+            return Normal.CDF(0, 1, Math.Sqrt(lambda / x) * ((x / mu) - 1)) + (Math.Exp((2 * lambda) / mu) * Normal.CDF(0, 1, -Math.Sqrt(lambda / x) * ((x / mu) + 1)));
         }
     }
 }

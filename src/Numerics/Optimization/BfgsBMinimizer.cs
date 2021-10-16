@@ -62,12 +62,12 @@ namespace MathNet.Numerics.Optimization
                 throw new IncompatibleObjectiveException("Gradient not supported in objective function, but required for BFGS minimization.");
 
             // Check that dimensions match
-            if (lowerBound.Count != upperBound.Count || lowerBound.Count != initialGuess.Count)
+            if ((lowerBound.Count != upperBound.Count) || (lowerBound.Count != initialGuess.Count))
                 throw new ArgumentException("Dimensions of bounds and/or initial guess do not match.");
 
             // Check that initial guess is feasible
             for (int ii = 0; ii < initialGuess.Count; ++ii)
-                if (initialGuess[ii] < lowerBound[ii] || initialGuess[ii] > upperBound[ii])
+                if ((initialGuess[ii] < lowerBound[ii]) || (initialGuess[ii] > upperBound[ii]))
                     throw new ArgumentException("Initial guess is not in the feasible region");
 
             objective.EvaluateAt(initialGuess);
@@ -119,11 +119,11 @@ namespace MathNet.Numerics.Optimization
             var directionFromCauchy = solution1 - cauchyPoint;
             var maxStepFromCauchyPoint = FindMaxStep(cauchyPoint, directionFromCauchy, lowerBound, upperBound);
 
-            var solution2 = cauchyPoint + Math.Min(maxStepFromCauchyPoint, 1.0)*directionFromCauchy;
+            var solution2 = cauchyPoint + (Math.Min(maxStepFromCauchyPoint, 1.0)*directionFromCauchy);
 
             var lineSearchDirection = solution2 - objective.Point;
             var maxLineSearchStep = FindMaxStep(objective.Point, lineSearchDirection, lowerBound, upperBound);
-            var estStepSize = -objective.Gradient*lineSearchDirection/(lineSearchDirection*pseudoHessian*lineSearchDirection);
+            var estStepSize = (-objective.Gradient*lineSearchDirection)/(lineSearchDirection*pseudoHessian*lineSearchDirection);
 
             var startingStepSize = Math.Min(Math.Max(estStepSize, 1.0), maxLineSearchStep);
 
@@ -156,7 +156,7 @@ namespace MathNet.Numerics.Optimization
 
             int iterations = DoBfgsUpdate(ref currentExitCondition, lineSearcher, ref pseudoHessian, ref lineSearchDirection, ref previousPoint, ref lineSearchResult, ref candidatePoint, ref step, ref totalLineSearchSteps, ref iterationsWithNontrivialLineSearch);
 
-            if (iterations == MaximumIterations && currentExitCondition == ExitCondition.None)
+            if ((iterations == MaximumIterations) && (currentExitCondition == ExitCondition.None))
                 throw new MaximumIterationsException(string.Format("Maximum iterations ({0}) reached.", MaximumIterations));
 
             return new MinimizationWithLineSearchResult(candidatePoint, iterations, currentExitCondition, totalLineSearchSteps, iterationsWithNontrivialLineSearch);
@@ -179,7 +179,7 @@ namespace MathNet.Numerics.Optimization
 
                 var Hs = pseudoHessian * step;
                 var sHs = step * pseudoHessian * step;
-                pseudoHessian = pseudoHessian + y.OuterProduct(y) * (1.0 / sy) - Hs.OuterProduct(Hs) * (1.0 / sHs);
+                pseudoHessian = (pseudoHessian + (y.OuterProduct(y) * (1.0 / sy))) - (Hs.OuterProduct(Hs) * (1.0 / sHs));
             }
             else
             {
@@ -216,7 +216,7 @@ namespace MathNet.Numerics.Optimization
             var directionFromCauchy = solution1 - cauchyPoint;
             var maxStepFromCauchyPoint = FindMaxStep(cauchyPoint, directionFromCauchy, _lowerBound, _upperBound);
 
-            var solution2 = cauchyPoint + Math.Min(maxStepFromCauchyPoint, 1.0) * directionFromCauchy;
+            var solution2 = cauchyPoint + (Math.Min(maxStepFromCauchyPoint, 1.0) * directionFromCauchy);
 
             lineSearchDirection = solution2 - candidatePoint.Point;
             maxLineSearchStep = FindMaxStep(candidatePoint.Point, lineSearchDirection, _lowerBound, _upperBound);
@@ -227,7 +227,7 @@ namespace MathNet.Numerics.Optimization
                 maxLineSearchStep = FindMaxStep(candidatePoint.Point, lineSearchDirection, _lowerBound, _upperBound);
             }
 
-            double estStepSize = -candidatePoint.Gradient * lineSearchDirection / (lineSearchDirection * pseudoHessian * lineSearchDirection);
+            double estStepSize = (-candidatePoint.Gradient * lineSearchDirection) / (lineSearchDirection * pseudoHessian * lineSearchDirection);
 
             startingStepSize = Math.Min(Math.Max(estStepSize, 1.0), maxLineSearchStep);
             return lineSearchDirection;
@@ -294,8 +294,8 @@ namespace MathNet.Numerics.Optimization
         protected override double GetProjectedGradient(IObjectiveFunctionEvaluation candidatePoint, int ii)
         {
             double projectedGradient;
-            bool atLowerBound = candidatePoint.Point[ii] - _lowerBound[ii] < VerySmall;
-            bool atUpperBound = _upperBound[ii] - candidatePoint.Point[ii] < VerySmall;
+            bool atLowerBound = (candidatePoint.Point[ii] - _lowerBound[ii]) < VerySmall;
+            bool atUpperBound = (_upperBound[ii] - candidatePoint.Point[ii]) < VerySmall;
 
             if (atLowerBound && atUpperBound)
                 projectedGradient = 0.0;

@@ -126,7 +126,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static bool IsValidParameterSet(double lambda, double nu)
         {
-            return lambda > 0.0 && nu >= 0.0;
+            return (lambda > 0.0) && (nu >= 0.0);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace MathNet.Numerics.Distributions
                 var z = 1 + _lambda;
 
                 // The probability of the next term.
-                var a1 = _lambda*_lambda/Math.Pow(2, _nu);
+                var a1 = (_lambda*_lambda)/Math.Pow(2, _nu);
 
                 // The unnormalized mean.
                 var zx = _lambda;
@@ -231,7 +231,7 @@ namespace MathNet.Numerics.Distributions
                 var z = 1 + _lambda;
 
                 // The probability of the next term.
-                var a1 = _lambda*_lambda/Math.Pow(2, _nu);
+                var a1 = (_lambda*_lambda)/Math.Pow(2, _nu);
 
                 // The unnormalized second moment.
                 var zxx = _lambda;
@@ -323,7 +323,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public double ProbabilityLn(int k)
         {
-            return k*Math.Log(_lambda) - _nu*SpecialFunctions.FactorialLn(k) - Math.Log(Z);
+            return (k*Math.Log(_lambda)) - (_nu*SpecialFunctions.FactorialLn(k)) - Math.Log(Z);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace MathNet.Numerics.Distributions
         {
             var z = Z;
             double sum = 0;
-            for (var i = 0; i < x + 1; i++)
+            for (var i = 0; i < (x + 1); i++)
             {
                 sum += Math.Pow(_lambda, i)/Math.Pow(SpecialFunctions.Factorial(i), _nu)/z;
             }
@@ -352,7 +352,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public static double PMF(double lambda, double nu, int k)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -370,13 +370,13 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public static double PMFLn(double lambda, double nu, int k)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
             var z = Normalization(lambda, nu);
-            return k*Math.Log(lambda) - nu*SpecialFunctions.FactorialLn(k) - Math.Log(z);
+            return (k*Math.Log(lambda)) - (nu*SpecialFunctions.FactorialLn(k)) - Math.Log(z);
         }
 
         /// <summary>
@@ -389,14 +389,14 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double lambda, double nu, double x)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
             var z = Normalization(lambda, nu);
             double sum = 0;
-            for (var i = 0; i < x + 1; i++)
+            for (var i = 0; i < (x + 1); i++)
             {
                 sum += Math.Pow(lambda, i)/Math.Pow(SpecialFunctions.Factorial(i), nu)/z;
             }
@@ -452,7 +452,7 @@ namespace MathNet.Numerics.Distributions
                 // The stopping criterion.
                 if (e < 1)
                 {
-                    if (t/(1 - e)/z < Tolerance)
+                    if ((t/(1 - e)/z) < Tolerance)
                     {
                         break;
                     }
@@ -482,7 +482,7 @@ namespace MathNet.Numerics.Distributions
             while (u > cdf)
             {
                 i++;
-                p = p*lambda/Math.Pow(i, nu);
+                p = (p*lambda)/Math.Pow(i, nu);
                 cdf += p;
             }
 
@@ -503,7 +503,7 @@ namespace MathNet.Numerics.Distributions
                     while (u > cdf)
                     {
                         k++;
-                        p = p*lambda/Math.Pow(k, nu);
+                        p = (p*lambda)/Math.Pow(k, nu);
                         cdf += p;
                     }
 
@@ -556,7 +556,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static int Sample(System.Random rnd, double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -573,7 +573,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static IEnumerable<int> Samples(System.Random rnd, double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -591,7 +591,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static void Samples(System.Random rnd, int[] values, double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -607,7 +607,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static int Sample(double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -623,7 +623,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static IEnumerable<int> Samples(double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -640,7 +640,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="nu">The rate of decay (ν) parameter. Range: ν ≥ 0.</param>
         public static void Samples(int[] values, double lambda, double nu)
         {
-            if (!(lambda > 0.0 && nu >= 0.0))
+            if (!((lambda > 0.0) && (nu >= 0.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

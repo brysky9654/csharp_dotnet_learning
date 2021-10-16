@@ -60,7 +60,7 @@ namespace MathNet.Numerics.Optimization
                 throw new OptimizationException("Lower bound must be lower than upper bound.");
             }
 
-            double middlePointX = lowerBound + (upperBound - lowerBound)/(1 + Constants.GoldenRatio);
+            double middlePointX = lowerBound + ((upperBound - lowerBound)/(1 + Constants.GoldenRatio));
             IScalarObjectiveFunctionEvaluation lower = objective.Evaluate(lowerBound);
             IScalarObjectiveFunctionEvaluation middle = objective.Evaluate(middlePointX);
             IScalarObjectiveFunctionEvaluation upper = objective.Evaluate(upperBound);
@@ -70,33 +70,33 @@ namespace MathNet.Numerics.Optimization
             ValueChecker(upper.Value, upperBound);
 
             int expansion_steps = 0;
-            while ((expansion_steps < maxExpansionSteps) && (upper.Value < middle.Value || lower.Value < middle.Value))
+            while ((expansion_steps < maxExpansionSteps) && ((upper.Value < middle.Value) || (lower.Value < middle.Value)))
             {
                 if (lower.Value < middle.Value)
                 {
-                    lowerBound = 0.5*(upperBound + lowerBound) - lowerExpansionFactor*0.5*(upperBound - lowerBound);
+                    lowerBound = (0.5*(upperBound + lowerBound)) - (lowerExpansionFactor*0.5*(upperBound - lowerBound));
                     lower = objective.Evaluate(lowerBound);
                 }
 
                 if (upper.Value < middle.Value)
                 {
-                    upperBound = 0.5*(upperBound + lowerBound) + upperExpansionFactor*0.5*(upperBound - lowerBound);
+                    upperBound = (0.5*(upperBound + lowerBound)) + (upperExpansionFactor*0.5*(upperBound - lowerBound));
                     upper = objective.Evaluate(upperBound);
                 }
 
-                middlePointX = lowerBound + (upperBound - lowerBound)/(1 + Constants.GoldenRatio);
+                middlePointX = lowerBound + ((upperBound - lowerBound)/(1 + Constants.GoldenRatio));
                 middle = objective.Evaluate(middlePointX);
 
                 expansion_steps += 1;
             }
 
-            if (upper.Value < middle.Value || lower.Value < middle.Value)
+            if ((upper.Value < middle.Value) || (lower.Value < middle.Value))
             {
                 throw new OptimizationException("Lower and upper bounds do not necessarily bound a minimum.");
             }
 
             int iterations = 0;
-            while (Math.Abs(upper.Point - lower.Point) > xTolerance && iterations < maxIterations)
+            while ((Math.Abs(upper.Point - lower.Point) > xTolerance) && (iterations < maxIterations))
             {
                 double testX = lower.Point + (upper.Point - middle.Point);
                 var test = objective.Evaluate(testX);

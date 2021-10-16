@@ -54,7 +54,7 @@ namespace MathNet.Numerics.Interpolation
         /// <param name="c3">third order spline coefficients (N)</param>
         public CubicSpline(double[] x, double[] c0, double[] c1, double[] c2, double[] c3)
         {
-            if (x.Length != c0.Length + 1 || x.Length != c1.Length + 1 || x.Length != c2.Length + 1 || x.Length != c3.Length + 1)
+            if ((x.Length != (c0.Length + 1)) || (x.Length != (c1.Length + 1)) || (x.Length != (c2.Length + 1)) || (x.Length != (c3.Length + 1)))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -77,7 +77,7 @@ namespace MathNet.Numerics.Interpolation
         /// </summary>
         public static CubicSpline InterpolateHermiteSorted(double[] x, double[] y, double[] firstDerivatives)
         {
-            if (x.Length != y.Length || x.Length != firstDerivatives.Length)
+            if ((x.Length != y.Length) || (x.Length != firstDerivatives.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -97,8 +97,8 @@ namespace MathNet.Numerics.Interpolation
                 double w2 = w*w;
                 c0[i] = y[i];
                 c1[i] = firstDerivatives[i];
-                c2[i] = (3*(y[i + 1] - y[i])/w - 2*firstDerivatives[i] - firstDerivatives[i + 1])/w;
-                c3[i] = (2*(y[i] - y[i + 1])/w + firstDerivatives[i] + firstDerivatives[i + 1])/w2;
+                c2[i] = (((3*(y[i + 1] - y[i]))/w) - (2*firstDerivatives[i]) - firstDerivatives[i + 1])/w;
+                c3[i] = (((2*(y[i] - y[i + 1]))/w) + firstDerivatives[i] + firstDerivatives[i + 1])/w2;
             }
 
             return new CubicSpline(x, c0, c1, c2, c3);
@@ -110,7 +110,7 @@ namespace MathNet.Numerics.Interpolation
         /// </summary>
         public static CubicSpline InterpolateHermiteInplace(double[] x, double[] y, double[] firstDerivatives)
         {
-            if (x.Length != y.Length || x.Length != firstDerivatives.Length)
+            if ((x.Length != y.Length) || (x.Length != firstDerivatives.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -168,7 +168,7 @@ namespace MathNet.Numerics.Interpolation
 
             var dd = new double[x.Length];
 
-            for (int i = 2; i < dd.Length - 2; i++)
+            for (int i = 2; i < (dd.Length - 2); i++)
             {
                 dd[i] = weights[i - 1].AlmostEqual(0.0) && weights[i + 1].AlmostEqual(0.0)
                     ? (((x[i + 1] - x[i])*diff[i - 1]) + ((x[i] - x[i - 1])*diff[i]))/(x[i + 1] - x[i - 1])
@@ -266,7 +266,7 @@ namespace MathNet.Numerics.Interpolation
                     a1[0] = 0;
                     a2[0] = 1;
                     a3[0] = 1;
-                    b[0] = 2*(y[1] - y[0])/(x[1] - x[0]);
+                    b[0] = (2*(y[1] - y[0]))/(x[1] - x[0]);
                     break;
                 case SplineBoundaryCondition.FirstDerivative:
                     a1[0] = 0;
@@ -285,12 +285,12 @@ namespace MathNet.Numerics.Interpolation
             }
 
             // Central Conditions
-            for (int i = 1; i < x.Length - 1; i++)
+            for (int i = 1; i < (x.Length - 1); i++)
             {
                 a1[i] = x[i + 1] - x[i];
                 a2[i] = 2*(x[i + 1] - x[i - 1]);
                 a3[i] = x[i] - x[i - 1];
-                b[i] = (3*(y[i] - y[i - 1])/(x[i] - x[i - 1])*(x[i + 1] - x[i])) + (3*(y[i + 1] - y[i])/(x[i + 1] - x[i])*(x[i] - x[i - 1]));
+                b[i] = (((3*(y[i] - y[i - 1]))/(x[i] - x[i - 1]))*(x[i + 1] - x[i])) + (((3*(y[i + 1] - y[i]))/(x[i + 1] - x[i]))*(x[i] - x[i - 1]));
             }
 
             // Right Boundary
@@ -300,7 +300,7 @@ namespace MathNet.Numerics.Interpolation
                     a1[n - 1] = 1;
                     a2[n - 1] = 1;
                     a3[n - 1] = 0;
-                    b[n - 1] = 2*(y[n - 1] - y[n - 2])/(x[n - 1] - x[n - 2]);
+                    b[n - 1] = (2*(y[n - 1] - y[n - 2]))/(x[n - 1] - x[n - 2]);
                     break;
                 case SplineBoundaryCondition.FirstDerivative:
                     a1[n - 1] = 0;
@@ -312,7 +312,7 @@ namespace MathNet.Numerics.Interpolation
                     a1[n - 1] = 1;
                     a2[n - 1] = 2;
                     a3[n - 1] = 0;
-                    b[n - 1] = (3*(y[n - 1] - y[n - 2])/(x[n - 1] - x[n - 2])) + (0.5*rightBoundary*(x[n - 1] - x[n - 2]));
+                    b[n - 1] = ((3*(y[n - 1] - y[n - 2]))/(x[n - 1] - x[n - 2])) + (0.5*rightBoundary*(x[n - 1] - x[n - 2]));
                     break;
                 default:
                     throw new NotSupportedException(Resources.InvalidRightBoundaryCondition);
@@ -399,8 +399,8 @@ namespace MathNet.Numerics.Interpolation
             double t1 = xx[index1] - xx[index0];
             double t2 = xx[index2] - xx[index0];
 
-            double a = (x2 - x0 - (t2/t1*(x1 - x0)))/(t2*t2 - t1*t2);
-            double b = (x1 - x0 - a*t1*t1)/t1;
+            double a = (x2 - x0 - ((t2/t1)*(x1 - x0)))/((t2*t2) - (t1*t2));
+            double b = (x1 - x0 - (a*t1*t1))/t1;
             return (2*a*t) + b;
         }
 
@@ -456,7 +456,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _c0[k] + x*(_c1[k] + x*(_c2[k] + x*_c3[k]));
+            return _c0[k] + (x*(_c1[k] + (x*(_c2[k] + (x*_c3[k])))));
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _c1[k] + x*(2*_c2[k] + x*3*_c3[k]);
+            return _c1[k] + (x*((2*_c2[k]) + (x*3*_c3[k])));
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return 2*_c2[k] + x*6*_c3[k];
+            return (2*_c2[k]) + (x*6*_c3[k]);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace MathNet.Numerics.Interpolation
         {
             int k = LeftSegmentIndex(t);
             var x = t - _x[k];
-            return _indefiniteIntegral.Value[k] + x*(_c0[k] + x*(_c1[k]/2 + x*(_c2[k]/3 + x*_c3[k]/4)));
+            return _indefiniteIntegral.Value[k] + (x*(_c0[k] + (x*((_c1[k]/2) + (x*((_c2[k]/3) + ((x*_c3[k])/4)))))));
         }
 
         /// <summary>
@@ -507,10 +507,10 @@ namespace MathNet.Numerics.Interpolation
         double[] ComputeIndefiniteIntegral()
         {
             var integral = new double[_c1.Length];
-            for (int i = 0; i < integral.Length - 1; i++)
+            for (int i = 0; i < (integral.Length - 1); i++)
             {
                 double w = _x[i + 1] - _x[i];
-                integral[i + 1] = integral[i] + w*(_c0[i] + w*(_c1[i]/2 + w*(_c2[i]/3 + w*_c3[i]/4)));
+                integral[i + 1] = integral[i] + (w*(_c0[i] + (w*((_c1[i]/2) + (w*((_c2[i]/3) + ((w*_c3[i])/4)))))));
             }
 
             return integral;

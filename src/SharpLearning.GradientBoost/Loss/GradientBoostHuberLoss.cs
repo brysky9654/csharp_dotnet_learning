@@ -25,7 +25,7 @@ namespace SharpLearning.GradientBoost.Loss
         /// http://en.wikipedia.org/wiki/Huber_loss
         public GradientBoostHuberLoss(double alpha = 0.9)
         {
-            if (alpha <= 0.0 || alpha > 1.0) { throw new ArgumentException("Alpha must be larger than 0.0 and no more than 1.0"); }
+            if ((alpha <= 0.0) || (alpha > 1.0)) { throw new ArgumentException("Alpha must be larger than 0.0 and no more than 1.0"); }
             m_alpha = alpha;
         }
 
@@ -73,7 +73,7 @@ namespace SharpLearning.GradientBoost.Loss
                 }
             }
 
-            splitInfo.Cost = splitInfo.SumOfSquares - (splitInfo.Sum * splitInfo.Sum / splitInfo.Samples);
+            splitInfo.Cost = splitInfo.SumOfSquares - ((splitInfo.Sum * splitInfo.Sum) / splitInfo.Samples);
 
             return splitInfo;
         }
@@ -149,12 +149,12 @@ namespace SharpLearning.GradientBoost.Loss
             left.Samples++;
             left.Sum += residual;
             left.SumOfSquares += residual2;
-            left.Cost = left.SumOfSquares - (left.Sum * left.Sum / left.Samples);
+            left.Cost = left.SumOfSquares - ((left.Sum * left.Sum) / left.Samples);
 
             right.Samples--;
             right.Sum -= residual;
             right.SumOfSquares -= residual2;
-            right.Cost = right.SumOfSquares - (right.Sum * right.Sum / right.Samples);
+            right.Cost = right.SumOfSquares - ((right.Sum * right.Sum) / right.Samples);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace SharpLearning.GradientBoost.Loss
                 values[j] = sign * Math.Min(Math.Abs(medianDiff), m_gamma); 
             }
 
-            var newValue = median + values.Sum() / values.Length;
+            var newValue = median + (values.Sum() / values.Length);
 
             return newValue;
         }

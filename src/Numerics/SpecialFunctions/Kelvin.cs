@@ -79,7 +79,7 @@ namespace MathNet.Numerics
         public static double KelvinBerPrime(double nu, double x)
         {
             const double inv2Sqrt2 = 0.35355339059327376220042218105242451964241796884424; // 1/(2 * sqrt(2))
-            return inv2Sqrt2 * (-KelvinBer(nu - 1, x) + KelvinBer(nu + 1, x) - KelvinBei(nu - 1, x) + KelvinBei(nu + 1, x));
+            return inv2Sqrt2 * (((-KelvinBer(nu - 1, x) + KelvinBer(nu + 1, x)) - KelvinBei(nu - 1, x)) + KelvinBei(nu + 1, x));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace MathNet.Numerics
         public static double KelvinBeiPrime(double nu, double x)
         {
             const double inv2Sqrt2 = 0.35355339059327376220042218105242451964241796884424; // 1/(2 * sqrt(2))
-            return inv2Sqrt2 * (KelvinBer(nu - 1, x) - KelvinBer(nu + 1, x) - KelvinBei(nu - 1, x) + KelvinBei(nu + 1, x));
+            return inv2Sqrt2 * ((KelvinBer(nu - 1, x) - KelvinBer(nu + 1, x) - KelvinBei(nu - 1, x)) + KelvinBei(nu + 1, x));
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace MathNet.Numerics
             }
 
             const double inv2Sqrt2 = 0.35355339059327376220042218105242451964241796884424; // 1/(2 * sqrt(2))
-            return inv2Sqrt2 * (-KelvinKer(nu - 1, x) + KelvinKer(nu + 1, x) - KelvinKei(nu - 1, x) + KelvinKei(nu + 1, x));
+            return inv2Sqrt2 * (((-KelvinKer(nu - 1, x) + KelvinKer(nu + 1, x)) - KelvinKei(nu - 1, x)) + KelvinKei(nu + 1, x));
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MathNet.Numerics
             }
 
             const double inv2Sqrt2 = 0.35355339059327376220042218105242451964241796884424; // 1/(2 * sqrt(2))
-            return inv2Sqrt2 * (KelvinKer(nu - 1, x) - KelvinKer(nu + 1, x) - KelvinKei(nu - 1, x) + KelvinKei(nu + 1, x));
+            return inv2Sqrt2 * ((KelvinKer(nu - 1, x) - KelvinKer(nu + 1, x) - KelvinKei(nu - 1, x)) + KelvinKei(nu + 1, x));
         }
 
         /// <summary>

@@ -95,8 +95,8 @@ namespace SharpLearning.Neural.Optimizers
             m_iterationCounter++;
 
             // initialize accumulators. Will only be done once on first iteration and if optimizer methods is not sgd
-            var useAccumulators = m_gsumWeights.Count == 0 && 
-                (m_optimizerMethod != OptimizerMethod.Sgd || m_momentum > 0.0);
+            var useAccumulators = (m_gsumWeights.Count == 0) && 
+                ((m_optimizerMethod != OptimizerMethod.Sgd) || (m_momentum > 0.0));
 
             if (useAccumulators)
             {
@@ -124,10 +124,10 @@ namespace SharpLearning.Neural.Optimizers
             for (var i = 0; i < parametersAndGradients.Count; i++)
             {
                 m_gsumWeights.Add(new double[parametersAndGradients[i].Parameters.Length]);
-                if (m_optimizerMethod == OptimizerMethod.Adam || 
-                    m_optimizerMethod == OptimizerMethod.Adadelta || 
-                    m_optimizerMethod == OptimizerMethod.AdaMax ||
-                    m_optimizerMethod == OptimizerMethod.Nadam)
+                if ((m_optimizerMethod == OptimizerMethod.Adam) || 
+                    (m_optimizerMethod == OptimizerMethod.Adadelta) || 
+                    (m_optimizerMethod == OptimizerMethod.AdaMax) ||
+                    (m_optimizerMethod == OptimizerMethod.Nadam))
                 {
                     m_xsumWeights.Add(new double[parametersAndGradients[i].Parameters.Length]);
                 }
@@ -140,7 +140,7 @@ namespace SharpLearning.Neural.Optimizers
             {
                 case OptimizerMethod.Adam:
                     {
-                        m_learningRate = (float)(m_learningRateInit * Math.Sqrt(1.0 - Math.Pow(m_beta2, m_iterationCounter)) /
+                        m_learningRate = (float)((m_learningRateInit * Math.Sqrt(1.0 - Math.Pow(m_beta2, m_iterationCounter))) /
                             (1 - Math.Pow(m_beta1, m_iterationCounter)));
                     }
                     break;
@@ -152,8 +152,8 @@ namespace SharpLearning.Neural.Optimizers
                 case OptimizerMethod.Nadam:
                     {
                         // Nadam does not update learning rate but updates the schedule for the momentum cache.
-                        m_momentumCache = m_beta1 * (1.0 - 0.5 * (Math.Pow(0.96, m_iterationCounter * m_schedule_decay)));
-                        m_momentumCache_1 = m_beta1 * (1.0 - 0.5 * (Math.Pow(0.96, (m_iterationCounter + 1) * m_schedule_decay)));
+                        m_momentumCache = m_beta1 * (1.0 - (0.5 * (Math.Pow(0.96, m_iterationCounter * m_schedule_decay))));
+                        m_momentumCache_1 = m_beta1 * (1.0 - (0.5 * (Math.Pow(0.96, (m_iterationCounter + 1) * m_schedule_decay))));
 
                         m_scheduleNew = m_schedule * m_momentumCache;
                         m_scheduleNext = m_schedule * m_momentumCache * m_momentumCache_1;
@@ -191,7 +191,7 @@ namespace SharpLearning.Neural.Optimizers
                         {
                             if (m_momentum > 0.0) // sgd + momentum
                             {
-                                var dx = m_momentum * gsumi[j] - m_learningRate * gij;
+                                var dx = (m_momentum * gsumi[j]) - (m_learningRate * gij);
                                 gsumi[j] = dx; 
                                 parameters[j] += (float)dx; 
                             }
@@ -203,57 +203,57 @@ namespace SharpLearning.Neural.Optimizers
                         break;
                     case OptimizerMethod.Adam:
                         {
-                            gsumi[j] = m_beta1 * gsumi[j] + (1.0 - m_beta1) * gij; 
-                            xsumi[j] = m_beta2 * xsumi[j] + (1.0 - m_beta2) * gij * gij;
+                            gsumi[j] = (m_beta1 * gsumi[j]) + ((1.0 - m_beta1) * gij); 
+                            xsumi[j] = (m_beta2 * xsumi[j]) + ((1.0 - m_beta2) * gij * gij);
 
-                            var dx = -m_learningRate * gsumi[j] / (Math.Sqrt(xsumi[j]) + m_eps);
+                            var dx = (-m_learningRate * gsumi[j]) / (Math.Sqrt(xsumi[j]) + m_eps);
                             parameters[j] += (float)dx;
                         }
                         break;
                     case OptimizerMethod.AdaMax:
                         {
-                            gsumi[j] = m_beta1 * gsumi[j] + (1.0 - m_beta1) * gij; 
+                            gsumi[j] = (m_beta1 * gsumi[j]) + ((1.0 - m_beta1) * gij); 
                             xsumi[j] = Math.Max(m_beta2 * xsumi[j], Math.Abs(gij)); 
 
-                            var dx = -m_learningRate * gsumi[j] / (xsumi[j] + m_eps);
+                            var dx = (-m_learningRate * gsumi[j]) / (xsumi[j] + m_eps);
                             parameters[j] += (float)dx;
                         }
                         break;
                     case OptimizerMethod.Nadam:
                         {
                             var gPrime = gij / (1.0 - m_scheduleNew);
-                            gsumi[j] = m_beta1 * gsumi[j] + (1.0 - m_beta1) * gij;
+                            gsumi[j] = (m_beta1 * gsumi[j]) + ((1.0 - m_beta1) * gij);
                             var gsumiPrime = gsumi[j] / (1.0 - m_scheduleNext);
 
-                            xsumi[j] = m_beta2 * xsumi[j] + (1.0 - m_beta2) * gij * gij;
+                            xsumi[j] = (m_beta2 * xsumi[j]) + ((1.0 - m_beta2) * gij * gij);
                             var xsumiPrime = xsumi[j] / (1.0 - Math.Pow(m_beta2, m_iterationCounter));
-                            var gsumiBar = (1.0 - m_momentumCache) * gPrime + m_momentumCache_1 * gsumiPrime;
+                            var gsumiBar = ((1.0 - m_momentumCache) * gPrime) + (m_momentumCache_1 * gsumiPrime);
 
-                            var dx = -m_learningRate * gsumiBar / (Math.Sqrt(xsumiPrime) + m_eps);
+                            var dx = (-m_learningRate * gsumiBar) / (Math.Sqrt(xsumiPrime) + m_eps);
                             parameters[j] += (float)dx;
                         }
                         break;
                     case OptimizerMethod.Adagrad:
                         {
-                            gsumi[j] = gsumi[j] + gij * gij;
-                            var dx = -m_learningRate * gij / Math.Sqrt(gsumi[j] + m_eps);
+                            gsumi[j] = gsumi[j] + (gij * gij);
+                            var dx = (-m_learningRate * gij) / Math.Sqrt(gsumi[j] + m_eps);
                             parameters[j] += (float)dx;
                         }
                         break;
                     case OptimizerMethod.RMSProp:
                         {
-                            gsumi[j] = m_rho * gsumi[j] + (1.0 - m_rho) * gij * gij;
-                            var dx = -m_learningRate * gij / (Math.Sqrt(gsumi[j]) + m_eps);
+                            gsumi[j] = (m_rho * gsumi[j]) + ((1.0 - m_rho) * gij * gij);
+                            var dx = (-m_learningRate * gij) / (Math.Sqrt(gsumi[j]) + m_eps);
                             parameters[j] += (float)dx;
                         }
                         break;
                     case OptimizerMethod.Adadelta:
                         {
-                            gsumi[j] = m_rho * gsumi[j] + (1 - m_rho) * gij * gij;
+                            gsumi[j] = (m_rho * gsumi[j]) + ((1 - m_rho) * gij * gij);
                             
                             // learning rate multiplication left out since recommended default is 1.0. 
-                            var dx = - gij * Math.Sqrt(xsumi[j] + m_eps) / Math.Sqrt(gsumi[j] + m_eps); 
-                            xsumi[j] = m_rho * xsumi[j] + (1 - m_rho) * dx * dx;
+                            var dx = (- gij * Math.Sqrt(xsumi[j] + m_eps)) / Math.Sqrt(gsumi[j] + m_eps); 
+                            xsumi[j] = (m_rho * xsumi[j]) + ((1 - m_rho) * dx * dx);
 
                             parameters[j] += (float)dx;
                         }
@@ -261,8 +261,8 @@ namespace SharpLearning.Neural.Optimizers
                     case OptimizerMethod.Netsterov:
                         {
                             var dx = gsumi[j];
-                            gsumi[j] = gsumi[j] * m_momentum + m_learningRate * gij;
-                            dx = m_momentum * dx - (1.0 + m_momentum) * gsumi[j];
+                            gsumi[j] = (gsumi[j] * m_momentum) + (m_learningRate * gij);
+                            dx = (m_momentum * dx) - ((1.0 + m_momentum) * gsumi[j]);
                             parameters[j] += (float)dx;
                         }
                         break;

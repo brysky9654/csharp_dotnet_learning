@@ -69,8 +69,8 @@ namespace MathNet.Numerics.IntegralTransforms
         /// <param name="samples">Sample Vector.</param>
         static void ForwardScaleByOptions(HartleyOptions options, double[] samples)
         {
-            if ((options & HartleyOptions.NoScaling) == HartleyOptions.NoScaling ||
-                (options & HartleyOptions.AsymmetricScaling) == HartleyOptions.AsymmetricScaling)
+            if (((options & HartleyOptions.NoScaling) == HartleyOptions.NoScaling) ||
+                ((options & HartleyOptions.AsymmetricScaling) == HartleyOptions.AsymmetricScaling))
             {
                 return;
             }

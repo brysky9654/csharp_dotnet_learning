@@ -151,10 +151,10 @@ namespace MathNet.Numerics.Interpolation
 
             for (int level = 1; level < n; level++)
             {
-                for (int i = 0; i < n - level; i++)
+                for (int i = 0; i < (n - level); i++)
                 {
                     double hp = _x[i + level] - t;
-                    double ho = (_x[i] - t)*d[i]/hp;
+                    double ho = ((_x[i] - t)*d[i])/hp;
 
                     double den = ho - c[i + 1];
                     if (den.AlmostEqual(0.0))

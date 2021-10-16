@@ -154,7 +154,7 @@ namespace MathNet.Numerics
         public static double MSE<T>(Vector<T> a, Vector<T> b) where T : struct, IEquatable<T>, IFormattable
         {
             var norm = (a - b).L2Norm();
-            return norm*norm/a.Count;
+            return (norm*norm)/a.Count;
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace MathNet.Numerics
             var ab = LinearAlgebraControl.Provider.DotProduct(a, b);
             var a2 = LinearAlgebraControl.Provider.DotProduct(a, a);
             var b2 = LinearAlgebraControl.Provider.DotProduct(b, b);
-            return 1d - ab/Math.Sqrt(a2*b2);
+            return 1d - (ab/Math.Sqrt(a2*b2));
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace MathNet.Numerics
             var ab = LinearAlgebraControl.Provider.DotProduct(a, b);
             var a2 = LinearAlgebraControl.Provider.DotProduct(a, a);
             var b2 = LinearAlgebraControl.Provider.DotProduct(b, b);
-            return (float)(1d - ab/Math.Sqrt(a2*b2));
+            return (float)(1d - (ab/Math.Sqrt(a2*b2)));
         }
 
         /// <summary>
@@ -500,14 +500,14 @@ namespace MathNet.Numerics
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
-            if (a.Length == 0 && b.Length == 0)
+            if ((a.Length == 0) && (b.Length == 0))
             {
                 return 0;
             }
 
             for (int x = 0, len = a.Length; x < len; x++)
             {
-                if (a[x] != 0 && b[x] != 0)
+                if ((a[x] != 0) && (b[x] != 0))
                 {
                     if (a[x] == b[x])
                     {
@@ -546,14 +546,14 @@ namespace MathNet.Numerics
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
 
-            if (a.Length == 0 && b.Length == 0)
+            if ((a.Length == 0) && (b.Length == 0))
             {
                 return 0;
             }
 
             for (int x = 0, len = a.Length; x < len; x++)
             {
-                if (a[x] != 0 && b[x] != 0)
+                if ((a[x] != 0) && (b[x] != 0))
                 {
                     if (a[x] == b[x])
                     {

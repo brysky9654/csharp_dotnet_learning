@@ -237,7 +237,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             // diagonal + diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.AddArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -261,7 +261,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             // diagonal - diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.SubtractArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -322,7 +322,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -344,7 +344,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex[diagonalResult._data.Length];
                 var otherDataCopy = new Complex[diagonalResult._data.Length];
@@ -397,7 +397,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex[diagonalResult._data.Length];
                 var otherDataCopy = new Complex[diagonalResult._data.Length];
@@ -441,7 +441,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex[diagonalResult._data.Length];
                 var otherDataCopy = new Complex[diagonalResult._data.Length];
@@ -487,7 +487,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex[diagonalResult._data.Length];
                 var otherDataCopy = new Complex[diagonalResult._data.Length];
@@ -540,7 +540,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new Complex[diagonalResult._data.Length];
                 var otherDataCopy = new Complex[diagonalResult._data.Length];
@@ -600,7 +600,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -630,7 +630,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<Complex>;
                 var denseResult = result.Storage as DenseVectorStorage<Complex>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     // TODO: merge/MulByConj
                     LinearAlgebraControl.Provider.ConjugateArray(_data, denseResult.Data);
@@ -856,7 +856,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void LowerTriangle(Matrix<Complex> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -890,7 +890,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyLowerTriangle(Matrix<Complex> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -914,7 +914,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void UpperTriangle(Matrix<Complex> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -943,7 +943,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyUpperTriangle(Matrix<Complex> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }

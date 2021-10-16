@@ -27,18 +27,18 @@ namespace MathNet.Numerics.Optimization.TrustRegion.Subproblems
                 HitBoundary = false;
                 Pstep = Pgn;
             }
-            else if (alpha * Psd.L2Norm() >= delta)
+            else if ((alpha * Psd.L2Norm()) >= delta)
             {
                 // Psd is outside trust region radius
                 HitBoundary = true;
-                Pstep = delta / Psd.L2Norm() * Psd;
+                Pstep = (delta / Psd.L2Norm()) * Psd;
             }
             else
             {
                 // Pstep is intersection of the trust region boundary
                 HitBoundary = true;
                 var beta = Util.FindBeta(alpha, Psd, Pgn, delta).Item2;
-                Pstep = alpha * Psd + beta * (Pgn - alpha * Psd);
+                Pstep = (alpha * Psd) + (beta * (Pgn - (alpha * Psd)));
             }
         }
     }

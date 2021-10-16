@@ -72,7 +72,7 @@ namespace MathNet.Numerics.Optimization
             // First step
             var steepestDirection = -gradient;
             var searchDirection = steepestDirection;
-            double initialStepSize = 100 * gradientTolerance / (gradient * gradient);
+            double initialStepSize = (100 * gradientTolerance) / (gradient * gradient);
 
             LineSearchResult result;
             try
@@ -94,13 +94,13 @@ namespace MathNet.Numerics.Optimization
             int totalLineSearchSteps = result.Iterations;
             int iterationsWithNontrivialLineSearch = result.Iterations > 0 ? 0 : 1;
             int steepestDescentResets = 0;
-            while (objective.Gradient.Norm(2.0) >= gradientTolerance && iterations < maxIterations)
+            while ((objective.Gradient.Norm(2.0) >= gradientTolerance) && (iterations < maxIterations))
             {
                 var previousSteepestDirection = steepestDirection;
                 steepestDirection = -objective.Gradient;
-                var searchDirectionAdjuster = Math.Max(0, steepestDirection*(steepestDirection - previousSteepestDirection)/(previousSteepestDirection*previousSteepestDirection));
-                searchDirection = steepestDirection + searchDirectionAdjuster * searchDirection;
-                if (searchDirection * objective.Gradient >= 0)
+                var searchDirectionAdjuster = Math.Max(0, (steepestDirection*(steepestDirection - previousSteepestDirection))/(previousSteepestDirection*previousSteepestDirection));
+                searchDirection = steepestDirection + (searchDirectionAdjuster * searchDirection);
+                if ((searchDirection * objective.Gradient) >= 0)
                 {
                     searchDirection = steepestDirection;
                     steepestDescentResets += 1;

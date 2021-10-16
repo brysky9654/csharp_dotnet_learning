@@ -96,8 +96,8 @@ namespace MathNet.Numerics
             }
 
             var q = b > 0d
-                ? -0.5*(b + new Complex(b*b - 4*a*c, 0d).SquareRoot())
-                : -0.5*(b - new Complex(b*b - 4*a*c, 0d).SquareRoot());
+                ? -0.5*(b + new Complex((b*b) - (4*a*c), 0d).SquareRoot())
+                : -0.5*(b - new Complex((b*b) - (4*a*c), 0d).SquareRoot());
 
             return new Tuple<Complex, Complex>(q/a, c/q);
         }
@@ -155,7 +155,7 @@ namespace MathNet.Numerics
             var samples = new double[degree];
             for (int i = 0; i < samples.Length; i++)
             {
-                samples[i] = location + scale*Math.Cos(((2*i) + 1)*angleFactor);
+                samples[i] = location + (scale*Math.Cos(((2*i) + 1)*angleFactor));
             }
             return samples;
         }
@@ -184,7 +184,7 @@ namespace MathNet.Numerics
             var samples = new double[degree];
             for (int i = 0; i < samples.Length; i++)
             {
-                samples[i] = location + scale*Math.Cos((i + 1)*angleFactor);
+                samples[i] = location + (scale*Math.Cos((i + 1)*angleFactor));
             }
             return samples;
         }

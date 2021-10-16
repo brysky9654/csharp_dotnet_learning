@@ -110,7 +110,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="scale">The scale (b) of the distribution. Range: b > 0.</param>
         public static bool IsValidParameterSet(double location, double scale)
         {
-            return scale > 0.0 && !double.IsNaN(location);
+            return (scale > 0.0) && !double.IsNaN(location);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="PDFLn"/>
         public double DensityLn(double x)
         {
-            return -Math.Abs(x - _location)/_scale - Math.Log(2.0*_scale);
+            return (-Math.Abs(x - _location)/_scale) - Math.Log(2.0*_scale);
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            return -Math.Abs(x - location)/scale - Math.Log(2.0*scale);
+            return (-Math.Abs(x - location)/scale) - Math.Log(2.0*scale);
         }
 
         /// <summary>

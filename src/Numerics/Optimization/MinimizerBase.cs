@@ -66,8 +66,8 @@ namespace MathNet.Numerics.Optimization
             {
                 double projectedGradient = GetProjectedGradient(candidatePoint, ii);
 
-                double tmp = projectedGradient *
-                    Math.Max(Math.Abs(candidatePoint.Point[ii]), 1.0) / normalizer;
+                double tmp = (projectedGradient *
+                              Math.Max(Math.Abs(candidatePoint.Point[ii]), 1.0)) / normalizer;
                 relativeGradient = Math.Max(relativeGradient, Math.Abs(tmp));
             }
             if (relativeGradient < GradientTolerance)
@@ -90,7 +90,7 @@ namespace MathNet.Numerics.Optimization
                 }
 
                 double functionChange = candidatePoint.Value - lastPoint.Value;
-                if (iterations > 500 && functionChange < 0 && Math.Abs(functionChange) < FunctionProgressTolerance)
+                if ((iterations > 500) && (functionChange < 0) && (Math.Abs(functionChange) < FunctionProgressTolerance))
                     return ExitCondition.LackOfProgress;
             }
 

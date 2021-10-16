@@ -292,7 +292,7 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || x == 0.0)
+            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || (x == 0.0))
             {
                 return 0.0;
             }
@@ -302,7 +302,7 @@ namespace MathNet.Numerics.Distributions
                 return Math.Exp(PDFLn(freedom, x));
             }
 
-            return (Math.Pow(2.0, 1.0 - (freedom/2.0))*Math.Pow(x, freedom - 1.0)*Math.Exp(-x*x/2.0))/SpecialFunctions.Gamma(freedom/2.0);
+            return (Math.Pow(2.0, 1.0 - (freedom/2.0))*Math.Pow(x, freedom - 1.0)*Math.Exp((-x*x)/2.0))/SpecialFunctions.Gamma(freedom/2.0);
         }
 
         /// <summary>
@@ -319,12 +319,12 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || x == 0.0)
+            if (double.IsPositiveInfinity(freedom) || double.IsPositiveInfinity(x) || (x == 0.0))
             {
                 return double.NegativeInfinity;
             }
 
-            return ((1.0 - (freedom/2.0))*Math.Log(2.0)) + ((freedom - 1.0)*Math.Log(x)) - (x*x/2.0) - SpecialFunctions.GammaLn(freedom/2.0);
+            return (((1.0 - (freedom/2.0))*Math.Log(2.0)) + ((freedom - 1.0)*Math.Log(x))) - ((x*x)/2.0) - SpecialFunctions.GammaLn(freedom/2.0);
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace MathNet.Numerics.Distributions
                 return 1.0;
             }
 
-            return SpecialFunctions.GammaLowerRegularized(freedom/2.0, x*x/2.0);
+            return SpecialFunctions.GammaLowerRegularized(freedom/2.0, (x*x)/2.0);
         }
 
         /// <summary>

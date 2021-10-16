@@ -134,7 +134,7 @@ namespace MathNet.Numerics.Random
             ShortLag = shortLag;
 
             // Align LongLag to number of worker threads.
-            if (longLag%_threads == 0)
+            if ((longLag%_threads) == 0)
             {
                 LongLag = longLag;
             }
@@ -266,7 +266,7 @@ namespace MathNet.Numerics.Random
             var longLag = DefaultLongLag;
 
             // Align LongLag to number of worker threads.
-            if (longLag%threads != 0)
+            if ((longLag%threads) != 0)
             {
                 longLag = ((longLag/threads) + 1)*threads;
             }
@@ -327,7 +327,7 @@ namespace MathNet.Numerics.Random
             var longLag = DefaultLongLag;
 
             // Align LongLag to number of worker threads.
-            if (longLag%threads != 0)
+            if ((longLag%threads) != 0)
             {
                 longLag = ((longLag/threads) + 1)*threads;
             }

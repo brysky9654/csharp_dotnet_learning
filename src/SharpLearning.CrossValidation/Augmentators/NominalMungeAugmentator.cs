@@ -28,7 +28,7 @@ namespace SharpLearning.CrossValidation.Augmentators
         /// <param name="seed">Seed for random augmentation</param>
         public NominalMungeAugmentator(double probabilityParameter=0.2, int seed = 432)
         {
-            if (probabilityParameter > 1.0 || probabilityParameter < 0.0)
+            if ((probabilityParameter > 1.0) || (probabilityParameter < 0.0))
             { throw new ArgumentException("probabilityParameter must be between 0.0 and 1.0. Was: " + probabilityParameter); }
 
             m_probabilityParameter = probabilityParameter;
@@ -86,7 +86,7 @@ namespace SharpLearning.CrossValidation.Augmentators
                         var sampleValue = sample[h];
                         var candiateValue = candidate[h];
 
-                        if (m_random.NextDouble() <= m_probabilityParameter && m_probabilityParameter != 0.0)
+                        if ((m_random.NextDouble() <= m_probabilityParameter) && (m_probabilityParameter != 0.0))
                         {
                             // switch values
                             augmentation.At(j, h, candiateValue);

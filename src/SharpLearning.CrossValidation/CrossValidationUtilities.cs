@@ -43,7 +43,7 @@ namespace SharpLearning.CrossValidation
             
             for (int i = 0; i < foldCount; i++)
             {
-                var lastFold = (i == foldCount - 1);
+                var lastFold = (i == (foldCount - 1));
                 int[] validationIndices;
 
                 if (lastFold) // handle remainders.

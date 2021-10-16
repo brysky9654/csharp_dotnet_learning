@@ -96,7 +96,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="p">The probability (p) of generating one. Range: 0 ≤ p ≤ 1.</param>
         public static bool IsValidParameterSet(double p)
         {
-            return p >= 0.0 && p <= 1.0;
+            return (p >= 0.0) && (p <= 1.0);
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the probability mass at location <paramref name="k"/>.</returns>
         public static double PMF(double p, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -255,7 +255,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the log probability mass at location <paramref name="k"/>.</returns>
         public static double PMFLn(double p, int k)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -277,7 +277,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double p, double x)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -365,7 +365,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>A sample from the Bernoulli distribution.</returns>
         public static int Sample(System.Random rnd, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -381,7 +381,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<int> Samples(System.Random rnd, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -398,7 +398,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, int[] values, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -413,7 +413,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>A sample from the Bernoulli distribution.</returns>
         public static int Sample(double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -428,7 +428,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<int> Samples(double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -444,7 +444,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(int[] values, double p)
         {
-            if (!(p >= 0.0 && p <= 1.0))
+            if (!((p >= 0.0) && (p <= 1.0)))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

@@ -158,7 +158,7 @@ namespace MathNet.Numerics.Distributions
             var sum = 0.0;
             foreach (var t in p)
             {
-                if (t < 0.0 || double.IsNaN(t))
+                if ((t < 0.0) || double.IsNaN(t))
                 {
                     return false;
                 }

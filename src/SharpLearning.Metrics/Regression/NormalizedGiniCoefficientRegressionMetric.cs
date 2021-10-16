@@ -18,7 +18,7 @@ namespace SharpLearning.Metrics.Regression
         /// <returns></returns>
         public double Error(double[] target, double[] predicted)
         {
-            return 1.0 - GiniCoefficient(target, predicted) / GiniCoefficient(target, target);
+            return 1.0 - (GiniCoefficient(target, predicted) / GiniCoefficient(target, target));
         }
 
         /// <summary>

@@ -145,8 +145,8 @@ namespace MathNet.Numerics.Statistics.Mcmc
 
                 // Create a horizontal interval (x_l, x_r) enclosing x.
                 double r = RandomSource.NextDouble();
-                double xL = _current - r * Scale;
-                double xR = _current + (1.0 - r) * Scale;
+                double xL = _current - (r * Scale);
+                double xR = _current + ((1.0 - r) * Scale);
 
                 // Stepping out procedure.
                 while (_pdfLnP(xL) > lu) { xL -= Scale; }
@@ -155,7 +155,7 @@ namespace MathNet.Numerics.Statistics.Mcmc
                 // Shrinking: propose new x and shrink interval until good one found.
                 while (true)
                 {
-                    double xnew = RandomSource.NextDouble() * (xR - xL) + xL;
+                    double xnew = (RandomSource.NextDouble() * (xR - xL)) + xL;
                     _currentDensityLn = _pdfLnP(xnew);
                     if (_currentDensityLn > lu)
                     {

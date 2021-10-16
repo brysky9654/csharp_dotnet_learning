@@ -186,7 +186,7 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
         /// </summary>
         public void SetObserved(Vector<double> observedX, Vector<double> observedY, Vector<double> weights = null)
         {
-            if (observedX == null || observedY == null)
+            if ((observedX == null) || (observedY == null))
             {
                 throw new ArgumentNullException("The data set can't be null.");
             }
@@ -197,19 +197,19 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
             ObservedX = observedX;
             ObservedY = observedY;
 
-            if (weights != null && weights.Count != observedY.Count)
+            if ((weights != null) && (weights.Count != observedY.Count))
             {
                 throw new ArgumentException("The weightings can't have different from observations.");
             }
-            if (weights != null && weights.Count(x => double.IsInfinity(x) || double.IsNaN(x)) > 0)
+            if ((weights != null) && (weights.Count(x => double.IsInfinity(x) || double.IsNaN(x)) > 0))
             {
                 throw new ArgumentException("The weightings are not well-defined.");
             }
-            if (weights != null && weights.Count(x => x == 0) == weights.Count)
+            if ((weights != null) && (weights.Count(x => x == 0) == weights.Count))
             {
                 throw new ArgumentException("All the weightings can't be zero.");
             }
-            if (weights != null && weights.Count(x => x < 0) > 0)
+            if ((weights != null) && (weights.Count(x => x < 0) > 0))
             {
                 weights = weights.PointwiseAbs();
             }
@@ -236,11 +236,11 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
             }
             coefficients = initialGuess;
             
-            if (isFixed != null && isFixed.Count != initialGuess.Count)
+            if ((isFixed != null) && (isFixed.Count != initialGuess.Count))
             {
                 throw new ArgumentException("The isFixed can't have different size from the initial guess.");
             }
-            if (isFixed != null && isFixed.Count(p => p == true) == isFixed.Count)
+            if ((isFixed != null) && (isFixed.Count(p => p == true) == isFixed.Count))
             {
                 throw new ArgumentException("All the parameters can't be fixed.");
             }
@@ -322,7 +322,7 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
             {
                 for (int j = 0; j < NumberOfParameters; j++)
                 {
-                    if (IsFixed != null && IsFixed[j])
+                    if ((IsFixed != null) && IsFixed[j])
                     {
                         // if j-th parameter is fixed, set J[i, j] = 0
                         jacobianValue[i, j] = 0.0;
@@ -357,49 +357,49 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
                 if (accuracyOrder >= 6)
                 {
                     // f'(x) = {- f(x - 3h) + 9f(x - 2h) - 45f(x - h) + 45f(x + h) - 9f(x + 2h) + f(x + 3h)} / 60h + O(h^6)
-                    var f1 = userFunction(parameters - 3 * h, ObservedX);
-                    var f2 = userFunction(parameters - 2 * h, ObservedX);
-                    var f3 = userFunction(parameters - h, ObservedX);
-                    var f4 = userFunction(parameters + h, ObservedX);
-                    var f5 = userFunction(parameters + 2 * h, ObservedX);
-                    var f6 = userFunction(parameters + 3 * h, ObservedX);
+                    var f1 = userFunction(parameters - (3 * h), ObservedX);
+                    var f2 = userFunction(parameters - (2 * h), ObservedX);
+                    var f3 = userFunction(parameters - h,       ObservedX);
+                    var f4 = userFunction(parameters + h,       ObservedX);
+                    var f5 = userFunction(parameters + (2 * h), ObservedX);
+                    var f6 = userFunction(parameters + (3 * h), ObservedX);
 
-                    var prime = (-f1 + 9 * f2 - 45 * f3 + 45 * f4 - 9 * f5 + f6) / (60 * h[j]);
+                    var prime = (((((-f1 + (9 * f2)) - (45 * f3)) + (45 * f4)) - (9 * f5)) + f6) / (60 * h[j]);
                     derivertives.SetColumn(j, prime);
                 }
                 else if (accuracyOrder == 5)
                 {
                     // f'(x) = {-137f(x) + 300f(x + h) - 300f(x + 2h) + 200f(x + 3h) - 75f(x + 4h) + 12f(x + 5h)} / 60h + O(h^5)
                     var f1 = currentValues;
-                    var f2 = userFunction(parameters + h, ObservedX);
-                    var f3 = userFunction(parameters + 2 * h, ObservedX);
-                    var f4 = userFunction(parameters + 3 * h, ObservedX);
-                    var f5 = userFunction(parameters + 4 * h, ObservedX);
-                    var f6 = userFunction(parameters + 5 * h, ObservedX);
+                    var f2 = userFunction(parameters + h,       ObservedX);
+                    var f3 = userFunction(parameters + (2 * h), ObservedX);
+                    var f4 = userFunction(parameters + (3 * h), ObservedX);
+                    var f5 = userFunction(parameters + (4 * h), ObservedX);
+                    var f6 = userFunction(parameters + (5 * h), ObservedX);
 
-                    var prime = (-137 * f1 + 300 * f2 - 300 * f3 + 200 * f4 - 75 * f5 + 12 * f6) / (60 * h[j]);
+                    var prime = ((((((-137 * f1) + (300 * f2)) - (300 * f3)) + (200 * f4)) - (75 * f5)) + (12 * f6)) / (60 * h[j]);
                     derivertives.SetColumn(j, prime);
                 }
                 else if (accuracyOrder == 4)
                 {
                     // f'(x) = {f(x - 2h) - 8f(x - h) + 8f(x + h) - f(x + 2h)} / 12h + O(h^4)
-                    var f1 = userFunction(parameters - 2 * h, ObservedX);
-                    var f2 = userFunction(parameters - h, ObservedX);
-                    var f3 = userFunction(parameters + h, ObservedX);
-                    var f4 = userFunction(parameters + 2 * h, ObservedX);
+                    var f1 = userFunction(parameters - (2 * h), ObservedX);
+                    var f2 = userFunction(parameters - h,       ObservedX);
+                    var f3 = userFunction(parameters + h,       ObservedX);
+                    var f4 = userFunction(parameters + (2 * h), ObservedX);
 
-                    var prime = (f1 - 8 * f2 + 8 * f3 - f4) / (12 * h[j]);
+                    var prime = (((f1 - (8 * f2)) + (8 * f3)) - f4) / (12 * h[j]);
                     derivertives.SetColumn(j, prime);
                 }
                 else if (accuracyOrder == 3)
                 {
                     // f'(x) = {-11f(x) + 18f(x + h) - 9f(x + 2h) + 2f(x + 3h)} / 6h + O(h^3)
                     var f1 = currentValues;
-                    var f2 = userFunction(parameters + h, ObservedX);
-                    var f3 = userFunction(parameters + 2 * h, ObservedX);
-                    var f4 = userFunction(parameters + 3 * h, ObservedX);
+                    var f2 = userFunction(parameters + h,       ObservedX);
+                    var f3 = userFunction(parameters + (2 * h), ObservedX);
+                    var f4 = userFunction(parameters + (3 * h), ObservedX);
 
-                    var prime = (-11 * f1 + 18 * f2 - 9 * f3 + 2 * f4) / (6 * h[j]);
+                    var prime = ((((-11 * f1) + (18 * f2)) - (9 * f3)) + (2 * f4)) / (6 * h[j]);
                     derivertives.SetColumn(j, prime);
                 }
                 else if (accuracyOrder == 2)

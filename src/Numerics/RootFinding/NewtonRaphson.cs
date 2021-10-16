@@ -98,7 +98,7 @@ namespace MathNet.Numerics.RootFinding
             }
 
             root = initialGuess;
-            for (int i = 0; i < maxIterations && root >= lowerBound && root <= upperBound; i++)
+            for (int i = 0; (i < maxIterations) && (root >= lowerBound) && (root <= upperBound); i++)
             {
                 // Evaluation
                 double fx = f(root);
@@ -108,7 +108,7 @@ namespace MathNet.Numerics.RootFinding
                 double step = fx/dfx;
                 root -= step;
 
-                if (Math.Abs(step) < accuracy && Math.Abs(fx) < accuracy)
+                if ((Math.Abs(step) < accuracy) && (Math.Abs(fx) < accuracy))
                 {
                     return true;
                 }

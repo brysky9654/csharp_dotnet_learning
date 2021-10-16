@@ -86,7 +86,7 @@ namespace SharpLearning.Ensemble.Models
                     .Probabilities.Values.ToArray();
                 for (int j = 0; j < m_numberOfClasses; j++)
                 {
-                    ensemblePredictions[i * m_numberOfClasses + j] = probabilities[j];
+                    ensemblePredictions[(i * m_numberOfClasses) + j] = probabilities[j];
                 }
             }
 

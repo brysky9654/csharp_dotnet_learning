@@ -52,7 +52,7 @@ namespace MathNet.Numerics.Integration
             }
 
             double midpoint = (intervalEnd + intervalBegin)/2;
-            return (intervalEnd - intervalBegin)/6*(f(intervalBegin) + f(intervalEnd) + (4*f(midpoint)));
+            return ((intervalEnd - intervalBegin)/6)*(f(intervalBegin) + f(intervalEnd) + (4*f(midpoint)));
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace MathNet.Numerics.Integration
             double offset = step;
             int m = 4;
             double sum = f(intervalBegin) + f(intervalEnd);
-            for (int i = 0; i < numberOfPartitions - 1; i++)
+            for (int i = 0; i < (numberOfPartitions - 1); i++)
             {
                 // NOTE (cdrnet, 2009-01-07): Do not combine intervalBegin and offset (numerical stability)
                 sum += m*f(intervalBegin + offset);

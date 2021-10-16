@@ -215,7 +215,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             // diagonal + diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.AddArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -239,7 +239,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             // diagonal - diagonal = diagonal
             var diagOther = other as DiagonalMatrix;
             var diagResult = result as DiagonalMatrix;
-            if (diagOther != null && diagResult != null)
+            if ((diagOther != null) && (diagResult != null))
             {
                 LinearAlgebraControl.Provider.SubtractArrays(_data, diagOther._data, diagResult._data);
                 return;
@@ -300,7 +300,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<float>;
                 var denseResult = result.Storage as DenseVectorStorage<float>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -322,7 +322,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new float[diagonalResult._data.Length];
                 var otherDataCopy = new float[diagonalResult._data.Length];
@@ -375,7 +375,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new float[diagonalResult._data.Length];
                 var otherDataCopy = new float[diagonalResult._data.Length];
@@ -419,7 +419,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         {
             var diagonalOther = other as DiagonalMatrix;
             var diagonalResult = result as DiagonalMatrix;
-            if (diagonalOther != null && diagonalResult != null)
+            if ((diagonalOther != null) && (diagonalResult != null))
             {
                 var thisDataCopy = new float[diagonalResult._data.Length];
                 var otherDataCopy = new float[diagonalResult._data.Length];
@@ -480,7 +480,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
             {
                 var denseOther = rightSide.Storage as DenseVectorStorage<float>;
                 var denseResult = result.Storage as DenseVectorStorage<float>;
-                if (denseOther != null && denseResult != null)
+                if ((denseOther != null) && (denseResult != null))
                 {
                     LinearAlgebraControl.Provider.PointWiseMultiplyArrays(_data, denseOther.Data, denseResult.Data);
                     return;
@@ -704,7 +704,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void LowerTriangle(Matrix<float> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -738,7 +738,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyLowerTriangle(Matrix<float> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -762,7 +762,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void UpperTriangle(Matrix<float> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -791,7 +791,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the same as this matrix.</exception>
         public override void StrictlyUpperTriangle(Matrix<float> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }

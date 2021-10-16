@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace MathNet.Numerics.Integration.GaussRule
 {
@@ -393,12 +392,12 @@ namespace MathNet.Numerics.Integration.GaussRule
 
             // Calculate Abscissas for Kronrod polynomial
 
-            int r = gaussOrder.IsOdd() ? (gaussOrder - 1) / 2 + 1 : gaussOrder / 2 + 1;
+            int r = gaussOrder.IsOdd() ? ((gaussOrder - 1) / 2) + 1 : (gaussOrder / 2) + 1;
             var kronrodAbscissas = new double[r];
 
-            for (int k = 1; k <= gaussOrder + 1; k = k + 2)
+            for (int k = 1; k <= (gaussOrder + 1); k = k + 2)
             {
-                var x0 = (1.0 - (1.0 - 1.0 / gaussOrder) / (8 * gaussOrder * gaussOrder)) * Math.Cos((k - 0.5) * Math.PI / (2.0 * gaussOrder + 1.0));
+                var x0 = (1.0 - ((1.0 - (1.0 / gaussOrder)) / (8 * gaussOrder * gaussOrder))) * Math.Cos(((k - 0.5) * Math.PI) / ((2.0 * gaussOrder) + 1.0));
                 var dx = 0d;
                 var j = 1; // iterations
 
@@ -410,7 +409,7 @@ namespace MathNet.Numerics.Integration.GaussRule
                     x0 = x0 - dx;
                     j++;
                 }
-                while (Math.Abs(dx) > eps && j < 100);
+                while ((Math.Abs(dx) > eps) && (j < 100));
 
                 if (Math.Abs(x0) < Precision.MachineEpsilon) x0 = 0.0;
 
@@ -435,8 +434,8 @@ namespace MathNet.Numerics.Integration.GaussRule
                 var L = LegendreP(gaussOrder, x);
 
                 var p = L.Item2;
-                var w2 = 2.0 / ((1.0 - x * x) * p * p); // Gauss weight
-                weights[i] = w2 + 2.0 / ((gaussOrder + 1.0) * p * E.Item1);
+                var w2 = 2.0 / ((1.0 - (x * x)) * p * p); // Gauss weight
+                weights[i] = w2 + (2.0 / ((gaussOrder + 1.0) * p * E.Item1));
             }
             for (int i = kronrodStart; i < abscissas.Length; i += 2)
             {
@@ -487,7 +486,7 @@ namespace MathNet.Numerics.Integration.GaussRule
 
             int n = order - 1;
             int q = n.IsOdd() ? 1 : 0;
-            int r = n.IsOdd() ? (n - 1) / 2 + 2 : n / 2 + 1;
+            int r = n.IsOdd() ? ((n - 1) / 2) + 2 : (n / 2) + 1;
 
             double[] a = new double[r + 1];
 
@@ -508,21 +507,21 @@ namespace MathNet.Numerics.Integration.GaussRule
             {
                 double ratio = 1.0;
                 a[r - k] = 0.0;
-                for (int i = r + 1 - k; i <= r; i++)
+                for (int i = (r + 1) - k; i <= r; i++)
                 {
-                    double numerator = (n - q + 2 * (i + k - 1)) * (n + q + 2 * (k - i + 1)) * (n - 1 - q + 2 * (i - k)) * (2 * (k + i - 1) - 1 - q - n);
-                    double denominator = (n - q + 2 * (i - k)) * (2 * (k + i - 1) - q - n) * (n + 1 + q + 2 * (k - i)) * (n - 1 - q + 2 * (i + k));
-                    ratio = ratio * numerator / denominator;
+                    double numerator = ((n - q) + (2 * ((i + k) - 1))) * (n + q + (2 * ((k - i) + 1))) * ((n - 1 - q) + (2 * (i - k))) * ((2 * ((k + i) - 1)) - 1 - q - n);
+                    double denominator = ((n - q) + (2 * (i - k))) * ((2 * ((k + i) - 1)) - q - n) * (n + 1 + q + (2 * (k - i))) * ((n - 1 - q) + (2 * (i + k)));
+                    ratio = (ratio * numerator) / denominator;
                     a[r - k] -= a[i] * ratio; 
                 }
             }
 
             // K = sum c[k] P[k, x] 
 
-            double[] c = new double[2 * r - q];
+            double[] c = new double[(2 * r) - q];
             for (int i = 1; i < a.Length; i++)
             {
-                c[2 * i - 1 - q] = a[i];
+                c[(2 * i) - 1 - q] = a[i];
             }
 
             return c;
@@ -551,15 +550,15 @@ namespace MathNet.Numerics.Integration.GaussRule
             if (a.Length == 1)
                 return new Tuple<double, double>(a[0], 0);
             if (a.Length == 2)
-                return new Tuple<double, double>(a[0] + a[1] * x, a[1]);
+                return new Tuple<double, double>(a[0] + (a[1] * x), a[1]);
 
             double b0 = 0.0, b1 = 0.0, b2 = 0.0;
             double p0 = 0.0, p1 = 0.0, p2 = 0.0;
 
             for (int k = a.Length - 1; k >= 1; k--)
             {
-                b0 = a[k] + (2.0 * k + 1.0) / (k + 1.0) * x * b1 - (k + 1.0) / (k + 2.0) * b2;
-                p0 = (2.0 * k + 1.0) / (k + 1.0) * (b1 + x * p1) - (k + 1.0) / (k + 2.0) * p2;
+                b0 = (a[k] + ((((2.0 * k) + 1.0) / (k + 1.0)) * x * b1)) - (((k + 1.0) / (k + 2.0)) * b2);
+                p0 = ((((2.0 * k) + 1.0) / (k + 1.0)) * (b1 + (x * p1))) - (((k + 1.0) / (k + 2.0)) * p2);
 
                 b2 = b1;
                 b1 = b0;
@@ -567,8 +566,8 @@ namespace MathNet.Numerics.Integration.GaussRule
                 p1 = p0;
             }
 
-            var value = a[0] + b1 * x - 0.5 * b2;
-            var derivative = b1 + p1 * x - 0.5 * p2;
+            var value = (a[0] + (b1 * x)) - (0.5 * b2);
+            var derivative = (b1 + (p1 * x)) - (0.5 * p2);
 
             return new Tuple<double, double>( value, derivative );
         }
@@ -600,8 +599,8 @@ namespace MathNet.Numerics.Integration.GaussRule
 
             for (int k = 1; k <= order; k++)
             {
-                b0 = (2.0 * k - 1.0) / k * x * b1 - (k - 1.0) / k * b2; // L(k, x)
-                p0 = (2.0 * k - 1.0) / k * (b1 + x * p1) - (k - 1.0) / k * p2; // L'(k, x)
+                b0 = ((((2.0 * k) - 1.0) / k) * x * b1) - (((k - 1.0) / k) * b2);          // L(k, x)
+                p0 = ((((2.0 * k) - 1.0) / k) * (b1 + (x * p1))) - (((k - 1.0) / k) * p2); // L'(k, x)
                 
                 b2 = b1;
                 b1 = b0;

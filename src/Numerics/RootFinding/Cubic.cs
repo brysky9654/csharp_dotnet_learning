@@ -48,8 +48,8 @@ namespace MathNet.Numerics.RootFinding
         /// </summary>
         static void QR(double a2, double a1, double a0, out double Q, out double R)
         {
-            Q = (3*a1 - a2*a2)/9.0;
-            R = (9.0*a2*a1 - 27*a0 - 2*a2*a2*a2)/54.0;
+            Q = ((3*a1) - (a2*a2))/9.0;
+            R = ((9.0*a2*a1) - (27*a0) - (2*a2*a2*a2))/54.0;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace MathNet.Numerics.RootFinding
             QR(a2, a1, a0, out Q, out R);
 
             var Q3 = Q*Q*Q;
-            var D = Q3 + R*R;
+            var D = Q3 + (R*R);
             var shift = -a2/3d;
 
             double x1;
@@ -93,9 +93,9 @@ namespace MathNet.Numerics.RootFinding
             {
                 // 3 real roots, use eqn (70)-(73) to calculate the real roots
                 double theta = Math.Acos(R/Math.Sqrt(-Q3));
-                x1 = 2d*Math.Sqrt(-Q)*Math.Cos(theta/3.0) + shift;
-                x2 = 2d*Math.Sqrt(-Q)*Math.Cos((theta + 2.0*Constants.Pi)/3d) + shift;
-                x3 = 2d*Math.Sqrt(-Q)*Math.Cos((theta - 2.0*Constants.Pi)/3d) + shift;
+                x1 = (2d*Math.Sqrt(-Q)*Math.Cos(theta/3.0)) + shift;
+                x2 = (2d*Math.Sqrt(-Q)*Math.Cos((theta + (2.0*Constants.Pi))/3d)) + shift;
+                x3 = (2d*Math.Sqrt(-Q)*Math.Cos((theta - (2.0*Constants.Pi))/3d)) + shift;
             }
 
             return new Tuple<double, double, double>(x1, x2, x3);
@@ -107,11 +107,11 @@ namespace MathNet.Numerics.RootFinding
         /// </summary>
         public static Tuple<Complex, Complex, Complex> Roots(double d, double c, double b, double a)
         {
-            double A = b*b - 3*a*c;
-            double B = 2*b*b*b - 9*a*b*c + 27*a*a*d;
+            double A = (b*b) - (3*a*c);
+            double B = ((2*b*b*b) - (9*a*b*c)) + (27*a*a*d);
             double s = -1/(3*a);
 
-            double D = (B*B - 4*A*A*A)/(-27*a*a);
+            double D = ((B*B) - (4*A*A*A))/(-27*a*a);
             if (D == 0d)
             {
                 if (A == 0d)
@@ -120,19 +120,19 @@ namespace MathNet.Numerics.RootFinding
                     return new Tuple<Complex, Complex, Complex>(u, u, u);
                 }
 
-                var v = new Complex((9*a*d - b*c)/(2*A), 0d);
-                var w = new Complex((4*a*b*c - 9*a*a*d - b*b*b)/(a*A), 0d);
+                var v = new Complex(((9*a*d) - (b*c))/(2*A),                 0d);
+                var w = new Complex(((4*a*b*c) - (9*a*a*d) - (b*b*b))/(a*A), 0d);
                 return new Tuple<Complex, Complex, Complex>(v, v, w);
             }
 
             var C = (A == 0)
                 ? new Complex(B, 0d).CubicRoots()
-                : ((B + Complex.Sqrt(B*B - 4*A*A*A))/2).CubicRoots();
+                : ((B + Complex.Sqrt((B*B) - (4*A*A*A)))/2).CubicRoots();
 
             return new Tuple<Complex, Complex, Complex>(
-                s*(b + C.Item1 + A/C.Item1),
-                s*(b + C.Item2 + A/C.Item2),
-                s*(b + C.Item3 + A/C.Item3));
+                s*(b + C.Item1 + (A/C.Item1)),
+                s*(b + C.Item2 + (A/C.Item2)),
+                s*(b + C.Item3 + (A/C.Item3)));
         }
     }
 }

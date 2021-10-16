@@ -236,7 +236,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             var otherDense = other as DenseVector;
             var resultDense = result as DenseVector;
 
-            if (otherDense == null || resultDense == null)
+            if ((otherDense == null) || (resultDense == null))
             {
                 base.DoAdd(other, result);
             }
@@ -298,7 +298,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             var otherDense = other as DenseVector;
             var resultDense = result as DenseVector;
 
-            if (otherDense == null || resultDense == null)
+            if ((otherDense == null) || (resultDense == null))
             {
                 base.DoSubtract(other, result);
             }
@@ -613,7 +613,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             var denseOther = other as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseOther == null || denseResult == null)
+            if ((denseOther == null) || (denseResult == null))
             {
                 base.DoPointwiseMultiply(other, result);
             }
@@ -634,7 +634,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             var denseOther = divisor as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseOther == null || denseResult == null)
+            if ((denseOther == null) || (denseResult == null))
             {
                 base.DoPointwiseDivide(divisor, result);
             }
@@ -654,7 +654,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
             var denseExponent = exponent as DenseVector;
             var denseResult = result as DenseVector;
 
-            if (denseExponent == null || denseResult == null)
+            if ((denseExponent == null) || (denseResult == null))
             {
                 base.DoPointwisePower(exponent, result);
             }
@@ -723,11 +723,11 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32
                 for (int i = 0; i < weakTokens.Length; i++)
                 {
                     current += weakTokens[i];
-                    if (current.EndsWith("+") || current.EndsWith("-") || current.StartsWith("(") && !current.EndsWith(")"))
+                    if (current.EndsWith("+") || current.EndsWith("-") || (current.StartsWith("(") && !current.EndsWith(")")))
                     {
                         continue;
                     }
-                    var ahead = i < weakTokens.Length - 1 ? weakTokens[i + 1] : string.Empty;
+                    var ahead = i < (weakTokens.Length - 1) ? weakTokens[i + 1] : string.Empty;
                     if (ahead.StartsWith("+") || ahead.StartsWith("-"))
                     {
                         continue;

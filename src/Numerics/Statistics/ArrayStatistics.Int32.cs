@@ -268,7 +268,7 @@ namespace MathNet.Numerics.Statistics
             ulong m = 0;
             for (int i = 0; i < data.Length; i++)
             {
-                mean += (data[i] * data[i] - mean) / ++m;
+                mean += ((data[i] * data[i]) - mean) / ++m;
             }
 
             return Math.Sqrt(mean);

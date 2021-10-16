@@ -97,8 +97,8 @@ namespace MathNet.Numerics.Integration.GaussRule
             int m = (order + 1) >> 1;
             double[] abscissas = new double[m];
             double[] weights = new double[m];
-            double t0 = 1.0 - (1.0 - 1.0 / order) / (8.0 * order * order);
-            double t1 = 1.0 / (4.0 * order + 2.0);
+            double t0 = 1.0 - ((1.0 - (1.0 / order)) / (8.0 * order * order));
+            double t1 = 1.0 / ((4.0 * order) + 2.0);
 
             // Find ith root of Legendre polynomial
             for (int i = 1; i <= m; i++)
@@ -128,7 +128,7 @@ namespace MathNet.Numerics.Integration.GaussRule
                             p1 = p0;
                             t2 = x0 * p1;
 
-                            p0 = t2 + ltbl[k] * (t2 - p2);
+                            p0 = t2 + (ltbl[k] * (t2 - p2));
                         }
                     }
                     else
@@ -140,7 +140,7 @@ namespace MathNet.Numerics.Integration.GaussRule
                             p1 = p0;
                             t2 = x0 * p1;
 
-                            p0 = t2 + ltbl[k] * (t2 - p2);
+                            p0 = t2 + (ltbl[k] * (t2 - p2));
                         }
 
                         for (k = 1024; k <= order; k++)
@@ -150,20 +150,20 @@ namespace MathNet.Numerics.Integration.GaussRule
                             t2 = x0 * p1;
                             double t3 = (k - 1.0) / k;
 
-                            p0 = t2 + t3 * (t2 - p2);
+                            p0 = t2 + (t3 * (t2 - p2));
                         }
                     }
 
-                    double dpdx = ((x0 * p0 - p1) * order) / (x0 * x0 - 1.0); // Compute Legendre polynomial derivative at x0
+                    double dpdx = (((x0 * p0) - p1) * order) / ((x0 * x0) - 1.0); // Compute Legendre polynomial derivative at x0
 
-                    x1 = x0 - p0 / dpdx; // Newton step
+                    x1 = x0 - (p0 / dpdx); // Newton step
 
-                    w1 = 2.0 / ((1.0 - x1 * x1) * dpdx * dpdx); // Weight computing
+                    w1 = 2.0 / ((1.0 - (x1 * x1)) * dpdx * dpdx); // Weight computing
 
                     // Compute weight w0 on first iteration, needed for dw
                     if (j == 0)
                     {
-                        w0 = 2.0 / ((1.0 - x0 * x0) * dpdx * dpdx);
+                        w0 = 2.0 / ((1.0 - (x0 * x0)) * dpdx * dpdx);
                     }
 
                     dx = x0 - x1;
@@ -173,7 +173,7 @@ namespace MathNet.Numerics.Integration.GaussRule
                     w0 = w1;
                     j++;
                 }
-                while ((Math.Abs(dx) > eps || Math.Abs(dw) > eps) && j < 100);
+                while (((Math.Abs(dx) > eps) || (Math.Abs(dw) > eps)) && (j < 100));
 
                 int index = (m - 1) - (i - 1);
 

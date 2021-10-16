@@ -85,13 +85,13 @@ namespace MathNet.Numerics.Optimization.LineSearch
             ExitCondition reasonForExit = ExitCondition.None;
             for (ii = 0; ii < MaximumIterations; ++ii)
             {
-                objective.EvaluateAt(startingPoint.Point + searchDirection * step);
+                objective.EvaluateAt(startingPoint.Point + (searchDirection * step));
                 ValidateGradient(objective);
                 ValidateValue(objective);
 
                 double stepDd = searchDirection * objective.Gradient;
 
-                if (objective.Value > initialValue + C1 * step * initialDd)
+                if (objective.Value > (initialValue + (C1 * step * initialDd)))
                 {
                     upperBound = step;
                     step = 0.5 * (lowerBound + upperBound);
@@ -123,7 +123,7 @@ namespace MathNet.Numerics.Optimization.LineSearch
                 }
             }
 
-            if (ii == MaximumIterations && Double.IsPositiveInfinity(upperBound))
+            if ((ii == MaximumIterations) && Double.IsPositiveInfinity(upperBound))
             {
                 throw new MaximumIterationsException(String.Format("Maximum iterations ({0}) reached. Function appears to be unbounded in search direction.", MaximumIterations));
             }

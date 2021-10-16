@@ -148,7 +148,7 @@ namespace MathNet.Numerics.Optimization
             double mu = initialMu * diagonalOfHessian.Max(); // μ 
             double nu = 2; //  ν
             int iterations = 0;
-            while (iterations < maximumIterations && exitCondition == ExitCondition.None)
+            while ((iterations < maximumIterations) && (exitCondition == ExitCondition.None))
             {
                 iterations++;
 
@@ -160,7 +160,7 @@ namespace MathNet.Numerics.Optimization
                     Pstep = Hessian.Solve(-Gradient);
 
                     // if ||ΔP|| <= xTol * (||P|| + xTol), found and stop
-                    if (Pstep.L2Norm() <= stepTolerance * (stepTolerance + P.DotProduct(P)))
+                    if (Pstep.L2Norm() <= (stepTolerance * (stepTolerance + P.DotProduct(P))))
                     {
                         exitCondition = ExitCondition.RelativePoints;
                         break;
@@ -178,7 +178,7 @@ namespace MathNet.Numerics.Optimization
 
                     // calculate the ratio of the actual to the predicted reduction.
                     // ρ = (RSS - RSSnew) / (Δp'(μΔp - g))
-                    var predictedReduction = Pstep.DotProduct(mu * Pstep - Gradient);
+                    var predictedReduction = Pstep.DotProduct((mu * Pstep) - Gradient);
                     var rho = (predictedReduction != 0)
                             ? (RSS - RSSnew) / predictedReduction
                             : 0;
@@ -207,7 +207,7 @@ namespace MathNet.Numerics.Optimization
                             exitCondition = ExitCondition.Converged; // SmallRSS
                         }
 
-                        mu = mu * Math.Max(1.0 / 3.0, 1.0 - Math.Pow(2.0 * rho - 1.0, 3));
+                        mu = mu * Math.Max(1.0 / 3.0, 1.0 - Math.Pow((2.0 * rho) - 1.0, 3));
                         nu = 2;
 
                         break;

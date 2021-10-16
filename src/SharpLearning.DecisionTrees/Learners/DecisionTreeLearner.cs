@@ -111,7 +111,7 @@ namespace SharpLearning.DecisionTrees.Learners
             // Hence, the check is not added to the general checks.
             if (weights.Length != 0)
             {
-                if (weights.Length != targets.Length || weights.Length != observations.RowCount)
+                if ((weights.Length != targets.Length) || (weights.Length != observations.RowCount))
                 {
                     throw new ArgumentException($"Weights length differ from observation row count and target length. " +
                         $"Weights: {weights.Length}, observation: {observations.RowCount}, targets: {targets.Length}");

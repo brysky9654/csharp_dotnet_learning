@@ -54,7 +54,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex(double.NaN, double.NaN);
                 }
-                if (magnitude < minMagnitude || magnitude == minMagnitude && data[i].Phase < min.Phase)
+                if ((magnitude < minMagnitude) || ((magnitude == minMagnitude) && (data[i].Phase < min.Phase)))
                 {
                     minMagnitude = magnitude;
                     min = data[i];
@@ -85,7 +85,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex32(float.NaN, float.NaN);
                 }
-                if (magnitude < minMagnitude || magnitude == minMagnitude && data[i].Phase < min.Phase)
+                if ((magnitude < minMagnitude) || ((magnitude == minMagnitude) && (data[i].Phase < min.Phase)))
                 {
                     minMagnitude = magnitude;
                     min = data[i];
@@ -116,7 +116,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex(double.NaN, double.NaN);
                 }
-                if (magnitude > maxMagnitude || magnitude == maxMagnitude && data[i].Phase > max.Phase)
+                if ((magnitude > maxMagnitude) || ((magnitude == maxMagnitude) && (data[i].Phase > max.Phase)))
                 {
                     maxMagnitude = magnitude;
                     max = data[i];
@@ -147,7 +147,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex32(float.NaN, float.NaN);
                 }
-                if (magnitude > maxMagnitude || magnitude == maxMagnitude && data[i].Phase > max.Phase)
+                if ((magnitude > maxMagnitude) || ((magnitude == maxMagnitude) && (data[i].Phase > max.Phase)))
                 {
                     maxMagnitude = magnitude;
                     max = data[i];

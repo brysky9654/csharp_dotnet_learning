@@ -112,7 +112,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="location">The location (μ) of the distribution.</param>
         public static bool IsValidParameterSet(double alpha, double beta, double scale, double location)
         {
-            return alpha > 0.0 && alpha <= 2.0 && beta >= -1.0 && beta <= 1.0 && scale > 0.0 && !double.IsNaN(location);
+            return (alpha > 0.0) && (alpha <= 2.0) && (beta >= -1.0) && (beta <= 1.0) && (scale > 0.0) && !double.IsNaN(location);
         }
 
         /// <summary>
@@ -325,15 +325,15 @@ namespace MathNet.Numerics.Distributions
                 var factor1 = Math.Sin(angle)/Math.Pow(Math.Cos(randTheta), 1.0/alpha);
                 var factor2 = Math.Pow(Math.Cos(randTheta - angle)/randW, (1 - alpha)/alpha);
 
-                return location + scale*(factor*factor1*factor2);
+                return location + (scale*(factor*factor1*factor2));
             }
             else
             {
                 var part1 = Constants.PiOver2 + (beta*randTheta);
                 var summand = part1*Math.Tan(randTheta);
-                var subtrahend = beta*Math.Log(Constants.PiOver2*randW*Math.Cos(randTheta)/part1);
+                var subtrahend = beta*Math.Log((Constants.PiOver2*randW*Math.Cos(randTheta))/part1);
 
-                return location + scale*Constants.TwoInvPi*(summand - subtrahend);
+                return location + (scale*Constants.TwoInvPi*(summand - subtrahend));
             }
         }
 
@@ -358,7 +358,7 @@ namespace MathNet.Numerics.Distributions
                     var factor1 = Math.Sin(angle)/Math.Pow(Math.Cos(randTheta), 1.0/alpha);
                     var factor2 = Math.Pow(Math.Cos(randTheta - angle)/randWs[i], (1 - alpha)/alpha);
 
-                    values[i] = location + scale*(factor*factor1*factor2);
+                    values[i] = location + (scale*(factor*factor1*factor2));
                 }
             }
             else
@@ -369,9 +369,9 @@ namespace MathNet.Numerics.Distributions
 
                     var part1 = Constants.PiOver2 + (beta*randTheta);
                     var summand = part1*Math.Tan(randTheta);
-                    var subtrahend = beta*Math.Log(Constants.PiOver2*randWs[i]*Math.Cos(randTheta)/part1);
+                    var subtrahend = beta*Math.Log((Constants.PiOver2*randWs[i]*Math.Cos(randTheta))/part1);
 
-                    values[i] = location + scale*Constants.TwoInvPi*(summand - subtrahend);
+                    values[i] = location + (scale*Constants.TwoInvPi*(summand - subtrahend));
                 }
             }
         }
@@ -422,7 +422,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double alpha, double beta, double scale, double location, double x)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -432,12 +432,12 @@ namespace MathNet.Numerics.Distributions
                 return Normal.PDF(location, Constants.Sqrt2*scale, x);
             }
 
-            if (alpha == 1d && beta == 0d)
+            if ((alpha == 1d) && (beta == 0d))
             {
                 return Cauchy.PDF(location, scale, x);
             }
 
-            if (alpha == 0.5d && beta == 1d && x >= location)
+            if ((alpha == 0.5d) && (beta == 1d) && (x >= location))
             {
                 return (Math.Sqrt(scale/Constants.Pi2)*Math.Exp(-scale/(2*(x - location))))/Math.Pow(x - location, 1.5);
             }
@@ -457,7 +457,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="DensityLn"/>
         public static double PDFLn(double alpha, double beta, double scale, double location, double x)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -467,14 +467,14 @@ namespace MathNet.Numerics.Distributions
                 return Normal.PDFLn(location, Constants.Sqrt2*scale, x);
             }
 
-            if (alpha == 1d && beta == 0d)
+            if ((alpha == 1d) && (beta == 0d))
             {
                 return Cauchy.PDFLn(location, scale, x);
             }
 
-            if (alpha == 0.5d && beta == 1d && x >= location)
+            if ((alpha == 0.5d) && (beta == 1d) && (x >= location))
             {
-                return Math.Log(scale/Constants.Pi2)/2 - scale/(2*(x - location)) - 1.5*Math.Log(x - location);
+                return (Math.Log(scale/Constants.Pi2)/2) - (scale/(2*(x - location))) - (1.5*Math.Log(x - location));
             }
 
             throw new NotSupportedException();
@@ -492,7 +492,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double alpha, double beta, double scale, double location, double x)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -502,12 +502,12 @@ namespace MathNet.Numerics.Distributions
                 return Normal.CDF(location, Constants.Sqrt2*scale, x);
             }
 
-            if (alpha == 1d && beta == 0d)
+            if ((alpha == 1d) && (beta == 0d))
             {
                 return Cauchy.CDF(location, scale, x);
             }
 
-            if (alpha == 0.5d && beta == 1d)
+            if ((alpha == 0.5d) && (beta == 1d))
             {
                 return SpecialFunctions.Erfc(Math.Sqrt(scale/(2*(x - location))));
             }
@@ -526,7 +526,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -545,7 +545,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -565,7 +565,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -583,7 +583,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -601,7 +601,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -620,7 +620,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double alpha, double beta, double scale, double location)
         {
-            if (alpha <= 0.0 || alpha > 2.0 || beta < -1.0 || beta > 1.0 || scale <= 0.0)
+            if ((alpha <= 0.0) || (alpha > 2.0) || (beta < -1.0) || (beta > 1.0) || (scale <= 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

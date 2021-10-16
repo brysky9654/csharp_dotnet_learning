@@ -202,7 +202,7 @@ namespace MathNet.Numerics.LinearAlgebra.Solvers
                 // Divergence is occurring if:
                 // - the last residual is larger than the previous one
                 // - the relative increase of the residual is larger than the setting allows
-                if ((difference < 0) || (_residualHistory[i - 1]*(1 + _maximumRelativeIncrease) >= _residualHistory[i]))
+                if ((difference < 0) || ((_residualHistory[i - 1]*(1 + _maximumRelativeIncrease)) >= _residualHistory[i]))
                 {
                     // No divergence taking place within the required number of iterations
                     // So reset and stop the iteration. There is no way we can get to the

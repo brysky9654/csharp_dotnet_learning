@@ -126,7 +126,7 @@ namespace SharpLearning.Containers
             }
 
             var max = indices.Max();
-            if (max >= observationRowCount || max >= targetLength)
+            if ((max >= observationRowCount) || (max >= targetLength))
             {
                 throw new ArgumentException($"Indices contains elements exceeding the row count of observations and targets. " +  
                     $"Indices Max: {max}, observations row count: {observationRowCount}, target length: {targetLength}");

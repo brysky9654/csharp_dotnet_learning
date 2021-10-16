@@ -79,7 +79,7 @@ namespace MathNet.Numerics
                 case 1:
                     return 1d - StudentT.CDF(0d, 1d, degreesFreedom, x);
                 case 2:
-                    return 1d - StudentT.CDF(0d, 1d, degreesFreedom, x) + StudentT.CDF(0d, 1d, degreesFreedom, -x);
+                    return (1d - StudentT.CDF(0d, 1d, degreesFreedom, x)) + StudentT.CDF(0d, 1d, degreesFreedom, -x);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(tails));
             }

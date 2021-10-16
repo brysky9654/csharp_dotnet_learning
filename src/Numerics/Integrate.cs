@@ -121,7 +121,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return DoubleExponentialTransformation.Integrate(u, -1, 1, targetAbsoluteError);
             }
@@ -135,7 +135,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return DoubleExponentialTransformation.Integrate(u, 0, 1, targetAbsoluteError);
             }
@@ -149,7 +149,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return DoubleExponentialTransformation.Integrate(u, -1, 0, targetAbsoluteError);
             }
@@ -188,7 +188,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return GaussLegendreRule.Integrate(u, -1, 1, order);
             }
@@ -202,7 +202,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return GaussLegendreRule.Integrate(u, 0, 1, order);
             }
@@ -216,7 +216,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return GaussLegendreRule.Integrate(u, -1, 0, order);
             }
@@ -229,7 +229,7 @@ namespace MathNet.Numerics
             {
                 Func<double, double> u = (t) =>
                 {
-                    return f((intervalEnd - intervalBegin) / 4 * t * (3 - t * t) + (intervalEnd + intervalBegin) / 2) * 3 * (intervalEnd - intervalBegin) / 4 * (1 - t * t);
+                    return ((f((((intervalEnd - intervalBegin) / 4) * t * (3 - (t * t))) + ((intervalEnd + intervalBegin) / 2)) * 3 * (intervalEnd - intervalBegin)) / 4) * (1 - (t * t));
                 };
                 return GaussLegendreRule.Integrate(u, -1, 1, order);
             }
@@ -302,7 +302,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return DoubleExponentialTransformation.ContourIntegrate(u, -1, 1, targetAbsoluteError);
             }
@@ -316,7 +316,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return DoubleExponentialTransformation.ContourIntegrate(u, 0, 1, targetAbsoluteError);
             }
@@ -330,7 +330,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return DoubleExponentialTransformation.ContourIntegrate(u, -1, 0, targetAbsoluteError);
             }
@@ -369,7 +369,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (t) =>
                 {
-                    return f(t / (1 - t * t)) * (1 + t * t) / ((1 - t * t) * (1 - t * t));
+                    return (f(t / (1 - (t * t))) * (1 + (t * t))) / ((1 - (t * t)) * (1 - (t * t)));
                 };
                 return GaussLegendreRule.ContourIntegrate(u, -1, 1, order);
             }
@@ -383,7 +383,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return 2 * s * f(intervalBegin + (s / (1 - s)) * (s / (1 - s))) / ((1 - s) * (1 - s) * (1 - s));
+                    return (2 * s * f(intervalBegin + ((s / (1 - s)) * (s / (1 - s))))) / ((1 - s) * (1 - s) * (1 - s));
                 };
                 return GaussLegendreRule.ContourIntegrate(u, 0, 1, order);
             }
@@ -397,7 +397,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (s) =>
                 {
-                    return -2 * s * f(intervalEnd - s / (1 + s) * (s / (1 + s))) / ((1 + s) * (1 + s) * (1 + s));
+                    return (-2 * s * f(intervalEnd - ((s / (1 + s)) * (s / (1 + s))))) / ((1 + s) * (1 + s) * (1 + s));
                 };
                 return GaussLegendreRule.ContourIntegrate(u, -1, 0, order);
             }
@@ -410,7 +410,7 @@ namespace MathNet.Numerics
             {
                 Func<double, Complex> u = (t) =>
                 {
-                    return f((intervalEnd - intervalBegin) / 4 * t * (3 - t * t) + (intervalEnd + intervalBegin) / 2) * 3 * (intervalEnd - intervalBegin) / 4 * (1 - t * t);
+                    return ((f((((intervalEnd - intervalBegin) / 4) * t * (3 - (t * t))) + ((intervalEnd + intervalBegin) / 2)) * 3 * (intervalEnd - intervalBegin)) / 4) * (1 - (t * t));
                 };
                 return GaussLegendreRule.ContourIntegrate(u, -1, 1, order);
             }

@@ -119,7 +119,7 @@ namespace MathNet.Numerics.Distributions
                 }
             }
 
-            if (degreesOfFreedom <= 0.0 || double.IsNaN(degreesOfFreedom))
+            if ((degreesOfFreedom <= 0.0) || double.IsNaN(degreesOfFreedom))
             {
                 return false;
             }
@@ -190,7 +190,7 @@ namespace MathNet.Numerics.Distributions
         {
             var p = _scale.RowCount;
 
-            if (x.RowCount != p || x.ColumnCount != p)
+            if ((x.RowCount != p) || (x.ColumnCount != p))
             {
                 throw Matrix.DimensionsDontMatch<ArgumentOutOfRangeException>(x, _scale, "x");
             }
@@ -199,15 +199,15 @@ namespace MathNet.Numerics.Distributions
             var siX = _chol.Solve(x);
 
             // Compute the multivariate Gamma function.
-            var gp = Math.Pow(Constants.Pi, p*(p - 1.0)/4.0);
+            var gp = Math.Pow(Constants.Pi, (p*(p - 1.0))/4.0);
             for (var j = 1; j <= p; j++)
             {
-                gp *= SpecialFunctions.Gamma((_degreesOfFreedom + 1.0 - j)/2.0);
+                gp *= SpecialFunctions.Gamma(((_degreesOfFreedom + 1.0) - j)/2.0);
             }
 
-            return Math.Pow(dX, (_degreesOfFreedom - p - 1.0)/2.0)
-                   *Math.Exp(-0.5*siX.Trace())
-                   /Math.Pow(2.0, _degreesOfFreedom*p/2.0)
+            return (Math.Pow(dX, (_degreesOfFreedom - p - 1.0)/2.0)
+                   *Math.Exp(-0.5*siX.Trace()))
+                   /Math.Pow(2.0,               (_degreesOfFreedom*p)/2.0)
                    /Math.Pow(_chol.Determinant, _degreesOfFreedom/2.0)
                    /gp;
         }

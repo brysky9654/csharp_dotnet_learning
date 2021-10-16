@@ -53,7 +53,7 @@ namespace SharpLearning.Neural.Layers
         /// Default (0.0). https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf</param>
         public DropoutLayer(double dropOut = 0.0)
         {
-            if (dropOut < 0.0 || dropOut >= 1.0) { throw new ArgumentException("Dropout must be below 1.0 and at least 0.0"); }
+            if ((dropOut < 0.0) || (dropOut >= 1.0)) { throw new ArgumentException("Dropout must be below 1.0 and at least 0.0"); }
             DropOut = dropOut;
             ActivationFunc = Activation.Undefined;
         }

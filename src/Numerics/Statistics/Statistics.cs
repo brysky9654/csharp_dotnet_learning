@@ -673,7 +673,7 @@ namespace MathNet.Numerics.Statistics
         {
             var array1 = samples1 as double[];
             var array2 = samples2 as double[];
-            return array1 != null && array2 != null
+            return (array1 != null) && (array2 != null)
                 ? ArrayStatistics.Covariance(array1, array2)
                 : StreamingStatistics.Covariance(samples1, samples2);
         }
@@ -689,7 +689,7 @@ namespace MathNet.Numerics.Statistics
         {
             var array1 = samples1 as float[];
             var array2 = samples2 as float[];
-            return array1 != null && array2 != null
+            return (array1 != null) && (array2 != null)
                 ? ArrayStatistics.Covariance(array1, array2)
                 : StreamingStatistics.Covariance(samples1, samples2);
         }
@@ -718,7 +718,7 @@ namespace MathNet.Numerics.Statistics
         {
             var array1 = population1 as double[];
             var array2 = population2 as double[];
-            return array1 != null && array2 != null
+            return (array1 != null) && (array2 != null)
                 ? ArrayStatistics.PopulationCovariance(array1, array2)
                 : StreamingStatistics.PopulationCovariance(population1, population2);
         }
@@ -734,7 +734,7 @@ namespace MathNet.Numerics.Statistics
         {
             var array1 = population1 as float[];
             var array2 = population2 as float[];
-            return array1 != null && array2 != null
+            return (array1 != null) && (array2 != null)
                 ? ArrayStatistics.PopulationCovariance(array1, array2)
                 : StreamingStatistics.PopulationCovariance(population1, population2);
         }

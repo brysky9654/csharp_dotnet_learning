@@ -170,7 +170,7 @@ namespace MathNet.Numerics
 
             for (int i = 0; i < indices.Length; i++)
             {
-                if (indices[i] >= indices.Length || indices[i] < 0)
+                if ((indices[i] >= indices.Length) || (indices[i] < 0))
                 {
                     return false;
                 }

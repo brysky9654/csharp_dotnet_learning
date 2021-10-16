@@ -214,7 +214,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double.Solvers
                     sum += rowValues[j]*lhs[j];
                 }
 
-                lhs[i] = 1/rowValues[i]*(lhs[i] - sum);
+                lhs[i] = (1/rowValues[i])*(lhs[i] - sum);
             }
         }
     }

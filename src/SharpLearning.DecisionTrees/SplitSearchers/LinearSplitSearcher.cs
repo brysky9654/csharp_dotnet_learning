@@ -74,7 +74,7 @@ namespace SharpLearning.DecisionTrees.SplitSearchers
             {
                 var currentValue = feature[j];
                 var currentTarget = targets[j];
-                if (prevValue != currentValue && prevTarget != currentTarget)
+                if ((prevValue != currentValue) && (prevTarget != currentTarget))
                 {
                     var currentSplit = j;
                     var leftSize = (double)(currentSplit - parentInterval.FromInclusive);
@@ -84,8 +84,8 @@ namespace SharpLearning.DecisionTrees.SplitSearchers
                     {
                         impurityCalculator.UpdateIndex(currentSplit);
                         
-                        if (impurityCalculator.WeightedLeft < m_minimumLeafWeight ||
-                            impurityCalculator.WeightedRight < m_minimumLeafWeight)
+                        if ((impurityCalculator.WeightedLeft < m_minimumLeafWeight) ||
+                            (impurityCalculator.WeightedRight < m_minimumLeafWeight))
                         {
                             continue;
                         }

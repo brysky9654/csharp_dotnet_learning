@@ -317,7 +317,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         public void Add(T scalar, Matrix<T> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, result, "result");
             }
@@ -339,7 +339,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         public Matrix<T> Add(Matrix<T> other)
         {
-            if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
+            if ((other.RowCount != RowCount) || (other.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other);
             }
@@ -357,12 +357,12 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         public void Add(Matrix<T> other, Matrix<T> result)
         {
-            if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
+            if ((other.RowCount != RowCount) || (other.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other, "other");
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, result, "result");
             }
@@ -395,7 +395,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void Subtract(T scalar, Matrix<T> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, result, "result");
             }
@@ -429,7 +429,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void SubtractFrom(T scalar, Matrix<T> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, result, "result");
             }
@@ -445,7 +445,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         public Matrix<T> Subtract(Matrix<T> other)
         {
-            if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
+            if ((other.RowCount != RowCount) || (other.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other);
             }
@@ -463,12 +463,12 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentOutOfRangeException">If the two matrices don't have the same dimensions.</exception>
         public void Subtract(Matrix<T> other, Matrix<T> result)
         {
-            if (other.RowCount != RowCount || other.ColumnCount != ColumnCount)
+            if ((other.RowCount != RowCount) || (other.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other, "other");
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, result, "result");
             }
@@ -735,7 +735,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the this.Rows x other.Columns.</exception>
         public void Multiply(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != other.RowCount || result.RowCount != RowCount || result.ColumnCount != other.ColumnCount)
+            if ((ColumnCount != other.RowCount) || (result.RowCount != RowCount) || (result.ColumnCount != other.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -779,7 +779,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the this.RowCount x other.RowCount.</exception>
         public void TransposeAndMultiply(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != other.ColumnCount || result.RowCount != RowCount || result.ColumnCount != other.RowCount)
+            if ((ColumnCount != other.ColumnCount) || (result.RowCount != RowCount) || (result.ColumnCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -872,7 +872,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the this.ColumnCount x other.ColumnCount.</exception>
         public void TransposeThisAndMultiply(Matrix<T> other, Matrix<T> result)
         {
-            if (RowCount != other.RowCount || result.RowCount != ColumnCount || result.ColumnCount != other.ColumnCount)
+            if ((RowCount != other.RowCount) || (result.RowCount != ColumnCount) || (result.ColumnCount != other.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -918,7 +918,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the this.RowCount x other.RowCount.</exception>
         public void ConjugateTransposeAndMultiply(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != other.ColumnCount || result.RowCount != RowCount || result.ColumnCount != other.RowCount)
+            if ((ColumnCount != other.ColumnCount) || (result.RowCount != RowCount) || (result.ColumnCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -1011,7 +1011,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not the this.ColumnCount x other.ColumnCount.</exception>
         public void ConjugateTransposeThisAndMultiply(Matrix<T> other, Matrix<T> result)
         {
-            if (RowCount != other.RowCount || result.RowCount != ColumnCount || result.ColumnCount != other.ColumnCount)
+            if ((RowCount != other.RowCount) || (result.RowCount != ColumnCount) || (result.ColumnCount != other.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -1112,7 +1112,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">The result of the power.</param>
         public void Power(int exponent, Matrix<T> result)
         {
-            if (RowCount != ColumnCount || result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((RowCount != ColumnCount) || (result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1177,7 +1177,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">if the result matrix's dimensions are not the same as this matrix.</exception>
         public void Negate(Matrix<T> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1203,7 +1203,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">if the result matrix's dimensions are not the same as this matrix.</exception>
         public void Conjugate(Matrix<T> result)
         {
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1232,7 +1232,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">Matrix to store the results in.</param>
         public void Modulus(T divisor, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1261,7 +1261,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">Matrix to store the results in.</param>
         public void ModulusByThis(T dividend, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1290,7 +1290,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">Matrix to store the results in.</param>
         public void Remainder(T divisor, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1319,7 +1319,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="result">Matrix to store the results in.</param>
         public void RemainderByThis(T dividend, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1335,7 +1335,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>A new matrix that is the pointwise multiplication of this matrix and <paramref name="other"/>.</returns>
         public Matrix<T> PointwiseMultiply(Matrix<T> other)
         {
-            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, "other");
             }
@@ -1354,7 +1354,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseMultiply(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -1370,7 +1370,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>A new matrix that is the pointwise division of this matrix and <paramref name="divisor"/>.</returns>
         public Matrix<T> PointwiseDivide(Matrix<T> divisor)
         {
-            if (ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor);
             }
@@ -1389,7 +1389,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseDivide(Matrix<T> divisor, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor, result);
             }
@@ -1416,7 +1416,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwisePower(T exponent, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1430,7 +1430,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="exponent">The exponent to raise this matrix values to.</param>
         public Matrix<T> PointwisePower(Matrix<T> exponent)
         {
-            if (ColumnCount != exponent.ColumnCount || RowCount != exponent.RowCount)
+            if ((ColumnCount != exponent.ColumnCount) || (RowCount != exponent.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, exponent);
             }
@@ -1448,7 +1448,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwisePower(Matrix<T> exponent, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != exponent.ColumnCount || RowCount != exponent.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != exponent.ColumnCount) || (RowCount != exponent.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, exponent, result);
             }
@@ -1464,7 +1464,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="divisor"/> are not the same size.</exception>
         public Matrix<T> PointwiseModulus(Matrix<T> divisor)
         {
-            if (ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor);
             }
@@ -1484,7 +1484,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseModulus(Matrix<T> divisor, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor, result);
             }
@@ -1500,7 +1500,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="divisor"/> are not the same size.</exception>
         public Matrix<T> PointwiseRemainder(Matrix<T> divisor)
         {
-            if (ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor);
             }
@@ -1520,7 +1520,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseRemainder(Matrix<T> divisor, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != divisor.ColumnCount || RowCount != divisor.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != divisor.ColumnCount) || (RowCount != divisor.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, divisor, result);
             }
@@ -1552,7 +1552,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this vector and <paramref name="result"/> are not the same size.</exception>
         protected void PointwiseUnary(Action<Matrix<T>> f, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -1571,7 +1571,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="other"/> are not the same dimension.</exception>
         protected Matrix<T> PointwiseBinary(Action<Matrix<T>, Matrix<T>> f, Matrix<T> other)
         {
-            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other);
             }
@@ -1592,7 +1592,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="other"/> are not the same dimension.</exception>
         protected void PointwiseBinary(Action<Matrix<T>,Matrix<T>> f, Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -2035,7 +2035,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If the result matrix's dimensions are not (this.Rows * lower.rows) x (this.Columns * lower.Columns).</exception>
         public virtual void KroneckerProduct(Matrix<T> other, Matrix<T> result)
         {
-            if (result.RowCount != (RowCount*other.RowCount) || result.ColumnCount != (ColumnCount*other.ColumnCount))
+            if ((result.RowCount != (RowCount*other.RowCount)) || (result.ColumnCount != (ColumnCount*other.ColumnCount)))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other, result);
             }
@@ -2068,7 +2068,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this vector and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseMinimum(T scalar, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -2095,7 +2095,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseMaximum(T scalar, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -2122,7 +2122,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseAbsoluteMinimum(T scalar, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -2149,7 +2149,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseAbsoluteMaximum(T scalar, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -2176,7 +2176,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseMinimum(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -2203,7 +2203,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseMaximum(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -2230,7 +2230,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseAbsoluteMinimum(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }
@@ -2257,7 +2257,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <exception cref="ArgumentException">If this matrix and <paramref name="result"/> are not the same size.</exception>
         public void PointwiseAbsoluteMaximum(Matrix<T> other, Matrix<T> result)
         {
-            if (ColumnCount != result.ColumnCount || RowCount != result.RowCount || ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != result.ColumnCount) || (RowCount != result.RowCount) || (ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, other, result);
             }

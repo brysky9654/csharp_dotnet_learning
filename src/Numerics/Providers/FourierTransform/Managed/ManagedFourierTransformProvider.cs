@@ -209,7 +209,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
 
             samples[0] = data[0].Real;
             samples[1] = 0f;
-            for (int i = 1, j = 2; i < data.Length / 2; i++)
+            for (int i = 1, j = 2; i < (data.Length / 2); i++)
             {
                 samples[j++] = data[i].Real;
                 samples[j++] = data[i].Imaginary;
@@ -240,7 +240,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
 
             samples[0] = data[0].Real;
             samples[1] = 0d;
-            for (int i = 1, j = 2; i < data.Length/2; i++)
+            for (int i = 1, j = 2; i < (data.Length/2); i++)
             {
                 samples[j++] = data[i].Real;
                 samples[j++] = data[i].Imaginary;
@@ -263,7 +263,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
 
             Complex32[] data = new Complex32[n];
             data[0] = new Complex32(spectrum[0], 0f);
-            for (int i = 1, j = 2; i < data.Length / 2; i++)
+            for (int i = 1, j = 2; i < (data.Length / 2); i++)
             {
                 data[i] = new Complex32(spectrum[j++], spectrum[j++]);
                 data[data.Length - i] = data[i].Conjugate();
@@ -275,7 +275,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
             else
             {
                 data[data.Length / 2] = new Complex32(spectrum[n - 1], spectrum[n]);
-                data[data.Length / 2 + 1] = data[data.Length / 2].Conjugate();
+                data[(data.Length / 2) + 1] = data[data.Length / 2].Conjugate();
             }
 
             Backward(data, scaling);
@@ -293,7 +293,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
 
             Complex[] data = new Complex[n];
             data[0] = new Complex(spectrum[0], 0d);
-            for (int i = 1, j = 2; i < data.Length/2; i++)
+            for (int i = 1, j = 2; i < (data.Length/2); i++)
             {
                 data[i] = new Complex(spectrum[j++], spectrum[j++]);
                 data[data.Length - i] = data[i].Conjugate();
@@ -305,7 +305,7 @@ namespace MathNet.Numerics.Providers.FourierTransform.Managed
             else
             {
                 data[data.Length/2] = new Complex(spectrum[n-1], spectrum[n]);
-                data[data.Length/2 + 1] = data[data.Length/2].Conjugate();
+                data[(data.Length/2) + 1] = data[data.Length/2].Conjugate();
             }
 
             Backward(data, scaling);

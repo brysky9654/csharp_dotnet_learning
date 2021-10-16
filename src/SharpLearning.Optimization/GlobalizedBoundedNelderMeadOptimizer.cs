@@ -154,10 +154,10 @@ namespace SharpLearning.Optimization
 
                 Parallel.For(0, dim, options, (i, loopState) =>
                 {
-                    var a = (0.02 + 0.08 * m_random.NextDouble()) * (m_parameters[i].Max - m_parameters[i].Min); // % simplex size between 2%-8% of min(xrange)
+                    var a = (0.02 + (0.08 * m_random.NextDouble())) * (m_parameters[i].Max - m_parameters[i].Min); // % simplex size between 2%-8% of min(xrange)
 
-                    var p = a * (Math.Sqrt(dim + 1) + dim - 1) / (dim * Math.Sqrt(2));
-                    var q = a * (Math.Sqrt(dim + 1) - 1) / (dim * Math.Sqrt(2));
+                    var p = (a * ((Math.Sqrt(dim + 1) + dim) - 1)) / (dim * Math.Sqrt(2));
+                    var q = (a * (Math.Sqrt(dim + 1) - 1)) / (dim * Math.Sqrt(2));
 
                     var x = initialPoint.ToArray();
                     x[i] = x[i] + p;
@@ -203,7 +203,7 @@ namespace SharpLearning.Optimization
                     var iterationBest = results.First();
 
                     // break after m_maxIterationsPrRestart
-                    if (iterations >= m_maxIterationsPrRestart && m_maxIterationsPrRestart != 0)
+                    if ((iterations >= m_maxIterationsPrRestart) && (m_maxIterationsPrRestart != 0))
                     {
                         allResults.AddRange(results);
                         break;
@@ -229,7 +229,7 @@ namespace SharpLearning.Optimization
                     }
 
                     // check if m_maxFunctionEvaluations is reached
-                    if (m_totalFunctionEvaluations >= m_maxFunctionEvaluations && m_maxFunctionEvaluations != 0)
+                    if ((m_totalFunctionEvaluations >= m_maxFunctionEvaluations) && (m_maxFunctionEvaluations != 0))
                     {
                         allResults.AddRange(results);
                         break;
@@ -256,7 +256,7 @@ namespace SharpLearning.Optimization
                     var refelctionScore = EvaluateFunction(functionToMinimize, xr);
 
                     var first = results.First().Error;
-                    if (first <= refelctionScore.Error && refelctionScore.Error < results[results.Count - 2].Error)
+                    if ((first <= refelctionScore.Error) && (refelctionScore.Error < results[results.Count - 2].Error))
                     {
                         results.RemoveAt(results.Count - 1);
                         results.Add(refelctionScore);
@@ -309,7 +309,7 @@ namespace SharpLearning.Optimization
                 }
 
                 // check if m_maxFunctionEvaluations is reached
-                if (m_totalFunctionEvaluations >= m_maxFunctionEvaluations && m_maxFunctionEvaluations != 0)
+                if ((m_totalFunctionEvaluations >= m_maxFunctionEvaluations) && (m_maxFunctionEvaluations != 0))
                 {
                     allResults.AddRange(results);
                     break;

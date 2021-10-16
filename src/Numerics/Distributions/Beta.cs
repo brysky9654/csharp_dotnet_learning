@@ -107,7 +107,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="b">The β shape parameter of the Beta distribution. Range: β ≥ 0.</param>
         public static bool IsValidParameterSet(double a, double b)
         {
-            return a >= 0.0 && b >= 0.0;
+            return (a >= 0.0) && (b >= 0.0);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MathNet.Numerics.Distributions
         {
             get
             {
-                if (_shapeA == 0.0 && _shapeB == 0.0)
+                if ((_shapeA == 0.0) && (_shapeB == 0.0))
                 {
                     return 0.5;
                 }
@@ -192,20 +192,20 @@ namespace MathNet.Numerics.Distributions
                     return 0.0;
                 }
 
-                if (_shapeA == 0.0 && _shapeB == 0.0)
+                if ((_shapeA == 0.0) && (_shapeB == 0.0))
                 {
                     return -Math.Log(0.5);
                 }
 
-                if (_shapeA == 0.0 || _shapeB == 0.0)
+                if ((_shapeA == 0.0) || (_shapeB == 0.0))
                 {
                     return 0.0;
                 }
 
-                return SpecialFunctions.BetaLn(_shapeA, _shapeB)
-                       - ((_shapeA - 1.0)*SpecialFunctions.DiGamma(_shapeA))
-                       - ((_shapeB - 1.0)*SpecialFunctions.DiGamma(_shapeB))
-                       + ((_shapeA + _shapeB - 2.0)*SpecialFunctions.DiGamma(_shapeA + _shapeB));
+                return (SpecialFunctions.BetaLn(_shapeA, _shapeB)
+                      - ((_shapeA - 1.0)*SpecialFunctions.DiGamma(_shapeA))
+                      - ((_shapeB - 1.0)*SpecialFunctions.DiGamma(_shapeB)))
+                       + (((_shapeA + _shapeB) - 2.0)*SpecialFunctions.DiGamma(_shapeA + _shapeB));
             }
         }
 
@@ -231,7 +231,7 @@ namespace MathNet.Numerics.Distributions
                     return 2.0;
                 }
 
-                if (_shapeA == 0.0 && _shapeB == 0.0)
+                if ((_shapeA == 0.0) && (_shapeB == 0.0))
                 {
                     return 0.0;
                 }
@@ -246,7 +246,7 @@ namespace MathNet.Numerics.Distributions
                     return -2.0;
                 }
 
-                return 2.0*(_shapeB - _shapeA)*Math.Sqrt(_shapeA + _shapeB + 1.0)
+                return (2.0*(_shapeB - _shapeA)*Math.Sqrt(_shapeA + _shapeB + 1.0))
                        /((_shapeA + _shapeB + 2.0)*Math.Sqrt(_shapeA*_shapeB));
             }
         }
@@ -258,7 +258,7 @@ namespace MathNet.Numerics.Distributions
         {
             get
             {
-                if (_shapeA == 0.0 && _shapeB == 0.0)
+                if ((_shapeA == 0.0) && (_shapeB == 0.0))
                 {
                     return 0.5;
                 }
@@ -288,12 +288,12 @@ namespace MathNet.Numerics.Distributions
                     return 0.0;
                 }
 
-                if (_shapeA == 1.0 && _shapeB == 1.0)
+                if ((_shapeA == 1.0) && (_shapeB == 1.0))
                 {
                     return 0.5;
                 }
 
-                return (_shapeA - 1)/(_shapeA + _shapeB - 2);
+                return (_shapeA - 1)/((_shapeA + _shapeB) - 2);
             }
         }
 
@@ -430,12 +430,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="Density"/>
         public static double PDF(double a, double b, double x)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (x < 0.0 || x > 1.0)
+            if ((x < 0.0) || (x > 1.0))
             {
                 return 0.0;
             }
@@ -455,9 +455,9 @@ namespace MathNet.Numerics.Distributions
                 return x == 0.0 ? double.PositiveInfinity : 0.0;
             }
 
-            if (a == 0.0 && b == 0.0)
+            if ((a == 0.0) && (b == 0.0))
             {
-                if (x == 0.0 || x == 1.0)
+                if ((x == 0.0) || (x == 1.0))
                 {
                     return double.PositiveInfinity;
                 }
@@ -475,12 +475,12 @@ namespace MathNet.Numerics.Distributions
                 return x == 1.0 ? double.PositiveInfinity : 0.0;
             }
 
-            if (a == 1.0 && b == 1.0)
+            if ((a == 1.0) && (b == 1.0))
             {
                 return 1.0;
             }
 
-            if (a > 80.0 || b > 80.0)
+            if ((a > 80.0) || (b > 80.0))
             {
                 return Math.Exp(PDFLn(a, b, x));
             }
@@ -499,12 +499,12 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="DensityLn"/>
         public static double PDFLn(double a, double b, double x)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
 
-            if (x < 0.0 || x > 1.0)
+            if ((x < 0.0) || (x > 1.0))
             {
                 return double.NegativeInfinity;
             }
@@ -524,9 +524,9 @@ namespace MathNet.Numerics.Distributions
                 return x == 0.0 ? double.PositiveInfinity : double.NegativeInfinity;
             }
 
-            if (a == 0.0 && b == 0.0)
+            if ((a == 0.0) && (b == 0.0))
             {
-                return x == 0.0 || x == 1.0 ? double.PositiveInfinity : double.NegativeInfinity;
+                return (x == 0.0) || (x == 1.0) ? double.PositiveInfinity : double.NegativeInfinity;
             }
 
             if (a == 0.0)
@@ -539,7 +539,7 @@ namespace MathNet.Numerics.Distributions
                 return x == 1.0 ? double.PositiveInfinity : double.NegativeInfinity;
             }
 
-            if (a == 1.0 && b == 1.0)
+            if ((a == 1.0) && (b == 1.0))
             {
                 return 0.0;
             }
@@ -561,7 +561,7 @@ namespace MathNet.Numerics.Distributions
         /// <seealso cref="CumulativeDistribution"/>
         public static double CDF(double a, double b, double x)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -591,9 +591,9 @@ namespace MathNet.Numerics.Distributions
                 return x >= 0.0 ? 1.0 : 0.0;
             }
 
-            if (a == 0.0 && b == 0.0)
+            if ((a == 0.0) && (b == 0.0))
             {
-                if (x >= 0.0 && x < 1.0)
+                if ((x >= 0.0) && (x < 1.0))
                 {
                     return 0.5;
                 }
@@ -611,7 +611,7 @@ namespace MathNet.Numerics.Distributions
                 return x >= 1.0 ? 1.0 : 0.0;
             }
 
-            if (a == 1.0 && b == 1.0)
+            if ((a == 1.0) && (b == 1.0))
             {
                 return x;
             }
@@ -631,7 +631,7 @@ namespace MathNet.Numerics.Distributions
         /// <remarks>WARNING: currently not an explicit implementation, hence slow and unreliable.</remarks>
         public static double InvCDF(double a, double b, double p)
         {
-            if (a < 0.0 || b < 0.0 || p < 0.0 || p > 1.0)
+            if ((a < 0.0) || (b < 0.0) || (p < 0.0) || (p > 1.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -648,7 +648,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(System.Random rnd, double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -665,7 +665,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(System.Random rnd, double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -683,7 +683,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(System.Random rnd, double[] values, double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -699,7 +699,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sample from the distribution.</returns>
         public static double Sample(double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -715,7 +715,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static IEnumerable<double> Samples(double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }
@@ -732,7 +732,7 @@ namespace MathNet.Numerics.Distributions
         /// <returns>a sequence of samples from the distribution.</returns>
         public static void Samples(double[] values, double a, double b)
         {
-            if (a < 0.0 || b < 0.0)
+            if ((a < 0.0) || (b < 0.0))
             {
                 throw new ArgumentException(Resources.InvalidDistributionParameters);
             }

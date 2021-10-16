@@ -20,7 +20,7 @@ namespace SharpLearning.Optimization.Transforms
         /// <returns></returns>
         public double Transform(double min, double max, ParameterType parameterType, IParameterSampler sampler)
         {
-            if (min >= 1 || max >= 1)
+            if ((min >= 1) || (max >= 1))
             {
                 throw new ArgumentException("ExponentialAverage scale requires min: " + 
                     $" {min} and max: {max} to be smaller than one");

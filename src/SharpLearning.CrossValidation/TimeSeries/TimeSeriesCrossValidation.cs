@@ -99,7 +99,7 @@ namespace SharpLearning.CrossValidation.TimeSeries
             for (int i = 0; i < predictions.Length; i++)
             {
                 // Only train a new model at each retrain interval.
-                if((m_retrainInterval == 1 || i % m_retrainInterval == 0) && i != 0)
+                if(((m_retrainInterval == 1) || ((i % m_retrainInterval) == 0)) && (i != 0))
                 {
                     model = learner.Learn(observations, targets, trainingIndices);
                 }

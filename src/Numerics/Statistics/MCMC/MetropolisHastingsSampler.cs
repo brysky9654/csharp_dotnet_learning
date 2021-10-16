@@ -132,7 +132,7 @@ namespace MathNet.Numerics.Statistics.Mcmc
 
                 Samples++;
 
-                double acc = Math.Min(0.0, p + bwd - _currentDensityLn - fwd);
+                double acc = Math.Min(0.0, (p + bwd) - _currentDensityLn - fwd);
                 if (acc == 0.0)
                 {
                     _current = next;

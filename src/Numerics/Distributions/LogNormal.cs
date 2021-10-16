@@ -109,8 +109,8 @@ namespace MathNet.Numerics.Distributions
         /// <returns>A log-normal distribution.</returns>
         public static LogNormal WithMeanVariance(double mean, double var, System.Random randomSource = null)
         {
-            var sigma2 = Math.Log(var/(mean*mean) + 1.0);
-            return new LogNormal(Math.Log(mean) - sigma2/2.0, Math.Sqrt(sigma2), randomSource);
+            var sigma2 = Math.Log((var/(mean*mean)) + 1.0);
+            return new LogNormal(Math.Log(mean) - (sigma2/2.0), Math.Sqrt(sigma2), randomSource);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="sigma">The shape (σ) of the distribution. Range: σ ≥ 0.</param>
         public static bool IsValidParameterSet(double mu, double sigma)
         {
-            return sigma >= 0.0 && !double.IsNaN(mu);
+            return (sigma >= 0.0) && !double.IsNaN(mu);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the mu of the log-normal distribution.
         /// </summary>
-        public double Mean => Math.Exp(_mu + (_sigma*_sigma/2.0));
+        public double Mean => Math.Exp(_mu + ((_sigma*_sigma)/2.0));
 
         /// <summary>
         /// Gets the variance of the log-normal distribution.
@@ -286,7 +286,7 @@ namespace MathNet.Numerics.Distributions
         public double InverseCumulativeDistribution(double p)
         {
             return p <= 0.0 ? 0.0 : p >= 1.0 ? double.PositiveInfinity
-                : Math.Exp(_mu - _sigma*Constants.Sqrt2*SpecialFunctions.ErfcInv(2.0*p));
+                : Math.Exp(_mu - (_sigma*Constants.Sqrt2*SpecialFunctions.ErfcInv(2.0*p)));
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace MathNet.Numerics.Distributions
             }
 
             return p <= 0.0 ? 0.0 : p >= 1.0 ? double.PositiveInfinity
-                : Math.Exp(mu - sigma*Constants.Sqrt2*SpecialFunctions.ErfcInv(2.0*p));
+                : Math.Exp(mu - (sigma*Constants.Sqrt2*SpecialFunctions.ErfcInv(2.0*p)));
         }
 
         /// <summary>

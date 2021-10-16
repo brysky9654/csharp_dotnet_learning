@@ -66,7 +66,7 @@ namespace SharpLearning.Containers.Views
         /// <returns></returns>
         public double* this[int row]
         {
-            get { return (double*)((byte*)m_dataPtr + (long)row * m_strideInBytes); }
+            get { return (double*)((byte*)m_dataPtr + ((long)row * m_strideInBytes)); }
         }
 
         /// <summary>

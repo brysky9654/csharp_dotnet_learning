@@ -195,7 +195,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (y.Length != x.Length || y.Length != result.Length)
+            if ((y.Length != x.Length) || (y.Length != result.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -233,7 +233,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (y.Length != x.Length || y.Length != result.Length)
+            if ((y.Length != x.Length) || (y.Length != result.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -271,7 +271,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (y.Length != x.Length || y.Length != result.Length)
+            if ((y.Length != x.Length) || (y.Length != result.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -309,7 +309,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (y.Length != x.Length || y.Length != result.Length)
+            if ((y.Length != x.Length) || (y.Length != result.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -350,7 +350,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (y.Length != x.Length || y.Length != result.Length)
+            if ((y.Length != x.Length) || (y.Length != result.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -466,17 +466,17 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentOutOfRangeException(string.Format("columnsA ({0}) != rowsB ({1})", columnsX, rowsY));
             }
 
-            if (rowsX * columnsX != x.Length)
+            if ((rowsX * columnsX) != x.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsA ({0}) * columnsA ({1}) != a.Length ({2})", rowsX, columnsX, x.Length));
             }
 
-            if (rowsY * columnsY != y.Length)
+            if ((rowsY * columnsY) != y.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsB ({0}) * columnsB ({1}) != b.Length ({2})", rowsY, columnsY, y.Length));
             }
 
-            if (rowsX * columnsY != result.Length)
+            if ((rowsX * columnsY) != result.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsA ({0}) * columnsB ({1}) != c.Length ({2})", rowsX, columnsY, result.Length));
             }
@@ -493,7 +493,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 columnDataB[i] = column;
             }
 
-            var shouldNotParallelize = rowsX + columnsY + columnsX < Control.ParallelizeOrder || Control.MaxDegreeOfParallelism < 2;
+            var shouldNotParallelize = ((rowsX + columnsY + columnsX) < Control.ParallelizeOrder) || (Control.MaxDegreeOfParallelism < 2);
             if (shouldNotParallelize)
             {
                 var row = new Complex32[columnsX];
@@ -509,7 +509,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             sum += row[ii] * col[ii];
                         }
 
-                        result[j * rowsX + i] += Complex32.One * sum;
+                        result[(j * rowsX) + i] += Complex32.One * sum;
                     }
                 }
             }
@@ -530,7 +530,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                                 sum += row[ii] * column[ii];
                             }
 
-                            result[j * rowsX + i] += Complex32.One * sum;
+                            result[(j * rowsX) + i] += Complex32.One * sum;
                         }
                     }
                 });
@@ -587,17 +587,17 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentOutOfRangeException(string.Format("columnsA ({0}) != rowsB ({1})", columnsA, rowsB));
             }
 
-            if (rowsA * columnsA != a.Length)
+            if ((rowsA * columnsA) != a.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsA ({0}) * columnsA ({1}) != a.Length ({2})", rowsA, columnsA, a.Length));
             }
 
-            if (rowsB * columnsB != b.Length)
+            if ((rowsB * columnsB) != b.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsB ({0}) * columnsB ({1}) != b.Length ({2})", rowsB, columnsB, b.Length));
             }
 
-            if (rowsA * columnsB != c.Length)
+            if ((rowsA * columnsB) != c.Length)
             {
                 throw new ArgumentOutOfRangeException(string.Format("rowsA ({0}) * columnsB ({1}) != c.Length ({2})", rowsA, columnsB, c.Length));
             }
@@ -626,7 +626,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 columnDataB[i] = column;
             }
 
-            var shouldNotParallelize = rowsA + columnsB + columnsA < Control.ParallelizeOrder || Control.MaxDegreeOfParallelism < 2;
+            var shouldNotParallelize = ((rowsA + columnsB + columnsA) < Control.ParallelizeOrder) || (Control.MaxDegreeOfParallelism < 2);
             if (shouldNotParallelize)
             {
                 var row = new Complex32[columnsA];
@@ -642,7 +642,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             sum += row[ii] * col[ii];
                         }
 
-                        c[j * rowsA + i] += alpha * sum;
+                        c[(j * rowsA) + i] += alpha * sum;
                     }
                 }
             }
@@ -663,7 +663,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                                 sum += row[ii] * column[ii];
                             }
 
-                            c[j * rowsA + i] += alpha * sum;
+                            c[(j * rowsA) + i] += alpha * sum;
                         }
                     }
                 });
@@ -691,7 +691,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(ipiv));
             }
 
-            if (data.Length != order*order)
+            if (data.Length != (order*order))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(data));
             }
@@ -761,7 +761,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 }
 
                 // Compute multipliers.
-                if (j < order & data[indexjj] != 0.0f)
+                if ((j < order) & (data[indexjj] != 0.0f))
                 {
                     for (var i = j + 1; i < order; i++)
                     {
@@ -784,7 +784,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(a));
             }
 
-            if (a.Length != order*order)
+            if (a.Length != (order*order))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(a));
             }
@@ -813,7 +813,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(ipiv));
             }
 
-            if (a.Length != order*order)
+            if (a.Length != (order*order))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(a));
             }
@@ -853,12 +853,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(b));
             }
 
-            if (a.Length != order*order)
+            if (a.Length != (order*order))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(a));
             }
 
-            if (b.Length != order*columnsOfB)
+            if (b.Length != (order*columnsOfB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -901,7 +901,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(b));
             }
 
-            if (a.Length != order*order)
+            if (a.Length != (order*order))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(a));
             }
@@ -911,7 +911,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(ipiv));
             }
 
-            if (b.Length != order*columnsOfB)
+            if (b.Length != (order*columnsOfB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -1082,7 +1082,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(b));
             }
 
-            if (b.Length != orderA*columnsB)
+            if (b.Length != (orderA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -1118,7 +1118,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(b));
             }
 
-            if (b.Length != orderA*columnsB)
+            if (b.Length != (orderA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -1199,7 +1199,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(q));
             }
 
-            if (r.Length != rowsR*columnsR)
+            if (r.Length != (rowsR*columnsR))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, "rowsR * columnsR"), nameof(r));
             }
@@ -1209,7 +1209,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentException(string.Format(Resources.ArrayTooSmall, "min(m,n)"), nameof(tau));
             }
 
-            if (q.Length != rowsR*rowsR)
+            if (q.Length != (rowsR*rowsR))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, "rowsR * rowsR"), nameof(q));
             }
@@ -1261,7 +1261,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(a));
             }
 
-            if (a.Length != rowsA*columnsA)
+            if (a.Length != (rowsA*columnsA))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, "rowsR * columnsR"), nameof(a));
             }
@@ -1271,7 +1271,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentException(string.Format(Resources.ArrayTooSmall, "min(m,n)"), nameof(tau));
             }
 
-            if (r.Length != columnsA*columnsA)
+            if (r.Length != (columnsA*columnsA))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, "columnsA * columnsA"), nameof(r));
             }
@@ -1300,7 +1300,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
             Array.Clear(a, 0, a.Length);
             for (var i = 0; i < columnsA; i++)
             {
-                a[i*rowsA + i] = Complex32.One;
+                a[(i*rowsA) + i] = Complex32.One;
             }
 
             for (var i = minmn - 1; i >= 0; i--)
@@ -1325,7 +1325,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
         /// <param name="availableCores">Number of available CPUs</param>
         static void ComputeQR(Complex32[] work, int workIndex, Complex32[] a, int rowStart, int rowCount, int columnStart, int columnCount, int availableCores)
         {
-            if (rowStart > rowCount || columnStart > columnCount)
+            if ((rowStart > rowCount) || (columnStart > columnCount))
             {
                 return;
             }
@@ -1348,12 +1348,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     var scale = Complex32.Zero;
                     for (var i = rowStart; i < rowCount; i++)
                     {
-                        scale += work[(workIndex*rowCount) + i - rowStart]*a[(j*rowCount) + i];
+                        scale += work[((workIndex*rowCount) + i) - rowStart]*a[(j*rowCount) + i];
                     }
 
                     for (var i = rowStart; i < rowCount; i++)
                     {
-                        a[(j*rowCount) + i] -= work[(workIndex*rowCount) + i - rowStart].Conjugate()*scale;
+                        a[(j*rowCount) + i] -= work[((workIndex*rowCount) + i) - rowStart].Conjugate()*scale;
                     }
                 }
             }
@@ -1383,14 +1383,14 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 });
 
             var norm = Complex32.Zero;
-            for (var i = 0; i < rowCount - row; ++i)
+            for (var i = 0; i < (rowCount - row); ++i)
             {
                 var index1 = tmp + i;
                 norm += work[index1].Magnitude*work[index1].Magnitude;
             }
 
             norm = norm.SquareRoot();
-            if (row == rowCount - 1 || norm.Magnitude == 0)
+            if ((row == (rowCount - 1)) || (norm.Magnitude == 0))
             {
                 a[index] = -work[tmp];
                 work[tmp] = new Complex32(2.0f, 0).SquareRoot();
@@ -1452,17 +1452,17 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(x));
             }
 
-            if (a.Length != rows*columns)
+            if (a.Length != (rows*columns))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(a));
             }
 
-            if (b.Length != rows*columnsB)
+            if (b.Length != (rows*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
 
-            if (x.Length != columns*columnsB)
+            if (x.Length != (columns*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(x));
             }
@@ -1544,22 +1544,22 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 columnsQ = rowsR = columnsR = columnsA;
             }
 
-            if (r.Length != rowsR*columnsR)
+            if (r.Length != (rowsR*columnsR))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, rowsR*columnsR), nameof(r));
             }
 
-            if (q.Length != rowsQ*columnsQ)
+            if (q.Length != (rowsQ*columnsQ))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, rowsQ*columnsQ), nameof(q));
             }
 
-            if (b.Length != rowsA*columnsB)
+            if (b.Length != (rowsA*columnsB))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, rowsA*columnsB), nameof(b));
             }
 
-            if (x.Length != columnsA*columnsB)
+            if (x.Length != (columnsA*columnsB))
             {
                 throw new ArgumentException(string.Format(Resources.ArgumentArrayWrongLength, columnsA*columnsB), nameof(x));
             }
@@ -1653,12 +1653,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(vt));
             }
 
-            if (u.Length != rowsA*rowsA)
+            if (u.Length != (rowsA*rowsA))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(u));
             }
 
-            if (vt.Length != columnsA*columnsA)
+            if (vt.Length != (columnsA*columnsA))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(vt));
             }
@@ -1748,7 +1748,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     e[j] = a[(j*rowsA) + l].Conjugate();
                 }
 
-                if (computeVectors && l < nct)
+                if (computeVectors && (l < nct))
                 {
                     // Place the transformation in "u" for subsequent back multiplication.
                     for (i = l; i < rowsA; i++)
@@ -1788,7 +1788,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
 
                 e[l] = -e[l].Conjugate();
 
-                if (lp1 < rowsA && e[l] != 0.0f)
+                if ((lp1 < rowsA) && (e[l] != 0.0f))
                 {
                     // Apply the transformation.
                     for (i = lp1; i < rowsA; i++)
@@ -1948,7 +1948,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     t = stemp[i].Magnitude;
                     r = stemp[i]/t;
                     stemp[i] = t;
-                    if (i < m - 1)
+                    if (i < (m - 1))
                     {
                         e[i] = e[i]/r;
                     }
@@ -1964,7 +1964,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 }
 
                 // Exit
-                if (i == m - 1)
+                if (i == (m - 1))
                 {
                     break;
                 }
@@ -2023,7 +2023,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 }
 
                 int kase;
-                if (l == m - 2)
+                if (l == (m - 2))
                 {
                     kase = 4;
                 }
@@ -2033,12 +2033,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     for (ls = m - 1; ls > l; ls--)
                     {
                         test = 0.0f;
-                        if (ls != m - 1)
+                        if (ls != (m - 1))
                         {
                             test = test + e[ls].Magnitude;
                         }
 
-                        if (ls != l + 1)
+                        if (ls != (l + 1))
                         {
                             test = test + e[ls - 1].Magnitude;
                         }
@@ -2055,7 +2055,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     {
                         kase = 3;
                     }
-                    else if (ls == m - 1)
+                    else if (ls == (m - 1))
                     {
                         kase = 1;
                     }
@@ -2080,9 +2080,9 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         f = e[m - 2].Real;
                         e[m - 2] = 0.0f;
                         float t1;
-                        for (var kk = l; kk < m - 1; kk++)
+                        for (var kk = l; kk < (m - 1); kk++)
                         {
-                            k = m - 2 - kk + l;
+                            k = (m - 2 - kk) + l;
                             t1 = stemp[k].Real;
                             Drotg(ref t1, ref f, out cs, out sn);
                             stemp[k] = t1;
@@ -2148,7 +2148,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         var b = (((smm1 + sm)*(smm1 - sm)) + (emm1*emm1))/2.0f;
                         var c = (sm*emm1)*(sm*emm1);
                         var shift = 0.0f;
-                        if (b != 0.0f || c != 0.0f)
+                        if ((b != 0.0f) || (c != 0.0f))
                         {
                             shift = (float) Math.Sqrt((b*b) + c);
                             if (b < 0.0f)
@@ -2163,7 +2163,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         var g = sl*el;
 
                         // Chase zeros
-                        for (k = l; k < m - 1; k++)
+                        for (k = l; k < (m - 1); k++)
                         {
                             Drotg(ref f, ref g, out cs, out sn);
                             if (k != l)
@@ -2191,7 +2191,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             stemp[k + 1] = -(sn*e[k]) + (cs*stemp[k + 1]);
                             g = sn*e[k + 1].Real;
                             e[k + 1] = cs*e[k + 1];
-                            if (computeVectors && k < rowsA)
+                            if (computeVectors && (k < rowsA))
                             {
                                 for (i = 0; i < rowsA; i++)
                                 {
@@ -2224,7 +2224,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         }
 
                         // Order the singular value.
-                        while (l != mn - 1)
+                        while (l != (mn - 1))
                         {
                             if (stemp[l].Real >= stemp[l + 1].Real)
                             {
@@ -2234,7 +2234,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             t = stemp[l];
                             stemp[l] = stemp[l + 1];
                             stemp[l + 1] = t;
-                            if (computeVectors && l < columnsA)
+                            if (computeVectors && (l < columnsA))
                             {
                                 // Swap columns l, l + 1
                                 for (i = 0; i < columnsA; i++)
@@ -2245,7 +2245,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                                 }
                             }
 
-                            if (computeVectors && l < rowsA)
+                            if (computeVectors && (l < rowsA))
                             {
                                 // Swap columns l, l + 1
                                 for (i = 0; i < rowsA; i++)
@@ -2309,12 +2309,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(x));
             }
 
-            if (b.Length != rowsA*columnsB)
+            if (b.Length != (rowsA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
 
-            if (x.Length != columnsA*columnsB)
+            if (x.Length != (columnsA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -2367,12 +2367,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(x));
             }
 
-            if (u.Length != rowsA*rowsA)
+            if (u.Length != (rowsA*rowsA))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(u));
             }
 
-            if (vt.Length != columnsA*columnsA)
+            if (vt.Length != (columnsA*columnsA))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(vt));
             }
@@ -2382,12 +2382,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(s));
             }
 
-            if (b.Length != rowsA*columnsB)
+            if (b.Length != (rowsA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
 
-            if (x.Length != columnsA*columnsB)
+            if (x.Length != (columnsA*columnsB))
             {
                 throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(b));
             }
@@ -2442,7 +2442,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(matrix));
             }
 
-            if (matrix.Length != order*order)
+            if (matrix.Length != (order*order))
             {
                 throw new ArgumentException(String.Format(Resources.ArgumentArrayWrongLength, order*order), nameof(matrix));
             }
@@ -2452,7 +2452,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(matrixEv));
             }
 
-            if (matrixEv.Length != order*order)
+            if (matrixEv.Length != (order*order))
             {
                 throw new ArgumentException(String.Format(Resources.ArgumentArrayWrongLength, order*order), nameof(matrixEv));
             }
@@ -2472,7 +2472,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 throw new ArgumentNullException(nameof(matrixD));
             }
 
-            if (matrixD.Length != order*order)
+            if (matrixD.Length != (order*order))
             {
                 throw new ArgumentException(String.Format(Resources.ArgumentArrayWrongLength, order*order), nameof(matrixD));
             }
@@ -2492,7 +2492,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 for (var i = 0; i < order; i++)
                 {
                     vectorEv[i] = new Complex(d[i], e[i]);
-                    matrixD[i*order + i] = new Complex32(d[i], e[i]);
+                    matrixD[(i*order) + i] = new Complex32(d[i], e[i]);
                 }
             }
             else
@@ -2505,7 +2505,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 for (var i = 0; i < order; i++)
                 {
                     vectorEv[i] = new Complex(v[i].Real, v[i].Imaginary);
-                    matrixD[i*order + i] = v[i];
+                    matrixD[(i*order) + i] = v[i];
                 }
             }
         }
@@ -2529,7 +2529,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
 
             for (var i = 0; i < order; i++)
             {
-                d[i] = matrixA[i*order + i].Real;
+                d[i] = matrixA[(i*order) + i].Real;
             }
 
             // Householder reduction to tridiagonal form.
@@ -2541,7 +2541,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
 
                 for (var k = 0; k < i; k++)
                 {
-                    scale = scale + Math.Abs(matrixA[k*order + i].Real) + Math.Abs(matrixA[k*order + i].Imaginary);
+                    scale = scale + Math.Abs(matrixA[(k*order) + i].Real) + Math.Abs(matrixA[(k*order) + i].Imaginary);
                 }
 
                 if (scale == 0.0f)
@@ -2553,15 +2553,15 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 {
                     for (var k = 0; k < i; k++)
                     {
-                        matrixA[k*order + i] /= scale;
-                        h += matrixA[k*order + i].MagnitudeSquared;
+                        matrixA[(k*order) + i] /= scale;
+                        h += matrixA[(k*order) + i].MagnitudeSquared;
                     }
 
                     Complex32 g = (float) Math.Sqrt(h);
                     e[i] = scale*g.Real;
 
                     Complex32 temp;
-                    var im1Oi = (i - 1)*order + i;
+                    var im1Oi = ((i - 1)*order) + i;
                     var f = matrixA[im1Oi];
                     if (f.Magnitude != 0.0f)
                     {
@@ -2586,12 +2586,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             // Form element of A*U.
                             for (var k = 0; k <= j; k++)
                             {
-                                tmp += matrixA[k*order + j]*matrixA[k*order + i].Conjugate();
+                                tmp += matrixA[(k*order) + j]*matrixA[(k*order) + i].Conjugate();
                             }
 
-                            for (var k = j + 1; k <= i - 1; k++)
+                            for (var k = j + 1; k <= (i - 1); k++)
                             {
-                                tmp += matrixA[jO + k].Conjugate()*matrixA[k*order + i].Conjugate();
+                                tmp += matrixA[jO + k].Conjugate()*matrixA[(k*order) + i].Conjugate();
                             }
 
                             // Form element of P
@@ -2604,28 +2604,28 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         // Form the reduced A.
                         for (var j = 0; j < i; j++)
                         {
-                            f = matrixA[j*order + i].Conjugate();
+                            f = matrixA[(j*order) + i].Conjugate();
                             g = tau[j] - (hh*f);
                             tau[j] = g.Conjugate();
 
                             for (var k = 0; k <= j; k++)
                             {
-                                matrixA[k*order + j] -= (f*tau[k]) + (g*matrixA[k*order + i]);
+                                matrixA[(k*order) + j] -= (f*tau[k]) + (g*matrixA[(k*order) + i]);
                             }
                         }
                     }
 
                     for (var k = 0; k < i; k++)
                     {
-                        matrixA[k*order + i] *= scale;
+                        matrixA[(k*order) + i] *= scale;
                     }
 
                     tau[i - 1] = temp.Conjugate();
                 }
 
                 hh = d[i];
-                d[i] = matrixA[i*order + i].Real;
-                matrixA[i*order + i] = new Complex32(hh, scale*(float) Math.Sqrt(h));
+                d[i] = matrixA[(i*order) + i].Real;
+                matrixA[(i*order) + i] = new Complex32(hh, scale*(float) Math.Sqrt(h));
             }
 
             hh = d[0];
@@ -2667,7 +2667,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 var m = l;
                 while (m < order)
                 {
-                    if (Math.Abs(e[m]) <= eps*tst1)
+                    if (Math.Abs(e[m]) <= (eps*tst1))
                     {
                         break;
                     }
@@ -2736,7 +2736,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             }
                         }
 
-                        p = (-s)*s2*c3*el1*e[l]/dl1;
+                        p = ((-s)*s2*c3*el1*e[l])/dl1;
                         e[l] = s*p;
                         d[l] = c*p;
 
@@ -2746,7 +2746,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         {
                             throw new NonConvergenceException();
                         }
-                    } while (Math.Abs(e[l]) > eps*tst1);
+                    } while (Math.Abs(e[l]) > (eps*tst1));
                 }
 
                 d[l] = d[l] + f;
@@ -2754,7 +2754,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
             }
 
             // Sort eigenvalues and corresponding vectors.
-            for (var i = 0; i < order - 1; i++)
+            for (var i = 0; i < (order - 1); i++)
             {
                 var k = i;
                 var p = d[i];
@@ -2805,7 +2805,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
             // Recover and apply the Householder matrices.
             for (var i = 1; i < order; i++)
             {
-                var h = matrixA[i*order + i].Imaginary;
+                var h = matrixA[(i*order) + i].Imaginary;
                 if (h != 0)
                 {
                     for (var j = 0; j < order; j++)
@@ -2813,14 +2813,14 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         var s = Complex32.Zero;
                         for (var k = 0; k < i; k++)
                         {
-                            s += dataEv[(j*order) + k]*matrixA[k*order + i];
+                            s += dataEv[(j*order) + k]*matrixA[(k*order) + i];
                         }
 
                         s = (s/h)/h;
 
                         for (var k = 0; k < i; k++)
                         {
-                            dataEv[(j*order) + k] -= s*matrixA[k*order + i].Conjugate();
+                            dataEv[(j*order) + k] -= s*matrixA[(k*order) + i].Conjugate();
                         }
                     }
                 }
@@ -2841,7 +2841,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
         {
             var ort = new Complex32[order];
 
-            for (var m = 1; m < order - 1; m++)
+            for (var m = 1; m < (order - 1); m++)
             {
                 // Scale column.
                 var scale = 0.0f;
@@ -2897,13 +2897,13 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                         var f = Complex32.Zero;
                         for (var j = order - 1; j >= m; j--)
                         {
-                            f += ort[j]*matrixH[j*order + i];
+                            f += ort[j]*matrixH[(j*order) + i];
                         }
 
                         f = f/h;
                         for (var j = m; j < order; j++)
                         {
-                            matrixH[j*order + i] -= f*ort[j].Conjugate();
+                            matrixH[(j*order) + i] -= f*ort[j].Conjugate();
                         }
                     }
 
@@ -2925,7 +2925,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
             {
                 var mm1O = (m - 1)*order;
                 var mm1Om = mm1O + m;
-                if (matrixH[mm1Om] != Complex32.Zero && ort[m] != Complex32.Zero)
+                if ((matrixH[mm1Om] != Complex32.Zero) && (ort[m] != Complex32.Zero))
                 {
                     var norm = (matrixH[mm1Om].Real*ort[m].Real) + (matrixH[mm1Om].Imaginary*ort[m].Imaginary);
 
@@ -2965,7 +2965,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     matrixH[im1Oi] = matrixH[im1Oi].Magnitude;
                     for (var j = i; j < order; j++)
                     {
-                        matrixH[j*order + i] *= y.Conjugate();
+                        matrixH[(j*order) + i] *= y.Conjugate();
                     }
 
                     for (var j = 0; j <= Math.Min(i + 1, order - 1); j++)
@@ -3013,7 +3013,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     var lm1O = lm1*order;
                     var lO = l*order;
                     var tst1 = Math.Abs(matrixH[lm1O + lm1].Real) + Math.Abs(matrixH[lm1O + lm1].Imaginary) + Math.Abs(matrixH[lO + l].Real) + Math.Abs(matrixH[lO + l].Imaginary);
-                    if (Math.Abs(matrixH[lm1O + l].Real) < eps*tst1)
+                    if (Math.Abs(matrixH[lm1O + l].Real) < (eps*tst1))
                     {
                         break;
                     }
@@ -3038,16 +3038,16 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                 {
                     // Form shift
                     Complex32 s;
-                    if (iter != 10 && iter != 20)
+                    if ((iter != 10) && (iter != 20))
                     {
                         s = matrixH[nOn];
                         x = matrixH[nO + nm1]*matrixH[nm1O + n].Real;
 
-                        if (x.Real != 0.0f || x.Imaginary != 0.0f)
+                        if ((x.Real != 0.0f) || (x.Imaginary != 0.0f))
                         {
                             y = (matrixH[nm1O + nm1] - s)/2.0f;
                             z = ((y*y) + x).SquareRoot();
-                            if ((y.Real*z.Real) + (y.Imaginary*z.Imaginary) < 0.0)
+                            if (((y.Real*z.Real) + (y.Imaginary*z.Imaginary)) < 0.0)
                             {
                                 z *= -1.0f;
                             }
@@ -3059,12 +3059,12 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     else
                     {
                         // Form exceptional shift
-                        s = Math.Abs(matrixH[nm1O + n].Real) + Math.Abs(matrixH[(n - 2)*order + nm1].Real);
+                        s = Math.Abs(matrixH[nm1O + n].Real) + Math.Abs(matrixH[((n - 2)*order) + nm1].Real);
                     }
 
                     for (var i = 0; i <= n; i++)
                     {
-                        matrixH[i*order + i] -= s;
+                        matrixH[(i*order) + i] -= s;
                     }
 
                     exshift += s;
@@ -3101,7 +3101,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
 
                         for (var j = n + 1; j < order; j++)
                         {
-                            matrixH[j*order + n] *= s.Conjugate();
+                            matrixH[(j*order) + n] *= s.Conjugate();
                         }
                     }
 
@@ -3125,7 +3125,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                             else
                             {
                                 y = matrixH[jm1Oi].Real;
-                                matrixH[jm1Oi] = new Complex32((x.Real*y.Real) - (x.Imaginary*y.Imaginary) + (matrixH[jm1O + j].Imaginary*z.Real), matrixH[jm1Oi].Imaginary);
+                                matrixH[jm1Oi] = new Complex32(((x.Real*y.Real) - (x.Imaginary*y.Imaginary)) + (matrixH[jm1O + j].Imaginary*z.Real), matrixH[jm1Oi].Imaginary);
                             }
 
                             matrixH[jO + i] = (x.Conjugate()*z) - (matrixH[jm1O + j].Imaginary*y);
@@ -3162,7 +3162,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
             {
                 for (var j = i; j < order; j++)
                 {
-                    norm = Math.Max(norm, Math.Abs(matrixH[j*order + i].Real) + Math.Abs(matrixH[j*order + i].Imaginary));
+                    norm = Math.Max(norm, Math.Abs(matrixH[(j*order) + i].Real) + Math.Abs(matrixH[(j*order) + i].Imaginary));
                 }
             }
 
@@ -3188,11 +3188,11 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
                     z = 0.0f;
                     for (var j = i + 1; j <= n; j++)
                     {
-                        z += matrixH[j*order + i]*matrixH[nO + j];
+                        z += matrixH[(j*order) + i]*matrixH[nO + j];
                     }
 
                     y = x - vectorV[i];
-                    if (y.Real == 0.0f && y.Imaginary == 0.0f)
+                    if ((y.Real == 0.0f) && (y.Imaginary == 0.0f))
                     {
                         y = eps*norm;
                     }
@@ -3201,7 +3201,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Managed
 
                     // Overflow control
                     var tr = Math.Abs(matrixH[nO + i].Real) + Math.Abs(matrixH[nO + i].Imaginary);
-                    if ((eps*tr)*tr > 1)
+                    if (((eps*tr)*tr) > 1)
                     {
                         for (var j = i; j <= n; j++)
                         {

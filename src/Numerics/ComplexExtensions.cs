@@ -325,7 +325,7 @@ namespace MathNet.Numerics
         /// <returns><c>true</c> if this instance is zero; otherwise, <c>false</c>.</returns>
         public static bool IsZero(this Complex complex)
         {
-            return complex.Real == 0.0 && complex.Imaginary == 0.0;
+            return (complex.Real == 0.0) && (complex.Imaginary == 0.0);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace MathNet.Numerics
         /// <returns><c>true</c> if this instance is one; otherwise, <c>false</c>.</returns>
         public static bool IsOne(this Complex complex)
         {
-            return complex.Real == 1.0 && complex.Imaginary == 0.0;
+            return (complex.Real == 1.0) && (complex.Imaginary == 0.0);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace MathNet.Numerics
         /// <param name="complex">The <see cref="Complex"/> number to perform this operation on.</param>
         public static bool IsImaginaryOne(this Complex complex)
         {
-            return complex.Real == 0.0 && complex.Imaginary == 1.0;
+            return (complex.Real == 0.0) && (complex.Imaginary == 1.0);
         }
 
         /// <summary>
@@ -398,7 +398,7 @@ namespace MathNet.Numerics
         /// </returns>
         public static bool IsRealNonNegative(this Complex complex)
         {
-            return complex.Imaginary == 0.0f && complex.Real >= 0;
+            return (complex.Imaginary == 0.0f) && (complex.Real >= 0);
         }
 
         /// <summary>
@@ -592,8 +592,8 @@ namespace MathNet.Numerics
             }
 
             // handle prefix imaginary symbol
-            if (String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0
-                || String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0)
+            if ((String.Compare(token.Value,    "i", StringComparison.OrdinalIgnoreCase) == 0)
+                || (String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0))
             {
                 imaginary = true;
                 token = token.Next;
@@ -611,8 +611,8 @@ namespace MathNet.Numerics
 #endif
 
             // handle suffix imaginary symbol
-            if (token != null && (String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0
-                                  || String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0))
+            if ((token != null) && ((String.Compare(token.Value, "i", StringComparison.OrdinalIgnoreCase) == 0)
+                                 || (String.Compare(token.Value, "j", StringComparison.OrdinalIgnoreCase) == 0)))
             {
                 if (imaginary)
                 {

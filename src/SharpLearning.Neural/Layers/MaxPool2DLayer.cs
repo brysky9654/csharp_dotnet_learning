@@ -176,13 +176,13 @@ namespace SharpLearning.Neural.Layers
                 {
                     var poolRowOffSet = ph * Width;
 
-                    int hstart = ph * m_stride - m_padHeight;
+                    int hstart = (ph * m_stride) - m_padHeight;
                     int hend = Math.Min(hstart + m_poolHeight, InputHeight);
                     hstart = Math.Max(hstart, 0);
 
                     for (int pw = 0; pw < Width; ++pw)
                     {
-                        int wstart = pw * m_stride - m_padWidth;
+                        int wstart = (pw * m_stride) - m_padWidth;
                         int wend = Math.Min(wstart + m_poolWidth, InputWidth);
                         wstart = Math.Max(wstart, 0);
 
@@ -195,7 +195,7 @@ namespace SharpLearning.Neural.Layers
                             for (int w = wstart; w < wend; ++w)
                             {
                                 var inputColIndex = rowOffSet + w + inputDepthOffSet;
-                                var inputIndex = inputColIndex * batchSize + batchItem;
+                                var inputIndex = (inputColIndex * batchSize) + batchItem;
 
                                 var v = inputData[inputIndex];
 
@@ -214,7 +214,7 @@ namespace SharpLearning.Neural.Layers
                         n++;
 
                         var outputColIndex = poolRowOffSet + pw + outputDeptOffSet;
-                        var outputIndex = outputColIndex * output.RowCount + batchItem;
+                        var outputIndex = (outputColIndex * output.RowCount) + batchItem;
                         outputData[outputIndex] = currentMax;                      
                     }
                 }
@@ -244,12 +244,12 @@ namespace SharpLearning.Neural.Layers
                     var axOffSet = ax + outputDeptOffSet;
                     for (var ay = 0; ay < Height; y += m_stride, ay++)
                     {
-                        var inputGradientColIndex = ay * Width + axOffSet;
-                        var inputGradientIndex = inputGradientColIndex * batchSize + batchItem;
+                        var inputGradientColIndex = (ay * Width) + axOffSet;
+                        var inputGradientIndex = (inputGradientColIndex * batchSize) + batchItem;
                         var chainGradient = inputData[inputGradientIndex];
 
-                        var outputGradientColIndex = switchy[n] * InputWidth + switchx[n] + inputDepthOffSet;
-                        var outputGradientIndex = outputGradientColIndex * outputGradient.RowCount + batchItem;
+                        var outputGradientColIndex = (switchy[n] * InputWidth) + switchx[n] + inputDepthOffSet;
+                        var outputGradientIndex = (outputGradientColIndex * outputGradient.RowCount) + batchItem;
                         outputData[outputGradientIndex] = chainGradient;
                         n++;
                     }

@@ -170,7 +170,7 @@ namespace MathNet.Numerics.Distributions
         /// <param name="stddev">The standard deviation (σ) of the normal distribution. Range: σ ≥ 0.</param>
         public static bool IsValidParameterSet(double mean, double stddev)
         {
-            return stddev >= 0.0 && !double.IsNaN(mean);
+            return (stddev >= 0.0) && !double.IsNaN(mean);
         }
 
         /// <summary>
@@ -350,20 +350,20 @@ namespace MathNet.Numerics.Distributions
             // Polar transform
             double x, y;
             int index = 0;
-            for (int i = 0; i < uniform.Length && index < values.Length; i += 2)
+            for (int i = 0; (i < uniform.Length) && (index < values.Length); i += 2)
             {
                 if (!PolarTransform(uniform[i], uniform[i + 1], out x, out y))
                 {
                     continue;
                 }
 
-                values[index++] = mean + stddev*x;
+                values[index++] = mean + (stddev*x);
                 if (index == values.Length)
                 {
                     return;
                 }
 
-                values[index++] = mean + stddev*y;
+                values[index++] = mean + (stddev*y);
                 if (index == values.Length)
                 {
                     return;
@@ -378,13 +378,13 @@ namespace MathNet.Numerics.Distributions
                     continue;
                 }
 
-                values[index++] = mean + stddev*x;
+                values[index++] = mean + (stddev*x);
                 if (index == values.Length)
                 {
                     return;
                 }
 
-                values[index++] = mean + stddev*y;
+                values[index++] = mean + (stddev*y);
                 if (index == values.Length)
                 {
                     return;
@@ -397,14 +397,14 @@ namespace MathNet.Numerics.Distributions
             var v1 = (2.0*a) - 1.0;
             var v2 = (2.0*b) - 1.0;
             var r = (v1*v1) + (v2*v2);
-            if (r >= 1.0 || r == 0.0)
+            if ((r >= 1.0) || (r == 0.0))
             {
                 x = 0;
                 y = 0;
                 return false;
             }
 
-            var fac = Math.Sqrt(-2.0*Math.Log(r)/r);
+            var fac = Math.Sqrt((-2.0*Math.Log(r))/r);
             x = v1*fac;
             y = v2*fac;
             return true;

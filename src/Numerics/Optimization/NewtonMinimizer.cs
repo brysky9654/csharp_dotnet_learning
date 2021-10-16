@@ -79,12 +79,12 @@ namespace MathNet.Numerics.Optimization
             int totalLineSearchSteps = 0;
             int iterationsWithNontrivialLineSearch = 0;
             bool tmpLineSearch = false;
-            while (objective.Gradient.Norm(2.0) >= gradientTolerance && iterations < maxIterations)
+            while ((objective.Gradient.Norm(2.0) >= gradientTolerance) && (iterations < maxIterations))
             {
                 ValidateHessian(objective);
 
                 var searchDirection = objective.Hessian.LU().Solve(-objective.Gradient);
-                if (searchDirection * objective.Gradient >= 0)
+                if ((searchDirection * objective.Gradient) >= 0)
                 {
                     searchDirection = -objective.Gradient;
                     tmpLineSearch = true;

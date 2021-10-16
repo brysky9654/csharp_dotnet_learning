@@ -60,7 +60,7 @@ namespace MathNet.Numerics.Optimization.LineSearch
 
         protected override bool WolfeCondition(double stepDd, double initialDd)
         {
-            return stepDd < C2 * initialDd;
+            return stepDd < (C2 * initialDd);
         }
 
         protected override void ValidateValue(IObjectiveFunctionEvaluation eval)

@@ -119,7 +119,7 @@ namespace MathNet.Numerics.Differentiation
                     A[row, 0] = 1.0;
                     for (int col = 1; col < points; col++)
                     {
-                        A[row, col] = A[row, col - 1] * l / col;
+                        A[row, col] = (A[row, col - 1] * l) / col;
                     }
                     l -= 1;
                 }

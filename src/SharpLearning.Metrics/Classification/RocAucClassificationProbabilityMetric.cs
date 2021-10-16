@@ -69,10 +69,10 @@ namespace SharpLearning.Metrics.Classification
                 if (probability != previousProbability)
                 {
                     auc = auc +  trapezoidArea(
-                        fpCount * 1.0 / negativeCount, 
-                        previousFpCount * 1.0 / negativeCount, 
-                        tpCount * 1.0 / positivesCount, 
-                        previousTpCount * 1.0 / positivesCount);
+                        (fpCount * 1.0) / negativeCount, 
+                        (previousFpCount * 1.0) / negativeCount, 
+                        (tpCount * 1.0) / positivesCount, 
+                        (previousTpCount * 1.0) / positivesCount);
 
                     previousProbability = probability;
                     previousFpCount = fpCount;
@@ -85,8 +85,8 @@ namespace SharpLearning.Metrics.Classification
             }
 
             auc = auc + trapezoidArea(
-                1.0, previousFpCount * 1.0 / negativeCount, 
-                1.0, previousTpCount * 1.0 / positivesCount);
+                1.0, (previousFpCount * 1.0) / negativeCount, 
+                1.0, (previousTpCount * 1.0) / positivesCount);
 
             return 1.0 - auc;
         }

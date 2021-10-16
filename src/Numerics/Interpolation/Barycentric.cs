@@ -49,7 +49,7 @@ namespace MathNet.Numerics.Interpolation
         /// <param name="w">Barycentric weights (N), sorted ascendingly by x.</param>
         public Barycentric(double[] x, double[] y, double[] w)
         {
-            if (x.Length != y.Length || x.Length != w.Length)
+            if ((x.Length != y.Length) || (x.Length != w.Length))
             {
                 throw new ArgumentException(Resources.ArgumentVectorsSameLength);
             }
@@ -145,7 +145,7 @@ namespace MathNet.Numerics.Interpolation
                 throw new ArgumentException(string.Format(Resources.ArrayTooSmall, 1), nameof(x));
             }
 
-            if (0 > order || x.Length <= order)
+            if ((0 > order) || (x.Length <= order))
             {
                 throw new ArgumentOutOfRangeException(nameof(order));
             }
@@ -162,7 +162,7 @@ namespace MathNet.Numerics.Interpolation
                 for (int i = Math.Max(k - order, 0); i <= Math.Min(k, weights.Length - 1 - order); i++)
                 {
                     double v = 1;
-                    for (int j = i; j <= i + order; j++)
+                    for (int j = i; j <= (i + order); j++)
                     {
                         if (j != k)
                         {
@@ -312,7 +312,7 @@ namespace MathNet.Numerics.Interpolation
             {
                 if (i != closestPoint)
                 {
-                    double v = offset*_w[i]/(t - _x[i]);
+                    double v = (offset*_w[i])/(t - _x[i]);
                     s1 = s1 + (v*_y[i]);
                     s2 = s2 + v;
                 }

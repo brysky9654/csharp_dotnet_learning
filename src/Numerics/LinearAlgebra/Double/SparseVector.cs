@@ -216,7 +216,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
                 int i = 0, j = 0;
                 while (j < otherStorage.ValueCount)
                 {
-                    if (i >= _storage.ValueCount || _storage.Indices[i] > otherStorage.Indices[j])
+                    if ((i >= _storage.ValueCount) || (_storage.Indices[i] > otherStorage.Indices[j]))
                     {
                         var otherValue = otherStorage.Values[j];
                         if (otherValue != 0.0)
@@ -240,9 +240,9 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             {
                 result.Clear();
                 int i = 0, j = 0, last = -1;
-                while (i < _storage.ValueCount || j < otherStorage.ValueCount)
+                while ((i < _storage.ValueCount) || (j < otherStorage.ValueCount))
                 {
-                    if (j >= otherStorage.ValueCount || i < _storage.ValueCount && _storage.Indices[i] <= otherStorage.Indices[j])
+                    if ((j >= otherStorage.ValueCount) || ((i < _storage.ValueCount) && (_storage.Indices[i] <= otherStorage.Indices[j])))
                     {
                         var next = _storage.Indices[i];
                         if (next != last)
@@ -319,7 +319,7 @@ namespace MathNet.Numerics.LinearAlgebra.Double
                 int i = 0, j = 0;
                 while (j < otherStorage.ValueCount)
                 {
-                    if (i >= _storage.ValueCount || _storage.Indices[i] > otherStorage.Indices[j])
+                    if ((i >= _storage.ValueCount) || (_storage.Indices[i] > otherStorage.Indices[j]))
                     {
                         var otherValue = otherStorage.Values[j];
                         if (otherValue != 0.0)
@@ -343,9 +343,9 @@ namespace MathNet.Numerics.LinearAlgebra.Double
             {
                 result.Clear();
                 int i = 0, j = 0, last = -1;
-                while (i < _storage.ValueCount || j < otherStorage.ValueCount)
+                while ((i < _storage.ValueCount) || (j < otherStorage.ValueCount))
                 {
-                    if (j >= otherStorage.ValueCount || i < _storage.ValueCount && _storage.Indices[i] <= otherStorage.Indices[j])
+                    if ((j >= otherStorage.ValueCount) || ((i < _storage.ValueCount) && (_storage.Indices[i] <= otherStorage.Indices[j])))
                     {
                         var next = _storage.Indices[i];
                         if (next != last)

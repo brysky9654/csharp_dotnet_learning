@@ -172,8 +172,8 @@ namespace SharpLearning.GradientBoost.GBMDecisionTree
         {
             var error = node.LeftError + node.RightError;
             var reduction = previousError - error;
-            rawFeatureImportances[node.FeatureIndex] += reduction * reduction *
-                (double)node.SampleCount / (double)totalSampleCount;
+            rawFeatureImportances[node.FeatureIndex] += (reduction * reduction *
+                                                         (double)node.SampleCount) / (double)totalSampleCount;
 
             if (node.LeftIndex != -1)
             {

@@ -20,11 +20,11 @@ namespace MathNet.Numerics.Optimization.TrustRegion.Subproblems
 
             var a = d.DotProduct(d);
             var b = 2.0 * z.DotProduct(d);
-            var c = z.DotProduct(z) - delta * delta;
+            var c = z.DotProduct(z) - (delta * delta);
 
-            var aux = b + ((b >= 0) ? 1.0 : -1.0) * Math.Sqrt(b * b - 4.0 * a * c);
+            var aux = b + (((b >= 0) ? 1.0 : -1.0) * Math.Sqrt((b * b) - (4.0 * a * c)));
             var beta1 = -aux / 2.0 / a;
-            var beta2 = -2.0 * c / aux;
+            var beta2 = (-2.0 * c) / aux;
 
             // return sorted beta
             return (beta1 < beta2)

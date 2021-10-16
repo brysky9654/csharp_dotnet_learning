@@ -395,7 +395,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -460,7 +460,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -526,7 +526,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -592,7 +592,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result);
             }
@@ -708,7 +708,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var sparseOther = other as SparseMatrix;
             var sparseResult = result as SparseMatrix;
-            if (sparseOther == null || sparseResult == null)
+            if ((sparseOther == null) || (sparseResult == null))
             {
                 base.DoAdd(other, result);
                 return;
@@ -766,7 +766,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var sparseOther = other as SparseMatrix;
             var sparseResult = result as SparseMatrix;
 
-            if (sparseOther == null || sparseResult == null)
+            if ((sparseOther == null) || (sparseResult == null))
             {
                 base.DoSubtract(other, result);
                 return;
@@ -832,7 +832,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 return;
             }
 
-            if (scalar == 0.0 || NonZerosCount == 0)
+            if ((scalar == 0.0) || (NonZerosCount == 0))
             {
                 result.Clear();
                 return;
@@ -884,14 +884,14 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
         {
             var sparseOther = other as SparseMatrix;
             var sparseResult = result as SparseMatrix;
-            if (sparseOther != null && sparseResult != null)
+            if ((sparseOther != null) && (sparseResult != null))
             {
                 DoMultiplySparse(sparseOther, sparseResult);
                 return;
             }
 
             var diagonalOther = other.Storage as DiagonalMatrixStorage<Complex>;
-            if (diagonalOther != null && sparseResult != null)
+            if ((diagonalOther != null) && (sparseResult != null))
             {
                 var diagonal = diagonalOther.Data;
                 if (other.ColumnCount == other.RowCount)
@@ -1095,7 +1095,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
             var otherSparse = other as SparseMatrix;
             var resultSparse = result as SparseMatrix;
 
-            if (otherSparse == null || resultSparse == null)
+            if ((otherSparse == null) || (resultSparse == null))
             {
                 base.DoTransposeAndMultiply(other, result);
                 return;
@@ -1239,7 +1239,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != (RowCount*other.RowCount) || result.ColumnCount != (ColumnCount*other.ColumnCount))
+            if ((result.RowCount != (RowCount*other.RowCount)) || (result.ColumnCount != (ColumnCount*other.ColumnCount)))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(this, other, result);
             }
@@ -1358,7 +1358,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(leftSide));
             }
 
-            if (leftSide.RowCount != rightSide.RowCount || leftSide.ColumnCount != rightSide.ColumnCount)
+            if ((leftSide.RowCount != rightSide.RowCount) || (leftSide.ColumnCount != rightSide.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }
@@ -1405,7 +1405,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex
                 throw new ArgumentNullException(nameof(leftSide));
             }
 
-            if (leftSide.RowCount != rightSide.RowCount || leftSide.ColumnCount != rightSide.ColumnCount)
+            if ((leftSide.RowCount != rightSide.RowCount) || (leftSide.ColumnCount != rightSide.ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentOutOfRangeException>(leftSide, rightSide);
             }

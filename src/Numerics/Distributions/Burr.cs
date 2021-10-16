@@ -90,7 +90,7 @@ namespace MathNet.Numerics.Distributions
         public static bool IsValidParameterSet(double a, double c, double k)
         {
             var allFinite = a.IsFinite() && c.IsFinite() && k.IsFinite();
-            return allFinite && a > 0.0 && c > 0.0 && k > 0.0;
+            return allFinite && (a > 0.0) && (c > 0.0) && (k > 0.0);
         }
 
         /// <summary>
@@ -105,14 +105,14 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the mean of the Burr distribution.
         /// </summary>
-        public double Mean => (1 / SpecialFunctions.Gamma(k)) * a * SpecialFunctions.Gamma(1 + 1 / c) * SpecialFunctions.Gamma(k - 1 / c);
+        public double Mean => (1 / SpecialFunctions.Gamma(k)) * a * SpecialFunctions.Gamma(1 + (1 / c)) * SpecialFunctions.Gamma(k - (1 / c));
 
         /// <summary>
         /// Gets the variance of the Burr distribution.
         /// </summary>
         public double Variance =>
-            (1 / SpecialFunctions.Gamma(k)) * Math.Pow(a, 2) * SpecialFunctions.Gamma(1 + 2 / c) * SpecialFunctions.Gamma(k - 2 / c)
-            - Math.Pow((1 / SpecialFunctions.Gamma(k)) * a * SpecialFunctions.Gamma(1 + 1 / c) * SpecialFunctions.Gamma(k - 1 / c), 2);
+            ((1 / SpecialFunctions.Gamma(k)) * Math.Pow(a, 2) * SpecialFunctions.Gamma(1 + (2 / c)) * SpecialFunctions.Gamma(k - (2 / c)))
+            - Math.Pow((1 / SpecialFunctions.Gamma(k)) * a * SpecialFunctions.Gamma(1 + (1 / c)) * SpecialFunctions.Gamma(k - (1 / c)), 2);
 
         /// <summary>
         /// Gets the standard deviation of the Burr distribution.
@@ -122,7 +122,7 @@ namespace MathNet.Numerics.Distributions
         /// <summary>
         /// Gets the mode of the Burr distribution.
         /// </summary>
-        public double Mode => a * Math.Pow((c - 1) / (c * k + 1), 1 / c);
+        public double Mode => a * Math.Pow((c - 1) / ((c * k) + 1), 1 / c);
 
         /// <summary>
         /// Gets the minimum of the Burr distribution.
@@ -149,7 +149,7 @@ namespace MathNet.Numerics.Distributions
                 var mean = Mean;
                 var variance = Variance;
                 var std = StdDev;
-                return (GetMoment(3) - 3 * mean * variance - mean * mean * mean) / (std * std * std);
+                return (GetMoment(3) - (3 * mean * variance) - (mean * mean * mean)) / (std * std * std);
             }
         }
 
@@ -275,12 +275,12 @@ namespace MathNet.Numerics.Distributions
         /// <returns>the n-th moment of the distribution.</returns>
         public double GetMoment(double n)
         {
-            if (n > k * c)
+            if (n > (k * c))
             {
                 throw new ArgumentException(Resources.ArgumentParameterSetInvalid);
             }
-            var lambda_n = (n / c) * SpecialFunctions.Gamma(n / c) * SpecialFunctions.Gamma(k - n / c);
-            return Math.Pow(a, n) * lambda_n / SpecialFunctions.Gamma(k);
+            var lambda_n = (n / c) * SpecialFunctions.Gamma(n / c) * SpecialFunctions.Gamma(k - (n / c));
+            return (Math.Pow(a, n) * lambda_n) / SpecialFunctions.Gamma(k);
         }
 
         /// <summary>
@@ -372,7 +372,7 @@ namespace MathNet.Numerics.Distributions
 
         internal static double DensityImpl(double a, double c, double k, double x)
         {
-            var numerator = (k * c / a) * Math.Pow(x / a, c - 1);
+            var numerator = ((k * c) / a) * Math.Pow(x / a, c - 1);
             var denominator = Math.Pow(1 + Math.Pow(x / a, c), k + 1);
             return numerator / denominator;
         }
@@ -385,7 +385,7 @@ namespace MathNet.Numerics.Distributions
         internal static double CumulativeDistributionImpl(double a, double c, double k, double x)
         {
             var denominator = Math.Pow(1 + Math.Pow(x / a, c), k);
-            return 1 - 1 / denominator;
+            return 1 - (1 / denominator);
         }
     }
 }

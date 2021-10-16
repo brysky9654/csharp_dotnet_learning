@@ -216,7 +216,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Solvers
                     sum += rowValues[j]*lhs[j];
                 }
 
-                lhs[i] = 1/rowValues[i]*(lhs[i] - sum);
+                lhs[i] = (1/rowValues[i])*(lhs[i] - sum);
             }
         }
     }

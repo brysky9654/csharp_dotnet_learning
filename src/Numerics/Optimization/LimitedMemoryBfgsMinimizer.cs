@@ -77,7 +77,7 @@ namespace MathNet.Numerics.Optimization
             // First step
 
             var lineSearchDirection = -objective.Gradient;
-            var stepSize = 100 * GradientTolerance / (lineSearchDirection * lineSearchDirection);
+            var stepSize = (100 * GradientTolerance) / (lineSearchDirection * lineSearchDirection);
 
             var previousPoint = objective;
 
@@ -110,7 +110,7 @@ namespace MathNet.Numerics.Optimization
             int totalLineSearchSteps = lineSearchResult.Iterations;
             int iterationsWithNontrivialLineSearch = lineSearchResult.Iterations > 0 ? 0 : 1;
             previousPoint = candidate;
-            while (iterations++ < MaximumIterations && previousPoint.Gradient.Norm(2) >= GradientTolerance)
+            while ((iterations++ < MaximumIterations) && (previousPoint.Gradient.Norm(2) >= GradientTolerance))
             {
                 lineSearchDirection = -ApplyLbfgsUpdate(previousPoint, ykhistory, skhistory, rhokhistory);
                 var directionalDerivative = previousPoint.Gradient.DotProduct(lineSearchDirection);
@@ -149,7 +149,7 @@ namespace MathNet.Numerics.Optimization
                 }
             }
 
-            if (iterations == MaximumIterations && currentExitCondition == ExitCondition.None)
+            if ((iterations == MaximumIterations) && (currentExitCondition == ExitCondition.None))
                 throw new MaximumIterationsException(String.Format("Maximum iterations ({0}) reached.", MaximumIterations));
 
             return new MinimizationWithLineSearchResult(candidate, iterations, ExitCondition.AbsoluteGradient, totalLineSearchSteps, iterationsWithNontrivialLineSearch);

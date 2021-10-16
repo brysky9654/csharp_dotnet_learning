@@ -83,13 +83,13 @@ namespace MathNet.Numerics.Optimization.ObjectiveFunctions
                 var relIncr = origPoint * RelativeIncrement;
                 var h = Math.Max(relIncr, MinimumIncrement);
                 var mult = 1;
-                if (origPoint + h > UpperBound[ii])
+                if ((origPoint + h) > UpperBound[ii])
                     mult = -1;
 
-                tmpPoint[ii] = origPoint + mult*h;
+                tmpPoint[ii] = origPoint + (mult*h);
                 tmpObj.EvaluateAt(tmpPoint);
                 double bumpedValue = tmpObj.Value;
-                _gradient[ii] = (mult * bumpedValue - mult * InnerObjectiveFunction.Value) / h;
+                _gradient[ii] = ((mult * bumpedValue) - (mult * InnerObjectiveFunction.Value)) / h;
 
                 tmpPoint[ii] = origPoint;
             }

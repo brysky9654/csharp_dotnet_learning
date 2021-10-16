@@ -85,8 +85,8 @@ namespace SharpLearning.DecisionTrees.SplitSearchers
                     {
                         impurityCalculator.UpdateIndex(currentSplit);
                         
-                        if (impurityCalculator.WeightedLeft < m_minimumLeafWeight ||
-                            impurityCalculator.WeightedRight < m_minimumLeafWeight)
+                        if ((impurityCalculator.WeightedLeft < m_minimumLeafWeight) ||
+                            (impurityCalculator.WeightedRight < m_minimumLeafWeight))
                         {
                             continue;
                         }

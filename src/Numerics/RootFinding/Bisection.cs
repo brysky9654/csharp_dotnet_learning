@@ -120,7 +120,7 @@ namespace MathNet.Numerics.RootFinding
             {
                 double froot = f(root);
 
-                if (upperBound - lowerBound <= 2*accuracy && Math.Abs(froot) <= accuracy)
+                if (((upperBound - lowerBound) <= (2*accuracy)) && (Math.Abs(froot) <= accuracy))
                 {
                     return true;
                 }

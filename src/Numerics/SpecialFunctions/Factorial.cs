@@ -126,7 +126,7 @@ namespace MathNet.Numerics
         /// <returns>The binomial coefficient: n choose k.</returns>
         public static double Binomial(int n, int k)
         {
-            if (k < 0 || n < 0 || k > n)
+            if ((k < 0) || (n < 0) || (k > n))
             {
                 return 0.0;
             }
@@ -142,7 +142,7 @@ namespace MathNet.Numerics
         /// <returns>The logarithmic binomial coefficient: ln(n choose k).</returns>
         public static double BinomialLn(int n, int k)
         {
-            if (k < 0 || n < 0 || k > n)
+            if ((k < 0) || (n < 0) || (k > n))
             {
                 return double.NegativeInfinity;
             }

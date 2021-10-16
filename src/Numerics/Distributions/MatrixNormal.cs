@@ -122,12 +122,12 @@ namespace MathNet.Numerics.Distributions
         {
             var n = m.RowCount;
             var p = m.ColumnCount;
-            if (v.ColumnCount != n || v.RowCount != n)
+            if ((v.ColumnCount != n) || (v.RowCount != n))
             {
                 return false;
             }
 
-            if (k.ColumnCount != p || k.RowCount != p)
+            if ((k.ColumnCount != p) || (k.RowCount != p))
             {
                 return false;
             }
@@ -186,7 +186,7 @@ namespace MathNet.Numerics.Distributions
         /// <exception cref="ArgumentOutOfRangeException">If the argument does not have the correct dimensions.</exception>
         public double Density(Matrix<double> x)
         {
-            if (x.RowCount != _m.RowCount || x.ColumnCount != _m.ColumnCount)
+            if ((x.RowCount != _m.RowCount) || (x.ColumnCount != _m.ColumnCount))
             {
                 throw Matrix.DimensionsDontMatch<ArgumentOutOfRangeException>(x, _m, "x");
             }
@@ -196,7 +196,7 @@ namespace MathNet.Numerics.Distributions
             var cholK = _k.Cholesky();
 
             return Math.Exp(-0.5*cholK.Solve(a.Transpose()*cholV.Solve(a)).Trace())
-                   /Math.Pow(2.0*Constants.Pi, x.RowCount*x.ColumnCount/2.0)
+                   /Math.Pow(2.0*Constants.Pi,  (x.RowCount*x.ColumnCount)/2.0)
                    /Math.Pow(cholK.Determinant, x.RowCount/2.0)
                    /Math.Pow(cholV.Determinant, x.ColumnCount/2.0);
         }

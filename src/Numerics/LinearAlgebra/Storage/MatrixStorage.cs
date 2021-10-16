@@ -149,7 +149,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 return false;
             }
-            if (ColumnCount != other.ColumnCount || RowCount != other.RowCount)
+            if ((ColumnCount != other.ColumnCount) || (RowCount != other.RowCount))
             {
                 return false;
             }
@@ -197,7 +197,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                     int col;
                     int row = Math.DivRem(i, ColumnCount, out col);
 #endif
-                    hash = hash*31 + At(row, col).GetHashCode();
+                    hash = (hash*31) + At(row, col).GetHashCode();
                 }
             }
             return hash;
@@ -218,17 +218,17 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         public void Clear(int rowIndex, int rowCount, int columnIndex, int columnCount)
         {
-            if (rowCount < 1 || columnCount < 1)
+            if ((rowCount < 1) || (columnCount < 1))
             {
                 return;
             }
 
-            if (rowIndex + rowCount > RowCount || rowIndex < 0)
+            if (((rowIndex + rowCount) > RowCount) || (rowIndex < 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(rowIndex));
             }
 
-            if (columnIndex + columnCount > ColumnCount || columnIndex < 0)
+            if (((columnIndex + columnCount) > ColumnCount) || (columnIndex < 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(columnIndex));
             }
@@ -238,9 +238,9 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         internal virtual void ClearUnchecked(int rowIndex, int rowCount, int columnIndex, int columnCount)
         {
-            for (var i = rowIndex; i < rowIndex + rowCount; i++)
+            for (var i = rowIndex; i < (rowIndex + rowCount); i++)
             {
-                for (var j = columnIndex; j < columnIndex + columnCount; j++)
+                for (var j = columnIndex; j < (columnIndex + columnCount); j++)
                 {
                     At(i, j, Zero);
                 }
@@ -256,7 +256,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             for (int k = 0; k < rowIndices.Length; k++)
             {
-                if (rowIndices[k] < 0 || rowIndices[k] >= RowCount)
+                if ((rowIndices[k] < 0) || (rowIndices[k] >= RowCount))
                 {
                     throw new ArgumentOutOfRangeException(nameof(rowIndices));
                 }
@@ -321,7 +321,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 return;
             }
 
-            if (RowCount != target.RowCount || ColumnCount != target.ColumnCount)
+            if ((RowCount != target.RowCount) || (ColumnCount != target.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, target.RowCount + "x" + target.ColumnCount);
                 throw new ArgumentException(message, nameof(target));
@@ -351,7 +351,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (rowCount == 0 || columnCount == 0)
+            if ((rowCount == 0) || (columnCount == 0))
             {
                 return;
             }
@@ -374,9 +374,9 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             int sourceColumnIndex, int targetColumnIndex, int columnCount,
             ExistingData existingData)
         {
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
-                for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+                for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
                 {
                     target.At(ii, jj, At(i, j));
                 }
@@ -417,7 +417,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         internal virtual void CopySubRowToUnchecked(VectorStorage<T> target, int rowIndex,
             int sourceColumnIndex, int targetColumnIndex, int columnCount, ExistingData existingData)
         {
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
                 target.At(jj, At(rowIndex, j));
             }
@@ -457,7 +457,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         internal virtual void CopySubColumnToUnchecked(VectorStorage<T> target, int columnIndex,
             int sourceRowIndex, int targetRowIndex, int rowCount, ExistingData existingData)
         {
-            for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+            for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
             {
                 target.At(ii, At(i, columnIndex));
             }
@@ -472,7 +472,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (RowCount != target.ColumnCount || ColumnCount != target.RowCount)
+            if ((RowCount != target.ColumnCount) || (ColumnCount != target.RowCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, target.RowCount + "x" + target.ColumnCount);
                 throw new ArgumentException(message, nameof(target));
@@ -689,7 +689,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(other));
             }
 
-            if (RowCount != other.RowCount || ColumnCount != other.ColumnCount)
+            if ((RowCount != other.RowCount) || (ColumnCount != other.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, other.RowCount + "x" + other.ColumnCount);
                 throw new ArgumentException(message, nameof(other));
@@ -748,7 +748,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (RowCount != target.RowCount || ColumnCount != target.ColumnCount)
+            if ((RowCount != target.RowCount) || (ColumnCount != target.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, target.RowCount + "x" + target.ColumnCount);
                 throw new ArgumentException(message, nameof(target));
@@ -777,7 +777,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (RowCount != target.RowCount || ColumnCount != target.ColumnCount)
+            if ((RowCount != target.RowCount) || (ColumnCount != target.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, target.RowCount + "x" + target.ColumnCount);
                 throw new ArgumentException(message, nameof(target));
@@ -809,7 +809,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (rowCount == 0 || columnCount == 0)
+            if ((rowCount == 0) || (columnCount == 0))
             {
                 return;
             }
@@ -832,9 +832,9 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             Zeros zeros, ExistingData existingData)
             where TU : struct, IEquatable<TU>, IFormattable
         {
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
-                for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+                for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
                 {
                     target.At(ii, jj, f(ii, jj, At(i, j)));
                 }
@@ -853,13 +853,13 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(other));
             }
 
-            if (RowCount != target.RowCount || ColumnCount != target.ColumnCount)
+            if ((RowCount != target.RowCount) || (ColumnCount != target.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, target.RowCount + "x" + target.ColumnCount);
                 throw new ArgumentException(message, nameof(target));
             }
 
-            if (RowCount != other.RowCount || ColumnCount != other.ColumnCount)
+            if ((RowCount != other.RowCount) || (ColumnCount != other.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, other.RowCount + "x" + other.ColumnCount);
                 throw new ArgumentException(message, nameof(other));
@@ -965,7 +965,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 throw new ArgumentNullException(nameof(other));
             }
 
-            if (RowCount != other.RowCount || ColumnCount != other.ColumnCount)
+            if ((RowCount != other.RowCount) || (ColumnCount != other.ColumnCount))
             {
                 var message = string.Format(Resources.ArgumentMatrixDimensions2, RowCount + "x" + ColumnCount, other.RowCount + "x" + other.ColumnCount);
                 throw new ArgumentException(message, nameof(other));

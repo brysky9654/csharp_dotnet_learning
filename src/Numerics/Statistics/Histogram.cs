@@ -193,7 +193,7 @@ namespace MathNet.Numerics.Statistics
         /// </returns>
         public int CompareTo(Bucket bucket)
         {
-            if (UpperBound > bucket.LowerBound && LowerBound < bucket.LowerBound)
+            if ((UpperBound > bucket.LowerBound) && (LowerBound < bucket.LowerBound))
             {
                 throw new ArgumentException(Resources.PartialOrderException);
             }
@@ -308,7 +308,7 @@ namespace MathNet.Numerics.Statistics
             {
                 AddBucket(new Bucket(
                     fNextLowerBound,
-                    fNextLowerBound = (lower + (n + 1) * width)));
+                    fNextLowerBound = (lower + ((n + 1) * width))));
             }
 
             AddData(data);
@@ -339,7 +339,7 @@ namespace MathNet.Numerics.Statistics
             // Add buckets for each bin.
             for (int n = 0; n < nbuckets; n++)
             {
-                AddBucket(new Bucket(lower + n * width, lower + (n + 1) * width));
+                AddBucket(new Bucket(lower + (n * width), lower + ((n + 1) * width)));
             }
 
             AddData(data);

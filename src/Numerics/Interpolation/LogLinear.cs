@@ -153,8 +153,8 @@ namespace MathNet.Numerics.Interpolation
             var linearFirstDerivative = _spline.Differentiate(t);
             var linearSecondDerivative = _spline.Differentiate2(t);
 
-            var secondDerivative = Differentiate(t)*linearFirstDerivative +
-                                   Interpolate(t)*linearSecondDerivative;
+            var secondDerivative = (Differentiate(t)*linearFirstDerivative) +
+                                   (Interpolate(t)*linearSecondDerivative);
 
             return secondDerivative;
         }

@@ -189,7 +189,7 @@ namespace MathNet.Numerics.LinearAlgebra.Single.Solvers
                 matrix.Multiply(vecPdash, nu);
 
                 // alpha_i = rho_(i-1)/ (r~^T nu_i) = rho / dotproduct(r~ and nu_i)
-                alpha = currentRho*1/tempResiduals.DotProduct(nu);
+                alpha = (currentRho*1)/tempResiduals.DotProduct(nu);
 
                 // s = r_(i-1) - alpha_i nu_i
                 nu.Multiply(-alpha, temp);

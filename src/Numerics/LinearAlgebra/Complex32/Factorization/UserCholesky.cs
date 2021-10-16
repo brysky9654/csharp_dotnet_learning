@@ -124,7 +124,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex32.Factorization
         /// <exception cref="ArgumentOutOfRangeException">If <paramref name="matrix"/> does not have the same dimensions as the existing factor.</exception>
         public override void Factorize(Matrix<Complex32> matrix)
         {
-            if (matrix.RowCount != Factor.RowCount || matrix.ColumnCount != Factor.ColumnCount)
+            if ((matrix.RowCount != Factor.RowCount) || (matrix.ColumnCount != Factor.ColumnCount))
             {
                 throw Matrix.DimensionsDontMatch<ArgumentException>(matrix, Factor);
             }

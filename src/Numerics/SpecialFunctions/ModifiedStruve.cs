@@ -248,7 +248,7 @@ namespace MathNet.Numerics
                     return Constants.TwoInvPi*x;
                 }
 
-                double T = (4.0*x - 24.0)/(x + 24.0);
+                double T = ((4.0*x) - 24.0)/(x + 24.0);
                 return Constants.TwoInvPi*x*Evaluate.ChebyshevSum(nterm1, ARL0, T)*Math.Exp(x);
             }
 
@@ -276,13 +276,13 @@ namespace MathNet.Numerics
                 ch2 = Evaluate.ChebyshevSum(nterm3, AI0ML0, T);
             }
 
-            double test = Math.Log(ch1) - Constants.LogSqrt2Pi - Math.Log(x)/2.0 + x;
+            double test = (Math.Log(ch1) - Constants.LogSqrt2Pi - (Math.Log(x)/2.0)) + x;
             if (test > Math.Log(xmax))
             {
                 throw new ArithmeticException("ERROR IN MISCFUN FUNCTION STRVL0: ARGUMENT CAUSES OVERFLOW");
             }
 
-            return Math.Exp(test) - Constants.TwoInvPi*ch2/x;
+            return Math.Exp(test) - ((Constants.TwoInvPi*ch2)/x);
         }
 
         /// <summary>
@@ -493,8 +493,8 @@ namespace MathNet.Numerics
                     return xsq/Constants.Pi3Over2;
                 }
 
-                double t = (4.0*x - 24.0)/(x + 24.0);
-                return xsq*Evaluate.ChebyshevSum(nterm1, ARL1, t)*Math.Exp(x)/Constants.Pi3Over2;
+                double t = ((4.0*x) - 24.0)/(x + 24.0);
+                return (xsq*Evaluate.ChebyshevSum(nterm1, ARL1, t)*Math.Exp(x))/Constants.Pi3Over2;
             }
 
             // CODE FOR |x| > 16
@@ -521,13 +521,13 @@ namespace MathNet.Numerics
                 ch2 = Evaluate.ChebyshevSum(nterm3, AI1ML1, t);
             }
 
-            double test = Math.Log(ch1) - Constants.LogSqrt2Pi - Math.Log(x)/2.0 + x;
+            double test = (Math.Log(ch1) - Constants.LogSqrt2Pi - (Math.Log(x)/2.0)) + x;
             if (test > Math.Log(xmax))
             {
                 throw new ArithmeticException("ERROR IN MISCFUN FUNCTION STRVL1: ARGUMENT CAUSES OVERFLOW");
             }
 
-            return Math.Exp(test) - Constants.TwoInvPi*ch2;
+            return Math.Exp(test) - (Constants.TwoInvPi*ch2);
         }
 
         /// <summary>

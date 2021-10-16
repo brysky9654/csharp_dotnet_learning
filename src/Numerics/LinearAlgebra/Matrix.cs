@@ -451,7 +451,7 @@ namespace MathNet.Numerics.LinearAlgebra
             var result = Build.SameAs(this);
             for (var row = 0; row < RowCount; row++)
             {
-                for (var column = 0; column <= row && column < ColumnCount; column++)
+                for (var column = 0; (column <= row) && (column < ColumnCount); column++)
                 {
                     result.At(row, column, At(row, column));
                 }
@@ -472,7 +472,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -499,7 +499,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -587,7 +587,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -632,7 +632,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != RowCount) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -1137,7 +1137,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.ColumnCount != (ColumnCount + right.ColumnCount) || result.RowCount != RowCount)
+            if ((result.ColumnCount != (ColumnCount + right.ColumnCount)) || (result.RowCount != RowCount))
             {
                 throw new ArgumentException(Resources.ArgumentMatrixSameColumnDimension);
             }
@@ -1199,7 +1199,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != (RowCount + lower.RowCount) || result.ColumnCount != ColumnCount)
+            if ((result.RowCount != (RowCount + lower.RowCount)) || (result.ColumnCount != ColumnCount))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }
@@ -1253,7 +1253,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if (result.RowCount != RowCount + lower.RowCount || result.ColumnCount != ColumnCount + lower.ColumnCount)
+            if ((result.RowCount != (RowCount + lower.RowCount)) || (result.ColumnCount != (ColumnCount + lower.ColumnCount)))
             {
                 throw DimensionsDontMatch<ArgumentException>(this, result, "result");
             }

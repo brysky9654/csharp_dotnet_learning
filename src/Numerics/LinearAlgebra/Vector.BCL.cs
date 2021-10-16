@@ -50,7 +50,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </returns>
         public bool Equals(Vector<T> other)
         {
-            return other != null && Storage.Equals(other.Storage);
+            return (other != null) && Storage.Equals(other.Storage);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace MathNet.Numerics.LinearAlgebra
         public sealed override bool Equals(object obj)
         {
             var other = obj as Vector<T>;
-            return other != null && Storage.Equals(other.Storage);
+            return (other != null) && Storage.Equals(other.Storage);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 int height = Math.Min(maxPerColumn, Count - offset);
                 var candidate = FormatCompleteColumn(offset, height, formatValue);
                 chars += candidate.Item1 + padding;
-                if (chars > maxCharactersWidth && offset > 0)
+                if ((chars > maxCharactersWidth) && (offset > 0))
                 {
                     break;
                 }

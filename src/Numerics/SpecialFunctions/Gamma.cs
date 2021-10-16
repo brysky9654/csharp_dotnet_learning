@@ -94,19 +94,19 @@ namespace MathNet.Numerics
                        - Math.Log(Math.Sin(Math.PI*z))
                        - Math.Log(s)
                        - Constants.LogTwoSqrtEOverPi
-                       - ((0.5 - z)*Math.Log((0.5 - z + GammaR)/Math.E));
+                       - ((0.5 - z)*Math.Log(((0.5 - z) + GammaR)/Math.E));
             }
             else
             {
                 double s = GammaDk[0];
                 for (int i = 1; i <= GammaN; i++)
                 {
-                    s += GammaDk[i]/(z + i - 1.0);
+                    s += GammaDk[i]/((z + i) - 1.0);
                 }
 
                 return Math.Log(s)
                        + Constants.LogTwoSqrtEOverPi
-                       + ((z - 0.5)*Math.Log((z - 0.5 + GammaR)/Math.E));
+                       + ((z - 0.5)*Math.Log(((z - 0.5) + GammaR)/Math.E));
             }
         }
 
@@ -137,17 +137,17 @@ namespace MathNet.Numerics
                 return Math.PI/(Math.Sin(Math.PI*z)
                                 *s
                                 *Constants.TwoSqrtEOverPi
-                                *Math.Pow((0.5 - z + GammaR)/Math.E, 0.5 - z));
+                                *Math.Pow(((0.5 - z) + GammaR)/Math.E, 0.5 - z));
             }
             else
             {
                 double s = GammaDk[0];
                 for (int i = 1; i <= GammaN; i++)
                 {
-                    s += GammaDk[i]/(z + i - 1.0);
+                    s += GammaDk[i]/((z + i) - 1.0);
                 }
 
-                return s*Constants.TwoSqrtEOverPi*Math.Pow((z - 0.5 + GammaR)/Math.E, z - 0.5);
+                return s*Constants.TwoSqrtEOverPi*Math.Pow(((z - 0.5) + GammaR)/Math.E, z - 0.5);
             }
         }
 
@@ -165,12 +165,12 @@ namespace MathNet.Numerics
             const double bigInv = 2.22044604925031308085e-16;
 
 
-            if (x < 1d || x <= a)
+            if ((x < 1d) || (x <= a))
             {
                 return 1d - GammaLowerRegularized(a, x);
             }
 
-            double ax = a*Math.Log(x) - x - GammaLn(a);
+            double ax = (a*Math.Log(x)) - x - GammaLn(a);
             if (ax < -709.78271289338399)
             {
                 return a < x ? 0d : 1d;
@@ -192,8 +192,8 @@ namespace MathNet.Numerics
                 y = y + 1;
                 z = z + 2;
                 double yc = y*c;
-                double pk = pkm1*z - pkm2*yc;
-                double qk = qkm1*z - qkm2*yc;
+                double pk = (pkm1*z) - (pkm2*yc);
+                double qk = (qkm1*z) - (qkm2*yc);
                 if (qk != 0)
                 {
                     double r = pk/qk;
@@ -292,7 +292,7 @@ namespace MathNet.Numerics
                 return a < x ? 1d : 0d;
             }
 
-            if (x <= 1 || x <= a)
+            if ((x <= 1) || (x <= a))
             {
                 double r2 = a;
                 double c2 = 1;
@@ -301,12 +301,12 @@ namespace MathNet.Numerics
                 do
                 {
                     r2 = r2 + 1;
-                    c2 = c2*x/r2;
+                    c2 = (c2*x)/r2;
                     ans2 += c2;
                 }
                 while ((c2/ans2) > epsilon);
 
-                return Math.Exp(ax)*ans2/a;
+                return (Math.Exp(ax)*ans2)/a;
             }
 
             int c = 0;
@@ -379,12 +379,12 @@ namespace MathNet.Numerics
                 return double.NaN;
             }
 
-            if (a < 0 || a.AlmostEqual(0.0))
+            if ((a < 0) || a.AlmostEqual(0.0))
             {
                 throw new ArgumentOutOfRangeException(nameof(a));
             }
 
-            if (y0 < 0 || y0 > 1)
+            if ((y0 < 0) || (y0 > 1))
             {
                 throw new ArgumentOutOfRangeException(nameof(y0));
             }
@@ -414,14 +414,14 @@ namespace MathNet.Numerics
 
             for (int i = 0; i < 20; i++)
             {
-                if (x < xLower || x > xUpper)
+                if ((x < xLower) || (x > xUpper))
                 {
                     d = 0.0625;
                     break;
                 }
 
                 y = 1 - GammaLowerRegularized(a, x);
-                if (y < yLower || y > yUpper)
+                if ((y < yLower) || (y > yUpper))
                 {
                     d = 0.0625;
                     break;
@@ -587,7 +587,7 @@ namespace MathNet.Numerics
             }
 
             // Handle special cases.
-            if (x <= 0 && Math.Floor(x) == x)
+            if ((x <= 0) && (Math.Floor(x) == x))
             {
                 return double.NegativeInfinity;
             }
@@ -600,7 +600,7 @@ namespace MathNet.Numerics
 
             if (x <= s)
             {
-                return d1 - (1/x) + (d2*x);
+                return (d1 - (1/x)) + (d2*x);
             }
 
             double result = 0;

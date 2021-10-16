@@ -138,7 +138,7 @@ namespace MathNet.Numerics.Interpolation
 
             for (int level = 1; level < x.Length; level++)
             {
-                for (int i = 0; i < x.Length - level; i++)
+                for (int i = 0; i < (x.Length - level); i++)
                 {
                     double hp = t - _x[i + level];
                     double ho = _x[i] - t;
@@ -163,12 +163,12 @@ namespace MathNet.Numerics.Interpolation
 
             for (int level = 1; level < x.Length; level++)
             {
-                for (int i = 0; i < x.Length - level; i++)
+                for (int i = 0; i < (x.Length - level); i++)
                 {
                     double hp = t - _x[i + level];
                     double ho = _x[i] - t;
                     double den = _x[i] - _x[i + level];
-                    dx[i] = ((hp*dx[i]) + x[i] + (ho*dx[i + 1]) - x[i + 1])/den;
+                    dx[i] = (((hp*dx[i]) + x[i] + (ho*dx[i + 1])) - x[i + 1])/den;
                     x[i] = ((hp*x[i]) + (ho*x[i + 1]))/den;
                 }
             }
@@ -190,13 +190,13 @@ namespace MathNet.Numerics.Interpolation
 
             for (int level = 1; level < x.Length; level++)
             {
-                for (int i = 0; i < x.Length - level; i++)
+                for (int i = 0; i < (x.Length - level); i++)
                 {
                     double hp = t - _x[i + level];
                     double ho = _x[i] - t;
                     double den = _x[i] - _x[i + level];
-                    ddx[i] = ((hp*ddx[i]) + (ho*ddx[i + 1]) + (2*dx[i]) - (2*dx[i + 1]))/den;
-                    dx[i] = ((hp*dx[i]) + x[i] + (ho*dx[i + 1]) - x[i + 1])/den;
+                    ddx[i] = (((hp*ddx[i]) + (ho*ddx[i + 1]) + (2*dx[i])) - (2*dx[i + 1]))/den;
+                    dx[i] = (((hp*dx[i]) + x[i] + (ho*dx[i + 1])) - x[i + 1])/den;
                     x[i] = ((hp*x[i]) + (ho*x[i + 1]))/den;
                 }
             }

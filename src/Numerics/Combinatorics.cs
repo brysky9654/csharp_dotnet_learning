@@ -49,7 +49,7 @@ namespace MathNet.Numerics
         /// <returns>Maximum number of distinct variations.</returns>
         public static double Variations(int n, int k)
         {
-            if (k < 0 || n < 0 || k > n)
+            if ((k < 0) || (n < 0) || (k > n))
             {
                 return 0;
             }
@@ -69,7 +69,7 @@ namespace MathNet.Numerics
         /// <returns>Maximum number of distinct variations with repetition.</returns>
         public static double VariationsWithRepetition(int n, int k)
         {
-            if (k < 0 || n < 0)
+            if ((k < 0) || (n < 0))
             {
                 return 0;
             }
@@ -98,19 +98,19 @@ namespace MathNet.Numerics
         /// <returns>Maximum number of combinations with repetition.</returns>
         public static double CombinationsWithRepetition(int n, int k)
         {
-            if (k < 0 || n < 0 || (n == 0 && k > 0))
+            if ((k < 0) || (n < 0) || ((n == 0) && (k > 0)))
             {
                 return 0;
             }
 
-            if (n == 0 && k == 0)
+            if ((n == 0) && (k == 0))
             {
                 return 1;
             }
 
             return Math.Floor(
                 0.5 + Math.Exp(
-                    SpecialFunctions.FactorialLn(n + k - 1)
+                    SpecialFunctions.FactorialLn((n + k) - 1)
                     - SpecialFunctions.FactorialLn(k)
                     - SpecialFunctions.FactorialLn(n - 1)));
         }
@@ -223,7 +223,7 @@ namespace MathNet.Numerics
             var random = randomSource ?? SystemRandomSource.Default;
 
             bool[] mask = new bool[n];
-            if (k*3 < n)
+            if ((k*3) < n)
             {
                 // just pick and try
                 int selectionCount = 0;
@@ -372,7 +372,7 @@ namespace MathNet.Numerics
             if (elementsToChoose > array.Length) throw new ArgumentOutOfRangeException(nameof(elementsToChoose), string.Format(Resources.ArgumentOutOfRangeSmallerEqual, "elementsToChoose", "data.Count"));
 
             // Partial Fisher-Yates Shuffling
-            for (int i = array.Length - 1; i >= array.Length - elementsToChoose; i--)
+            for (int i = array.Length - 1; i >= (array.Length - elementsToChoose); i--)
             {
                 int swapIndex = random.Next(i + 1);
                 yield return array[swapIndex];

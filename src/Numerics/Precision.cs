@@ -166,7 +166,7 @@ namespace MathNet.Numerics
             // To get the right number we need to know if the value is negative or positive
             // truncating a positive number will always give use the correct magnitude
             // truncating a negative number will give us a magnitude that is off by 1 (unless integer)
-            return magnitude < 0d && truncated != magnitude
+            return (magnitude < 0d) && (truncated != magnitude)
                 ? truncated - 1
                 : truncated;
         }
@@ -193,7 +193,7 @@ namespace MathNet.Numerics
             // To get the right number we need to know if the value is negative or positive
             // truncating a positive number will always give use the correct magnitude
             // truncating a negative number will give us a magnitude that is off by 1 (unless integer)
-            return magnitude < 0f && truncated != magnitude
+            return (magnitude < 0f) && (truncated != magnitude)
                 ? truncated - 1
                 : truncated;
         }
@@ -262,7 +262,7 @@ namespace MathNet.Numerics
         /// <returns>The next larger floating point value.</returns>
         public static double Increment(this double value, int count = 1)
         {
-            if (double.IsInfinity(value) || double.IsNaN(value) || count == 0)
+            if (double.IsInfinity(value) || double.IsNaN(value) || (count == 0))
             {
                 return value;
             }
@@ -311,7 +311,7 @@ namespace MathNet.Numerics
         /// <returns>The next smaller floating point value.</returns>
         public static double Decrement(this double value, int count = 1)
         {
-            if (double.IsInfinity(value) || double.IsNaN(value) || count == 0)
+            if (double.IsInfinity(value) || double.IsNaN(value) || (count == 0))
             {
                 return value;
             }
@@ -502,7 +502,7 @@ namespace MathNet.Numerics
             else
             {
                 // IntValue is positive
-                var topRangeEnd = long.MaxValue - intValue < maxNumbersBetween
+                var topRangeEnd = (long.MaxValue - intValue) < maxNumbersBetween
                     // Overflow, which means we'd have to go further than a long would allow us.
                     // Also we couldn't translate it back to a double, so we'll return Double.MaxValue
                     ? double.MaxValue

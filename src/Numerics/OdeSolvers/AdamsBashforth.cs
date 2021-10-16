@@ -49,7 +49,7 @@ namespace MathNet.Numerics.OdeSolvers
             y[0] = y0;
             for (int i = 1; i < N; i++)
             {
-                y[i] = y0 + dt * f(t, y0);
+                y[i] = y0 + (dt * f(t, y0));
                 t += dt;
                 y0 = y[i];
             }
@@ -72,14 +72,14 @@ namespace MathNet.Numerics.OdeSolvers
             double[] y = new double[N];
 
             double k1 = f(t, y0);
-            double k2 = f(t + dt, y0 + dt * k1);
-            double y1 = y0 + 0.5 * dt * (k1 + k2);
+            double k2 = f(t + dt, y0 + (dt * k1));
+            double y1 = y0 + (0.5 * dt * (k1 + k2));
 
             y[0] = y0;
             y[1] = y1;
             for (int i = 2; i < N; i++)
             {
-                y[i] = y1 + dt * (1.5 * f(t + dt, y1) - 0.5 * f(t, y0));
+                y[i] = y1 + (dt * ((1.5 * f(t + dt, y1)) - (0.5 * f(t, y0))));
                 t += dt;
                 y0 = y[i - 1];
                 y1 = y[i];
@@ -109,17 +109,17 @@ namespace MathNet.Numerics.OdeSolvers
             y[0] = y0;
             for (int i = 1; i < 3; i++)
             {
-                k1 = dt * f(t, y0);
-                k2 = dt * f(t + dt / 2, y0 + k1 / 2);
-                k3 = dt * f(t + dt / 2, y0 + k2 / 2);
-                k4 = dt * f(t + dt, y0 + k3);
-                y[i] = y0 + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                k1 = dt * f(t,            y0);
+                k2 = dt * f(t + (dt / 2), y0 + (k1 / 2));
+                k3 = dt * f(t + (dt / 2), y0 + (k2 / 2));
+                k4 = dt * f(t + dt,       y0 + k3);
+                y[i] = y0 + ((k1 + (2 * k2) + (2 * k3) + k4) / 6);
                 t += dt;
                 y0 = y[i];
             }
             for (int i = 3; i < N; i++)
             {
-                y[i] = y[i - 1] + dt * (23 * f(t, y[i - 1]) - 16 * f(t - dt, y[i - 2]) + 5 * f(t - 2 * dt, y[i - 3])) / 12.0;
+                y[i] = y[i - 1] + ((dt * (((23 * f(t, y[i - 1])) - (16 * f(t - dt, y[i - 2]))) + (5 * f(t - (2 * dt), y[i - 3])))) / 12.0);
                 t += dt;
             }
             return y;
@@ -147,17 +147,17 @@ namespace MathNet.Numerics.OdeSolvers
             y[0] = y0;
             for (int i = 1; i < 4; i++)
             {
-                k1 = dt * f(t, y0);
-                k2 = dt * f(t + dt / 2, y0 + k1 / 2);
-                k3 = dt * f(t + dt / 2, y0 + k2 / 2);
-                k4 = dt * f(t + dt, y0 + k3);
-                y[i] = y0 + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                k1 = dt * f(t,            y0);
+                k2 = dt * f(t + (dt / 2), y0 + (k1 / 2));
+                k3 = dt * f(t + (dt / 2), y0 + (k2 / 2));
+                k4 = dt * f(t + dt,       y0 + k3);
+                y[i] = y0 + ((k1 + (2 * k2) + (2 * k3) + k4) / 6);
                 t += dt;
                 y0 = y[i];
             }
             for (int i = 4; i < N; i++)
             {
-                y[i] = y[i - 1] + dt * (55 * f(t, y[i - 1]) - 59 * f(t - dt, y[i - 2]) + 37 * f(t - 2 * dt, y[i - 3]) - 9 * f(t - 3 * dt, y[i - 4])) / 24.0;
+                y[i] = y[i - 1] + ((dt * ((((55 * f(t, y[i - 1])) - (59 * f(t - dt, y[i - 2]))) + (37 * f(t - (2 * dt), y[i - 3]))) - (9 * f(t - (3 * dt), y[i - 4])))) / 24.0);
                 t += dt;
             }
             return y;

@@ -237,7 +237,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 for (int j = 0; j < Data.Length; j++)
                 {
-                    denseTarget.Data[j*target.RowCount + rowIndex] = Data[j];
+                    denseTarget.Data[(j*target.RowCount) + rowIndex] = Data[j];
                 }
                 return;
             }
@@ -296,14 +296,14 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             {
                 for (int j = 0; j < Data.Length; j++)
                 {
-                    denseTarget.Data[(j + targetColumnIndex)*target.RowCount + rowIndex] = Data[j + sourceColumnIndex];
+                    denseTarget.Data[((j + targetColumnIndex)*target.RowCount) + rowIndex] = Data[j + sourceColumnIndex];
                 }
                 return;
             }
 
             // FALL BACK
 
-            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < sourceColumnIndex + columnCount; j++, jj++)
+            for (int j = sourceColumnIndex, jj = targetColumnIndex; j < (sourceColumnIndex + columnCount); j++, jj++)
             {
                 target.At(rowIndex, jj, Data[j]);
             }
@@ -317,13 +317,13 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             var denseTarget = target as DenseColumnMajorMatrixStorage<T>;
             if (denseTarget != null)
             {
-                Array.Copy(Data, sourceRowIndex, denseTarget.Data, columnIndex*denseTarget.RowCount + targetRowIndex, rowCount);
+                Array.Copy(Data, sourceRowIndex, denseTarget.Data, (columnIndex*denseTarget.RowCount) + targetRowIndex, rowCount);
                 return;
             }
 
             // FALL BACK
 
-            for (int i = sourceRowIndex, ii = targetRowIndex; i < sourceRowIndex + rowCount; i++, ii++)
+            for (int i = sourceRowIndex, ii = targetRowIndex; i < (sourceRowIndex + rowCount); i++, ii++)
             {
                 target.At(ii, columnIndex, Data[i]);
             }
@@ -412,7 +412,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < Data.Length; i++)
                 {
-                    if (k < otherValueCount && otherIndices[k] == i)
+                    if ((k < otherValueCount) && (otherIndices[k] == i))
                     {
                         if (predicate(Data[i], otherValues[k]))
                         {
@@ -520,7 +520,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
             var denseTarget = target as DenseVectorStorage<T>;
             var denseOther = other as DenseVectorStorage<T>;
-            if (denseTarget != null && denseOther != null)
+            if ((denseTarget != null) && (denseOther != null))
             {
                 CommonParallel.For(0, Data.Length, 4096, (a, b) =>
                 {
@@ -534,7 +534,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
 
             var sparseOther = other as SparseVectorStorage<T>;
-            if (denseTarget != null && sparseOther != null)
+            if ((denseTarget != null) && (sparseOther != null))
             {
                 T[] targetData = denseTarget.Data;
                 int[] otherIndices = sparseOther.Indices;
@@ -544,7 +544,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < Data.Length; i++)
                 {
-                    if (k < otherValueCount && otherIndices[k] == i)
+                    if ((k < otherValueCount) && (otherIndices[k] == i))
                     {
                         targetData[i] = f(Data[i], otherValues[k]);
                         k++;
@@ -588,7 +588,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
                 int k = 0;
                 for (int i = 0; i < Data.Length; i++)
                 {
-                    if (k < otherValueCount && otherIndices[k] == i)
+                    if ((k < otherValueCount) && (otherIndices[k] == i))
                     {
                         state = f(state, Data[i], otherValues[k]);
                         k++;

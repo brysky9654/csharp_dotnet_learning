@@ -211,7 +211,7 @@ namespace MathNet.Numerics
 #endif
         public static bool IsPowerOfTwo(this int number)
         {
-            return number > 0 && (number & (number - 1)) == 0x0;
+            return (number > 0) && ((number & (number - 1)) == 0x0);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace MathNet.Numerics
 #endif
         public static bool IsPowerOfTwo(this long number)
         {
-            return number > 0 && (number & (number - 1)) == 0x0;
+            return (number > 0) && ((number & (number - 1)) == 0x0);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace MathNet.Numerics
                 return false; // return immediately in 6 cases out of 16.
             }
 
-            if (lastHexDigit == 0 || lastHexDigit == 1 || lastHexDigit == 4 || lastHexDigit == 9)
+            if ((lastHexDigit == 0) || (lastHexDigit == 1) || (lastHexDigit == 4) || (lastHexDigit == 9))
             {
                 int t = (int)Math.Floor(Math.Sqrt(number) + 0.5);
                 return (t * t) == number;
@@ -272,7 +272,7 @@ namespace MathNet.Numerics
                 return false; // return immediately in 6 cases out of 16.
             }
 
-            if (lastHexDigit == 0 || lastHexDigit == 1 || lastHexDigit == 4 || lastHexDigit == 9)
+            if ((lastHexDigit == 0) || (lastHexDigit == 1) || (lastHexDigit == 4) || (lastHexDigit == 9))
             {
                 long t = (long)Math.Floor(Math.Sqrt(number) + 0.5);
                 return (t * t) == number;
@@ -289,7 +289,7 @@ namespace MathNet.Numerics
         /// <exception cref="ArgumentOutOfRangeException"/>
         public static int PowerOfTwo(this int exponent)
         {
-            if (exponent < 0 || exponent >= 31)
+            if ((exponent < 0) || (exponent >= 31))
             {
                 throw new ArgumentOutOfRangeException(nameof(exponent));
             }
@@ -305,7 +305,7 @@ namespace MathNet.Numerics
         /// <exception cref="ArgumentOutOfRangeException"/>
         public static long PowerOfTwo(this long exponent)
         {
-            if (exponent < 0 || exponent >= 63)
+            if ((exponent < 0) || (exponent >= 63))
             {
                 throw new ArgumentOutOfRangeException(nameof(exponent));
             }

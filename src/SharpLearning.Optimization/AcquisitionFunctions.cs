@@ -32,7 +32,7 @@ namespace SharpLearning.Optimization
 
             var std = Math.Sqrt(variance);
             var z = (currentScore - mean - xi) / std;
-            var f = std * (z * CumulativeDensityFunction(z) + ProbabilityDensityFunction(z));
+            var f = std * ((z * CumulativeDensityFunction(z)) + ProbabilityDensityFunction(z));
 
             return f;
         }
@@ -59,7 +59,7 @@ namespace SharpLearning.Optimization
 
         static double ProbabilityDensityFunction(double x)
         {
-            return Math.Exp(-x * x / 2.0) / Math.Sqrt(2.0 * Math.PI);
+            return Math.Exp((-x * x) / 2.0) / Math.Sqrt(2.0 * Math.PI);
         }
 
         static double CumulativeDensityFunction(double x)
@@ -79,10 +79,10 @@ namespace SharpLearning.Optimization
             x = Math.Abs(x) / Math.Sqrt(2.0);
 
             // A&S formula 7.1.26
-            var t = 1.0 / (1.0 + p * x);
-            var y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
+            var t = 1.0 / (1.0 + (p * x));
+            var y = 1.0 - (((((((((a5 * t) + a4) * t) + a3) * t) + a2) * t) + a1) * t * Math.Exp(-x * x));
 
-            return 0.5 * (1.0 + sign * y);
+            return 0.5 * (1.0 + (sign * y));
         }
     }
 }

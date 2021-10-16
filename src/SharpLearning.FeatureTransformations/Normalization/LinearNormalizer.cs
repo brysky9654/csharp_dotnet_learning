@@ -27,7 +27,7 @@ namespace SharpLearning.FeatureTransformations.Normalization
             }
             else
             {
-                value = newMin + (newMax - newMin) * (value - oldMin) / (oldMax - oldMin);
+                value = newMin + (((newMax - newMin) * (value - oldMin)) / (oldMax - oldMin));
             }
 
             return value;

@@ -49,7 +49,7 @@ namespace MathNet.Numerics.Optimization
             objective.EvaluateAt(objective.Point); // Hessian may be not yet updated.
 
             var Hessian = objective.Hessian;
-            if (Hessian == null || objective.DegreeOfFreedom < 1)
+            if ((Hessian == null) || (objective.DegreeOfFreedom < 1))
             {
                 Covariance = null;
                 Correlation = null;
@@ -57,7 +57,7 @@ namespace MathNet.Numerics.Optimization
                 return;
             }
 
-            Covariance = Hessian.PseudoInverse() * objective.Value / objective.DegreeOfFreedom;
+            Covariance = (Hessian.PseudoInverse() * objective.Value) / objective.DegreeOfFreedom;
 
             if (Covariance != null)
             {

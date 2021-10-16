@@ -126,7 +126,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                     e[j] = matrixCopy.At(l, j).Conjugate();
                 }
 
-                if (computeVectors && l < nct)
+                if (computeVectors && (l < nct))
                 {
                     // Place the transformation in u for subsequent back multiplication.
                     for (i = l; i < matrixCopy.RowCount; i++)
@@ -155,7 +155,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                 }
 
                 e[l] = -e[l].Conjugate();
-                if (lp1 < matrixCopy.RowCount && e[l].Magnitude != 0.0)
+                if ((lp1 < matrixCopy.RowCount) && (e[l].Magnitude != 0.0))
                 {
                     // Apply the transformation.
                     for (i = lp1; i < matrixCopy.RowCount; i++)
@@ -308,7 +308,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                     t = s[i].Magnitude;
                     r = s[i]/t;
                     s[i] = t;
-                    if (i < m - 1)
+                    if (i < (m - 1))
                     {
                         e[i] = e[i]/r;
                     }
@@ -320,7 +320,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                 }
 
                 // Exit
-                if (i == m - 1)
+                if (i == (m - 1))
                 {
                     break;
                 }
@@ -371,7 +371,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                 }
 
                 int kase;
-                if (l == m - 2)
+                if (l == (m - 2))
                 {
                     kase = 4;
                 }
@@ -381,12 +381,12 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                     for (ls = m - 1; ls > l; ls--)
                     {
                         test = 0.0;
-                        if (ls != m - 1)
+                        if (ls != (m - 1))
                         {
                             test = test + e[ls].Magnitude;
                         }
 
-                        if (ls != l + 1)
+                        if (ls != (l + 1))
                         {
                             test = test + e[ls - 1].Magnitude;
                         }
@@ -403,7 +403,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                     {
                         kase = 3;
                     }
-                    else if (ls == m - 1)
+                    else if (ls == (m - 1))
                     {
                         kase = 1;
                     }
@@ -428,9 +428,9 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                         f = e[m - 2].Real;
                         e[m - 2] = Complex.Zero;
                         double t1;
-                        for (var kk = l; kk < m - 1; kk++)
+                        for (var kk = l; kk < (m - 1); kk++)
                         {
-                            k = m - 2 - kk + l;
+                            k = (m - 2 - kk) + l;
                             t1 = s[k].Real;
                             Srotg(ref t1, ref f, out cs, out sn);
                             s[k] = t1;
@@ -485,7 +485,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                         var c = (sm*emm1)*(sm*emm1);
                         var shift = 0.0;
 
-                        if (b != 0.0 || c != 0.0)
+                        if ((b != 0.0) || (c != 0.0))
                         {
                             shift = Math.Sqrt((b*b) + c);
                             if (b < 0.0)
@@ -500,7 +500,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                         var g = sl*el;
 
                         // Chase zeros.
-                        for (k = l; k < m - 1; k++)
+                        for (k = l; k < (m - 1); k++)
                         {
                             Srotg(ref f, ref g, out cs, out sn);
                             if (k != l)
@@ -523,7 +523,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                             s[k + 1] = (-sn*e[k]) + (cs*s[k + 1]);
                             g = sn*e[k + 1].Real;
                             e[k + 1] = cs*e[k + 1];
-                            if (computeVectors && k < matrixCopy.RowCount)
+                            if (computeVectors && (k < matrixCopy.RowCount))
                             {
                                 Csrot(u, matrixCopy.RowCount, k, k + 1, cs, sn);
                             }
@@ -546,7 +546,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                         }
 
                         // Order the singular value.
-                        while (l != mn - 1)
+                        while (l != (mn - 1))
                         {
                             if (s[l].Real >= s[l + 1].Real)
                             {
@@ -556,12 +556,12 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                             t = s[l];
                             s[l] = s[l + 1];
                             s[l + 1] = t;
-                            if (computeVectors && l < matrixCopy.ColumnCount)
+                            if (computeVectors && (l < matrixCopy.ColumnCount))
                             {
                                 Swap(vt, matrixCopy.ColumnCount, l, l + 1);
                             }
 
-                            if (computeVectors && l < matrixCopy.RowCount)
+                            if (computeVectors && (l < matrixCopy.RowCount))
                             {
                                 Swap(u, matrixCopy.RowCount, l, l + 1);
                             }
@@ -708,7 +708,7 @@ namespace MathNet.Numerics.LinearAlgebra.Complex.Factorization
                     z = s;
                 }
 
-                if (absdb >= absda && c != 0.0)
+                if ((absdb >= absda) && (c != 0.0))
                 {
                     z = 1.0/c;
                 }

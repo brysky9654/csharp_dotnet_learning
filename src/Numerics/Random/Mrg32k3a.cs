@@ -125,7 +125,7 @@ namespace MathNet.Numerics.Random
         /// </summary>
         protected sealed override double DoSample()
         {
-            double xn = A12*_xn2 - A13*_xn3;
+            double xn = (A12*_xn2) - (A13*_xn3);
             double k = (long)(xn/Modulus1);
             xn -= k*Modulus1;
             if (xn < 0)
@@ -133,7 +133,7 @@ namespace MathNet.Numerics.Random
                 xn += Modulus1;
             }
 
-            double yn = A21*_yn1 - A23*_yn3;
+            double yn = (A21*_yn1) - (A23*_yn3);
             k = (long)(yn/Modulus2);
             yn -= k*Modulus2;
             if (yn < 0)
@@ -150,7 +150,7 @@ namespace MathNet.Numerics.Random
 
             if (xn <= yn)
             {
-                return (xn - yn + Modulus1)*Reciprocal;
+                return ((xn - yn) + Modulus1)*Reciprocal;
             }
 
             return (xn - yn)*Reciprocal;
@@ -171,7 +171,7 @@ namespace MathNet.Numerics.Random
 
             for (int i = 0; i < values.Length; i++)
             {
-                double xn = A12*x2 - A13*x3;
+                double xn = (A12*x2) - (A13*x3);
                 double k = (long)(xn/Modulus1);
                 xn -= k*Modulus1;
                 if (xn < 0)
@@ -179,7 +179,7 @@ namespace MathNet.Numerics.Random
                     xn += Modulus1;
                 }
 
-                double yn = A21*y1 - A23*y3;
+                double yn = (A21*y1) - (A23*y3);
                 k = (long)(yn/Modulus2);
                 yn -= k*Modulus2;
                 if (yn < 0)
@@ -194,7 +194,7 @@ namespace MathNet.Numerics.Random
                 y2 = y1;
                 y1 = yn;
 
-                values[i] = xn <= yn ? (xn - yn + Modulus1)*Reciprocal : (xn - yn)*Reciprocal;
+                values[i] = xn <= yn ? ((xn - yn) + Modulus1)*Reciprocal : (xn - yn)*Reciprocal;
             }
         }
 
@@ -225,7 +225,7 @@ namespace MathNet.Numerics.Random
 
             while (true)
             {
-                double xn = A12*x2 - A13*x3;
+                double xn = (A12*x2) - (A13*x3);
                 double k = (long)(xn/Modulus1);
                 xn -= k*Modulus1;
                 if (xn < 0)
@@ -233,7 +233,7 @@ namespace MathNet.Numerics.Random
                     xn += Modulus1;
                 }
 
-                double yn = A21*y1 - A23*y3;
+                double yn = (A21*y1) - (A23*y3);
                 k = (long)(yn/Modulus2);
                 yn -= k*Modulus2;
                 if (yn < 0)
@@ -248,7 +248,7 @@ namespace MathNet.Numerics.Random
                 y2 = y1;
                 y1 = yn;
 
-                yield return xn <= yn ? (xn - yn + Modulus1)*Reciprocal : (xn - yn)*Reciprocal;
+                yield return xn <= yn ? ((xn - yn) + Modulus1)*Reciprocal : (xn - yn)*Reciprocal;
             }
         }
     }

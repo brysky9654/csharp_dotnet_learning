@@ -62,7 +62,7 @@ namespace MathNet.Numerics
         /// <returns>The logarithm of <paramref name="p"/> divided by 1.0 - <paramref name="p"/>.</returns>
         public static double Logit(double p)
         {
-            if (p < 0.0 || p > 1.0)
+            if ((p < 0.0) || (p > 1.0))
             {
                 throw new ArgumentOutOfRangeException(nameof(p), Resources.ArgumentBetween0And1);
             }

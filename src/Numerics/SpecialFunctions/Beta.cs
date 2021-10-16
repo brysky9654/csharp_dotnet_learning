@@ -61,7 +61,7 @@ namespace MathNet.Numerics
                 throw new ArgumentException(Resources.ArgumentMustBePositive, nameof(w));
             }
 
-            return GammaLn(z) + GammaLn(w) - GammaLn(z + w);
+            return (GammaLn(z) + GammaLn(w)) - GammaLn(z + w);
         }
 
         /// <summary>
@@ -109,16 +109,16 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException(nameof(b), Resources.ArgumentNotNegative);
             }
 
-            if (x < 0.0 || x > 1.0)
+            if ((x < 0.0) || (x > 1.0))
             {
                 throw new ArgumentOutOfRangeException(nameof(x), Resources.ArgumentInIntervalXYInclusive);
             }
 
-            var bt = (x == 0.0 || x == 1.0)
+            var bt = ((x == 0.0) || (x == 1.0))
                 ? 0.0
-                : Math.Exp(GammaLn(a + b) - GammaLn(a) - GammaLn(b) + (a*Math.Log(x)) + (b*Math.Log(1.0 - x)));
+                : Math.Exp((GammaLn(a + b) - GammaLn(a) - GammaLn(b)) + (a*Math.Log(x)) + (b*Math.Log(1.0 - x)));
 
-            var symmetryTransformation = x >= (a + 1.0)/(a + b + 2.0);
+            var symmetryTransformation = x >= ((a + 1.0)/(a + b + 2.0));
 
             /* Continued fraction representation */
             var eps = Precision.DoublePrecision;
@@ -136,7 +136,7 @@ namespace MathNet.Numerics
             var qap = a + 1.0;
             var qam = a - 1.0;
             var c = 1.0;
-            var d = 1.0 - (qab*x/qap);
+            var d = 1.0 - ((qab*x)/qap);
 
             if (Math.Abs(d) < fpmin)
             {
@@ -148,7 +148,7 @@ namespace MathNet.Numerics
 
             for (int m = 1, m2 = 2; m <= 50000; m++, m2 += 2)
             {
-                var aa = m*(b - m)*x/((qam + m2)*(a + m2));
+                var aa = (m*(b - m)*x)/((qam + m2)*(a + m2));
                 d = 1.0 + (aa*d);
 
                 if (Math.Abs(d) < fpmin)
@@ -164,7 +164,7 @@ namespace MathNet.Numerics
 
                 d = 1.0/d;
                 h *= d*c;
-                aa = -(a + m)*(qab + m)*x/((a + m2)*(qap + m2));
+                aa = (-(a + m)*(qab + m)*x)/((a + m2)*(qap + m2));
                 d = 1.0 + (aa*d);
 
                 if (Math.Abs(d) < fpmin)
@@ -185,11 +185,11 @@ namespace MathNet.Numerics
 
                 if (Math.Abs(del - 1.0) <= eps)
                 {
-                    return symmetryTransformation ? 1.0 - (bt*h/a) : bt*h/a;
+                    return symmetryTransformation ? 1.0 - ((bt*h)/a) : (bt*h)/a;
                 }
             }
 
-            return symmetryTransformation ? 1.0 - (bt*h/a) : bt*h/a;
+            return symmetryTransformation ? 1.0 - ((bt*h)/a) : (bt*h)/a;
         }
     }
 }

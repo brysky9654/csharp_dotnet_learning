@@ -130,9 +130,9 @@ namespace SharpLearning.Neural.Layers
                         {
                             var diffSrcIndex = diff_src.GetDataIndex(n, c, h, w, Depth, Width, Height);
                             diff_src.Data()[diffSrcIndex] =
-                                diff_dst.Data()[diffSrcIndex] - diff_beta / (W * H * N)
-                                - (src.Data()[diffSrcIndex] - mean)
-                                * diff_gamma * variance / (W * H * N);
+                                diff_dst.Data()[diffSrcIndex] - (diff_beta / (W * H * N))
+                                - (((src.Data()[diffSrcIndex] - mean)
+                                  * diff_gamma * variance) / (W * H * N));
                             diff_src.Data()[diffSrcIndex] *= gamma * variance;
                         }
             });
@@ -180,7 +180,7 @@ namespace SharpLearning.Neural.Layers
                                 var m = src.GetValueFromIndex(n, c, h, w, Depth, Width, Height) - mean;
                                 variance += m * m;
                             }
-                    variance = 1f / (float)Math.Sqrt(variance / (W * H * N) + eps);
+                    variance = 1f / (float)Math.Sqrt((variance / (W * H * N)) + eps);
                 }
                 else
                 {
@@ -195,7 +195,7 @@ namespace SharpLearning.Neural.Layers
                             var d_off = src.GetDataIndex(n, c, h, w, Depth, Width, Height);
                             var scale = Scale.At(0, c);
                             var bias = Bias[c];
-                            dst[d_off] = scale * (src.Data()[d_off] - mean) * variance + bias;
+                            dst[d_off] = (scale * (src.Data()[d_off] - mean) * variance) + bias;
                         }
 
                 if (is_training)
@@ -213,7 +213,7 @@ namespace SharpLearning.Neural.Layers
 
         float MovingAverage(float currentValue, float value, float momentum = 0.99f)
         {
-            var newValue = currentValue * momentum + value * (1.0f - momentum);
+            var newValue = (currentValue * momentum) + (value * (1.0f - momentum));
             return newValue;
         }
 

@@ -56,7 +56,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (d < min || double.IsNaN(d))
+                if ((d < min) || double.IsNaN(d))
                 {
                     min = d;
                 }
@@ -79,7 +79,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (d < min || float.IsNaN(d))
+                if ((d < min) || float.IsNaN(d))
                 {
                     min = d;
                 }
@@ -102,7 +102,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (d > max || double.IsNaN(d))
+                if ((d > max) || double.IsNaN(d))
                 {
                     max = d;
                 }
@@ -125,7 +125,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (d > max || float.IsNaN(d))
+                if ((d > max) || float.IsNaN(d))
                 {
                     max = d;
                 }
@@ -148,7 +148,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (Math.Abs(d) < min || double.IsNaN(d))
+                if ((Math.Abs(d) < min) || double.IsNaN(d))
                 {
                     min = Math.Abs(d);
                 }
@@ -171,7 +171,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (Math.Abs(d) < min || float.IsNaN(d))
+                if ((Math.Abs(d) < min) || float.IsNaN(d))
                 {
                     min = Math.Abs(d);
                 }
@@ -194,7 +194,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (Math.Abs(d) > max || double.IsNaN(d))
+                if ((Math.Abs(d) > max) || double.IsNaN(d))
                 {
                     max = Math.Abs(d);
                 }
@@ -217,7 +217,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                if (Math.Abs(d) > max || float.IsNaN(d))
+                if ((Math.Abs(d) > max) || float.IsNaN(d))
                 {
                     max = Math.Abs(d);
                 }
@@ -246,7 +246,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex(double.NaN, double.NaN);
                 }
-                if (magnitude < minMagnitude || magnitude == minMagnitude && d.Phase < min.Phase)
+                if ((magnitude < minMagnitude) || ((magnitude == minMagnitude) && (d.Phase < min.Phase)))
                 {
                     minMagnitude = magnitude;
                     min = d;
@@ -276,7 +276,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex32(float.NaN, float.NaN);
                 }
-                if (magnitude < minMagnitude || magnitude == minMagnitude && d.Phase < min.Phase)
+                if ((magnitude < minMagnitude) || ((magnitude == minMagnitude) && (d.Phase < min.Phase)))
                 {
                     minMagnitude = magnitude;
                     min = d;
@@ -306,7 +306,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex(double.NaN, double.NaN);
                 }
-                if (magnitude > maxMagnitude || magnitude == maxMagnitude && d.Phase > max.Phase)
+                if ((magnitude > maxMagnitude) || ((magnitude == maxMagnitude) && (d.Phase > max.Phase)))
                 {
                     maxMagnitude = magnitude;
                     max = d;
@@ -336,7 +336,7 @@ namespace MathNet.Numerics.Statistics
                 {
                     return new Complex32(float.NaN, float.NaN);
                 }
-                if (magnitude > maxMagnitude || magnitude == maxMagnitude && d.Phase > max.Phase)
+                if ((magnitude > maxMagnitude) || ((magnitude == maxMagnitude) && (d.Phase > max.Phase)))
                 {
                     maxMagnitude = magnitude;
                     max = d;
@@ -758,7 +758,7 @@ namespace MathNet.Numerics.Statistics
 
             foreach (var d in stream)
             {
-                mean += (d*d - mean)/++m;
+                mean += ((d*d) - mean)/++m;
                 any = true;
             }
 

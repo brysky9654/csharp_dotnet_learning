@@ -57,8 +57,8 @@ namespace MathNet.Numerics.OdeSolvers
             for (int i = 1; i < N; i++)
             {
                 k1 = f(t, y0);
-                k2 = f(t + dt, y0 + k1 * dt);
-                y[i] = y0 + dt * 0.5 * (k1 + k2);
+                k2 = f(t + dt, y0 + (k1 * dt));
+                y[i] = y0 + (dt * 0.5 * (k1 + k2));
                 t += dt;
                 y0 = y[i];
             }
@@ -86,11 +86,11 @@ namespace MathNet.Numerics.OdeSolvers
             y[0] = y0;
             for (int i = 1; i < N; i++)
             {
-                k1 = f(t, y0);
-                k2 = f(t + dt / 2, y0 + k1 * dt / 2);
-                k3 = f(t + dt / 2, y0 + k2 * dt / 2);
-                k4 = f(t + dt, y0 + k3 * dt);
-                y[i] = y0 + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4);
+                k1 = f(t,            y0);
+                k2 = f(t + (dt / 2), y0 + ((k1 * dt) / 2));
+                k3 = f(t + (dt / 2), y0 + ((k2 * dt) / 2));
+                k4 = f(t + dt,       y0 + (k3 * dt));
+                y[i] = y0 + ((dt / 6) * (k1 + (2 * k2) + (2 * k3) + k4));
                 t += dt;
                 y0 = y[i];
             }
@@ -116,8 +116,8 @@ namespace MathNet.Numerics.OdeSolvers
             for (int i = 1; i < N; i++)
             {
                 k1 = f(t, y0);
-                k2 = f(t, y0 + k1 * dt);
-                y[i] = y0 + dt * 0.5 * (k1 + k2);
+                k2 = f(t, y0 + (k1 * dt));
+                y[i] = y0 + (dt * 0.5 * (k1 + k2));
                 t += dt;
                 y0 = y[i];
             }
@@ -142,11 +142,11 @@ namespace MathNet.Numerics.OdeSolvers
             y[0] = y0;
             for (int i = 1; i < N; i++)
             {
-                k1 = f(t, y0);
-                k2 = f(t + dt / 2, y0 + k1 * dt / 2);
-                k3 = f(t + dt / 2, y0 + k2 * dt / 2);
-                k4 = f(t + dt, y0 + k3 * dt);
-                y[i] = y0 + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4);
+                k1 = f(t,            y0);
+                k2 = f(t + (dt / 2), y0 + ((k1 * dt) / 2));
+                k3 = f(t + (dt / 2), y0 + ((k2 * dt) / 2));
+                k4 = f(t + dt,       y0 + (k3 * dt));
+                y[i] = y0 + ((dt / 6) * (k1 + (2 * k2) + (2 * k3) + k4));
                 t += dt;
                 y0 = y[i];
             }
