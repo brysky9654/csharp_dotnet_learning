@@ -12,6 +12,14 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 15d5b91f864f08e570bde69b10920f9bdac54598 | 2021-10-16 | Chris Schubert | UI project cleanup and integration completed |
+| d2895baa30d1809c4d7037df48e4f3444a34f67a | 2021-10-16 | Chris Schubert | More project cleanup and refactoring |
+| 0d39c094183b35766f0eea5eb277e9f5c3ee8554 | 2021-10-12 | Chris Schubert | Code cleanup and project restructuring |
+
+
+ ## Tag: `v0.2.9`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 4da74f1b62d39409eaa2fd367a7f0fb601a6bbe9 | 2021-10-10 | Chris Schubert | Correcting gitignore to exclude .meta files for ignored directories |
 
 
