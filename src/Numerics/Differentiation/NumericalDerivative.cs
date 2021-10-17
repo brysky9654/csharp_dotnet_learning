@@ -57,7 +57,7 @@ namespace MathNet.Numerics.Differentiation
         /// input parameter. Although implementation may vary, an example of second order accurate scaling may be (eps)^(1/3)*(1+abs(x)).
         /// </summary>
         Relative
-    };
+    }
 
     /// <summary>
     /// Class to evaluate the numerical derivative of a function using finite difference approximations.
