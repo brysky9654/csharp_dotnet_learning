@@ -14,7 +14,12 @@
 |------|------|--------|---------|
 
 
- ## Tag: `v0.2.10, origin/main`
+ ## Tag: `v0.2.11, origin/main`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
+
+
+ ## Tag: `v0.2.10`
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
 | 15d5b91f864f08e570bde69b10920f9bdac54598 | 2021-10-16 | Chris Schubert | UI project cleanup and integration completed |
